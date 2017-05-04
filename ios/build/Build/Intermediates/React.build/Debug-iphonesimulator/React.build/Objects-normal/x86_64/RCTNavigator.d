@@ -1,0 +1,31 @@
+dependencies: \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/RCTNavigator.m \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/RCTNavigator.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Base/RCTConvert.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/RCTAnimationType.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/RCTBorderStyle.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/RCTPointerEvents.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/RCTTextDecorationLineType.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/RCTNavItem.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/RCTComponent.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/RCTScrollView.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/RCTAutoInsetsProtocol.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/RCTScrollableProtocol.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/RCTView.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/RCTWrapperViewController.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/RCTViewControllerProtocol.h \
+  /Users/marclouvion/Desktop/ReactNative2Workspace/GasPredict/node_modules/react-native/React/Views/UIView+React.h

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Gas Now",
+    "price": "1150 ₩",
+    "distance": "1.6km"
+  },
+  {
+    "id": 2,
+    "name": "KT Station",
+    "price": "1220 ₩",
+    "distance": "2.3km"
+  },
+  {
+    "id": 3,
+    "name": "Gas Now",
+    "price": "1320 ₩",
+    "distance": "3km"
+  },
+  {
+    "id": 4,
+    "name": "Seoul Gas",
+    "price": "1234 ₩",
+    "distance": "3.1km"
+  },
+  {
+    "id": 4,
+    "name": "KT Station",
+    "price": "1070 ₩",
+    "distance": "1.9km"
+  }
+]
