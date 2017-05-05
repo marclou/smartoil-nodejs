@@ -49,7 +49,7 @@ class Welcome extends Component {
                     this.setState({ error: error.message });
                     reject(error);
                     },
-                { enableHighAccuracy: false, timeout: 10000, maximumAge: 1000 }
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 }
             );
         });
     }
