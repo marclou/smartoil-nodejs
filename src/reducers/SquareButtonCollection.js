@@ -26,11 +26,5 @@ export default (state = INITIAL_STATE, action) => {
          */
         //...state.slice(action.index + 1)
     //];
-    this.state = [
-        SquareButtonReducer(state[0], action),
-        SquareButtonReducer(state[1], action),
-        SquareButtonReducer(state[2], action)
-    ];
-    //console.log(state);
     return state;
 };

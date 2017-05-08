@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableWithoutFeedback, TouchableOpacity, AsyncStorage } from 'react-native';
+import { View, Text, TouchableOpacity, AsyncStorage } from 'react-native';
 import { RadioButtons } from 'react-native-radio-buttons';
 import { Icon } from 'native-base';
 

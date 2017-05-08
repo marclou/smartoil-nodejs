@@ -6,5 +6,5 @@ import SquareButtonCollection from './SquareButtonCollection';
 export default combineReducers({
     gasStationsLibraries: GasStationListReducer,
     squareButtonState: SquareButtonReducer,
-    squareButtonCollection: SquareButtonCollection
+    squareButtonCollectionReducer: SquareButtonCollection
 });

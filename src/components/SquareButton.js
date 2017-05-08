@@ -4,13 +4,16 @@ import { Icon } from 'native-base';
 import { Spinner } from './functionalComponents';
 
 class SquareButton extends Component {
+    componentDidMount() {
+
+    }
     onButtonPress() {
-        const { fetchingData } = this.props;
-        return fetchingData();
+        const { addFavoriteLocation } = this.props;
+        addFavoriteLocation;
     }
 
     renderButtonOrSpinner() {
-        const { loading, title, icon } = this.props.squareButtonState;
+        const { title, icon, loading } = this.props.squareButtonState;
         const { buttonStyle, textStyle, iconStyle } = styles;
         if (loading) {
             return (

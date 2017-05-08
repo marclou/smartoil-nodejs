@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { View } from 'react-native';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import * as SquareButtonActionCreators from '../actions';
+import * as squareButtonActionsCreator from '../actions/squareButtonAction';
 import SquareButton from './SquareButton';
 
 class SquareButtonCollection extends Component {
     renderSquareButtons() {
-        const { squareButtonCollection, squareButtonActions } = this.props;
-
+        const { squareButtonsCollection } = this.props;
         return (
-            squareButtonCollection.map((value, index) => {
+            squareButtonsCollection.map((value, index) => {
                 return (
                     <SquareButton
                         key={index}
                         squareButtonState={value}
-                        {...squareButtonActions}
+                        {...squareButtonActionsCreator}
                     />
                 );
             })
@@ -43,11 +42,11 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-    return { squareButtonCollection: state.squareButtonCollection };
+    return { squareButtonsCollection: state.squareButtonCollectionReducer };
 };
 
 const mapDispatchToProps = dispatch => {
-  return { squareButtonActions: bindActionCreators(SquareButtonActionCreators, dispatch) };
+    return { squareButtonActionCreator: bindActionCreators(squareButtonActionsCreator, dispatch) };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SquareButtonCollection);

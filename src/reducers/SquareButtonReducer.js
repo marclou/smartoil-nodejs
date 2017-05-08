@@ -20,6 +20,7 @@ export default (state = INITIAL_STATE, action) => {
                 icon: ''
             };
         case ADD_LOCATION_ACTION:
+            console.log('add Location action on reducer');
             return {
                 ...state,
                 loading: false,
