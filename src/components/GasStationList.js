@@ -6,6 +6,7 @@ import { gasStationFetch } from '../actions';
 import GasStationItem from './GasStationItem';
 import { Spinner } from './functionalComponents';
 
+
 class GasStationList extends Component {
     componentWillMount() {
         const { latitude, longitude } = this.props.coords;
@@ -22,7 +23,40 @@ class GasStationList extends Component {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
-        this.dataSource = ds.cloneWithRows(gasStationsLibraries.gasStationsData);
+        const { gasStationsData, userGasTypePreference } = gasStationsLibraries;
+        this.dataSource = ds.cloneWithRows(this.matchUserGasTypePreference(gasStationsData, userGasTypePreference));
+    }
+
+    matchUserGasTypePreference(array, userPreference) {
+        let result = [];
+
+        switch (userPreference) {
+            case 'Gasoline':
+                result = array.map((object) => {
+                    const price = { price: object.price_oil };
+                    return Object.assign(object, price);
+                });
+                break;
+            case 'Premium Gasoline':
+                result = array.map((object) => {
+                    const price = { price: object.price_premium_oil };
+                    return Object.assign(object, price);
+                });
+                break;
+            case 'Diesel':
+                result = array.map((object) => {
+                    const price = { price: object.price_dissel };
+                    return Object.assign(object, price);
+                });
+                break;
+            case 'Heating gas':
+                result = array.map((object) => {
+                    const price = { price: object.price_heating_oil };
+                    return Object.assign(object, price);
+                });
+                break;
+        }
+        return result;
     }
 
     /** Function to return a Spinner (loading = true)
@@ -45,7 +79,9 @@ class GasStationList extends Component {
     /** Function to tell ListView Component how each row should be rendered **/
     renderRow(gasStation) {
         return (
-            <GasStationItem gasStation={gasStation} />
+            <GasStationItem
+                gasStation={gasStation}
+            />
         );
     }
 

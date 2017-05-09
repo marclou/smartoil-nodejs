@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Linking, Platform, Text } from 'react-native';
+import { Linking, Platform, Text, Image } from 'react-native';
 import { Icon } from 'native-base';
 
 import { ListSection } from './functionalComponents';
@@ -22,16 +22,17 @@ class GasStationItem extends Component {
     }
 
     render() {
-        const { store_name, price_oil, uni_id } = this.props.gasStation;
-        const { iconStyle, textStyle } = styles;
+        const { price, uni_id } = this.props.gasStation;
+        const { logoStyle, iconStyle, textStyle } = styles;
 
         return (
             <ListSection onPress={this.onItemPress.bind(this)} >
+                <Image
+                    style={logoStyle}
+                    source={require('../img/brand_logos/a.jpg')}
+                />
                 <Text style={textStyle} >
-                    {store_name}
-                </Text>
-                <Text style={textStyle} >
-                    {price_oil}
+                    {price}
                 </Text>
                 <Text style={textStyle} >
                     {uni_id}
@@ -44,6 +45,11 @@ class GasStationItem extends Component {
 }
 
 const styles = {
+    logoStyle: {
+        height: 40,
+        width: 40,
+        alignSelf: 'center'
+    },
     textStyle: {
         width: 70,
         alignSelf: 'center'

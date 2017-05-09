@@ -5,7 +5,8 @@ import {
 
 const INITIAL_STATE = {
     loading: true,
-    gasStationsData: ''
+    gasStationsData: '',
+    userGasTypePreference: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -13,7 +14,7 @@ export default (state = INITIAL_STATE, action) => {
         case DATA_FETCHING:
             return { ...state, loading: true };
         case DATA_FETCH_SUCCESS:
-            return { loading: false, gasStationsData: action.payload };
+            return { loading: false, gasStationsData: action.payload, userGasTypePreference: action.userGasTypePreference };
         default:
             return state;
     }
