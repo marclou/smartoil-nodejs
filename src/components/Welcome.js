@@ -10,21 +10,27 @@ class Welcome extends Component {
             latitude: null,
             longitude: null,
             error: null,
+            buttonDisabled: false
         };
     }
 
     onButtonPress(researchType) {
-        switch (researchType) {
-            case 'LOCATION':
-                this.getUserPosition().then(() => {
-                    Actions.result({ coords: this.state });
-                }).catch((error) =>
-                    this.displayAlert('Alert', 'Location can not be retrieve. Have a look at settings.', error));
-                break;
-            case 'AREA_LIST':
-                return Actions.areaList();
-            default:
-                return Actions.result({ userCoords: this.state });
+        /**
+         * ButtonClicked is used to blind the button whether user has already clicked the button
+         */
+        if (!this.state.buttonDisabled) {
+            this.setState({ buttonDisabled: true });
+            switch (researchType) {
+                case 'LOCATION':
+                    this.getUserPosition();
+                    break;
+                case 'AREA_LIST':
+                    this.setState({ buttonDisabled: false });
+                    return Actions.areaList();
+                default:
+                    this.setState({ buttonDisabled: false });
+                    return Actions.areaList();
+            }
         }
     }
 
@@ -35,23 +41,25 @@ class Welcome extends Component {
      * @returns {Promise}
      */
     getUserPosition() {
-        return new Promise((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    this.setState({
-                        latitude: position.coords.latitude,
-                        longitude: position.coords.longitude,
-                        error: null,
-                    });
-                    resolve(position);
-                },
-                (error) => {
-                    this.setState({ error: error.message });
-                    reject(error);
-                    },
-                { enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 }
-            );
-        });
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                this.setState({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    error: null,
+                });
+                this.setState({ buttonDisabled: false });
+                Actions.result({ coords: this.state });
+            },
+            (error) => {
+                this.setState({
+                    error: error.message
+                });
+                this.setState({ buttonDisabled: false });
+                this.displayAlert('Alert', 'Location can not be retrieve. Have a look at settings.', error);
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 }
+        );
     }
 
     displayAlert(alertTitle, alertMessage, error) {
