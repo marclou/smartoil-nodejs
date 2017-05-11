@@ -3,7 +3,7 @@ import { Scene, Router, Actions } from 'react-native-router-flux';
 
 import Welcome from './components/Welcome';
 import SettingsList from './components/SettingsList';
-import GasStationList from './components/GasStationList';
+import Result from './components/Result';
 import AreaList from './components/AreaList';
 
 const RouterComponent = () => {
@@ -24,7 +24,7 @@ const RouterComponent = () => {
             />
             <Scene
                 key="result"
-                component={GasStationList}
+                component={Result}
                 title="Result"
             />
             <Scene

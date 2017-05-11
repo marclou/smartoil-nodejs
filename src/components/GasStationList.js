@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView } from 'react-native';
+import { ListView, View } from 'react-native';
 
 import { gasStationFetch } from '../actions';
 import GasStationItem from './GasStationItem';
@@ -76,6 +76,7 @@ class GasStationList extends Component {
      **/
     renderListOrSpinner() {
         const { loading } = this.props.gasStationsLibraries;
+
         if (loading) {
             return <Spinner size='large' />;
         }
@@ -99,10 +100,20 @@ class GasStationList extends Component {
 
     render() {
         return (
-            this.renderListOrSpinner()
+            <View style={styles.containerStyle}>
+                {this.renderListOrSpinner()}
+            </View>
         );
     }
 }
+
+const styles = {
+    containerStyle: {
+        flex: 1,
+        borderTopWidth: 1,
+        borderColor: '#AAA'
+    }
+};
 
 const mapStateToProps = state => {
     return { gasStationsLibraries: state.gasStationsLibraries };

@@ -7,8 +7,10 @@ import { SearchButton } from './functionalComponents';
 class Welcome extends Component {
     componentWillMount() {
         this.state = {
-            latitude: null,
-            longitude: null,
+            userCoordinates: {
+                latitude: null,
+                longitude: null,
+            },
             error: null,
             buttonDisabled: false
         };
@@ -44,12 +46,14 @@ class Welcome extends Component {
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 this.setState({
-                    latitude: position.coords.latitude,
-                    longitude: position.coords.longitude,
+                    userCoordinates: {
+                        latitude: position.coords.latitude,
+                        longitude: position.coords.longitude
+                    },
                     error: null,
                 });
                 this.setState({ buttonDisabled: false });
-                Actions.result({ coords: this.state });
+                Actions.result({ coords: this.state.userCoordinates });
             },
             (error) => {
                 this.setState({
@@ -58,7 +62,7 @@ class Welcome extends Component {
                 this.setState({ buttonDisabled: false });
                 this.displayAlert('Alert', this.state.error, error);
             },
-            { enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 }
+            { enableHighAccuracy: false, timeout: 10000, maximumAge: 1000 }
         );
     }
 
