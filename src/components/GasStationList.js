@@ -24,7 +24,19 @@ class GasStationList extends Component {
             rowHasChanged: (r1, r2) => r1 !== r2
         });
         const { gasStationsData, userGasTypePreference } = gasStationsLibraries;
-        this.dataSource = ds.cloneWithRows(this.matchUserGasTypePreference(gasStationsData, userGasTypePreference));
+        const gasStationsDataAndUserPreference = this.matchUserGasTypePreference(gasStationsData, userGasTypePreference);
+        gasStationsDataAndUserPreference.sort(this.sortGasStationByPrice);
+        this.dataSource = ds.cloneWithRows(gasStationsDataAndUserPreference);
+    }
+
+    sortGasStationByPrice(a, b) {
+        let comparison = 0;
+        if (a.price > b.price) {
+            comparison = 1;
+        } else if (a.price < b.price) {
+            comparison = -1;
+        }
+        return comparison;
     }
 
     matchUserGasTypePreference(array, userPreference) {
@@ -33,25 +45,25 @@ class GasStationList extends Component {
         switch (userPreference) {
             case 'Gasoline':
                 result = array.map((object) => {
-                    const price = { price: object.price_oil };
+                    const price = { price: object.oil };
                     return Object.assign(object, price);
                 });
                 break;
             case 'Premium Gasoline':
                 result = array.map((object) => {
-                    const price = { price: object.price_premium_oil };
+                    const price = { price: object.premium_oil };
                     return Object.assign(object, price);
                 });
                 break;
             case 'Diesel':
                 result = array.map((object) => {
-                    const price = { price: object.price_dissel };
+                    const price = { price: object.dissel };
                     return Object.assign(object, price);
                 });
                 break;
             case 'Heating gas':
                 result = array.map((object) => {
-                    const price = { price: object.price_heating_oil };
+                    const price = { price: object.heating_oil };
                     return Object.assign(object, price);
                 });
                 break;

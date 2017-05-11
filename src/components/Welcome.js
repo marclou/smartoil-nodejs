@@ -56,7 +56,7 @@ class Welcome extends Component {
                     error: error.message
                 });
                 this.setState({ buttonDisabled: false });
-                this.displayAlert('Alert', 'Location can not be retrieve. Have a look at settings.', error);
+                this.displayAlert('Alert', this.state.error, error);
             },
             { enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 }
         );
