@@ -1,15 +1,29 @@
 import React, { Component } from 'react';
-import { View, Text, Animated } from 'react-native';
+import { View, Animated } from 'react-native';
 import { connect } from 'react-redux';
 
 import { pricePredictionFetch } from '../actions';
-import { Spinner } from './functionalComponents';
+import { Spinner, MainResult, PriceResult, InfoResult } from './functionalComponents';
 
 class PricePrediction extends Component {
     componentWillMount() {
         const { latitude, longitude } = this.props.coords;
 
+        this.state = {
+            fadeAnim: new Animated.Value(0),          // Initial value for opacity: 0
+        };
+
         this.props.pricePredictionFetch(latitude, longitude);
+    }
+
+    componentDidMount() {
+        Animated.timing(                            // Animate over time
+            this.state.fadeAnim,                      // The animated value to drive
+            {
+                toValue: 1,
+                duration: 1000
+            }
+        ).start();                                  // Starts the animation
     }
 
     renderPricePredictionOrSpinner() {
@@ -19,18 +33,15 @@ class PricePrediction extends Component {
             return <Spinner size='large' />;
         }
         // TO BE REMOVED WHEN PRICE PREDICTION API IS READY
-        Object.assign(pricePredictionData, { predictPrice: 1250 }, { shortText: 'Buy' }, { longText: 'Prices will increase tomorrow, you should refill your tank now !' });
+        Object.assign(pricePredictionData, { predictPrice: 1250 }, { shortText: 'Buy !' }, { longText: 'Prices will increase tomorrow, you should refill your tank now.' });
         const { resultContainerStyle } = styles;
 
         return (
-            <View style={resultContainerStyle}>
-                <Text>
-                    {pricePredictionData.shortText}
-                </Text>
-                <Text>
-                    {pricePredictionData.longText}
-                </Text>
-            </View>
+            <Animated.View style={{ ...resultContainerStyle, opacity: this.state.fadeAnim }}>
+                <MainResult text={pricePredictionData.shortText} />
+                <PriceResult text={pricePredictionData.predictPrice} />
+                <InfoResult text={pricePredictionData.longText} />
+            </Animated.View>
         );
     }
 
@@ -54,6 +65,7 @@ const styles = {
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
+        padding: 40,
         backgroundColor: '#00cc99'
     }
 };
