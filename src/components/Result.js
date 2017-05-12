@@ -7,15 +7,17 @@ import PricePrediction from './PricePrediction';
 class Result extends Component {
     render() {
         const { containerStyle, predictionStyle, gasStationsListStyle } = styles;
+        const { coords } = this.props;
 
         return (
             <View style={containerStyle} >
                 <PricePrediction
                     style={predictionStyle}
+                    coords={coords}
                 />
                 <GasStationList
                     style={gasStationsListStyle}
-                    coords={this.props.coords}
+                    coords={coords}
                 />
             </View>
         );
