@@ -3,7 +3,10 @@ import { View, Animated } from 'react-native';
 import { connect } from 'react-redux';
 
 import { pricePredictionFetch } from '../actions';
-import { Spinner, MainResult, PriceResult, InfoResult } from './functionalComponents';
+import MainResult from './MainResult';
+import PriceResult from './PriceResult';
+import InfoResult from './InfoResult';
+import { Spinner } from './functionalComponents';
 
 class PricePrediction extends Component {
     componentWillMount() {

@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 
-const MainResult = ({ text }) => {
-    const { textContainer, textStyle } = styles;
+class MainResult extends Component {
 
-    return (
-        <View style={textContainer}>
-            <Text style={textStyle}>
-                {text}
-            </Text>
-        </View>
-    );
-};
+    render() {
+        const { textContainer, textStyle } = styles;
+        const { text } = this.props;
+
+        return (
+            <View style={textContainer}>
+                <Text style={textStyle}>
+                    {text}
+                </Text>
+            </View>
+        );
+    }
+}
 
 const styles = {
     textContainer: {
@@ -30,4 +34,4 @@ const styles = {
     }
 };
 
-export { MainResult };
+export default MainResult;
