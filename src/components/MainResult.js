@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { Text, Animated } from 'react-native';
 
 class MainResult extends Component {
+    componentWillMount() {
+        this.state = {
+            fadeAnim: new Animated.Value(0),
+        };
+    }
+    componentDidMount() {
+        Animated.timing(
+            this.state.fadeAnim,
+            {
+                toValue: 1,
+                duration: 1000
+            }
+        ).start();
+    }
 
     render() {
         const { textContainer, textStyle } = styles;
         const { text } = this.props;
+        const { fadeAnim } = this.state;
 
         return (
-            <View style={textContainer}>
+            <Animated.View style={{ ...textContainer, opacity: fadeAnim }}>
                 <Text style={textStyle}>
                     {text}
                 </Text>
-            </View>
+            </Animated.View>
         );
     }
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Platform } from 'react-native';
 import { Scene, Router, Actions } from 'react-native-router-flux';
 
 import Welcome from './components/Welcome';
@@ -7,8 +8,9 @@ import Result from './components/Result';
 import AreaList from './components/AreaList';
 
 const RouterComponent = () => {
+
     return (
-        <Router sceneStyle={{ paddingTop: 65 }}>
+        <Router sceneStyle={{ paddingTop: Platform.OS === 'ios' || Platform.Version > 19 ? 64 : 44 }}>
             <Scene
                 onRight={() => Actions.settings()}
                 rightTitle="Settings"
