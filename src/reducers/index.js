@@ -4,9 +4,13 @@ import SquareButtonReducer from './SquareButtonReducer';
 import SquareButtonCollection from './SquareButtonCollection';
 import PricePredictionReducer from './PricePredictionReducer';
 
+const squareButton = combineReducers({
+    squareButtonCollectionReducer: SquareButtonCollection,
+    squareButtonState: SquareButtonReducer
+});
+
 export default combineReducers({
     gasStationsLibraries: GasStationListReducer,
     pricePrediction: PricePredictionReducer,
-    squareButtonState: SquareButtonReducer,
-    squareButtonCollectionReducer: SquareButtonCollection
+    squareButton
 });

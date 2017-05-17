@@ -42,7 +42,7 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-    return { squareButtonsCollection: state.squareButtonCollectionReducer };
+    return { squareButtonsCollection: state.squareButton.squareButtonCollectionReducer };
 };
 
 const mapDispatchToProps = dispatch => {
