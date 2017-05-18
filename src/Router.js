@@ -8,9 +8,8 @@ import Result from './components/Result';
 import AreaList from './components/AreaList';
 
 const RouterComponent = () => {
-
     return (
-        <Router sceneStyle={{ paddingTop: Platform.OS === 'ios' || Platform.Version > 19 ? 64 : 44 }}>
+        <Router sceneStyle={navBarPadding()}>
             <Scene
                 onRight={() => Actions.settings()}
                 rightTitle="Settings"
@@ -40,5 +39,17 @@ const RouterComponent = () => {
         </Router>
     );
 };
+
+const navBarPadding = () => {
+  switch (Platform.OS) {
+      case 'ios':
+          return { paddingTop: 54 };
+      case 'android':
+          return { paddingTop: 44 };
+      default:
+          return { paddingTop: 54 };
+  }
+};
+
 
 export default RouterComponent;

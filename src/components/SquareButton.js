@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Icon } from 'native-base';
+
 import { Spinner } from './functionalComponents';
 
 class SquareButton extends Component {
-    componentDidMount() {
-
-    }
     onButtonPress() {
-        const { addFavoriteLocation } = this.props;
-        addFavoriteLocation;
+        console.log('Button pressed');
     }
 
     renderButtonOrSpinner() {
-        const { title, icon, loading } = this.props.squareButtonState;
         const { buttonStyle, textStyle, iconStyle } = styles;
+        const { loading, title, icon } = this.props.squareButtonProps;
+
         if (loading) {
             return (
                 <Spinner size='small' />

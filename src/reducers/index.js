@@ -1,16 +1,10 @@
 import { combineReducers } from 'redux';
 import GasStationListReducer from './GasStationListReducer';
-import SquareButtonReducer from './SquareButtonReducer';
-import SquareButtonCollection from './SquareButtonCollection';
 import PricePredictionReducer from './PricePredictionReducer';
-
-const squareButton = combineReducers({
-    squareButtonCollectionReducer: SquareButtonCollection,
-    squareButtonState: SquareButtonReducer
-});
+import SquareButtonCollectionReducer from './SquareButtonCollectionReducer';
 
 export default combineReducers({
     gasStationsLibraries: GasStationListReducer,
     pricePrediction: PricePredictionReducer,
-    squareButton
+    squareButtonCollection: SquareButtonCollectionReducer
 });

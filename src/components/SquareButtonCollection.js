@@ -1,33 +1,49 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { AsyncStorage, View } from 'react-native';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 
-import * as squareButtonActionsCreator from '../actions/squareButtonAction';
 import SquareButton from './SquareButton';
+import { fetchingButtons } from '../actions';
 
 class SquareButtonCollection extends Component {
-    renderSquareButtons() {
-        const { squareButtonsCollection } = this.props;
-        return (
-            squareButtonsCollection.map((value, index) => {
-                return (
-                    <SquareButton
-                        key={index}
-                        squareButtonState={value}
-                        {...squareButtonActionsCreator}
-                    />
-                );
-            })
-        );
+    componentWillMount() {
+        this.addAsyncStorage();
+        this.props.fetchingButtons();
+    }
+
+    // TO BE REMOVED
+    addAsyncStorage() {
+        const SB = [
+            {
+                id: 2,
+                loading: false,
+                title: 'Yongsan',
+                icon: 'pin'
+            },
+            {
+                id: 3,
+                loading: false,
+                title: 'Gangnam',
+                icon: 'pin'
+            }
+        ];
+        AsyncStorage.setItem('SquareButtons', JSON.stringify(SB));
     }
 
     render() {
         const { containerStyle } = styles;
+        const { squareButtonsProps } = this.props;
 
         return (
             <View style={containerStyle}>
-                {this.renderSquareButtons()}
+                {squareButtonsProps.map((squareButtonProps, index) => {
+                    return (
+                        <SquareButton
+                            squareButtonProps={squareButtonProps}
+                            key={index}
+                        />
+                    );
+                })}
             </View>
         );
     }
@@ -41,12 +57,8 @@ const styles = {
   }
 };
 
-const mapStateToProps = state => {
-    return { squareButtonsCollection: state.squareButton.squareButtonCollectionReducer };
+const mapStateToProps = (state) => {
+    return { squareButtonsProps: state.squareButtonCollection };
 };
 
-const mapDispatchToProps = dispatch => {
-    return { squareButtonActionCreator: bindActionCreators(squareButtonActionsCreator, dispatch) };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(SquareButtonCollection);
+export default connect(mapStateToProps, { fetchingButtons })(SquareButtonCollection);
