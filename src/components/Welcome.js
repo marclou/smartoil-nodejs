@@ -80,10 +80,10 @@ class Welcome extends Component {
 
         return (
             <View style={containerStyle} >
-                <SearchButton onPress={this.onButtonPress.bind(this, 'LOCATION')} icon={'pin'} >
+                <SearchButton onPress={this.onButtonPress.bind(this, 'LOCATION')} icon={'ios-pin'} >
                     Use location
                 </SearchButton>
-                <SearchButton onPress={this.onButtonPress.bind(this, 'AREA_LIST')} icon={'list'} >
+                <SearchButton onPress={this.onButtonPress.bind(this, 'AREA_LIST')} icon={'ios-list'} >
                     Search by area
                 </SearchButton>
             </View>

@@ -5,7 +5,7 @@
     <key>CFBundleDevelopmentRegion</key>
     <string>en</string>
     <key>CFBundleDisplayName</key>
-    <string>GasPredict</string>
+    <string>SmartGas</string>
     <key>CFBundleExecutable</key>
     <string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key>
@@ -84,11 +84,10 @@
       <string>SanFranciscoBold.ttf</string>
       <string>SanFranciscoThin.ttf</string>
       <string>SF-UI-Text-Regular.otf</string>
+      <string>SimpleLineIcons.ttf</string>
       <string>Skia.ttf</string>
       <string>Times New Roman.ttf</string>
       <string>Zocial.ttf</string>
-      <string>MaterialCommunityIcons.ttf</string>
-      <string>SimpleLineIcons.ttf</string>
     </array>
   </dict>
 </plist>

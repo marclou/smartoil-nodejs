@@ -19,14 +19,14 @@ class SquareButtonCollection extends Component {
                 type: 'FIND_RESULT',
                 loading: false,
                 title: 'Yongsan',
-                icon: 'pin'
+                icon: 'ios-pin'
             },
             {
                 id: 3,
                 type: 'FIND_RESULT',
                 loading: false,
                 title: 'Gangnam',
-                icon: 'pin'
+                icon: 'ios-pin'
             }
         ];
         AsyncStorage.setItem('SquareButtons', JSON.stringify(SB));

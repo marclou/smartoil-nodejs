@@ -1,4 +1,4 @@
-package com.gaspredict;
+package com.smartgas;
 
 import android.app.Application;
 
