@@ -57,7 +57,7 @@ class GasStationList extends Component {
                 break;
             case 'Diesel':
                 result = array.map((object) => {
-                    const price = { price: object.dissel };
+                    const price = { price: object.diesel };
                     return Object.assign(object, price);
                 });
                 break;

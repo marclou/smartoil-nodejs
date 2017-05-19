@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Switch } from 'react-native';
 import { ListDivider } from './functionalComponents';
 
 import SquareButtonCollection from './SquareButtonCollection';
@@ -15,6 +15,10 @@ class SettingsList extends Component {
                     <SquareButtonCollection />
                     <ListDivider title='favorite gas type' />
                     <RadioButtonsList />
+                    <ListDivider title='Allow access to my position' />
+                    <View>
+                        <Switch />
+                    </View>
                     <ListDivider title='Share this wonderfull app' />
                     <ShareList />
                 </ScrollView>
