@@ -7,18 +7,21 @@ import {
 const INITIAL_STATE = [
     {
         id: 1,
+        type: null,
         loading: true,
         title: null,
         icon: null
     },
     {
         id: 2,
+        type: null,
         loading: true,
         title: null,
         icon: null
     },
     {
         id: 3,
+        type: null,
         loading: true,
         title: null,
         icon: null
@@ -31,6 +34,7 @@ export default (state = INITIAL_STATE, action) => {
             return state.map((item) => {
                 let obj = {
                     id: item.id,
+                    type: 'ADD_LOCATION',
                     loading: false,
                     title: 'Add Location',
                     icon: 'add'

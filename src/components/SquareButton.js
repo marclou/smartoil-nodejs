@@ -1,12 +1,26 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Icon } from 'native-base';
+import { Actions } from 'react-native-router-flux';
 
 import { Spinner } from './functionalComponents';
 
 class SquareButton extends Component {
+
+    componentDidMount() {
+
+    }
+
     onButtonPress() {
-        console.log('Button pressed');
+        const { type } = this.props.squareButtonProps;
+        switch (type) {
+            case 'FIND_RESULT':
+                return Actions.result({ coords: { latitude: 37.55, longitude: 126.98 } });
+            case 'ADD_LOCATION':
+                return Actions.areaList();
+            default:
+                return null;
+        }
     }
 
     renderButtonOrSpinner() {
@@ -20,7 +34,7 @@ class SquareButton extends Component {
         }
         return (
             <TouchableOpacity style={{ flex: 1 }} onPress={this.onButtonPress.bind(this)}>
-                <View style={buttonStyle} >
+                <View style={buttonStyle}>
                     <Text style={textStyle}>
                         {title}
                     </Text>

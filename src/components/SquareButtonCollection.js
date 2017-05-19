@@ -16,12 +16,14 @@ class SquareButtonCollection extends Component {
         const SB = [
             {
                 id: 2,
+                type: 'FIND_RESULT',
                 loading: false,
                 title: 'Yongsan',
                 icon: 'pin'
             },
             {
                 id: 3,
+                type: 'FIND_RESULT',
                 loading: false,
                 title: 'Gangnam',
                 icon: 'pin'

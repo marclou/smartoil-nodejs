@@ -8,7 +8,7 @@ export const fetchingButtons = () => {
         AsyncStorage.getItem('SquareButtons', (err, result) => {
             setTimeout(() => {
                 dispatch(fetchingSuccess(JSON.parse(result)));
-            }, 1000);
+            }, 500);
         });
     };
 };
