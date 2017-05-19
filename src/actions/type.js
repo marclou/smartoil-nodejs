@@ -1,3 +1,7 @@
+/** Type for the userGlobalState Reducer **/
+export const RECEIVE_LOCATION = 'receive_location';
+export const ERROR_LOCATION = 'error_location';
+
 /** Type for the GasStationList Component **/
 export const DATA_FETCHING = 'data_fetching';
 export const DATA_FETCH_SUCCESS = 'data_fetch_success';

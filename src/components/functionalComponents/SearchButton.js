@@ -1,11 +1,12 @@
 import React from 'react';
 import { Icon, Button, Text } from 'native-base';
 
-const SearchButton = ({ onPress, icon, children }) => {
+const SearchButton = ({ disabled, onPress, icon, children }) => {
     const { buttonStyle } = styles;
 
     return (
         <Button
+            disabled={disabled}
             rounded
             onPress={onPress}
             style={buttonStyle}
