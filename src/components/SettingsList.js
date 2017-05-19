@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Switch } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { ListDivider } from './functionalComponents';
 
 import SquareButtonCollection from './SquareButtonCollection';
 import RadioButtonsList from './RadioButtonsList';
 import ShareList from './ShareList';
+import LocationPreference from './LocationPreference';
 
 class SettingsList extends Component {
     render() {
@@ -15,11 +16,9 @@ class SettingsList extends Component {
                     <SquareButtonCollection />
                     <ListDivider title='favorite gas type' />
                     <RadioButtonsList />
-                    <ListDivider title='Allow access to my position' />
-                    <View>
-                        <Switch />
-                    </View>
-                    <ListDivider title='Share this wonderfull app' />
+                    <ListDivider title='access my position' />
+                    <LocationPreference />
+                    <ListDivider title='share this wonderful app' />
                     <ShareList />
                 </ScrollView>
             </View>

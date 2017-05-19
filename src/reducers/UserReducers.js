@@ -1,6 +1,7 @@
 import {
     RECEIVE_LOCATION,
-    ERROR_LOCATION
+    ERROR_LOCATION,
+    CHANGE_USER_ALLOW_LOCATION
 } from '../actions/type';
 
 const INITIAL_STATE = {
@@ -20,6 +21,11 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 error: action.payload.error,
                 userAllowLocation: false
+            };
+        case CHANGE_USER_ALLOW_LOCATION:
+            return {
+                ...state,
+                userAllowLocation: action.payload
             };
         default:
             return state;
