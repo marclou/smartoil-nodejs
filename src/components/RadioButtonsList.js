@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, AsyncStorage } from 'react-native';
+import { connect } from 'react-redux';
 import { RadioButtons } from 'react-native-radio-buttons';
 import { Icon } from 'native-base';
 
+import { changeUserFavoriteGas } from '../actions';
+
 
 class RadioButtonsList extends Component {
-
-    /**
-     * selectedOption is the user choice for the gas preference.
-     * When component is about to mount, selectedOption is set up :
-     * - To the cache memory value (if found)
-     * - Gasoline by default (if not found)
-     */
     componentWillMount() {
-        this.state = { selectedOption: '' };
         AsyncStorage.getItem('gasTypePreference').then((value) => {
             if (value !== null) {
-                this.setState({ selectedOption: value });
-            } else {
-                this.setState({ selectedOption: 'Gasoline' });
+                this.props.changeUserFavoriteGas(value);
             }
         }).catch(error => {
             console.log(error);
@@ -32,12 +25,12 @@ class RadioButtonsList extends Component {
             'Heating gas'
         ];
 
+        const { userFavoriteGas } = this.props;
+
         function setSelectedOption(selectedOption) {
             try {
                 AsyncStorage.setItem('gasTypePreference', selectedOption);
-                this.setState({
-                    selectedOption
-                });
+                this.props.changeUserFavoriteGas(selectedOption);
             } catch (error) {
                 console.log(error);
             }
@@ -73,11 +66,16 @@ class RadioButtonsList extends Component {
                 <RadioButtons
                     options={options}
                     onSelection={setSelectedOption.bind(this)}
-                    selectedOption={this.state.selectedOption}
+                    selectedOption={userFavoriteGas}
                     renderOption={renderOption}
                     renderContainer={renderContainer}
                 />
             </View>);
     }
 }
-export default RadioButtonsList;
+
+const mapStateToProps = state => {
+    return { userFavoriteGas: state.userState };
+};
+
+export default connect(mapStateToProps, { changeUserFavoriteGas })(RadioButtonsList);

@@ -3,7 +3,8 @@ import { Alert } from 'react-native';
 import {
     RECEIVE_LOCATION,
     ERROR_LOCATION,
-    CHANGE_USER_ALLOW_LOCATION
+    CHANGE_USER_ALLOW_LOCATION,
+    CHANGE_USER_FAVORITE_GAS
 } from './type';
 
 export const getUserPosition = () => {
@@ -29,12 +30,12 @@ export const getUserPosition = () => {
                     payload: error
                 });
             },
-            { enableHighAccuracy: false, timeout: 6000, maximumAge: 1000 }
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 }
         );
     };
 };
 
-export const changeUserAllowLocation = (value) => {
+export const changeUserAllowLocation = value => {
     return (dispatch) => {
         if (value === true) {
             return dispatch({
@@ -63,8 +64,15 @@ export const changeUserAllowLocation = (value) => {
                     payload: error
                 });
             },
-            { enableHighAccuracy: false, timeout: 6000, maximumAge: 1000 }
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 }
         );
+    };
+};
+
+export const changeUserFavoriteGas = value => {
+    return {
+        type: CHANGE_USER_FAVORITE_GAS,
+        payload: value
     };
 };
 
