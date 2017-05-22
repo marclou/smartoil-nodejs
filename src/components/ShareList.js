@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
-
-import { Container, Content, Button, Text } from 'native-base';
+import { View, Button } from 'react-native';
 
 class ShareList extends Component {
+    onButtonPress() {
+        console.log('Pressed');
+    }
+
     render() {
         const { containerStyle } = styles;
 
         return (
-          <Container style={{ justifyContent: 'center' }} >
-             <Content>
-                 <Button transparent blue >
-                     <Text>Light</Text>
-                 </Button>
-                 <Button transparent blue >
-                     <Text>Light</Text>
-                 </Button>
-            </Content>
-          </Container>
+          <View style={containerStyle}>
+              <Button
+                  onPress={this.onButtonPress.bind(this)}
+                  title="Share with Facebook"
+              />
+              <Button
+                  onPress={this.onButtonPress.bind(this)}
+                  title="Share with Tweeter"
+              />
+          </View>
         );
     }
 }

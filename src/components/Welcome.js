@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
@@ -10,6 +10,7 @@ class Welcome extends Component {
     componentDidMount() {
         this.props.getUserPosition();
         this.props.getUserFavoriteGas();
+        this.addAsyncStorage();
     }
 
     onButtonPress(researchType) {
@@ -24,6 +25,27 @@ class Welcome extends Component {
             default:
                 return Actions.areaList();
         }
+    }
+
+    // TO BE REMOVED
+    addAsyncStorage() {
+        const SB = [
+            {
+                id: 2,
+                type: 'FIND_RESULT',
+                loading: false,
+                title: 'Yongsan',
+                icon: 'pin'
+            },
+            {
+                id: 3,
+                type: 'FIND_RESULT',
+                loading: false,
+                title: 'Gangnam',
+                icon: 'pin'
+            }
+        ];
+        AsyncStorage.setItem('SquareButtons', JSON.stringify(SB));
     }
 
     render() {

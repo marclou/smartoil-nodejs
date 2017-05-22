@@ -6,11 +6,6 @@ import { Actions } from 'react-native-router-flux';
 import { Spinner } from './functionalComponents';
 
 class SquareButton extends Component {
-
-    componentDidMount() {
-
-    }
-
     onButtonPress() {
         const { type } = this.props.squareButtonProps;
         switch (type) {

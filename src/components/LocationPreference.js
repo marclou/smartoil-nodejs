@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { changeUserAllowLocation } from '../actions';
 
 class LocationPreference extends Component {
-
     valueChanged(value) {
         this.props.changeUserAllowLocation(value);
     }

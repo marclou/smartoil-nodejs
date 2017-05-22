@@ -6,30 +6,8 @@ import SquareButton from './SquareButton';
 import { fetchingButtons } from '../actions';
 
 class SquareButtonCollection extends Component {
-    componentWillMount() {
-        this.addAsyncStorage();
+    componentDidMount() {
         this.props.fetchingButtons();
-    }
-
-    // TO BE REMOVED
-    addAsyncStorage() {
-        const SB = [
-            {
-                id: 2,
-                type: 'FIND_RESULT',
-                loading: false,
-                title: 'Yongsan',
-                icon: 'pin'
-            },
-            {
-                id: 3,
-                type: 'FIND_RESULT',
-                loading: false,
-                title: 'Gangnam',
-                icon: 'pin'
-            }
-        ];
-        AsyncStorage.setItem('SquareButtons', JSON.stringify(SB));
     }
 
     render() {

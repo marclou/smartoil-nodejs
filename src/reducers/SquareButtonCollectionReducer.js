@@ -1,5 +1,3 @@
-import uuidV1 from 'uuid';
-
 import {
     SQUARE_BUTTON_FETCHING_SUCCESS
 } from '../actions/type';

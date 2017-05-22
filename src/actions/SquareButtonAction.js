@@ -3,16 +3,6 @@ import {
     SQUARE_BUTTON_FETCHING_SUCCESS
 } from './type';
 
-export const fetchingButtons = () => {
-    return (dispatch) => {
-        AsyncStorage.getItem('SquareButtons', (err, result) => {
-            setTimeout(() => {
-                dispatch(fetchingSuccess(JSON.parse(result)));
-            }, 500);
-        });
-    };
-};
-
 const fetchingSuccess = (result) => {
     return {
         type: SQUARE_BUTTON_FETCHING_SUCCESS,
@@ -20,3 +10,10 @@ const fetchingSuccess = (result) => {
     };
 };
 
+export const fetchingButtons = () => {
+    return (dispatch) => {
+        AsyncStorage.getItem('SquareButtons', (err, result) => {
+            dispatch(fetchingSuccess(JSON.parse(result)));
+        });
+    };
+};

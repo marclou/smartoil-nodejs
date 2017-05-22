@@ -2,8 +2,7 @@ import {
     RECEIVE_LOCATION,
     ERROR_LOCATION,
     CHANGE_USER_ALLOW_LOCATION,
-    RECEIVE_USER_FAVORITE_GAS,
-    CHANGE_USER_FAVORITE_GAS
+    RECEIVE_USER_FAVORITE_GAS
 } from '../actions/type';
 
 const INITIAL_STATE = {
@@ -31,11 +30,6 @@ export default (state = INITIAL_STATE, action) => {
                 userAllowLocation: action.payload
             };
         case RECEIVE_USER_FAVORITE_GAS:
-            return {
-                ...state,
-                userFavoriteGas: action.payload
-            };
-        case CHANGE_USER_FAVORITE_GAS:
             return {
                 ...state,
                 userFavoriteGas: action.payload
