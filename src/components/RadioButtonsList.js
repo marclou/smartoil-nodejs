@@ -75,7 +75,7 @@ class RadioButtonsList extends Component {
 }
 
 const mapStateToProps = state => {
-    return { userFavoriteGas: state.userState };
+    return { userFavoriteGas: state.userState.userFavoriteGas };
 };
 
 export default connect(mapStateToProps, { changeUserFavoriteGas })(RadioButtonsList);
