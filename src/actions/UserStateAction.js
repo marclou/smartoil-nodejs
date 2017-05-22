@@ -1,9 +1,10 @@
-import { Alert } from 'react-native';
+import { AsyncStorage, Alert } from 'react-native';
 
 import {
     RECEIVE_LOCATION,
     ERROR_LOCATION,
     CHANGE_USER_ALLOW_LOCATION,
+    RECEIVE_USER_FAVORITE_GAS,
     CHANGE_USER_FAVORITE_GAS
 } from './type';
 
@@ -69,10 +70,31 @@ export const changeUserAllowLocation = value => {
     };
 };
 
-export const changeUserFavoriteGas = value => {
-    return {
-        type: CHANGE_USER_FAVORITE_GAS,
-        payload: value
+export const getUserFavoriteGas = () => {
+    return (dispatch) => {
+        AsyncStorage.getItem('gasTypePreference').then((value) => {
+            if (value !== null) {
+                return dispatch({
+                    type: RECEIVE_USER_FAVORITE_GAS,
+                    payload: value
+                });
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    };
+};
+
+export const changeUserFavoriteGas = selectedGasType => {
+    return (dispatch) => {
+        AsyncStorage.setItem('gasTypePreference', selectedGasType).then(() => {
+            return dispatch({
+                type: CHANGE_USER_FAVORITE_GAS,
+                payload: selectedGasType
+            });
+        }).catch(error => {
+            console.log(error);
+        });
     };
 };
 

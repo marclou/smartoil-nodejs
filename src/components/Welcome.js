@@ -3,12 +3,13 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import { getUserPosition } from '../actions';
+import { getUserPosition, getUserFavoriteGas } from '../actions';
 import { SearchButton } from './functionalComponents';
 
 class Welcome extends Component {
     componentDidMount() {
         this.props.getUserPosition();
+        this.props.getUserFavoriteGas();
     }
 
     onButtonPress(researchType) {
@@ -61,4 +62,4 @@ const mapStateToProps = state => {
     return { userGlobalState: state.userState };
 };
 
-export default connect(mapStateToProps, { getUserPosition })(Welcome);
+export default connect(mapStateToProps, { getUserPosition, getUserFavoriteGas })(Welcome);

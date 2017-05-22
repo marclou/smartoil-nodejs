@@ -2,6 +2,7 @@ import {
     RECEIVE_LOCATION,
     ERROR_LOCATION,
     CHANGE_USER_ALLOW_LOCATION,
+    RECEIVE_USER_FAVORITE_GAS,
     CHANGE_USER_FAVORITE_GAS
 } from '../actions/type';
 
@@ -28,6 +29,11 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 userAllowLocation: action.payload
+            };
+        case RECEIVE_USER_FAVORITE_GAS:
+            return {
+                ...state,
+                userFavoriteGas: action.payload
             };
         case CHANGE_USER_FAVORITE_GAS:
             return {

@@ -1,38 +1,33 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, AsyncStorage } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { RadioButtons } from 'react-native-radio-buttons';
 import { Icon } from 'native-base';
 
 import { changeUserFavoriteGas } from '../actions';
 
+const options = [
+    'Gasoline',
+    'Premium Gasoline',
+    'Diesel',
+    'Heating gas'
+];
 
 class RadioButtonsList extends Component {
-    componentWillMount() {
-        AsyncStorage.getItem('gasTypePreference').then((value) => {
-            if (value !== null) {
-                this.props.changeUserFavoriteGas(value);
-            }
-        }).catch(error => {
-            console.log(error);
-        });
+    shouldComponentUpdate(nextProps) {
+        return this.props.userFavoriteGas !== nextProps.userFavoriteGas;
     }
-    render() {
-        const options = [
-            'Gasoline',
-            'Premium Gasoline',
-            'Diesel',
-            'Heating gas'
-        ];
 
+    render() {
         const { userFavoriteGas } = this.props;
 
         function setSelectedOption(selectedOption) {
-            try {
-                AsyncStorage.setItem('gasTypePreference', selectedOption);
-                this.props.changeUserFavoriteGas(selectedOption);
-            } catch (error) {
-                console.log(error);
+            if (selectedOption !== userFavoriteGas) {
+                try {
+                    this.props.changeUserFavoriteGas(selectedOption);
+                } catch (error) {
+                    console.log(error);
+                }
             }
         }
 
