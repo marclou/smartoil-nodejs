@@ -1,14 +1,30 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { InteractionManager, View } from 'react-native';
 
+import { Spinner } from './functionalComponents';
 import GasStationList from './GasStationList';
 import PricePrediction from './PricePrediction';
 
 class Result extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isComponentReady: false
+        };
+    }
+
+    componentDidMount() {
+        InteractionManager.runAfterInteractions(() => {
+            this.setState({ isComponentReady: true });
+        });
+    }
     render() {
         const { containerStyle, predictionStyle, gasStationsListStyle } = styles;
         const { coords } = this.props;
 
+        if (!this.state.isComponentReady) {
+            return <Spinner />;
+        }
         return (
             <View style={containerStyle} >
                 <PricePrediction
@@ -17,7 +33,6 @@ class Result extends Component {
                 />
                 <GasStationList
                     style={gasStationsListStyle}
-                    coords={coords}
                 />
             </View>
         );

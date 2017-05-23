@@ -8,28 +8,29 @@ import { Spinner } from './functionalComponents';
 
 
 class GasStationList extends Component {
-    componentWillMount() {
-        const { latitude, longitude } = this.props.coords;
+    componentDidMount() {
+        const { latitude, longitude } = this.props.parameters.location;
 
         this.props.gasStationFetch(latitude, longitude);
-        this.createDataSource(this.props);
     }
 
     componentWillReceiveProps(nextProps) {
         this.createDataSource(nextProps);
     }
 
-    createDataSource({ gasStationsLibraries }) {
+    createDataSource({ gasStationsLibraries, parameters }) {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
-        const { gasStationsData, userGasTypePreference } = gasStationsLibraries;
-        const gasStationsDataAndUserPreference = this.matchUserGasTypePreference(gasStationsData, userGasTypePreference);
-        gasStationsDataAndUserPreference.sort(this.sortGasStationByPrice);
-        this.dataSource = ds.cloneWithRows(gasStationsDataAndUserPreference);
+        const { gasStationsData } = gasStationsLibraries;
+        const { gasType } = parameters;
+
+        const gasStationList = this.matchUserGasTypePreference(gasStationsData, gasType);
+        gasStationList.sort(this.sortByPrice);
+        this.dataSource = ds.cloneWithRows(gasStationList);
     }
 
-    sortGasStationByPrice(a, b) {
+    sortByPrice(a, b) {
         let comparison = 0;
         if (a.price > b.price) {
             comparison = 1;
@@ -116,7 +117,13 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-    return { gasStationsLibraries: state.gasStationsLibraries };
+    return {
+        gasStationsLibraries: state.gasStationsLibraries,
+        parameters: {
+            location: state.userState.userLocation,
+            gasType: state.userState.userFavoriteGas
+        }
+    };
 };
 
 export default connect(mapStateToProps, { gasStationFetch })(GasStationList);

@@ -57,10 +57,9 @@ const userFavoriteGasAction = favoriteGas => {
 // Options for the getCurrent position function (while looking for user real time position
 const locationOptions = {
     enableHighAccuracy: true,
-    timeout: 10000,
-    maximumAge: 1000
+    timeout: 150000,
+    maximumAge: 20000
 };
-
 
 export const getUserPosition = () => {
     return (dispatch) => {
