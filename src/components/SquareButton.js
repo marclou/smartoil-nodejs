@@ -10,7 +10,7 @@ class SquareButton extends Component {
         const { type } = this.props.squareButtonProps;
         switch (type) {
             case 'FIND_RESULT':
-                return Actions.result({ coords: { latitude: 37.55, longitude: 126.98 } });
+                return Actions.result({ coords: { latitude: 37.55, longitude: 126.90 } });
             case 'ADD_LOCATION':
                 return Actions.areaList();
             default:

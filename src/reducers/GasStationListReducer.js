@@ -14,6 +14,7 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, loading: true };
         case DATA_FETCH_SUCCESS:
             return {
+                ...state,
                 loading: false,
                 gasStationsData: action.payload
             };

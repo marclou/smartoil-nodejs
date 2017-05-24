@@ -8,8 +8,12 @@ import { Spinner } from './functionalComponents';
 
 
 class GasStationList extends Component {
+    componentWillMount() {
+        this.createDataSource(this.props);
+    }
+
     componentDidMount() {
-        const { latitude, longitude } = this.props.parameters.location;
+        const { latitude, longitude } = this.props.coords;
 
         this.props.gasStationFetch(latitude, longitude);
     }
@@ -18,15 +22,16 @@ class GasStationList extends Component {
         this.createDataSource(nextProps);
     }
 
-    createDataSource({ gasStationsLibraries, parameters }) {
+    createDataSource({ gasStationsLibraries, gasType }) {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
+
         const { gasStationsData } = gasStationsLibraries;
-        const { gasType } = parameters;
 
         const gasStationList = this.matchUserGasTypePreference(gasStationsData, gasType);
         gasStationList.sort(this.sortByPrice);
+
         this.dataSource = ds.cloneWithRows(gasStationList);
     }
 
@@ -119,10 +124,7 @@ const styles = {
 const mapStateToProps = state => {
     return {
         gasStationsLibraries: state.gasStationsLibraries,
-        parameters: {
-            location: state.userState.userLocation,
-            gasType: state.userState.userFavoriteGas
-        }
+        gasType: state.userState.userFavoriteGas
     };
 };
 

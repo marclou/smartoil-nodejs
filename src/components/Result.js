@@ -33,6 +33,7 @@ class Result extends Component {
                 />
                 <GasStationList
                     style={gasStationsListStyle}
+                    coords={coords}
                 />
             </View>
         );
