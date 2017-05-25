@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Welcome from './components/Welcome';
 import SettingsList from './components/SettingsList';
 import Result from './components/Result';
-import AreaList from './components/AreaList';
+import AreaList from './components/AreaContainer';
 
 const ConnectedRouter = connect()(Router);
 
@@ -47,7 +47,7 @@ const RouterComponent = () => {
 const navBarPadding = () => {
   switch (Platform.OS) {
       case 'ios':
-          return { paddingTop: 54 };
+          return { paddingTop: 64 };
       case 'android':
           return { paddingTop: 44 };
       default:

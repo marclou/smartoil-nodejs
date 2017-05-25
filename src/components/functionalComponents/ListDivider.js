@@ -14,8 +14,7 @@ const ListDivider = ({ title }) => {
 const styles = {
     dividerContainer: {
         backgroundColor: '#EEE',
-        padding: 10,
-        marginTop: 10
+        padding: 10
     }
 };
 
