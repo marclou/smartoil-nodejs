@@ -24,7 +24,7 @@ const styles = {
         backgroundColor: '#C1C1C1',
     },
     inputStyle: {
-        height: 30,
+        height: 35,
         flex: 1,
         paddingHorizontal: 8,
         fontSize: 15,

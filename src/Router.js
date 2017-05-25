@@ -34,7 +34,7 @@ const RouterComponent = () => {
                 />
                 <Scene
                     onRight={() => Actions.result()}
-                    rightTitle="Add/Go"
+                    rightTitle="Add"
                     key="areaList"
                     component={AreaList}
                     title="District list"
@@ -49,7 +49,7 @@ const navBarPadding = () => {
       case 'ios':
           return { paddingTop: 64 };
       case 'android':
-          return { paddingTop: 44 };
+          return { paddingTop: 54 };
       default:
           return { paddingTop: 54 };
   }

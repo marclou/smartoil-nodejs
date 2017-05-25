@@ -9,7 +9,9 @@ import { Spinner } from './functionalComponents';
 
 class GasStationList extends Component {
     componentWillMount() {
-        this.createDataSource(this.props);
+        if (this.props.gasStationsLibraries.loading !== true) {
+            this.createDataSource(this.props);
+        }
     }
 
     componentDidMount() {

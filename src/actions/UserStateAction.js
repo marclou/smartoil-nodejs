@@ -3,6 +3,7 @@ import { AsyncStorage, Alert } from 'react-native';
 import {
     RECEIVE_LOCATION,
     ERROR_LOCATION,
+    FETCHING_LOCATION,
     CHANGE_USER_ALLOW_LOCATION,
     RECEIVE_USER_FAVORITE_GAS
 } from './type';
@@ -18,6 +19,13 @@ const userLocationAction = (lat, long) => {
             },
             userAllowLocation: true
         }
+    };
+};
+
+// Action Creator for blinding any access to location changement
+const userFetchingLocation = () => {
+    return {
+        type: FETCHING_LOCATION
     };
 };
 
@@ -57,12 +65,14 @@ const userFavoriteGasAction = favoriteGas => {
 // Options for the getCurrent position function (while looking for user real time position
 const locationOptions = {
     enableHighAccuracy: true,
-    timeout: 150000,
+    timeout: 10000,
     maximumAge: 20000
 };
 
 export const getUserPosition = () => {
     return (dispatch) => {
+        // Unable any access to location switching
+        dispatch(userFetchingLocation());
         /* global navigator */
         navigator.geolocation.getCurrentPosition(
             (position) => {
@@ -70,7 +80,7 @@ export const getUserPosition = () => {
             },
             (error) => {
                 displayAlert('Alert', error.message, error);
-                return dispatch(userLocationErrorAction(error));
+                return dispatch(userLocationErrorAction(error.message));
             },
             locationOptions
         );
@@ -82,17 +92,7 @@ export const changeUserAllowLocation = value => {
         if (value === true) {
             return dispatch(userAllowLocationAction(!value));
         }
-        /* global navigator */
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                return dispatch(userLocationAction(position.coords.latitude, position.coords.longitude));
-            },
-            (error) => {
-                displayAlert('Alert', error.message, error);
-                return dispatch(userLocationErrorAction(error));
-            },
-            locationOptions
-        );
+        dispatch(getUserPosition());
     };
 };
 

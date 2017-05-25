@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableWithoutFeedback, Alert } from 'react-native';
 import { Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
 
@@ -18,6 +18,22 @@ class SquareButton extends Component {
         }
     }
 
+    displayAlert() {
+        const { type, title } = this.props.squareButtonProps;
+
+        if (type === 'FIND_RESULT') {
+            Alert.alert(
+                `Remove ${title}`,
+                'Are you sure you want to remove this location?',
+                [
+                    { text: 'Cancel', onPress: () => {} },
+                    { text: 'OK', onPress: () => console.log('pressed ok') }
+                ],
+                { cancelable: true }
+            );
+        }
+    }
+
     renderButtonOrSpinner() {
         const { buttonStyle, textStyle, iconStyle } = styles;
         const { loading, title, icon } = this.props.squareButtonProps;
@@ -28,14 +44,18 @@ class SquareButton extends Component {
             );
         }
         return (
-            <TouchableOpacity style={{ flex: 1 }} onPress={this.onButtonPress.bind(this)}>
+            <TouchableWithoutFeedback
+                style={{ flex: 1 }}
+                onPress={this.onButtonPress.bind(this)}
+                onLongPress={this.displayAlert.bind(this)}
+            >
                 <View style={buttonStyle}>
                     <Text style={textStyle}>
                         {title}
                     </Text>
                     <Icon style={iconStyle} name={icon} />
                 </View>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
         );
     }
 
