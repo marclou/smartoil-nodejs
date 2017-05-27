@@ -18,6 +18,7 @@ class Result extends Component {
             this.setState({ isComponentReady: true });
         });
     }
+
     render() {
         const { containerStyle, predictionStyle, gasStationsListStyle } = styles;
         const { coords } = this.props;

@@ -21,9 +21,9 @@ class Welcome extends Component {
                 Actions.result({ coords: userLocation });
                 break;
             case 'AREA_LIST':
-                return Actions.areaList();
+                return Actions.searchArea();
             default:
-                return Actions.areaList();
+                return Actions.searchArea();
         }
     }
 
