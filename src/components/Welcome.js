@@ -3,6 +3,7 @@ import { View, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
+import Fab from './Fab';
 import { getUserPosition, getUserFavoriteGas } from '../actions';
 import { SearchButton } from './functionalComponents';
 
@@ -14,11 +15,9 @@ class Welcome extends Component {
     }
 
     onButtonPress(researchType) {
-        const { userLocation } = this.props.userGlobalState;
-
         switch (researchType) {
             case 'LOCATION':
-                Actions.result({ coords: userLocation });
+                Actions.result();
                 break;
             case 'AREA_LIST':
                 return Actions.searchArea();
@@ -61,13 +60,7 @@ class Welcome extends Component {
                 >
                     Use location
                 </SearchButton>
-                <SearchButton
-                    disabled={JSON.parse('false')}
-                    onPress={this.onButtonPress.bind(this, 'AREA_LIST')}
-                    icon={'list'}
-                >
-                    Search by area
-                </SearchButton>
+                <Fab />
             </View>
         );
     }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { InteractionManager, View } from 'react-native';
+import { connect } from 'react-redux';
 
 import { Spinner } from './functionalComponents';
 import GasStationList from './GasStationList';
@@ -21,7 +22,7 @@ class Result extends Component {
 
     render() {
         const { containerStyle, predictionStyle, gasStationsListStyle } = styles;
-        const { coords } = this.props;
+        const { userCoordinates } = this.props;
 
         if (!this.state.isComponentReady) {
             return <Spinner />;
@@ -30,11 +31,11 @@ class Result extends Component {
             <View style={containerStyle} >
                 <PricePrediction
                     style={predictionStyle}
-                    coords={coords}
+                    coords={userCoordinates}
                 />
                 <GasStationList
                     style={gasStationsListStyle}
-                    coords={coords}
+                    coords={userCoordinates}
                 />
             </View>
         );
@@ -54,4 +55,8 @@ const styles = {
     }
 };
 
-export default Result;
+const mapStateToProps = state => {
+    return { userCoordinates: state.userState.userLocation };
+};
+
+export default connect(mapStateToProps)(Result);
