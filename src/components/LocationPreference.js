@@ -35,10 +35,7 @@ class LocationPreference extends Component {
 
 const styles = {
     containerStyle: {
-        flex: 1,
-        height: 60,
-        padding: 10,
-        paddingBottom: 5
+        alignSelf: 'center'
     }
 };
 

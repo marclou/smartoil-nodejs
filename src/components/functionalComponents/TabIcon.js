@@ -5,7 +5,6 @@ import { Icon } from 'native-base';
 const TabIcon = ({ iconName, title, selected }) => {
     const { containerStyle, iconStyle, textStyle } = styles;
 
-
     return (
         <View style={containerStyle}>
             <Icon

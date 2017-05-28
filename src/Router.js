@@ -2,9 +2,8 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { Icon } from 'native-base';
 
-import { TabIcon } from './components/functionalComponents';
+import { TabIcon, GasTypeSetting } from './components/functionalComponents';
 import Welcome from './components/Welcome';
 import SettingsList from './components/SettingsList';
 import Result from './components/Result';
@@ -13,26 +12,27 @@ import AreaList from './components/AreaContainer';
 const ConnectedRouter = connect()(Router);
 
 const RouterComponent = () => {
+    const { tabBarStyle, sceneStyle } = styles;
     return (
         <ConnectedRouter>
             <Scene key='root'>
-                <Scene key='tabs' tabs={true} hideNavBar={true} tabBarStyle={styles.tabBarStyle} >
+                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} >
                     <Scene key="home" title="Home" iconName='home' icon={TabIcon}>
                         <Scene
-                            sceneStyle={navBarPadding()}
+                            sceneStyle={sceneStyle}
                             key="main"
                             component={Welcome}
                             title="Home"
                             initial
                         />
                         <Scene
-                            sceneStyle={navBarPadding()}
+                            sceneStyle={sceneStyle}
                             key="result"
                             component={Result}
                             title="Result"
                         />
                         <Scene
-                            sceneStyle={navBarPadding()}
+                            sceneStyle={sceneStyle}
                             key="searchArea"
                             component={AreaList}
                             title="Area List"
@@ -40,29 +40,34 @@ const RouterComponent = () => {
                     </Scene>
                     <Scene key="favorite" title="Favorite" iconName='heart' icon={TabIcon}>
                         <Scene
-                            sceneStyle={navBarPadding()}
+                            sceneStyle={sceneStyle}
                             key="areaList"
                             component={AreaList}
                             title="District list"
-                            initial
                         />
                     </Scene>
                     <Scene key="setting" title="Settings" iconName='settings' icon={TabIcon} >
                         <Scene
-                            sceneStyle={navBarPadding()}
+                            sceneStyle={sceneStyle}
                             key="settings"
                             component={SettingsList}
                             title="Settings"
                             initial
                         />
                         <Scene
-                            sceneStyle={navBarPadding()}
+                            sceneStyle={sceneStyle}
+                            key="gasTypeSetting"
+                            component={GasTypeSetting}
+                            title="Gas Type Setting"
+                        />
+                        <Scene
+                            sceneStyle={sceneStyle}
                             key="addArea"
                             component={AreaList}
                             title="Area List"
                         />
                         <Scene
-                            sceneStyle={navBarPadding()}
+                            sceneStyle={sceneStyle}
                             key="resultList"
                             component={Result}
                             title="Result"
@@ -74,17 +79,6 @@ const RouterComponent = () => {
     );
 };
 
-const navBarPadding = () => {
-  switch (Platform.OS) {
-      case 'ios':
-          return { paddingTop: 64 };
-      case 'android':
-          return { paddingTop: 54 };
-      default:
-          return { paddingTop: 54 };
-  }
-};
-
 const styles = {
     tabBarStyle: {
         borderTopWidth: 0.5,
@@ -92,6 +86,17 @@ const styles = {
         backgroundColor: '#F5F5F5',
         opacity: 1,
         height: 60
+    },
+    sceneStyle: {
+        paddingBottom: 60,
+        ...Platform.select({
+            ios: {
+                paddingTop: 64,
+            },
+            android: {
+                paddingTop: 54,
+            },
+        })
     }
 };
 

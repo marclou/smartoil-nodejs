@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { View, InteractionManager, ScrollView } from 'react-native';
+import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 
-import { ListDivider, Spinner } from './functionalComponents';
-import SquareButtonCollection from './SquareButtonCollection';
-import RadioButtonsList from './RadioButtonsList';
-import ShareList from './ShareList';
-import LocationPreference from './LocationPreference';
+import { Spinner, SettingsRow, LocationSettingsRow } from './functionalComponents';
 
 class SettingsList extends Component {
     constructor(props) {
@@ -25,21 +23,33 @@ class SettingsList extends Component {
         if (!this.state.isComponentReady) {
             return <Spinner />;
         }
+        const { userFavoriteGas } = this.props.userSettings;
+
         return (
-            <View>
+            <View style={{ flex: 1 }}>
                 <ScrollView>
-                    <ListDivider title='favorite locations' />
-                    <SquareButtonCollection />
-                    <ListDivider title='favorite gas type' />
-                    <RadioButtonsList />
-                    <ListDivider title='access my position' />
-                    <LocationPreference />
-                    <ListDivider title='share this wonderful app' />
-                    <ShareList />
+                    <SettingsRow
+                        title="Favorite gas type"
+                        onPress={() => Actions.gasTypeSetting()}
+                        value={userFavoriteGas}
+                    />
+                    <LocationSettingsRow
+                        title="Access my position"
+                    />
+                    <SettingsRow
+                        title="Share this app"
+                    />
+                    <SettingsRow
+                        title="Policy & Privacy"
+                    />
                 </ScrollView>
             </View>
         );
     }
 }
 
-export default SettingsList;
+const mapStateToProps = state => {
+    return { userSettings: state.userState };
+};
+
+export default connect(mapStateToProps)(SettingsList);

@@ -4,5 +4,8 @@ export * from './ListSection';
 export * from './ListDivider';
 export * from './Spinner';
 export * from './AreaRow';
+export * from './SettingsRow';
+export * from './LocationSettingsRow';
 export * from './SearchBox';
 export * from './SectionHeader';
+export * from './GasTypeSetting';
