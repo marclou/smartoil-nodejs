@@ -2,7 +2,8 @@ import axios from 'axios';
 
 import {
     DATA_FETCHING,
-    DATA_FETCH_SUCCESS
+    DATA_FETCH_SUCCESS,
+    SELECT_ID
 } from './type';
 import {
     SERVER_URL,
@@ -28,5 +29,12 @@ export const gasStationFetch = (latitude, longitude) => {
             error => {
                 console.log(error);
             });
+    };
+};
+
+export const selectGasStation = (id) => {
+    return {
+        type: SELECT_ID,
+        payload: id
     };
 };

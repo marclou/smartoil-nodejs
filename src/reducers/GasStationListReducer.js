@@ -11,7 +11,10 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case DATA_FETCHING:
-            return { ...state, loading: true };
+            return {
+                ...state,
+                loading: true
+            };
         case DATA_FETCH_SUCCESS:
             return {
                 ...state,

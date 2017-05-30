@@ -21,7 +21,7 @@ class Result extends Component {
     }
 
     render() {
-        const { containerStyle, predictionStyle, gasStationsListStyle } = styles;
+        const { containerStyle, gasStationsListStyle } = styles;
         const { userCoordinates } = this.props;
 
         if (!this.state.isComponentReady) {
@@ -29,10 +29,6 @@ class Result extends Component {
         }
         return (
             <View style={containerStyle} >
-                <PricePrediction
-                    style={predictionStyle}
-                    coords={userCoordinates}
-                />
                 <GasStationList
                     style={gasStationsListStyle}
                     coords={userCoordinates}
@@ -46,9 +42,6 @@ const styles = {
     containerStyle: {
         flex: 1,
         flexDirection: 'column'
-    },
-    predictionStyle: {
-        flex: 1
     },
     gasStationsListStyle: {
         flex: 1

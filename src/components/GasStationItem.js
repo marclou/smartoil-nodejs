@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
-import { Linking, Platform, Text, Image, View } from 'react-native';
-import { Icon } from 'native-base';
+import { LayoutAnimation } from 'react-native';
+import { connect } from 'react-redux';
 
+import GasStationRow from './GasStationRow';
+import GasStationSelectedRow from './GasStationSelectedRow';
+import { selectGasStation } from '../actions/GasStationListAction';
 import { ListSection } from './functionalComponents';
 
 class GasStationItem extends Component {
-    onItemPress() {
-        this.openDirections();
+    componentWillUpdate() {
+        LayoutAnimation.spring();
     }
 
-    openDirections() {
+    onItemPress(id) {
+        this.props.selectGasStation(id);
+    }
+
+    /*openDirections() {
         const { latitude, longitude } = this.props.gasStation.location;
         switch (Platform.OS) {
             case 'ios':
@@ -19,61 +26,34 @@ class GasStationItem extends Component {
             default:
                 return console.log('which plateform ?');
         }
+    }*/
+
+    renderDescription() {
+        if (this.props.expanded) {
+            return (
+                <GasStationSelectedRow gasStation={this.props.gasStation}/>
+            );
+        }
+        return (
+            <GasStationRow gasStation={this.props.gasStation} />
+        );
     }
 
     render() {
-        const { price, distance } = this.props.gasStation;
-        const { logoStyle, iconStyle, textContainer, textStyle } = styles;
+        const { uni_id } = this.props.gasStation;
 
         return (
-            <ListSection onPress={this.onItemPress.bind(this)} >
-                <Image
-                    style={logoStyle}
-                    source={require('../img/brand_logos/a.jpg')}
-                />
-                <View style={textContainer} >
-                    <Text style={textStyle}>
-                        {price}
-                    </Text>
-                    <Text>
-                        ₩
-                    </Text>
-                </View>
-                <View style={textContainer} >
-                    <Text style={textStyle}>
-                        {(Math.round(distance * 100) / 100).toFixed(2)}
-                    </Text>
-                    <Text>
-                        km
-                    </Text>
-                </View>
-                <Icon name='arrow-forward' style={iconStyle} />
+            <ListSection onPress={this.onItemPress.bind(this, uni_id)} >
+                {this.renderDescription()}
             </ListSection>
-
         );
     }
 }
 
-const styles = {
-    logoStyle: {
-        height: 40,
-        width: 40,
-        alignSelf: 'center'
-    },
-    textContainer: {
-        width: 80,
-        alignSelf: 'center',
-        flexDirection: 'row'
-    },
-    textStyle: {
-        width: 45,
-        fontWeight: 'bold'
-    },
-    iconStyle: {
-        alignSelf: 'center',
-        fontSize: 20,
-        color: 'gray'
-    }
+const mapStateToProps = (state, ownProps) => {
+    const expanded = state.gasStationList.selectedID === ownProps.gasStation.uni_id;
+
+    return { expanded };
 };
 
-export default GasStationItem;
+export default connect(mapStateToProps, { selectGasStation })(GasStationItem);

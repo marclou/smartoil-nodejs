@@ -5,16 +5,22 @@ import {
 
 const INITIAL_STATE = {
     loading: true,
-    pricePredictionData: '',
-    userGasTypePreference: ''
+    pricePredictionData: [],
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case PREDICTION_FETCHING:
-            return { ...state, loading: true };
+            return {
+                ...state,
+                loading: true
+            };
         case PREDICTION_FETCH_SUCCESS:
-            return { loading: false, pricePredictionData: action.payload, userGasTypePreference: action.userGasTypePreference };
+            return {
+                ...state,
+                loading: false,
+                pricePredictionData: action.payload
+            };
         default:
             return state;
     }

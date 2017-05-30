@@ -10,7 +10,6 @@ class Fab extends Component {
         return (
             <ActionButton
                 buttonColor='rgba(231,76,60,1)'
-                bgColor='rgba(0,0,0,0.1)'
                 icon={<Icon name='search' style={actionButtonIconStyle} />}
             >
                 <ActionButton.Item

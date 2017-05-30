@@ -9,10 +9,19 @@ import InfoResult from './InfoResult';
 import { Spinner } from './functionalComponents';
 
 class PricePrediction extends Component {
-    componentWillMount() {
-        const { latitude, longitude } = this.props.coords;
+    shouldComponentUpdate(nextProps) {
+        if (nextProps.userLocation !== this.props.userLocation) {
+            return true;
+        }
+        return (nextProps.pricePrediction.pricePredictionData.length !== 0);
+    }
 
-        this.props.pricePredictionFetch(latitude, longitude);
+    componentWillUpdate(nextProps) {
+        const { latitude, longitude } = nextProps.userLocation;
+
+        if (nextProps.pricePrediction.pricePredictionData.length === 0) {
+            this.props.pricePredictionFetch(latitude, longitude);
+        }
     }
 
     renderPricePredictionOrSpinner() {
@@ -47,10 +56,10 @@ class PricePrediction extends Component {
 
 const styles = {
     containerStyle: {
-        flex: 1
+        height: 400
     },
     resultContainerStyle: {
-        flex: 1,
+        height: 400,
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
@@ -65,7 +74,10 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-    return { pricePrediction: state.pricePrediction };
+    return {
+        pricePrediction: state.pricePrediction,
+        userLocation: state.userState.userLocation
+    };
 };
 
 export default connect(mapStateToProps, { pricePredictionFetch })(PricePrediction);

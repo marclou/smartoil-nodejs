@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView, View } from 'react-native';
+import { ListView, View, SegmentedControlIOS } from 'react-native';
 
 import { gasStationFetch } from '../actions';
 import GasStationItem from './GasStationItem';
@@ -93,6 +93,7 @@ class GasStationList extends Component {
                 enableEmptySections
                 dataSource={this.dataSource}
                 renderRow={this.renderRow}
+                renderHeader={this.renderHeader}
             />
         );
     }
@@ -103,6 +104,16 @@ class GasStationList extends Component {
             <GasStationItem
                 gasStation={gasStation}
             />
+        );
+    }
+
+    renderHeader() {
+        return (
+            <View style={{ padding: 10 }}>
+                <SegmentedControlIOS
+                    values={['Nearest', 'Cheapest']}
+                />
+            </View>
         );
     }
 
@@ -117,15 +128,13 @@ class GasStationList extends Component {
 
 const styles = {
     containerStyle: {
-        flex: 1,
-        borderTopWidth: 1,
-        borderColor: '#AAA'
+        flex: 1
     }
 };
 
 const mapStateToProps = state => {
     return {
-        gasStationsLibraries: state.gasStationsLibraries,
+        gasStationsLibraries: state.gasStationList.gasStationsLibraries,
         gasType: state.userState.userFavoriteGas
     };
 };
