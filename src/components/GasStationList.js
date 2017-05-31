@@ -1,39 +1,47 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView, View, SegmentedControlIOS } from 'react-native';
+import { ListView, View, SegmentedControlIOS, LayoutAnimation } from 'react-native';
+import SegmentedControlTab from 'react-native-segmented-control-tab';
 
-import { gasStationFetch } from '../actions';
+import { gasStationFetch, selectFilter, deselectGasStation } from '../actions';
 import GasStationItem from './GasStationItem';
 import { Spinner } from './functionalComponents';
 
 
 class GasStationList extends Component {
     componentWillMount() {
-        if (this.props.gasStationsLibraries.loading !== true) {
+        if (this.props.gasStations.gasStationsLibraries.loading !== true) {
             this.createDataSource(this.props);
         }
     }
 
     componentDidMount() {
-        const { latitude, longitude } = this.props.coords;
+        const { latitude, longitude } = this.props.userState.userLocation;
 
         this.props.gasStationFetch(latitude, longitude);
     }
 
     componentWillReceiveProps(nextProps) {
+        LayoutAnimation.spring();
         this.createDataSource(nextProps);
     }
 
-    createDataSource({ gasStationsLibraries, gasType }) {
+    createDataSource({ gasStations, userState }) {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
 
-        const { gasStationsData } = gasStationsLibraries;
+        const { gasStationsData } = gasStations.gasStationsLibraries;
+        const { userFavoriteGas } = userState;
 
-        const gasStationList = this.matchUserGasTypePreference(gasStationsData, gasType);
-        gasStationList.sort(this.sortByPrice);
 
+        const gasStationList = this.matchUserGasTypePreference(gasStationsData, userFavoriteGas);
+
+        if (gasStations.selectedFilter === 0) {
+            gasStationList.sort(this.sortByPrice);
+        } else {
+            gasStationList.sort(this.sortByDistance);
+        }
         this.dataSource = ds.cloneWithRows(gasStationList);
     }
 
@@ -42,6 +50,16 @@ class GasStationList extends Component {
         if (a.price > b.price) {
             comparison = 1;
         } else if (a.price < b.price) {
+            comparison = -1;
+        }
+        return comparison;
+    }
+
+    sortByDistance(a, b) {
+        let comparison = 0;
+        if (a.distance > b.distance) {
+            comparison = 1;
+        } else if (a.distance < b.distance) {
             comparison = -1;
         }
         return comparison;
@@ -79,41 +97,32 @@ class GasStationList extends Component {
         return result;
     }
 
-    /** Function to return a Spinner (loading = true)
-     * when gas station datas aren't fetched from DB yet.
-     **/
-    renderListOrSpinner() {
-        const { loading } = this.props.gasStationsLibraries;
+    changeFilter(id) {
+        this.props.deselectGasStation();
+        this.props.selectFilter(id);
+    }
 
-        if (loading) {
+    renderListOrSpinner() {
+        const { gasStationsLibraries, selectedFilter } = this.props.gasStations;
+
+        if (gasStationsLibraries.loading) {
             return <Spinner size='large' />;
         }
         return (
             <ListView
                 enableEmptySections
                 dataSource={this.dataSource}
-                renderRow={this.renderRow}
-                renderHeader={this.renderHeader}
+                renderRow={(gasStation) => <GasStationItem gasStation={gasStation} />}
+                renderHeader={() =>
+                    <View style={{ padding: 10 }}>
+                        <SegmentedControlTab
+                            values={['Cheapest', 'Nearest']}
+                            selectedIndex={selectedFilter}
+                            onTabPress={this.changeFilter.bind(this, selectedFilter)}
+                        />
+                    </View>
+                }
             />
-        );
-    }
-
-    /** Function to tell ListView Component how each row should be rendered **/
-    renderRow(gasStation) {
-        return (
-            <GasStationItem
-                gasStation={gasStation}
-            />
-        );
-    }
-
-    renderHeader() {
-        return (
-            <View style={{ padding: 10 }}>
-                <SegmentedControlIOS
-                    values={['Nearest', 'Cheapest']}
-                />
-            </View>
         );
     }
 
@@ -134,9 +143,9 @@ const styles = {
 
 const mapStateToProps = state => {
     return {
-        gasStationsLibraries: state.gasStationList.gasStationsLibraries,
-        gasType: state.userState.userFavoriteGas
+        gasStations: state.gasStationList,
+        userState: state.userState
     };
 };
 
-export default connect(mapStateToProps, { gasStationFetch })(GasStationList);
+export default connect(mapStateToProps, { gasStationFetch, selectFilter, deselectGasStation })(GasStationList);

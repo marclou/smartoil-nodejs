@@ -3,7 +3,9 @@ import axios from 'axios';
 import {
     DATA_FETCHING,
     DATA_FETCH_SUCCESS,
-    SELECT_ID
+    SELECT_ID,
+    DESELECT_ID,
+    SELECT_FILTER
 } from './type';
 import {
     SERVER_URL,
@@ -36,5 +38,18 @@ export const selectGasStation = (id) => {
     return {
         type: SELECT_ID,
         payload: id
+    };
+};
+
+export const deselectGasStation = () => {
+      return {
+          type: DESELECT_ID
+      };
+};
+
+export const selectFilter = (id) => {
+    return {
+        type: SELECT_FILTER,
+        payload: (id === 0) ? 1 : 0
     };
 };

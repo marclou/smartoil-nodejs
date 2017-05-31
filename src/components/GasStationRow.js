@@ -21,7 +21,14 @@ class GasStationRow extends Component {
                         ₩
                     </Text>
                 </View>
-                <Icon name='heart' style={iconStyle} />
+                <View style={textContainer} >
+                    <Text style={textStyle}>
+                        {(Math.round(distance * 100) / 100).toFixed(2)}
+                    </Text>
+                    <Text>
+                        km
+                    </Text>
+                </View>
             </View>
         );
     }

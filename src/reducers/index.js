@@ -3,6 +3,7 @@ import NavigationReducer from './NavigationReducer';
 import UserReducer from './UserReducers';
 import GasStationListReducer from './GasStationListReducer';
 import SelectedIDReducer from './SelectedID';
+import SelectedFilterReducer from './SelectedFilter';
 import PricePredictionReducer from './PricePredictionReducer';
 import SquareButtonCollectionReducer from './SquareButtonCollectionReducer';
 import AreaListReducer from './AreaListReducer';
@@ -10,6 +11,7 @@ import AreaListReducer from './AreaListReducer';
 const gasStationList = combineReducers({
     gasStationsLibraries: GasStationListReducer,
     selectedID: SelectedIDReducer,
+    selectedFilter: SelectedFilterReducer
 });
 
 export default combineReducers({

@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { InteractionManager, View } from 'react-native';
-import { connect } from 'react-redux';
 
 import { Spinner } from './functionalComponents';
 import GasStationList from './GasStationList';
-import PricePrediction from './PricePrediction';
 
 class Result extends Component {
     constructor(props) {
@@ -21,18 +19,14 @@ class Result extends Component {
     }
 
     render() {
-        const { containerStyle, gasStationsListStyle } = styles;
-        const { userCoordinates } = this.props;
+        const { containerStyle } = styles;
 
         if (!this.state.isComponentReady) {
             return <Spinner />;
         }
         return (
             <View style={containerStyle} >
-                <GasStationList
-                    style={gasStationsListStyle}
-                    coords={userCoordinates}
-                />
+                <GasStationList />
             </View>
         );
     }
@@ -40,16 +34,8 @@ class Result extends Component {
 
 const styles = {
     containerStyle: {
-        flex: 1,
-        flexDirection: 'column'
-    },
-    gasStationsListStyle: {
         flex: 1
     }
 };
 
-const mapStateToProps = state => {
-    return { userCoordinates: state.userState.userLocation };
-};
-
-export default connect(mapStateToProps)(Result);
+export default Result;

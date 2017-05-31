@@ -1,14 +1,11 @@
 import {
-    SELECT_ID,
-    DESELECT_ID
+    SELECT_FILTER
 } from '../actions/type';
 
-export default (state = null, action) => {
+export default (state = 0, action) => {
     switch (action.type) {
-        case SELECT_ID:
+        case SELECT_FILTER:
             return action.payload;
-        case DESELECT_ID:
-            return null;
         default:
             return state;
     }

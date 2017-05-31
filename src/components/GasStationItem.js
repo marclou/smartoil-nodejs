@@ -31,7 +31,7 @@ class GasStationItem extends Component {
     renderDescription() {
         if (this.props.expanded) {
             return (
-                <GasStationSelectedRow gasStation={this.props.gasStation}/>
+                <GasStationSelectedRow gasStation={this.props.gasStation} />
             );
         }
         return (

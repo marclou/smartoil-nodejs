@@ -9,6 +9,8 @@ export const RECEIVE_USER_FAVORITE_GAS = 'receive_user_favorite_gas';
 export const DATA_FETCHING = 'data_fetching';
 export const DATA_FETCH_SUCCESS = 'data_fetch_success';
 export const SELECT_ID = 'select_id';
+export const DESELECT_ID = 'deselect_id';
+export const SELECT_FILTER = 'select_filter';
 
 /** Type for PricePrediction Component **/
 export const PREDICTION_FETCHING = 'prediction_fetching';
