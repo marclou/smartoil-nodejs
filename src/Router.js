@@ -30,6 +30,7 @@ const RouterComponent = () => {
                             key="result"
                             component={Result}
                             title="Result"
+                            hideTabBar
                         />
                         <Scene
                             sceneStyle={sceneStyle}
@@ -88,7 +89,6 @@ const styles = {
         height: 60
     },
     sceneStyle: {
-        paddingBottom: 60,
         ...Platform.select({
             ios: {
                 paddingTop: 64,

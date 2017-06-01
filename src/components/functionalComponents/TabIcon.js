@@ -1,22 +1,31 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Platform } from 'react-native';
 import { Icon } from 'native-base';
 
 const TabIcon = ({ iconName, title, selected }) => {
-    const { containerStyle, iconStyle, textStyle } = styles;
+    const { containerStyle, textStyle } = styles;
 
     return (
         <View style={containerStyle}>
             <Icon
                 name={iconName}
-                style={iconStyle}
+                style={colorStylePlatform(selected)}
                 active={selected}
             />
-            <Text style={textStyle}>
+            <Text style={textStyle && colorStylePlatform(selected)}>
                 {title}
             </Text>
         </View>
     );
+};
+
+const colorStylePlatform = (selected) => {
+    const { colorStyle, colorSelectedStyle } = styles;
+
+  if (Platform.OS === 'android') {
+      return selected ? colorSelectedStyle : colorStyle;
+  }
+  return colorStyle;
 };
 
 const styles = {
@@ -26,12 +35,14 @@ const styles = {
         alignSelf: 'center',
         alignItems: 'center'
     },
-    iconStyle: {
+    colorStyle: {
         color: '#301c2a'
     },
+    colorSelectedStyle: {
+        color: 'red'
+    },
     textStyle: {
-        fontSize: 12,
-        color: '#301c2a'
+        fontSize: 12
     }
 };
 

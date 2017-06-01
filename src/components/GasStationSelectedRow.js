@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Text, Image, View } from 'react-native';
-import { Icon } from 'native-base';
+
+import SaveIcon from './SaveIcon';
 
 class GasStationSelectedRow extends Component {
     render() {
         const { price, distance } = this.props.gasStation;
-        const { containerStyle, logoStyle, iconStyle, textContainer, textStyle } = styles;
+        const { containerStyle, logoStyle, textContainer, textStyle } = styles;
 
         return (
             <View style={containerStyle}>
@@ -29,7 +30,7 @@ class GasStationSelectedRow extends Component {
                         km
                     </Text>
                 </View>
-                <Icon name='heart' style={iconStyle} />
+                <SaveIcon gasStation={this.props.gasStation} />
             </View>
         );
     }
@@ -58,11 +59,6 @@ const styles = {
     textStyle: {
         width: 45,
         fontWeight: 'bold'
-    },
-    iconStyle: {
-        alignSelf: 'center',
-        fontSize: 20,
-        color: 'gray'
     }
 };
 

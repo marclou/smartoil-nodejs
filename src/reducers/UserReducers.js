@@ -7,6 +7,7 @@ import {
 } from '../actions/type';
 
 const INITIAL_STATE = {
+    errorLocation: null,
     userAllowLocation: false,
     loadingLocation: false,
     userFavoriteGas: 'Gasoline'
@@ -29,7 +30,7 @@ export default (state = INITIAL_STATE, action) => {
         case ERROR_LOCATION:
             return {
                 ...state,
-                error: action.payload,
+                errorLocation: action.payload,
                 loadingLocation: false,
                 userAllowLocation: false
             };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView, View, SegmentedControlIOS, LayoutAnimation } from 'react-native';
+import { ListView, View, LayoutAnimation } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
 import { gasStationFetch, selectFilter, deselectGasStation } from '../actions';

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import GasStationRow from './GasStationRow';
 import GasStationSelectedRow from './GasStationSelectedRow';
-import { selectGasStation } from '../actions/GasStationListAction';
+import { selectGasStation, deselectGasStation } from '../actions/GasStationListAction';
 import { ListSection } from './functionalComponents';
 
 class GasStationItem extends Component {
@@ -12,8 +12,14 @@ class GasStationItem extends Component {
         LayoutAnimation.spring();
     }
 
-    onItemPress(id) {
-        this.props.selectGasStation(id);
+    onItemPress() {
+        const { expanded, gasStation } = this.props;
+
+        if (!expanded) {
+            this.props.selectGasStation(gasStation.uni_id);
+        } else {
+            this.props.deselectGasStation();
+        }
     }
 
     /*openDirections() {
@@ -40,10 +46,8 @@ class GasStationItem extends Component {
     }
 
     render() {
-        const { uni_id } = this.props.gasStation;
-
         return (
-            <ListSection onPress={this.onItemPress.bind(this, uni_id)} >
+            <ListSection onPress={this.onItemPress.bind(this)} >
                 {this.renderDescription()}
             </ListSection>
         );
@@ -56,4 +60,4 @@ const mapStateToProps = (state, ownProps) => {
     return { expanded };
 };
 
-export default connect(mapStateToProps, { selectGasStation })(GasStationItem);
+export default connect(mapStateToProps, { selectGasStation, deselectGasStation })(GasStationItem);

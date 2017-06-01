@@ -2,8 +2,31 @@ import React, { Component } from 'react';
 import ActionButton from 'react-native-action-button';
 import { Icon } from 'native-base';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import { Alert } from 'react-native';
 
 class Fab extends Component {
+    displayAlert(alertTitle, alertMessage, error) {
+        Alert.alert(
+            alertTitle,
+            alertMessage,
+            [
+                { text: 'OK', onPress: () => console.log(error) },
+                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' }
+            ],
+            { cancelable: false }
+        );
+    }
+
+    allowLocationSearch() {
+        const { userAllowLocation } = this.props.userState;
+
+        if (userAllowLocation) {
+            return Actions.result();
+        }
+        return this.displayAlert('Alert', 'Please, turn on your location to use our services', null);
+    }
+
     render() {
         const { actionButtonIconStyle } = styles;
 
@@ -11,11 +34,13 @@ class Fab extends Component {
             <ActionButton
                 buttonColor='rgba(231,76,60,1)'
                 icon={<Icon name='search' style={actionButtonIconStyle} />}
+                offsetY={70}
+                degrees={360}
             >
                 <ActionButton.Item
                     buttonColor='#9b59b6'
                     title='Location'
-                    onPress={() => Actions.result()}
+                    onPress={this.allowLocationSearch.bind(this)}
                 >
                     <Icon
                         name='pin'
@@ -45,4 +70,8 @@ const styles = {
     }
 };
 
-export default Fab;
+const mapStateToProps = state => {
+    return { userState: state.userState };
+};
+
+export default connect(mapStateToProps)(Fab);

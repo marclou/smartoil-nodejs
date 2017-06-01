@@ -56,10 +56,10 @@ class PricePrediction extends Component {
 
 const styles = {
     containerStyle: {
-        height: 400
+        height: 250
     },
     resultContainerStyle: {
-        height: 400,
+        height: 250,
         flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
