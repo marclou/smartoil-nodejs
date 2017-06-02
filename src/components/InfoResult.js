@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Animated } from 'react-native';
+import { Text, Animated } from 'react-native';
 
 class InfoResult extends Component {
     componentWillMount() {

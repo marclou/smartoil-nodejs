@@ -5,7 +5,7 @@ import { Icon } from 'native-base';
 class GasStationRow extends Component {
     render() {
         const { price, distance } = this.props.gasStation;
-        const { containerStyle, logoStyle, iconStyle, textContainer, textStyle } = styles;
+        const { containerStyle, logoStyle, textContainer, textStyle } = styles;
 
         return (
             <View style={containerStyle}>

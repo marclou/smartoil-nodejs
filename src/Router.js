@@ -8,6 +8,7 @@ import Welcome from './components/Welcome';
 import SettingsList from './components/SettingsList';
 import Result from './components/Result';
 import AreaList from './components/AreaContainer';
+import FavoriteGasStations from './components/FavoriteGasStations';
 
 const ConnectedRouter = connect()(Router);
 
@@ -43,8 +44,8 @@ const RouterComponent = () => {
                         <Scene
                             sceneStyle={sceneStyle}
                             key="areaList"
-                            component={AreaList}
-                            title="District list"
+                            component={FavoriteGasStations}
+                            title="Favorite Stations"
                         />
                     </Scene>
                     <Scene key="setting" title="Settings" iconName='settings' icon={TabIcon} >

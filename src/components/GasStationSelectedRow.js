@@ -5,7 +5,7 @@ import SaveIcon from './SaveIcon';
 
 class GasStationSelectedRow extends Component {
     render() {
-        const { price, distance } = this.props.gasStation;
+        const { price, distance, uni_id } = this.props.gasStation;
         const { containerStyle, logoStyle, textContainer, textStyle } = styles;
 
         return (
@@ -20,6 +20,11 @@ class GasStationSelectedRow extends Component {
                     </Text>
                     <Text>
                         ₩
+                    </Text>
+                </View>
+                <View style={textContainer} >
+                    <Text style={textStyle}>
+                        {uni_id}
                     </Text>
                 </View>
                 <View style={textContainer} >

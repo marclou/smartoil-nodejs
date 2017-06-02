@@ -4,6 +4,7 @@
     "arrow-body-style": 0,
     "max-len": 0,
     "camelcase": 0,
-    "react/jsx-boolean-value": 0
+    "react/jsx-boolean-value": 0,
+    "object-shorthand": 0
   }
 }
