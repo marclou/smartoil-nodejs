@@ -23,7 +23,7 @@ class SettingsList extends Component {
         if (!this.state.isComponentReady) {
             return <Spinner />;
         }
-        const { userFavoriteGas } = this.props.userSettings;
+        const { userFavoriteGas, userTankCapacity } = this.props.userSettings;
 
         return (
             <View style={{ flex: 1 }}>
@@ -32,6 +32,11 @@ class SettingsList extends Component {
                         title="Favorite gas type"
                         onPress={() => Actions.gasTypeSetting()}
                         value={userFavoriteGas}
+                    />
+                    <SettingsRow
+                        title="Tank capacity"
+                        onPress={() => Actions.tankCapacitySetting()}
+                        value={`${userTankCapacity} L`}
                     />
                     <LocationSettingsRow
                         title="Access my position"

@@ -1,6 +1,7 @@
 export * from './TabIcon';
 export * from './SearchButton';
 export * from './ListSection';
+export * from './ListSectionLongPress';
 export * from './ListDivider';
 export * from './Spinner';
 export * from './AreaRow';
@@ -9,3 +10,4 @@ export * from './LocationSettingsRow';
 export * from './SearchBox';
 export * from './SectionHeader';
 export * from './GasTypeSetting';
+export * from './TankCapacitySetting';

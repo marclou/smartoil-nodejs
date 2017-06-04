@@ -10,7 +10,8 @@ const INITIAL_STATE = {
     errorLocation: null,
     userAllowLocation: false,
     loadingLocation: false,
-    userFavoriteGas: 'Gasoline'
+    userFavoriteGas: 'Gasoline',
+    userTankCapacity: '50'
 };
 
 export default (state = INITIAL_STATE, action) => {

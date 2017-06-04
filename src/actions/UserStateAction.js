@@ -5,7 +5,8 @@ import {
     ERROR_LOCATION,
     FETCHING_LOCATION,
     CHANGE_USER_ALLOW_LOCATION,
-    RECEIVE_USER_FAVORITE_GAS
+    RECEIVE_USER_FAVORITE_GAS,
+    RECEIVE_USER_TANK_CAPACITY
 } from './type';
 
 // Action Creator for updating the location
@@ -62,6 +63,14 @@ const userFavoriteGasAction = favoriteGas => {
     };
 };
 
+// Action Creator for updating the user Tank Capacity
+const userTankCapacityAction = tankCapacity => {
+    return {
+        type: RECEIVE_USER_TANK_CAPACITY,
+        payload: tankCapacity
+    };
+};
+
 // Options for the getCurrent position function (while looking for user real time position
 const locationOptions = {
     enableHighAccuracy: true,
@@ -112,6 +121,28 @@ export const changeUserFavoriteGas = selectedGasType => {
     return (dispatch) => {
         AsyncStorage.setItem('gasTypePreference', selectedGasType).then(() => {
             return dispatch(userFavoriteGasAction(selectedGasType));
+        }).catch(error => {
+            console.log(error);
+        });
+    };
+};
+
+export const getUserTankCapacity = () => {
+    return (dispatch) => {
+        AsyncStorage.getItem('tankCapacity').then((tankCapacity) => {
+            if (tankCapacity !== null) {
+                return dispatch(userTankCapacityAction(tankCapacity));
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    };
+};
+
+export const changeUserTankCapacity = tankCapacity => {
+    return (dispatch) => {
+        AsyncStorage.setItem('tankCapacity', tankCapacity).then(() => {
+            return dispatch(userTankCapacityAction(tankCapacity));
         }).catch(error => {
             console.log(error);
         });

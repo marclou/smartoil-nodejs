@@ -3,7 +3,7 @@ import { Platform } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
-import { TabIcon, GasTypeSetting } from './components/functionalComponents';
+import { TabIcon, GasTypeSetting, TankCapacitySetting } from './components/functionalComponents';
 import Welcome from './components/Welcome';
 import SettingsList from './components/SettingsList';
 import Result from './components/Result';
@@ -37,7 +37,7 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="searchArea"
                             component={AreaList}
-                            title="Area List"
+                            title="Areas"
                         />
                     </Scene>
                     <Scene key="favorite" title="Favorite" iconName='heart' icon={TabIcon}>
@@ -45,7 +45,7 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="areaList"
                             component={FavoriteGasStations}
-                            title="Favorite Stations"
+                            title="Favorites"
                         />
                     </Scene>
                     <Scene key="setting" title="Settings" iconName='settings' icon={TabIcon} >
@@ -60,7 +60,13 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="gasTypeSetting"
                             component={GasTypeSetting}
-                            title="Gas Type Setting"
+                            title="Gas Type"
+                        />
+                        <Scene
+                            sceneStyle={sceneStyle}
+                            key="tankCapacitySetting"
+                            component={TankCapacitySetting}
+                            title="Tank Capacity"
                         />
                         <Scene
                             sceneStyle={sceneStyle}
