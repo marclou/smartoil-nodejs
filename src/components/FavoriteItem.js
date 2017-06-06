@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, Alert } from 'react-native';
 import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
-import realm from '../Realm';
+import { deleteFavorite } from '../actions/FavoriteStationAction';
 import { ListSectionLongPress } from './functionalComponents';
 
 class FavoriteItem extends Component {
@@ -17,29 +18,21 @@ class FavoriteItem extends Component {
             'Are you sure you want to delete this from your favorites',
             [
                 { text: 'Cancel', style: 'cancel' },
-                { text: 'OK', onPress: () => this.deleteFavorite(uid) },
+                { text: 'OK', onPress: () => this.props.deleteFavorite(uid) },
             ],
             { cancelable: true }
         );
     }
 
-    deleteFavorite(uid) {
-        const stationList = realm.objects('GasStationsList');
-        const toBeDeleted = stationList[0].gasStations.filtered('uid = $0', uid);
-        realm.write(() => {
-            realm.delete(toBeDeleted);
-        });
-    }
-
     render() {
-        const { name } = this.props.gasStation;
+        const { uid } = this.props.gasStation;
         const { rowStyle } = styles;
 
         return (
             <ListSectionLongPress onPress={this.onPress.bind(this)} onLongPress={this.onLongPress.bind(this)} >
                 <View style={rowStyle}>
                     <Text>
-                        {name}
+                        {uid}
                     </Text>
                 </View>
             </ListSectionLongPress>
@@ -56,4 +49,4 @@ const styles = {
     }
 };
 
-export default FavoriteItem;
+export default connect(null, { deleteFavorite })(FavoriteItem);

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
+import realm from './Realm';
 import { configureStore } from './Store';
 import RouterComponent from './Router';
 

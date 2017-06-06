@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { InteractionManager, ListView } from 'react-native';
 import { connect } from 'react-redux';
 
-import realm from '../Realm';
+import { loadFavorites } from '../actions';
 import FavoriteItem from './FavoriteItem';
 import { Spinner } from './functionalComponents';
 
@@ -10,10 +10,10 @@ class FavoriteGasStations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isComponentReady: false,
-            gasStationList: []
+            isComponentReady: false
         };
-        this.createDataSource();
+        this.props.loadFavorites();
+        this.createDataSource(this.props);
     }
 
     componentDidMount() {
@@ -22,18 +22,15 @@ class FavoriteGasStations extends Component {
         });
     }
 
-    componentWillUpdate() {
-        this.createDataSource();
+    componentWillReceiveProps(nextProps) {
+        this.createDataSource(nextProps);
     }
 
-    createDataSource() {
-        const stationsRealm = realm.objects('GasStationsList');
-        const gasStationList = stationsRealm[0].gasStations;
-
+    createDataSource({ favoriteStations }) {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
-        this.state.gasStationList = ds.cloneWithRows(gasStationList);
+        this.dataSource = ds.cloneWithRows(favoriteStations);
     }
 
     render() {
@@ -46,7 +43,7 @@ class FavoriteGasStations extends Component {
             <ListView
                 enableEmptySections
                 style={containerStyle}
-                dataSource={this.state.gasStationList}
+                dataSource={this.dataSource}
                 renderRow={(gasStation) => <FavoriteItem gasStation={gasStation} />}
             />
         );
@@ -60,4 +57,8 @@ const styles = {
     }
 };
 
-export default connect()(FavoriteGasStations);
+const mapStateToProps = state => {
+    return { favoriteStations: state.favoriteStations.favoritesList };
+};
+
+export default connect(mapStateToProps, { loadFavorites })(FavoriteGasStations);

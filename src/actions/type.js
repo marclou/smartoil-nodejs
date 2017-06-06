@@ -13,6 +13,11 @@ export const SELECT_ID = 'select_id';
 export const DESELECT_ID = 'deselect_id';
 export const SELECT_FILTER = 'select_filter';
 
+/** Type for Favorite gas stations list **/
+export const LOAD_FAVORITES = 'load_favorites';
+export const ADD_FAVORITE = 'add_favorite';
+export const DELETE_FAVORITE = 'delete_favorite';
+
 /** Type for PricePrediction Component **/
 export const PREDICTION_FETCHING = 'prediction_fetching';
 export const PREDICTION_FETCH_SUCCESS = 'prediction_fetch_success';
