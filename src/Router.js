@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Navigator } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
@@ -18,7 +18,15 @@ const RouterComponent = () => {
         <ConnectedRouter>
             <Scene key='root'>
                 <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} >
-                    <Scene key="home" title="Home" iconName='home' icon={TabIcon}>
+                    <Scene key="favorite" title="Favorite" iconName='heart' icon={TabIcon}>
+                        <Scene
+                            sceneStyle={sceneStyle}
+                            key="areaList"
+                            component={FavoriteGasStations}
+                            title="Favorites"
+                        />
+                    </Scene>
+                    <Scene key="home" title="Home" iconName='home' icon={TabIcon} initial>
                         <Scene
                             sceneStyle={sceneStyle}
                             key="main"
@@ -38,14 +46,6 @@ const RouterComponent = () => {
                             key="searchArea"
                             component={AreaList}
                             title="Areas"
-                        />
-                    </Scene>
-                    <Scene key="favorite" title="Favorite" iconName='heart' icon={TabIcon}>
-                        <Scene
-                            sceneStyle={sceneStyle}
-                            key="areaList"
-                            component={FavoriteGasStations}
-                            title="Favorites"
                         />
                     </Scene>
                     <Scene key="setting" title="Settings" iconName='settings' icon={TabIcon} >
@@ -96,14 +96,15 @@ const styles = {
         height: 60
     },
     sceneStyle: {
-        ...Platform.select({
+        paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight
+        /*...Platform.select({
             ios: {
                 paddingTop: 64,
             },
             android: {
                 paddingTop: 54,
             },
-        })
+        })*/
     }
 };
 

@@ -11,3 +11,5 @@ export * from './SearchBox';
 export * from './SectionHeader';
 export * from './GasTypeSetting';
 export * from './TankCapacitySetting';
+export * from './Tag';
+export * from './Blur';

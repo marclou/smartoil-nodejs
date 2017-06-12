@@ -75,7 +75,8 @@ const userTankCapacityAction = tankCapacity => {
 const locationOptions = {
     enableHighAccuracy: true,
     timeout: 10000,
-    maximumAge: 20000
+    maximumAge: 20000,
+    distanceFilter: 100
 };
 
 export const getUserPosition = () => {
@@ -83,7 +84,7 @@ export const getUserPosition = () => {
         // Unable any access to location switching
         dispatch(userFetchingLocation());
         /* global navigator */
-        navigator.geolocation.getCurrentPosition(
+        navigator.geolocation.watchPosition(
             (position) => {
                 return dispatch(userLocationAction(position.coords.latitude, position.coords.longitude));
             },

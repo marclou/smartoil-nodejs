@@ -5,6 +5,8 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { Alert } from 'react-native';
 
+import { Blur } from './functionalComponents';
+
 class Fab extends Component {
     displayAlert(alertTitle, alertMessage, error) {
         Alert.alert(
@@ -28,33 +30,34 @@ class Fab extends Component {
     }
 
     render() {
-        const { actionButtonIconStyle } = styles;
+        const { actionButtonIconStyle, actionButtonPopIconStyle } = styles;
 
         return (
             <ActionButton
-                buttonColor='rgba(231,76,60,1)'
+                buttonColor='#3498db'
                 icon={<Icon name='search' style={actionButtonIconStyle} />}
                 offsetY={70}
-                degrees={360}
+                degrees={45}
+                backdrop={<Blur />}
             >
                 <ActionButton.Item
-                    buttonColor='#9b59b6'
+                    buttonColor='#EEE'
                     title='Location'
                     onPress={this.allowLocationSearch.bind(this)}
                 >
                     <Icon
                         name='pin'
-                        style={actionButtonIconStyle}
+                        style={actionButtonPopIconStyle}
                     />
                 </ActionButton.Item>
                 <ActionButton.Item
-                    buttonColor='#3498db'
+                    buttonColor='#EEE'
                     title='Areas'
                     onPress={() => Actions.searchArea()}
                 >
                     <Icon
                         name='list'
-                        style={actionButtonIconStyle}
+                        style={actionButtonPopIconStyle}
                     />
                 </ActionButton.Item>
             </ActionButton>
@@ -67,7 +70,13 @@ const styles = {
         fontSize: 20,
         height: 22,
         color: 'white',
+    },
+    actionButtonPopIconStyle: {
+        fontSize: 16,
+        height: 18,
+        color: 'black',
     }
+
 };
 
 const mapStateToProps = state => {

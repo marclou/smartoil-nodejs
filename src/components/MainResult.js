@@ -25,7 +25,7 @@ class MainResult extends Component {
         return (
             <Animated.View style={{ ...textContainer, opacity: fadeAnim }}>
                 <Text style={textStyle}>
-                    {text}
+                    {text} &
                 </Text>
             </Animated.View>
         );
