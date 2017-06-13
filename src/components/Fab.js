@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Alert } from 'react-native';
 
 import { Blur } from './functionalComponents';
+import { COLOR_PRIMARY } from '../styles/common';
 
 class Fab extends Component {
     displayAlert(alertTitle, alertMessage, error) {
@@ -34,10 +35,10 @@ class Fab extends Component {
 
         return (
             <ActionButton
-                buttonColor='#3498db'
+                buttonColor={COLOR_PRIMARY}
                 icon={<Icon name='search' style={actionButtonIconStyle} />}
                 offsetY={70}
-                degrees={45}
+                degrees={90}
                 backdrop={<Blur />}
             >
                 <ActionButton.Item
@@ -68,12 +69,10 @@ class Fab extends Component {
 const styles = {
     actionButtonIconStyle: {
         fontSize: 20,
-        height: 22,
         color: 'white',
     },
     actionButtonPopIconStyle: {
-        fontSize: 16,
-        height: 18,
+        fontSize: 20,
         color: 'black',
     }
 

@@ -1,4 +1,5 @@
 export * from './TabIcon';
+export * from './NavIcon';
 export * from './SearchButton';
 export * from './ListSection';
 export * from './ListSectionLongPress';

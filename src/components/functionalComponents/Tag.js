@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
+import { COLOR_TEXT_SECONDARY } from '../../styles/common';
+
 const Tag = ({ text }) => {
     const { containerStyle, textStyle } = styles;
 
@@ -15,16 +17,16 @@ const Tag = ({ text }) => {
 
 const styles = {
     containerStyle: {
-        borderWidth: 0.5,
         alignSelf: 'center',
-        backgroundColor: '#CCC',
+        backgroundColor: '#eaeaea',
         padding: 2,
-        opacity: 0.8,
-        borderRadius: 2,
+        borderRadius: 3,
     },
     textStyle: {
-        fontSize: 10,
-        textAlign: 'center'
+        padding: 2,
+        fontSize: 12,
+        textAlign: 'center',
+        color: COLOR_TEXT_SECONDARY
     }
 };
 

@@ -2,6 +2,8 @@ import React from 'react';
 import { Text, View, Platform } from 'react-native';
 import { Icon } from 'native-base';
 
+import { COLOR_PRIMARY } from '../../styles/common';
+
 const TabIcon = ({ iconName, title, selected }) => {
     const { containerStyle, textStyle } = styles;
 
@@ -39,7 +41,7 @@ const styles = {
         color: '#301c2a'
     },
     colorSelectedStyle: {
-        color: 'red'
+        color: COLOR_PRIMARY
     },
     textStyle: {
         fontSize: 12

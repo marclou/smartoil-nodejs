@@ -3,7 +3,7 @@ import { Platform, Navigator } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
-import { TabIcon, GasTypeSetting, TankCapacitySetting } from './components/functionalComponents';
+import { TabIcon, NavIcon, GasTypeSetting, TankCapacitySetting } from './components/functionalComponents';
 import Welcome from './components/Welcome';
 import SettingsList from './components/SettingsList';
 import Result from './components/Result';
@@ -14,6 +14,7 @@ const ConnectedRouter = connect()(Router);
 
 const RouterComponent = () => {
     const { tabBarStyle, sceneStyle } = styles;
+
     return (
         <ConnectedRouter>
             <Scene key='root'>
@@ -31,8 +32,10 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="main"
                             component={Welcome}
-                            title="Home"
+                            title="홈페이지"
                             initial
+                            renderRightButton={() => <NavIcon iconName="share" />}
+                            onRight={() => console.log('shared')}
                         />
                         <Scene
                             sceneStyle={sceneStyle}
