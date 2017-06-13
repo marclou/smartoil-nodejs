@@ -1,33 +1,21 @@
 import React from 'react';
-import { Text, View, Platform } from 'react-native';
-import { Icon } from 'native-base';
+import { View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { COLOR_PRIMARY } from '../../styles/common';
+import { COLOR_PRIMARY, COLOR_TEXT_TERTIARY } from '../../styles/common';
 
-const TabIcon = ({ iconName, title, selected }) => {
-    const { containerStyle, textStyle } = styles;
+const TabIcon = ({ iconName, selected }) => {
+    const { containerStyle, colorStyle, colorSelectedStyle } = styles;
 
     return (
         <View style={containerStyle}>
             <Icon
                 name={iconName}
-                style={colorStylePlatform(selected)}
-                active={selected}
+                size={22}
+                style={selected ? colorSelectedStyle : colorStyle}
             />
-            <Text style={textStyle && colorStylePlatform(selected)}>
-                {title}
-            </Text>
         </View>
     );
-};
-
-const colorStylePlatform = (selected) => {
-    const { colorStyle, colorSelectedStyle } = styles;
-
-  if (Platform.OS === 'android') {
-      return selected ? colorSelectedStyle : colorStyle;
-  }
-  return colorStyle;
 };
 
 const styles = {
@@ -35,16 +23,13 @@ const styles = {
         flex: 1,
         flexDirection: 'column',
         alignSelf: 'center',
-        alignItems: 'center'
+        justifyContent: 'center'
     },
     colorStyle: {
-        color: '#301c2a'
+        color: COLOR_TEXT_TERTIARY
     },
     colorSelectedStyle: {
         color: COLOR_PRIMARY
-    },
-    textStyle: {
-        fontSize: 12
     }
 };
 

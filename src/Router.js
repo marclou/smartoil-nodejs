@@ -19,7 +19,7 @@ const RouterComponent = () => {
         <ConnectedRouter>
             <Scene key='root'>
                 <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} >
-                    <Scene key="favorite" title="Favorite" iconName='heart' icon={TabIcon}>
+                    <Scene key="favorite" iconName='heart' icon={TabIcon}>
                         <Scene
                             sceneStyle={sceneStyle}
                             key="areaList"
@@ -27,7 +27,7 @@ const RouterComponent = () => {
                             title="Favorites"
                         />
                     </Scene>
-                    <Scene key="home" title="Home" iconName='home' icon={TabIcon} initial>
+                    <Scene key="home" iconName='home' icon={TabIcon} initial>
                         <Scene
                             sceneStyle={sceneStyle}
                             key="main"
@@ -51,7 +51,7 @@ const RouterComponent = () => {
                             title="Areas"
                         />
                     </Scene>
-                    <Scene key="setting" title="Settings" iconName='settings' icon={TabIcon} >
+                    <Scene key="setting" iconName='cog' icon={TabIcon} >
                         <Scene
                             sceneStyle={sceneStyle}
                             key="settings"
@@ -95,8 +95,8 @@ const styles = {
         borderTopWidth: 0.5,
         borderColor: '#b7b7b7',
         backgroundColor: '#F5F5F5',
-        opacity: 1,
-        height: 60
+
+
     },
     sceneStyle: {
         paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight

@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { pricePredictionFetch } from '../actions';
-import MainResult from './MainResult';
-import PriceResult from './PriceResult';
-import InfoResult from './InfoResult';
-import { Spinner } from './functionalComponents';
+import { Tag, Spinner } from './functionalComponents';
+import { COLOR_PRIMARY, COLOR_TEXT_PRIMARY, COLOR_TEXT_SECONDARY } from '../styles/common';
 
 class PricePrediction extends Component {
     shouldComponentUpdate(nextProps) {
@@ -32,13 +31,33 @@ class PricePrediction extends Component {
         }
         // TO BE REMOVED WHEN PRICE PREDICTION API IS READY
         Object.assign(pricePredictionData, { predictPrice: 1250 }, { shortText: 'Buy !' }, { longText: 'Prices will increase tomorrow, you should refill your tank now.' });
-        const { resultContainerStyle } = styles;
+        const { section, row, price, priceInfo, icon, advice } = styles;
 
         return (
-            <View style={resultContainerStyle}>
-                <MainResult text={pricePredictionData.shortText} />
-                <PriceResult text={pricePredictionData.predictPrice} />
-                <InfoResult text={pricePredictionData.longText} />
+            <View>
+                <View style={section}>
+                    <View style={row}>
+                        <Icon name="caret-down" size={30} color={COLOR_PRIMARY} style={icon} />
+                        <Text style={price}>
+                            1,567.06
+                        </Text>
+                        <Text style={priceInfo}>
+                            (원/리터)
+                        </Text>
+                    </View>
+                    <View style={row}>
+                        <Tag text="가솔린" />
+                        <Tag text="서울" />
+                    </View>
+                    <View style={row}>
+                        <Text style={advice}>
+                            이제 구매해야.
+                        </Text>
+                    </View>
+                </View>
+                <View style={section}>
+                    <Tag text="Diesiel" />
+                </View>
             </View>
         );
     }
@@ -56,20 +75,46 @@ class PricePrediction extends Component {
 
 const styles = {
     containerStyle: {
-        height: 400
-    },
-    resultContainerStyle: {
-        height: 400,
+        flex: 1,
         flexDirection: 'column',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        padding: 40,
-        backgroundColor: '#3fdc54',
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.5,
-        shadowRadius: 2
+        justifyContent: 'flex-start',
+        padding: 20
+    },
+    section: {
+        borderBottomWidth: 1,
+        borderColor: '#e2e2e2',
+        paddingTop: 20,
+        paddingBottom: 20
+    },
+    row: {
+
+        padding: 5,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+    },
+    icon: {
+        alignSelf: 'center'
+    },
+    price: {
+        alignSelf: 'flex-end',
+        fontSize: 60,
+        fontWeight: '300',
+        color: COLOR_TEXT_PRIMARY,
+        paddingRight: 10,
+        paddingLeft: 10
+    },
+    priceInfo: {
+        fontSize: 12,
+        color: COLOR_TEXT_SECONDARY,
+        alignSelf: 'flex-end',
+        paddingBottom: 15
+    },
+    advice: {
+        color: COLOR_TEXT_SECONDARY,
+        fontSize: 18,
+
     }
+
 };
 
 const mapStateToProps = state => {

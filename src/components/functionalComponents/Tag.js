@@ -17,6 +17,7 @@ const Tag = ({ text }) => {
 
 const styles = {
     containerStyle: {
+        marginRight: 8,
         alignSelf: 'center',
         backgroundColor: '#eaeaea',
         padding: 2,
