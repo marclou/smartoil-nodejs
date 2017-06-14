@@ -14,3 +14,5 @@ export * from './GasTypeSetting';
 export * from './TankCapacitySetting';
 export * from './Tag';
 export * from './Blur';
+export * from './PredictionPrice';
+export * from './PredictionIcon';

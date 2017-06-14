@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { InteractionManager, View } from 'react-native';
 
-import AddLocationList from './AddLocationList';
+import AreasList from './AreasList';
 import { Spinner } from './functionalComponents';
 
 class AreaList extends Component {
@@ -25,7 +25,7 @@ class AreaList extends Component {
 
         return (
             <View style={containerStyle}>
-                <AddLocationList />
+                <AreasList />
             </View>
         );
     }

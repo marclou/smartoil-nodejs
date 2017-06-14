@@ -7,7 +7,7 @@ import { Icon } from 'native-base';
 import { changeUserFavoriteGas } from '../actions';
 
 const options = [
-    'Gasoline',
+    '가솔린',
     'Premium Gasoline',
     'Diesel',
     'Heating gas'
