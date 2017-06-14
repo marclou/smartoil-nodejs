@@ -17,7 +17,7 @@ Npm i react-native-tab-view --save (swipable tab-view)
 
 
 
-> react-native link   (to link dependencies and devDependencies from package.JSON)
+> react-native link   (to link native libraries from package.JSON to native project)
 
 
 
@@ -30,7 +30,7 @@ Npm install --save redux-logger (add logs when dispatch actions)
 
 --------------- Environment Variables ---------------
 
-export ANDROID_HOME=/Users/marclouvion/Library/Android/sdk  (Path to Android SDK)
+export ANDROID_HOME=/Users/*USERNAME*/Library/Android/sdk  (Path to Android SDK)
 PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
 

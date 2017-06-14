@@ -7,9 +7,13 @@ import {
 } from '../actions/type';
 
 const INITIAL_STATE = {
-    errorLocation: null,
-    userAllowLocation: false,
+    errorLocation: false,
+    userAllowLocation: true,
     loadingLocation: false,
+    userLocation: {
+        latitude: null,
+        longitude: null
+    },
     userFavoriteGas: 'Gasoline',
     userTankCapacity: '50'
 };
@@ -25,20 +29,17 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 userLocation: action.payload.userCoordinates,
-                loadingLocation: false,
-                userAllowLocation: action.payload.userAllowLocation
+                loadingLocation: false
             };
         case ERROR_LOCATION:
             return {
                 ...state,
                 errorLocation: action.payload,
-                loadingLocation: false,
-                userAllowLocation: false
+                loadingLocation: false
             };
         case CHANGE_USER_ALLOW_LOCATION:
             return {
                 ...state,
-                loadingLocation: false,
                 userAllowLocation: action.payload
             };
         case RECEIVE_USER_FAVORITE_GAS:

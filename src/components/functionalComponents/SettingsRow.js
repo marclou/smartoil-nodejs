@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableOpacity } from 'react-native';
-import { Icon } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const SettingsRow = ({ title, onPress, value }) => {
     const { containerStyle, textStyle, valueStyle, iconStyle } = styles;
@@ -10,7 +10,7 @@ const SettingsRow = ({ title, onPress, value }) => {
             <View style={containerStyle}>
                 <Text style={textStyle}> {title} </Text>
                 <Text style={valueStyle}> {value} </Text>
-                <Icon name='arrow-forward' style={iconStyle} />
+                <Icon name='arrow-right' style={iconStyle} />
             </View>
         </TouchableOpacity>
     );
@@ -39,7 +39,7 @@ const styles = {
     },
     iconStyle: {
         alignSelf: 'center',
-        fontSize: 20,
+        fontSize: 15,
         color: 'gray'
     }
 };

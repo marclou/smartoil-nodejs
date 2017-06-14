@@ -30,6 +30,14 @@ export const configureStore = () => {
         reducers,
         applyMiddleware(...middlewares)
     );
+
+    if (module.hot) {
+        module.hot.accept(() => {
+            const nextRootReducer = require('./reducers/index').default;
+            store.replaceReducer(nextRootReducer);
+        });
+    }
+
     subscribeToLocalStorage(store, 1000);
     return store;
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ActionButton from 'react-native-action-button';
-import { Icon } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { Alert } from 'react-native';
@@ -47,7 +47,7 @@ class Fab extends Component {
                     onPress={this.allowLocationSearch.bind(this)}
                 >
                     <Icon
-                        name='pin'
+                        name='map-marker'
                         style={actionButtonPopIconStyle}
                     />
                 </ActionButton.Item>
@@ -68,11 +68,11 @@ class Fab extends Component {
 
 const styles = {
     actionButtonIconStyle: {
-        fontSize: 20,
+        fontSize: 16,
         color: 'white',
     },
     actionButtonPopIconStyle: {
-        fontSize: 20,
+        fontSize: 16,
         color: 'black',
     }
 

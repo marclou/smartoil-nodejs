@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, TouchableWithoutFeedback } from 'react-native';
-import { Icon } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 
 import { isSaved, addFavorite, deleteFavorite } from '../actions';
@@ -37,7 +37,7 @@ class SaveIcon extends Component {
         return (
             <TouchableWithoutFeedback onPress={this.pressIcon.bind(this)}>
                 <View style={containerStyle} >
-                    <Icon name={this.state.selected ? 'ios-heart' : 'ios-heart-outline'} style={iconStyle} />
+                    <Icon name={this.state.selected ? 'heart' : 'heart-o'} style={iconStyle} />
                 </View>
             </TouchableWithoutFeedback>
         );
@@ -49,7 +49,7 @@ const styles = {
         alignSelf: 'center'
     },
     iconStyle: {
-        fontSize: 25,
+        fontSize: 18,
         color: 'red'
     }
 };

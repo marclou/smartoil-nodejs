@@ -46,11 +46,11 @@ const userAllowLocationAction = (value) => {
 };
 
 // Display error message
-const displayAlert = (alertTitle, alertMessage, error) => {
+const displayAlert = (alertTitle, alertMessage, log) => {
     Alert.alert(
         alertTitle,
         alertMessage,
-        [{ text: 'OK', onPress: () => console.log(error) }],
+        [{ text: 'OK', onPress: () => console.log(log) }],
         { cancelable: false }
     );
 };
@@ -73,36 +73,37 @@ const userTankCapacityAction = tankCapacity => {
 
 // Options for the getCurrent position function (while looking for user real time position
 const locationOptions = {
-    enableHighAccuracy: true,
-    timeout: 10000,
-    maximumAge: 20000,
-    distanceFilter: 100
+    enableHighAccuracy: false,
+    timeout: 6000,
+    maximumAge: 20000
 };
 
 export const getUserPosition = () => {
     return (dispatch) => {
         // Unable any access to location switching
         dispatch(userFetchingLocation());
-        /* global navigator */
-        navigator.geolocation.watchPosition(
-            (position) => {
-                return dispatch(userLocationAction(position.coords.latitude, position.coords.longitude));
-            },
-            (error) => {
-                displayAlert('Alert', error.message, error);
-                return dispatch(userLocationErrorAction(error.message));
-            },
-            locationOptions
-        );
+
+            /* global navigator */
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    return dispatch(userLocationAction(position.coords.latitude, position.coords.longitude));
+                },
+                (positionError) => {
+                    displayAlert(
+                        'Alert',
+                        JSON.stringify(positionError),
+                        positionError.message
+                    );
+                    return dispatch(userLocationErrorAction(positionError.code));
+                },
+                locationOptions
+            );
     };
 };
 
 export const changeUserAllowLocation = value => {
     return (dispatch) => {
-        if (value === true) {
-            return dispatch(userAllowLocationAction(!value));
-        }
-        dispatch(getUserPosition());
+        return dispatch(userAllowLocationAction(!value));
     };
 };
 

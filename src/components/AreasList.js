@@ -10,7 +10,7 @@ class AreasList extends PureComponent {
         index: 0,
         routes: [
             { key: '1', title: 'First' },
-            { key: '2', title: 'Second' },
+            { key: '2', title: 'Second' }
         ],
     };
 
@@ -20,7 +20,7 @@ class AreasList extends PureComponent {
 
     _renderScene = SceneMap({
         '1': FirstRoute,
-        '2': SecondRoute,
+        '2': SecondRoute
     });
 
     render() {

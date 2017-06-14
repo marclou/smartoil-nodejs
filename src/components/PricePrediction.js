@@ -28,6 +28,7 @@ class PricePrediction extends Component {
         if (loading) {
             return <Spinner size='large' />;
         }
+
         // TO BE REMOVED WHEN PRICE PREDICTION API IS READY
         Object.assign(pricePredictionData, { predictPrice: 1250 }, { shortText: 'Buy !' }, { longText: 'Prices will increase tomorrow, you should refill your tank now.' });
         const { section, row, advice } = styles;
@@ -70,7 +71,7 @@ class PricePrediction extends Component {
 
 const styles = {
     containerStyle: {
-        flex: 1,
+        height: 300,
         flexDirection: 'column',
         justifyContent: 'flex-start',
         padding: 20
