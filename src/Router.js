@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, Navigator } from 'react-native';
+import { Platform } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
@@ -99,15 +99,14 @@ const styles = {
 
     },
     sceneStyle: {
-        paddingTop: Navigator.NavigationBar.Styles.General.TotalNavHeight
-        /*...Platform.select({
+        ...Platform.select({
             ios: {
                 paddingTop: 64,
             },
             android: {
                 paddingTop: 54,
             },
-        })*/
+        })
     }
 };
 

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Text, Image, View } from 'react-native';
-import { Icon } from 'native-base';
 
 class GasStationRow extends Component {
     render() {
@@ -55,11 +54,6 @@ const styles = {
     textStyle: {
         width: 45,
         fontWeight: 'bold'
-    },
-    iconStyle: {
-        alignSelf: 'center',
-        fontSize: 20,
-        color: 'gray'
     }
 };
 

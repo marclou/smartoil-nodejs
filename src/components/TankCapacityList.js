@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { RadioButtons } from 'react-native-radio-buttons';
-import { Icon } from 'native-base';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { changeUserTankCapacity } from '../actions';
 
@@ -33,7 +33,7 @@ class RadioButtonsList extends Component {
 
         function renderOption(option, selected, onSelect, index) {
             const textSelectedStyle = selected ? { fontWeight: 'bold' } : {};
-            const iconSelectedName = selected ? 'radio-button-on' : '';
+            const iconSelectedName = selected ? 'check-circle' : '';
             const iconSelectedStyle = selected ? { color: 'blue' } : {};
             const containerStyle = {
                 padding: 10,
@@ -45,7 +45,7 @@ class RadioButtonsList extends Component {
             return (
                 <TouchableOpacity onPress={onSelect} key={index}>
                     <View style={containerStyle}>
-                        <Icon name={iconSelectedName || 'radio-button-off'} style={iconSelectedStyle && { fontSize: 25, color: 'blue' }} />
+                        <Icon name={iconSelectedName || 'check-circle-o'} style={iconSelectedStyle && { fontSize: 25, color: 'blue' }} />
                         <Text style={textSelectedStyle && { alignSelf: 'center', paddingLeft: 20 }}>{option} L</Text>
                     </View>
                 </TouchableOpacity>

@@ -34,6 +34,7 @@ export const configureStore = () => {
     if (module.hot) {
         module.hot.accept(() => {
             const nextRootReducer = require('./reducers/index').default;
+
             store.replaceReducer(nextRootReducer);
         });
     }
