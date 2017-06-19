@@ -19,8 +19,8 @@ const NavIcon = ({ iconName }) => {
 
 const styles = {
     containerStyle: {
-        flex: 1,
-        alignSelf: 'center'
+        alignSelf: 'center',
+        padding: 5
     },
     iconStyle: {
         fontSize: 20,

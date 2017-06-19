@@ -15,3 +15,7 @@ export * from './Tag';
 export * from './Blur';
 export * from './PredictionPrice';
 export * from './PredictionIcon';
+export * from './PopModal';
+export * from './Header';
+export * from './Button';
+

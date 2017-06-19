@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { COLOR_PRIMARY, COLOR_PRIMARY_OPPOSITE } from '../../styles/common';
+import { COLOR_PRIMARY, COLOR_ERROR } from '../../styles/common';
 
 const PredictionIcon = ({ value }) => {
     const { iconStyle, iconUpColor, iconDownColor } = styles;
@@ -24,7 +24,7 @@ const styles = {
         fontSize: 30,
     },
     iconUpColor: {
-        color: COLOR_PRIMARY_OPPOSITE
+        color: COLOR_ERROR
     },
     iconDownColor: {
         color: COLOR_PRIMARY

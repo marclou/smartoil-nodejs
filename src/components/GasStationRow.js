@@ -1,32 +1,49 @@
 import React, { Component } from 'react';
 import { Text, Image, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+import { COLOR_TEXT_PRIMARY, COLOR_TEXT_SECONDARY } from '../styles/common';
 
 class GasStationRow extends Component {
     render() {
-        const { price, distance } = this.props.gasStation;
-        const { containerStyle, logoStyle, textContainer, textStyle } = styles;
+        const { price, distance, store_name } = this.props.gasStation;
+        const { containerStyle, logoStyle, textContainer, textStyle, majorTextStyle, section, subSection, iconStyle } = styles;
 
         return (
             <View style={containerStyle}>
-                <Image
-                    style={logoStyle}
-                    source={require('../img/brand_logos/a.jpg')}
-                />
-                <View style={textContainer} >
-                    <Text style={textStyle}>
-                        {price}
-                    </Text>
-                    <Text>
-                        ₩
-                    </Text>
+                <View style={section}>
+                    <Image
+                        style={logoStyle}
+                        source={require('../img/brand_logos/a.jpg')}
+                    />
+                    <View style={[subSection, { paddingLeft: 20 }]}>
+                        <Text style={textStyle}>
+                            {store_name}
+                        </Text>
+                        <View style={textContainer} >
+                            <Text style={majorTextStyle}>
+                                {price} 원
+                            </Text>
+                        </View>
+                    </View>
                 </View>
-                <View style={textContainer} >
-                    <Text style={textStyle}>
-                        {(Math.round(distance * 100) / 100).toFixed(2)}
-                    </Text>
-                    <Text>
-                        km
-                    </Text>
+                <View style={section}>
+                    <View style={[subSection, { alignItems: 'flex-end', paddingRight: 20 }]}>
+                        <View style={textContainer} >
+                            <Text style={textStyle}>
+                                {(Math.round(distance * 100) / 100).toFixed(2)} km
+                            </Text>
+                        </View>
+                        <View style={textContainer} >
+                            <Text style={textStyle}>
+                                1 분
+                            </Text>
+                        </View>
+                    </View>
+                    <Icon
+                        name="chevron-right"
+                        style={iconStyle}
+                    />
                 </View>
             </View>
         );
@@ -39,7 +56,21 @@ const styles = {
         flex: 1,
         justifyContent: 'space-between',
         flexDirection: 'row',
-        padding: 8
+        padding: 8,
+        height: 85
+    },
+    section: {
+        flexDirection: 'row',
+        padding: 5,
+        maxWidth: 220
+    },
+    subSection: {
+        justifyContent: 'space-around',
+        flexDirection: 'column'
+    },
+    iconStyle: {
+        alignSelf: 'center',
+        color: COLOR_TEXT_SECONDARY
     },
     logoStyle: {
         height: 40,
@@ -47,13 +78,16 @@ const styles = {
         alignSelf: 'center'
     },
     textContainer: {
-        width: 80,
-        alignSelf: 'center',
         flexDirection: 'row'
     },
+    majorTextStyle: {
+        fontSize: 16,
+        color: COLOR_TEXT_PRIMARY,
+        fontWeight: '700'
+    },
     textStyle: {
-        width: 45,
-        fontWeight: 'bold'
+        fontSize: 14,
+        color: COLOR_TEXT_SECONDARY
     }
 };
 

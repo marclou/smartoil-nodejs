@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { LayoutAnimation } from 'react-native';
+import { LayoutAnimation, Modal, View, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import GasStationRow from './GasStationRow';
-import GasStationSelectedRow from './GasStationSelectedRow';
 import { selectGasStation, deselectGasStation } from '../actions/GasStationListAction';
-import { ListSection } from './functionalComponents';
+import { ListSection, PopModal } from './functionalComponents';
 
 class GasStationItem extends Component {
     componentWillUpdate() {
@@ -13,42 +14,51 @@ class GasStationItem extends Component {
     }
 
     onItemPress() {
-        const { expanded, gasStation } = this.props;
+        const { gasStation } = this.props;
 
-        if (!expanded) {
-            this.props.selectGasStation(gasStation.uni_id);
-        } else {
-            this.props.deselectGasStation();
-        }
+        Actions.gasStationInfo({
+            title: gasStation.store_name,
+            gasStation: gasStation
+        });
+
+        // if (!expanded) {
+        //     this.props.selectGasStation(gasStation.uni_id);
+        // } else {
+        //     this.props.deselectGasStation();
+        // }
     }
 
-    /*openDirections() {
-        const { latitude, longitude } = this.props.gasStation.location;
-        switch (Platform.OS) {
-            case 'ios':
-                return Linking.openURL(`http://maps.apple.com/maps?daddr=${latitude},${longitude}`);
-            case 'android':
-                return Linking.openURL(`http://maps.google.com/maps?daddr=${latitude},${longitude}`);
-            default:
-                return console.log('which plateform ?');
-        }
-    }*/
+    renderModalOrGasStation() {
+        const { gasStation, expanded } = this.props;
 
-    renderDescription() {
         if (this.props.expanded) {
             return (
-                <GasStationSelectedRow gasStation={this.props.gasStation} />
+                <View>
+                    <Modal
+                        animationType={'fade'}
+                        transparent={false}
+                        visible={expanded}
+                        onRequestClose={() => this.props.deselectGasStation()}
+                    >
+                        <PopModal gasStation={gasStation} />
+                        <TouchableHighlight
+                            onPress={() => this.props.deselectGasStation()}
+                        >
+                            <Icon name='times' size={30} />
+                        </TouchableHighlight>
+                    </Modal>
+                </View>
             );
         }
-        return (
-            <GasStationRow gasStation={this.props.gasStation} />
-        );
+        return (<GasStationRow gasStation={gasStation} />);
     }
 
     render() {
+        const { gasStation } = this.props;
+
         return (
             <ListSection onPress={this.onItemPress.bind(this)} >
-                {this.renderDescription()}
+                <GasStationRow gasStation={gasStation} />
             </ListSection>
         );
     }

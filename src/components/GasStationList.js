@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView, View, LayoutAnimation } from 'react-native';
+import { ListView, View } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
 import { gasStationFetch, selectFilter, deselectGasStation } from '../actions';
 import GasStationItem from './GasStationItem';
 import { Spinner } from './functionalComponents';
+import { COLOR_TEXT_SECONDARY, COLOR_PRIMARY, COLOR_BACKGROUND } from '../styles/common';
 
 
 class GasStationList extends Component {
@@ -22,7 +23,6 @@ class GasStationList extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        LayoutAnimation.spring();
         this.createDataSource(nextProps);
     }
 
@@ -104,6 +104,7 @@ class GasStationList extends Component {
 
     renderListOrSpinner() {
         const { gasStationsLibraries, selectedFilter } = this.props.gasStations;
+        const { tabsContainerStyle, tabStyle, tabTextStyle, activeTabStyle, activeTabTextStyle } = styles;
 
         if (gasStationsLibraries.loading) {
             return <Spinner size='large' />;
@@ -114,11 +115,17 @@ class GasStationList extends Component {
                 dataSource={this.dataSource}
                 renderRow={(gasStation) => <GasStationItem gasStation={gasStation} />}
                 renderHeader={() =>
-                    <View style={{ padding: 10 }}>
+                    <View>
                         <SegmentedControlTab
-                            values={['Cheapest', 'Nearest']}
+                            values={['가장 싼', '가까운']}
                             selectedIndex={selectedFilter}
                             onTabPress={this.changeFilter.bind(this, selectedFilter)}
+                            borderRadius={0}
+                            tabsContainerStyle={tabsContainerStyle}
+                            tabStyle={tabStyle}
+                            tabTextStyle={tabTextStyle}
+                            activeTabStyle={activeTabStyle}
+                            activeTabTextStyle={activeTabTextStyle}
                         />
                     </View>
                 }
@@ -138,6 +145,34 @@ class GasStationList extends Component {
 const styles = {
     containerStyle: {
         flex: 1
+    },
+    tabsContainerStyle: {
+        backgroundColor: COLOR_BACKGROUND,
+        borderBottomWidth: 0.5,
+        borderColor: '#b7b7b7',
+        marginBottom: 5
+    },
+    tabStyle: {
+        backgroundColor: COLOR_BACKGROUND,
+        paddingVertical: 0,
+        borderWidth: 6,
+        borderColor: 'transparent'
+    },
+    tabTextStyle: {
+        color: COLOR_TEXT_SECONDARY,
+        paddingVertical: 5,
+        fontSize: 16
+    },
+    activeTabStyle: {
+        backgroundColor: COLOR_BACKGROUND,
+        paddingVertical: 0,
+        borderWidth: 6,
+        borderBottomColor: COLOR_PRIMARY,
+    },
+    activeTabTextStyle: {
+        color: COLOR_PRIMARY,
+        paddingVertical: 5,
+        fontSize: 16
     }
 };
 
