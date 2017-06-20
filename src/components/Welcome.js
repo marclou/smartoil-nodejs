@@ -12,6 +12,12 @@ class Welcome extends Component {
         this.props.getUserFavoriteGas();
     }
 
+    shouldComponentUpdate() {
+        const { errorLocation, loadingLocation, userAllowLocation } = this.props.userGlobalState;
+
+        return errorLocation !== null && !loadingLocation && userAllowLocation;
+    }
+
     render() {
         const { containerStyle } = styles;
 

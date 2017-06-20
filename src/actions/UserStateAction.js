@@ -17,8 +17,7 @@ const userLocationAction = (lat, long) => {
             userCoordinates: {
                 latitude: lat,
                 longitude: long
-            },
-            userAllowLocation: true
+            }
         }
     };
 };
@@ -36,23 +35,6 @@ const userLocationErrorAction = (error) => {
         type: ERROR_LOCATION,
         payload: error
     };
-};
-
-const userAllowLocationAction = (value) => {
-    return {
-        type: CHANGE_USER_ALLOW_LOCATION,
-        payload: value
-    };
-};
-
-// Display error message
-const displayAlert = (alertTitle, alertMessage, log) => {
-    Alert.alert(
-        alertTitle,
-        alertMessage,
-        [{ text: 'OK', onPress: () => console.log(log) }],
-        { cancelable: false }
-    );
 };
 
 // Action Creator for updating the user Favorite Gas
@@ -82,28 +64,27 @@ export const getUserPosition = () => {
     return (dispatch) => {
         // Unable any access to location switching
         dispatch(userFetchingLocation());
-
+        return new Promise((resolve, reject) => {
             /* global navigator */
             navigator.geolocation.getCurrentPosition(
                 (position) => {
+                    resolve();
                     return dispatch(userLocationAction(position.coords.latitude, position.coords.longitude));
                 },
                 (positionError) => {
-                    displayAlert(
-                        'Alert',
-                        JSON.stringify(positionError),
-                        positionError.message
-                    );
+                    reject(positionError);
                     return dispatch(userLocationErrorAction(positionError.code));
                 },
                 locationOptions
             );
+        });
     };
 };
 
 export const changeUserAllowLocation = value => {
-    return (dispatch) => {
-        return dispatch(userAllowLocationAction(!value));
+    return {
+        type: CHANGE_USER_ALLOW_LOCATION,
+        payload: !value
     };
 };
 

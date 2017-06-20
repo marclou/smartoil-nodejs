@@ -7,7 +7,7 @@ import {
 } from '../actions/type';
 
 const INITIAL_STATE = {
-    errorLocation: false,
+    errorLocation: null,
     userAllowLocation: true,
     loadingLocation: false,
     userLocation: {
@@ -29,7 +29,8 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 userLocation: action.payload.userCoordinates,
-                loadingLocation: false
+                loadingLocation: false,
+                errorLocation: null
             };
         case ERROR_LOCATION:
             return {

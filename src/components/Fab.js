@@ -3,31 +3,96 @@ import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
-import { Alert } from 'react-native';
+import { Alert, Linking } from 'react-native';
 
 import { Blur } from './functionalComponents';
 import { COLOR_PRIMARY } from '../styles/common';
+import { getUserPosition, changeUserAllowLocation } from '../actions';
 
 class Fab extends Component {
-    displayAlert(alertTitle, alertMessage, error) {
+    displayAlert(alertTitle, alertMessage, buttons) {
         Alert.alert(
             alertTitle,
             alertMessage,
-            [
-                { text: 'OK', onPress: () => console.log(error) },
-                { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' }
-            ],
+            buttons,
             { cancelable: false }
         );
     }
 
-    allowLocationSearch() {
-        const { userAllowLocation } = this.props.userState;
+    reloadLocation() {
+        this.props.getUserPosition()
+            .then(() => Actions.result())
+            .catch((positionError) => {
+                switch (positionError.code) {
+                    case 0:
+                        return this.displayAlert(
+                            'Alert',
+                            'The request failed, but the reason is not known. Please try again.',
+                            [
+                                { text: 'OK' }
+                            ]
+                        );
+                    case 1:
+                        return this.displayAlert(
+                            'Alert',
+                            'Please, turn on your GPS to access the data',
+                            [
+                                { text: 'Ok', onPress: () => Linking.openURL('app-settings:1') },
+                                { text: 'Cancel', style: 'cancel' }
+                            ]
+                        );
+                    case 2:
+                        return this.displayAlert(
+                            'Alert',
+                            'It seems that you network is not stable. Please retry soon',
+                            [
+                                { text: 'OK' }
+                            ]
+                        );
+                    case 3:
+                        return this.displayAlert(
+                            'Alert',
+                            'You request timed out. Please check if you allow SmartGas to access your location.',
+                            [
+                                { text: 'OK' }
+                            ]
+                        );
+                    default:
+                        return this.displayAlert(
+                            'Alert',
+                            'An unknown problem happened.',
+                            [
+                                { text: 'OK' }
+                            ]
+                        );
+                }
+            });
+    }
 
-        if (userAllowLocation) {
+    searchByLocation() {
+        const { userAllowLocation, userLocation, errorLocation } = this.props.userState;
+
+        if (!userAllowLocation) {
+            return this.displayAlert(
+                'Alert',
+                'Please, allow us to access your location on the setting tab.',
+                [
+                    { text: 'OK',
+                        onPress: () => {
+                            this.props.changeUserAllowLocation(userAllowLocation);
+                            this.reloadLocation();
+                        }
+                    },
+                    { text: 'Cancel', style: 'cancel' }
+                ]
+            );
+        }
+        if (errorLocation) {
+            this.reloadLocation();
+        }
+        if (userAllowLocation && userLocation.latitude !== null && userLocation.longitude !== null) {
             return Actions.result();
         }
-        return this.displayAlert('Alert', 'Please, turn on your location to use our services', null);
     }
 
     render() {
@@ -44,7 +109,7 @@ class Fab extends Component {
                 <ActionButton.Item
                     buttonColor='#EEE'
                     title='Location'
-                    onPress={this.allowLocationSearch.bind(this)}
+                    onPress={this.searchByLocation.bind(this)}
                 >
                     <Icon
                         name='map-marker'
@@ -82,4 +147,4 @@ const mapStateToProps = state => {
     return { userState: state.userState };
 };
 
-export default connect(mapStateToProps)(Fab);
+export default connect(mapStateToProps, { getUserPosition, changeUserAllowLocation })(Fab);
