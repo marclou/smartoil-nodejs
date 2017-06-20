@@ -18,7 +18,7 @@ const styles = {
         backgroundColor: '#FFF',
         justifyContent: 'space-around',
         flexDirection: 'row',
-        position: 'relative'
+        position: 'relative',
     }
 };
 

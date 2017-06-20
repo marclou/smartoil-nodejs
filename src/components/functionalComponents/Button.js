@@ -3,14 +3,14 @@ import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 
 import { COLOR_PRIMARY } from '../../styles/common';
 
-const Button = ({ text, onPress }) => {
+const Button = ({ title, onPress }) => {
     const { containerStyle, textStyle } = styles;
 
     return (
         <TouchableOpacity onPress={onPress}>
             <View style={containerStyle}>
                 <Text style={textStyle}>
-                    {text}
+                    {title}
                 </Text>
             </View>
         </TouchableOpacity>

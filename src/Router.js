@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, View } from 'react-native';
+import { Platform } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
@@ -10,12 +10,12 @@ import Result from './components/Result';
 import AreaList from './components/AreaContainer';
 import FavoriteGasStations from './components/FavoriteGasStations';
 import GasStationInfo from './components/GasStationInfo';
-import { COLOR_BACKGROUND } from './styles/common';
+import { COLOR_PRIMARY, COLOR_BACKGROUND, COLOR_NAV_BACKGROUND } from './styles/common';
 
 const ConnectedRouter = connect()(Router);
 
 const RouterComponent = () => {
-    const { tabBarStyle, navBarStyle, sceneStyle } = styles;
+    const { tabBarStyle, navBarStylePrimary, navBarStyle, titleStyle, sceneStyle } = styles;
 
     return (
         <ConnectedRouter>
@@ -26,8 +26,9 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="areaList"
                             component={FavoriteGasStations}
-                            title="Favorites"
-                            navigationBarStyle={navBarStyle}
+                            title="단골주유소"
+                            titleStyle={titleStyle}
+                            navigationBarStyle={navBarStylePrimary}
                         />
                     </Scene>
                     <Scene key="home" iconName='home' icon={TabIcon} initial>
@@ -36,10 +37,12 @@ const RouterComponent = () => {
                             key="main"
                             component={Welcome}
                             title="홈페이지"
+                            titleStyle={titleStyle}
                             initial
-                            renderRightButton={() => <NavIcon iconName="share" />}
+                            renderRightButton={() => <NavIcon iconName="share" color={COLOR_BACKGROUND} />}
+                            rightButtonStyle={{ flexDirection: 'row' }}
                             onRight={() => console.log('shared')}
-                            navigationBarStyle={navBarStyle}
+                            navigationBarStyle={navBarStylePrimary}
                         />
                         <Scene
                             sceneStyle={sceneStyle}
@@ -70,7 +73,8 @@ const RouterComponent = () => {
                             key="settings"
                             component={SettingsList}
                             title="Settings"
-                            navigationBarStyle={navBarStyle}
+                            titleStyle={titleStyle}
+                            navigationBarStyle={navBarStylePrimary}
                             initial
                         />
                         <Scene
@@ -112,14 +116,23 @@ const styles = {
     tabBarStyle: {
         borderTopWidth: 0.5,
         borderColor: '#b7b7b7',
-        backgroundColor: COLOR_BACKGROUND,
+        backgroundColor: COLOR_NAV_BACKGROUND,
     },
     navBarStyle: {
         borderBottomWidth: 0.5,
         borderColor: '#b7b7b7',
-        backgroundColor: COLOR_BACKGROUND,
+        backgroundColor: COLOR_NAV_BACKGROUND,
+    },
+    navBarStylePrimary: {
+        borderBottomWidth: 0.5,
+        borderColor: '#b7b7b7',
+        backgroundColor: COLOR_PRIMARY,
+    },
+    titleStyle: {
+        color: COLOR_NAV_BACKGROUND
     },
     sceneStyle: {
+        backgroundColor: COLOR_BACKGROUND,
         ...Platform.select({
             ios: {
                 paddingTop: 64,

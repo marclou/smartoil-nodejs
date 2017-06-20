@@ -18,4 +18,4 @@ export * from './PredictionIcon';
 export * from './PopModal';
 export * from './Header';
 export * from './Button';
-
+export * from './SegmentSelector';

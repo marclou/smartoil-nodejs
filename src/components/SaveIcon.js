@@ -48,7 +48,7 @@ class SaveIcon extends Component {
 const styles = {
     containerStyle: {
         alignSelf: 'center',
-        padding: 10
+        padding: 15
     },
     selectedIconStyle: {
         fontSize: 20,

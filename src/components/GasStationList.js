@@ -5,8 +5,8 @@ import SegmentedControlTab from 'react-native-segmented-control-tab';
 
 import { gasStationFetch, selectFilter, deselectGasStation } from '../actions';
 import GasStationItem from './GasStationItem';
-import { Spinner } from './functionalComponents';
-import { COLOR_TEXT_SECONDARY, COLOR_PRIMARY, COLOR_BACKGROUND } from '../styles/common';
+import { Spinner, SegmentSelector } from './functionalComponents';
+import { COLOR_TEXT_SECONDARY, COLOR_PRIMARY, COLOR_NAV_BACKGROUND } from '../styles/common';
 
 
 class GasStationList extends Component {
@@ -110,26 +110,28 @@ class GasStationList extends Component {
             return <Spinner size='large' />;
         }
         return (
-            <ListView
-                enableEmptySections
-                dataSource={this.dataSource}
-                renderRow={(gasStation) => <GasStationItem gasStation={gasStation} />}
-                renderHeader={() =>
-                    <View>
-                        <SegmentedControlTab
-                            values={['가장 싼', '가까운']}
-                            selectedIndex={selectedFilter}
-                            onTabPress={this.changeFilter.bind(this, selectedFilter)}
-                            borderRadius={0}
-                            tabsContainerStyle={tabsContainerStyle}
-                            tabStyle={tabStyle}
-                            tabTextStyle={tabTextStyle}
-                            activeTabStyle={activeTabStyle}
-                            activeTabTextStyle={activeTabTextStyle}
-                        />
-                    </View>
-                }
-            />
+            <View style={styles.containerStyle}>
+                <View>
+                    <SegmentedControlTab
+                        values={['가장 싼', '가까운']}
+                        selectedIndex={selectedFilter}
+                        onTabPress={this.changeFilter.bind(this, selectedFilter)}
+                        borderRadius={0}
+                        tabsContainerStyle={tabsContainerStyle}
+                        tabStyle={tabStyle}
+                        tabTextStyle={tabTextStyle}
+                        activeTabStyle={activeTabStyle}
+                        activeTabTextStyle={activeTabTextStyle}
+                    />
+                    <SegmentSelector number={2} indexSelected={selectedFilter} />
+                </View>
+                <ListView
+                    enableEmptySections
+                    dataSource={this.dataSource}
+                    renderRow={(gasStation) => <GasStationItem gasStation={gasStation} />}
+                />
+            </View>
+
         );
     }
 
@@ -147,31 +149,24 @@ const styles = {
         flex: 1
     },
     tabsContainerStyle: {
-        backgroundColor: COLOR_BACKGROUND,
-        borderBottomWidth: 0.5,
-        borderColor: '#b7b7b7',
-        marginBottom: 5
+        backgroundColor: COLOR_NAV_BACKGROUND,
+        borderBottomWidth: 0,
+        padding: 8
     },
     tabStyle: {
-        backgroundColor: COLOR_BACKGROUND,
-        paddingVertical: 0,
-        borderWidth: 6,
-        borderColor: 'transparent'
+        backgroundColor: COLOR_NAV_BACKGROUND,
+        borderWidth: 0
     },
     tabTextStyle: {
         color: COLOR_TEXT_SECONDARY,
-        paddingVertical: 5,
         fontSize: 16
     },
     activeTabStyle: {
-        backgroundColor: COLOR_BACKGROUND,
-        paddingVertical: 0,
-        borderWidth: 6,
-        borderBottomColor: COLOR_PRIMARY,
+        backgroundColor: COLOR_NAV_BACKGROUND,
+        borderWidth: 0,
     },
     activeTabTextStyle: {
         color: COLOR_PRIMARY,
-        paddingVertical: 5,
         fontSize: 16
     }
 };

@@ -16,23 +16,31 @@ import {
 class GasStationInfo extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             isComponentReady: false
         };
     }
 
     componentDidMount() {
+        Actions.refresh({
+            renderRightButton: this.renderRightButton,
+            rightButtonStyle: { padding: 0 }
+        });
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
         });
-        Actions.refresh({ renderRightButton: this.renderRightButton });
+    }
+
+    linkToNavigation() {
+
     }
 
     renderRightButton(props) {
         return (
             <View style={styles.navIconStyle}>
                 <SaveIcon gasStation={props.gasStation} />
-                <NavIcon iconName="share" />
+                <NavIcon iconName="share" color={COLOR_PRIMARY} />
             </View>
         );
     }
@@ -73,8 +81,8 @@ class GasStationInfo extends Component {
                 </View>
                 <View style={{ marginTop: 25 }}>
                     <Button
-                        text="항해하다"
-                        onPress={() => console.log('pressed !')}
+                        title="항해하다"
+                        onPress={() => this.linkToNavigation()}
                     />
                 </View>
             </View>
@@ -122,9 +130,6 @@ const styles = {
     navIconStyle: {
         flexDirection: 'row',
         flex: 1,
-        width: 70,
-        justifyContent: 'space-between',
-        alignItems: 'center'
     }
 };
 

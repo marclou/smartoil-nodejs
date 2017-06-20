@@ -2,16 +2,14 @@ import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { COLOR_PRIMARY } from '../../styles/common';
-
-const NavIcon = ({ iconName }) => {
+const NavIcon = ({ iconName, onPress, color }) => {
     const { containerStyle, iconStyle } = styles;
 
     return (
-        <TouchableOpacity style={containerStyle}>
+        <TouchableOpacity style={containerStyle} onPress={onPress}>
             <Icon
                 name={iconName}
-                style={iconStyle}
+                style={[iconStyle, { color: color }]}
             />
         </TouchableOpacity>
     );
@@ -20,11 +18,10 @@ const NavIcon = ({ iconName }) => {
 const styles = {
     containerStyle: {
         alignSelf: 'center',
-        padding: 5
+        padding: 15
     },
     iconStyle: {
-        fontSize: 20,
-        color: COLOR_PRIMARY
+        fontSize: 20
     }
 };
 

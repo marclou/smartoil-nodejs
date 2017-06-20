@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { InteractionManager, ListView } from 'react-native';
+import { InteractionManager, ListView, Text, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 
 import { loadFavorites } from '../actions';
 import FavoriteItem from './FavoriteItem';
 import { Spinner } from './functionalComponents';
+import { PADDING_BOTTOM, COLOR_TEXT_TERTIARY } from '../styles/common';
 
 class FavoriteGasStations extends Component {
     constructor(props) {
@@ -12,14 +13,14 @@ class FavoriteGasStations extends Component {
         this.state = {
             isComponentReady: false
         };
-        this.props.loadFavorites();
-        this.createDataSource(this.props);
     }
 
     componentDidMount() {
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
         });
+        this.props.loadFavorites();
+        this.createDataSource(this.props);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -34,10 +35,25 @@ class FavoriteGasStations extends Component {
     }
 
     render() {
-        const { containerStyle } = styles;
+        const { containerStyle, emptyContainerStyle, emptyImgStyle, emptyTextStyle } = styles;
+        const { isComponentReady } = this.state;
+        const { favoriteStations } = this.props;
 
-        if (!this.state.isComponentReady) {
+        if (!isComponentReady) {
             return <Spinner />;
+        }
+        if (favoriteStations.length === 0) {
+            return (
+                <View style={emptyContainerStyle}>
+                    <Image
+                        style={emptyImgStyle}
+                        source={require('../img/gas.png')}
+                    />
+                    <Text style={emptyTextStyle}>
+                        단골 주유소가 없습니다.
+                    </Text>
+                </View>
+            );
         }
         return (
             <ListView
@@ -53,7 +69,24 @@ class FavoriteGasStations extends Component {
 const styles = {
     containerStyle: {
         flex: 1,
-        paddingBottom: 60
+        paddingBottom: PADDING_BOTTOM
+    },
+    emptyContainerStyle: {
+        flex: 1,
+        paddingBottom: PADDING_BOTTOM,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    emptyImgStyle: {
+        marginLeft: 30,
+        height: 150,
+        width: 150
+    },
+    emptyTextStyle: {
+        fontSize: 24,
+        color: COLOR_TEXT_TERTIARY,
+        paddingVertical: 10
     }
 };
 
