@@ -7,6 +7,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import SaveIcon from './SaveIcon';
 import { Spinner, Tag, Button, NavIcon } from './functionalComponents';
+import { displayLogo } from '../img/brands';
 import {
     COLOR_PRIMARY,
     COLOR_TEXT_PRIMARY,
@@ -47,7 +48,7 @@ class GasStationInfo extends Component {
 
     render() {
         const { containerStyle, divider, row, logoStyle, textMajorStyle, textMediumStyle, textMinorStyle } = styles;
-        const { price, distance, store_name } = this.props.gasStation;
+        const { price, distance, store_name, brand } = this.props.gasStation;
         const { userGasType } = this.props;
 
         if (!this.state.isComponentReady) {
@@ -58,7 +59,7 @@ class GasStationInfo extends Component {
                 <LinearGradient colors={['rgba(0,0,0,0.1)', 'rgba(0,0,0,0)']}>
                     <Image
                         style={logoStyle}
-                        source={require('../img/brand_logos/a.jpg')}
+                        source={displayLogo('large', brand)}
                     />
                 </LinearGradient>
                 <View style={row}>
@@ -109,8 +110,8 @@ const styles = {
     },
     logoStyle: {
         margin: 15,
-        height: 80,
-        width: 80,
+        height: 100,
+        width: 150,
         alignSelf: 'center'
     },
     textMajorStyle: {

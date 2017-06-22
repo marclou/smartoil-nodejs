@@ -3,10 +3,11 @@ import { Text, Image, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { COLOR_TEXT_PRIMARY, COLOR_TEXT_SECONDARY } from '../styles/common';
+import { displayLogo } from '../img/brands';
 
 class GasStationRow extends Component {
     render() {
-        const { price, distance, store_name } = this.props.gasStation;
+        const { price, distance, store_name, brand } = this.props.gasStation;
         const { containerStyle, logoStyle, textContainer, textStyle, majorTextStyle, section, subSection, iconStyle } = styles;
 
         return (
@@ -14,7 +15,7 @@ class GasStationRow extends Component {
                 <View style={section}>
                     <Image
                         style={logoStyle}
-                        source={require('../img/brand_logos/a.jpg')}
+                        source={displayLogo('small', brand)}
                     />
                     <View style={[subSection, { paddingLeft: 20 }]}>
                         <Text style={textStyle}>

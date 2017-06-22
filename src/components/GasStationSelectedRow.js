@@ -10,10 +10,6 @@ class GasStationSelectedRow extends Component {
 
         return (
             <View style={containerStyle}>
-                <Image
-                    style={logoStyle}
-                    source={require('../img/brand_logos/a.jpg')}
-                />
                 <View style={textContainer} >
                     <Text style={textStyle}>
                         {price}

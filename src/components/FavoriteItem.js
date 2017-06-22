@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { COLOR_TEXT_SECONDARY } from '../styles/common';
 import { deleteFavorite } from '../actions/FavoriteStationAction';
 import { ListSectionLongPress } from './functionalComponents';
+import { displayLogo } from '../img/brands';
 
 class FavoriteItem extends Component {
     onPress() {
@@ -27,7 +28,7 @@ class FavoriteItem extends Component {
     }
 
     render() {
-        const { name } = this.props.gasStation;
+        const { name, brand } = this.props.gasStation;
         const { containerStyle, section, logoStyle, textStyle, iconStyle } = styles;
         return (
             <ListSectionLongPress onPress={this.onPress.bind(this)} onLongPress={this.onLongPress.bind(this)} >
@@ -35,7 +36,7 @@ class FavoriteItem extends Component {
                     <View style={section}>
                         <Image
                             style={logoStyle}
-                            source={require('../img/brand_logos/a.jpg')}
+                            source={displayLogo('small', brand)}
                         />
                         <Text style={textStyle}>
                             {name}
