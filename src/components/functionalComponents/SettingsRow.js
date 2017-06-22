@@ -10,7 +10,7 @@ const SettingsRow = ({ title, onPress, value }) => {
             <View style={containerStyle}>
                 <Text style={textStyle}> {title} </Text>
                 <Text style={valueStyle}> {value} </Text>
-                <Icon name='arrow-right' style={iconStyle} />
+                <Icon name='chevron-right' style={iconStyle} />
             </View>
         </TouchableOpacity>
     );
@@ -34,7 +34,7 @@ const styles = {
         flex: 1,
         color: 'gray',
         textAlign: 'right',
-        paddingRight: 15,
+        paddingRight: 25,
         alignSelf: 'center'
     },
     iconStyle: {

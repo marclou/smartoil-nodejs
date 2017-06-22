@@ -3,7 +3,9 @@ import {
     ERROR_LOCATION,
     FETCHING_LOCATION,
     CHANGE_USER_ALLOW_LOCATION,
-    RECEIVE_USER_FAVORITE_GAS
+    RECEIVE_USER_FAVORITE_GAS,
+    RECEIVE_USER_TANK_CAPACITY,
+    RECEIVE_USER_FAVORITE_AREA
 } from '../actions/type';
 
 const INITIAL_STATE = {
@@ -15,7 +17,8 @@ const INITIAL_STATE = {
         longitude: null
     },
     userFavoriteGas: 'Gasoline',
-    userTankCapacity: '50'
+    userTankCapacity: 50,
+    userFavoriteArea: 'Seoul'
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -47,6 +50,16 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 userFavoriteGas: action.payload
+            };
+        case RECEIVE_USER_TANK_CAPACITY:
+            return {
+                ...state,
+                userTankCapacity: action.payload
+            };
+        case RECEIVE_USER_FAVORITE_AREA:
+            return {
+                ...state,
+                userFavoriteArea: action.payload
             };
         default:
             return state;

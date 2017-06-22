@@ -23,29 +23,34 @@ class SettingsList extends Component {
         if (!this.state.isComponentReady) {
             return <Spinner />;
         }
-        const { userFavoriteGas, userTankCapacity } = this.props.userSettings;
+        const { userFavoriteGas, userTankCapacity, userFavoriteArea } = this.props.userSettings;
 
         return (
             <View style={{ flex: 1 }}>
                 <ScrollView>
                     <SettingsRow
-                        title="Favorite gas type"
+                        title="기름종류"
                         onPress={() => Actions.gasTypeSetting()}
                         value={userFavoriteGas}
                     />
                     <SettingsRow
-                        title="Tank capacity"
+                        title="리터량"
                         onPress={() => Actions.tankCapacitySetting()}
                         value={`${userTankCapacity} L`}
                     />
+                    <SettingsRow
+                        title="내 지역"
+                        onPress={() => Actions.favoriteArea()}
+                        value={userFavoriteArea}
+                    />
                     <LocationSettingsRow
-                        title="Access my position"
+                        title="위치 정보 제공 동의"
                     />
                     <SettingsRow
-                        title="Share this app"
+                        title="정책"
                     />
                     <SettingsRow
-                        title="Policy & Privacy"
+                        title="정책"
                     />
                 </ScrollView>
             </View>

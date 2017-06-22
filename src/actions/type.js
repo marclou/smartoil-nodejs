@@ -5,6 +5,7 @@ export const FETCHING_LOCATION = 'fetching_location';
 export const CHANGE_USER_ALLOW_LOCATION = 'change_user_allow_location';
 export const RECEIVE_USER_FAVORITE_GAS = 'receive_user_favorite_gas';
 export const RECEIVE_USER_TANK_CAPACITY = 'receive_user_tank_capacity';
+export const RECEIVE_USER_FAVORITE_AREA = 'receive_user_favorite_area';
 
 /** Type for the GasStationList Component **/
 export const DATA_FETCHING = 'data_fetching';

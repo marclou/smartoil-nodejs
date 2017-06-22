@@ -32,7 +32,7 @@ class PricePrediction extends Component {
         // TO BE REMOVED WHEN PRICE PREDICTION API IS READY
         Object.assign(pricePredictionData, { predictPrice: 1250 }, { shortText: 'Buy !' }, { longText: 'Prices will increase tomorrow, you should refill your tank now.' });
         const { section, row, advice } = styles;
-        const { userFavoriteGas } = this.props.userState;
+        const { userFavoriteGas, userFavoriteArea } = this.props.userState;
 
         return (
             <View>
@@ -43,7 +43,7 @@ class PricePrediction extends Component {
                     </View>
                     <View style={row}>
                         <Tag text={userFavoriteGas} />
-                        <Tag text="서울" />
+                        <Tag text={userFavoriteArea} />
                     </View>
                     <View style={row}>
                         <Text style={advice}>

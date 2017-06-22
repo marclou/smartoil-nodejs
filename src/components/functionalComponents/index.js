@@ -19,3 +19,6 @@ export * from './PopModal';
 export * from './Header';
 export * from './Button';
 export * from './SegmentSelector';
+export * from './Area';
+export * from './BackButton';
+export * from './SelectionItem';

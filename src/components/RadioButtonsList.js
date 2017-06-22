@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { changeUserFavoriteGas } from '../actions';
 
 const options = [
-    '가솔린',
+    'Gasoline',
     'Premium Gasoline',
     'Diesel',
     'Heating gas'

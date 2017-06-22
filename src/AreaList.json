@@ -69,5 +69,15 @@
             "latitude": 37.532600,
             "longitude": 127.024612
         }
+    },
+    {
+        "name": "Marc",
+        "coordinates": {
+            "latitude": 34.992107,
+            "longitude": 127.112946
+        }
+    },
+    {
+        "name": "KEMAR"
     }
 ]

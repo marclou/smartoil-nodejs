@@ -4,12 +4,19 @@ import { connect } from 'react-redux';
 
 import Fab from './Fab';
 import PricePrediction from './PricePrediction';
-import { getUserPosition, getUserFavoriteGas } from '../actions';
+import {
+    getUserPosition,
+    getUserFavoriteGas,
+    getUserTankCapacity,
+    getUserFavoriteArea
+} from '../actions';
 
 class Welcome extends Component {
     componentDidMount() {
         this.props.getUserPosition();
         this.props.getUserFavoriteGas();
+        this.props.getUserTankCapacity();
+        this.props.getUserFavoriteArea();
     }
 
     shouldComponentUpdate() {
@@ -42,4 +49,11 @@ const mapStateToProps = state => {
     return { userGlobalState: state.userState };
 };
 
-export default connect(mapStateToProps, { getUserPosition, getUserFavoriteGas })(Welcome);
+export default connect(mapStateToProps,
+    {
+        getUserPosition,
+        getUserFavoriteGas,
+        getUserTankCapacity,
+        getUserFavoriteArea
+    }
+    )(Welcome);

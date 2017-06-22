@@ -3,8 +3,8 @@ import { View, TouchableOpacity } from 'react-native';
 
 const ListSection = ({ children, onPress }) => {
     return (
-        <TouchableOpacity onPress={onPress} >
-            <View style={styles.containerStyle}>
+        <TouchableOpacity onPress={onPress} style={styles.containerStyle} >
+            <View style={styles.viewStyle}>
                 {children}
             </View>
         </TouchableOpacity>
@@ -13,12 +13,16 @@ const ListSection = ({ children, onPress }) => {
 
 const styles = {
     containerStyle: {
+        backgroundColor: '#FFF'
+    },
+    viewStyle: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginHorizontal: 9,
         borderBottomWidth: 1,
         borderColor: '#DDD',
         backgroundColor: '#FFF',
-        justifyContent: 'space-around',
-        flexDirection: 'row',
-        position: 'relative'
     }
 };
 

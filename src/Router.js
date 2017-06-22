@@ -3,14 +3,17 @@ import { Platform } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
-import { TabIcon, NavIcon, GasTypeSetting, TankCapacitySetting } from './components/functionalComponents';
+import { TabIcon, NavIcon, BackButton } from './components/functionalComponents';
 import Welcome from './components/Welcome';
 import SettingsList from './components/SettingsList';
 import Result from './components/Result';
 import AreaList from './components/AreaContainer';
 import FavoriteGasStations from './components/FavoriteGasStations';
 import GasStationInfo from './components/GasStationInfo';
-import { COLOR_PRIMARY, COLOR_BACKGROUND, COLOR_NAV_BACKGROUND } from './styles/common';
+import GasFavoriteList from './components/GasFavoriteList';
+import TankCapacityFavoriteList from './components/TankCapacityFavoriteList';
+import AreaFavoriteList from './components/AreaFavoriteList';
+import { COLOR_PRIMARY, COLOR_TEXT_SECONDARY, COLOR_BACKGROUND, COLOR_NAV_BACKGROUND } from './styles/common';
 
 const ConnectedRouter = connect()(Router);
 
@@ -48,6 +51,7 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="result"
                             component={Result}
+                            renderBackButton={() => <BackButton color={COLOR_TEXT_SECONDARY} />}
                             title="결과"
                             navigationBarStyle={[navBarStyle, { borderBottomWidth: 0 }]}
                             hideTabBar
@@ -56,6 +60,7 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="gasStationInfo"
                             component={GasStationInfo}
+                            renderBackButton={() => <BackButton color={COLOR_TEXT_SECONDARY} />}
                             navigationBarStyle={navBarStyle}
                             hideTabBar
                         />
@@ -63,6 +68,7 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="searchArea"
                             component={AreaList}
+                            renderBackButton={() => <BackButton color={COLOR_TEXT_SECONDARY} />}
                             title="Areas"
                             navigationBarStyle={navBarStyle}
                         />
@@ -72,7 +78,7 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="settings"
                             component={SettingsList}
-                            title="Settings"
+                            title="설정"
                             titleStyle={titleStyle}
                             navigationBarStyle={navBarStylePrimary}
                             initial
@@ -80,16 +86,29 @@ const RouterComponent = () => {
                         <Scene
                             sceneStyle={sceneStyle}
                             key="gasTypeSetting"
-                            component={GasTypeSetting}
-                            title="Gas Type"
-                            navigationBarStyle={navBarStyle}
+                            component={GasFavoriteList}
+                            renderBackButton={() => <BackButton color={COLOR_NAV_BACKGROUND} />}
+                            title="기름 종류"
+                            titleStyle={titleStyle}
+                            navigationBarStyle={navBarStylePrimary}
                         />
                         <Scene
                             sceneStyle={sceneStyle}
                             key="tankCapacitySetting"
-                            component={TankCapacitySetting}
-                            title="Tank Capacity"
-                            navigationBarStyle={navBarStyle}
+                            component={TankCapacityFavoriteList}
+                            renderBackButton={() => <BackButton color={COLOR_NAV_BACKGROUND} />}
+                            title="리터량"
+                            titleStyle={titleStyle}
+                            navigationBarStyle={navBarStylePrimary}
+                        />
+                        <Scene
+                            sceneStyle={sceneStyle}
+                            key="favoriteArea"
+                            component={AreaFavoriteList}
+                            renderBackButton={() => <BackButton color={COLOR_NAV_BACKGROUND} />}
+                            title="지역"
+                            titleStyle={titleStyle}
+                            navigationBarStyle={navBarStylePrimary}
                         />
                         <Scene
                             sceneStyle={sceneStyle}

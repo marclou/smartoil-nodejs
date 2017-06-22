@@ -1,4 +1,4 @@
-import { AsyncStorage, Alert } from 'react-native';
+import { AsyncStorage } from 'react-native';
 
 import {
     RECEIVE_LOCATION,
@@ -6,7 +6,8 @@ import {
     FETCHING_LOCATION,
     CHANGE_USER_ALLOW_LOCATION,
     RECEIVE_USER_FAVORITE_GAS,
-    RECEIVE_USER_TANK_CAPACITY
+    RECEIVE_USER_TANK_CAPACITY,
+    RECEIVE_USER_FAVORITE_AREA
 } from './type';
 
 // Action Creator for updating the location
@@ -50,6 +51,14 @@ const userTankCapacityAction = tankCapacity => {
     return {
         type: RECEIVE_USER_TANK_CAPACITY,
         payload: tankCapacity
+    };
+};
+
+// Action Creator for updating the user Favorite Area
+const userFavoriteAreaAction = favoriteArea => {
+    return {
+        type: RECEIVE_USER_FAVORITE_AREA,
+        payload: favoriteArea
     };
 };
 
@@ -114,7 +123,7 @@ export const getUserTankCapacity = () => {
     return (dispatch) => {
         AsyncStorage.getItem('tankCapacity').then((tankCapacity) => {
             if (tankCapacity !== null) {
-                return dispatch(userTankCapacityAction(tankCapacity));
+                return dispatch(userTankCapacityAction(parseInt(tankCapacity, 16)));
             }
         }).catch(error => {
             console.log(error);
@@ -124,8 +133,30 @@ export const getUserTankCapacity = () => {
 
 export const changeUserTankCapacity = tankCapacity => {
     return (dispatch) => {
-        AsyncStorage.setItem('tankCapacity', tankCapacity).then(() => {
+        AsyncStorage.setItem('tankCapacity', tankCapacity.toString()).then(() => {
             return dispatch(userTankCapacityAction(tankCapacity));
+        }).catch(error => {
+            console.log(error);
+        });
+    };
+};
+
+export const getUserFavoriteArea = () => {
+    return (dispatch) => {
+        AsyncStorage.getItem('favoriteArea').then((favoriteArea) => {
+            if (favoriteArea !== null) {
+                return dispatch(userFavoriteAreaAction(favoriteArea));
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    };
+};
+
+export const changeUserFavoriteArea = favoriteArea => {
+    return (dispatch) => {
+        AsyncStorage.setItem('favoriteArea', favoriteArea).then(() => {
+            return dispatch(userFavoriteAreaAction(favoriteArea));
         }).catch(error => {
             console.log(error);
         });
