@@ -123,7 +123,7 @@ export const getUserTankCapacity = () => {
     return (dispatch) => {
         AsyncStorage.getItem('tankCapacity').then((tankCapacity) => {
             if (tankCapacity !== null) {
-                return dispatch(userTankCapacityAction(parseInt(tankCapacity, 16)));
+                return dispatch(userTankCapacityAction(parseInt(tankCapacity, 10)));
             }
         }).catch(error => {
             console.log(error);

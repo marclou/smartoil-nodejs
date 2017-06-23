@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { changeUserAllowLocation } from '../actions';
 import { Spinner } from './functionalComponents';
-import { COLOR_PRIMARY } from '../styles/common';
 
 class LocationPreference extends Component {
     valueChanged(value) {
@@ -29,6 +28,7 @@ class LocationPreference extends Component {
                     value={userAllowLocation}
                     onValueChange={this.valueChanged.bind(this, userAllowLocation)}
                     onTintColor='rgba(25, 118, 210, 0.5)'
+                    thumbTintColor='white'
                 />
             </View>
         );

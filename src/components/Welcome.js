@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { connect } from 'react-redux';
 
 import Fab from './Fab';
@@ -26,11 +26,13 @@ class Welcome extends Component {
     }
 
     render() {
-        const { containerStyle } = styles;
+        const { containerStyle, sectionStyle } = styles;
 
         return (
             <View style={containerStyle} >
-                <PricePrediction />
+                <View style={sectionStyle}>
+                    <PricePrediction />
+                </View>
                 <Fab />
             </View>
         );
@@ -39,6 +41,9 @@ class Welcome extends Component {
 
 const styles = {
     containerStyle: {
+        flex: 1,
+    },
+    sectionStyle: {
         flex: 1,
         flexDirection: 'column',
         justifyContent: 'flex-start'

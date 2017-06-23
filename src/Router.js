@@ -3,6 +3,9 @@ import { Platform } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
+import Location from './components/initialComponent/Location';
+import GasType from './components/initialComponent/GasType';
+import TankCapacity from './components/initialComponent/TankCapacity';
 import { TabIcon, NavIcon, BackButton } from './components/functionalComponents';
 import Welcome from './components/Welcome';
 import SettingsList from './components/SettingsList';
@@ -18,12 +21,33 @@ import { COLOR_PRIMARY, COLOR_TEXT_SECONDARY, COLOR_BACKGROUND, COLOR_NAV_BACKGR
 const ConnectedRouter = connect()(Router);
 
 const RouterComponent = () => {
-    const { tabBarStyle, navBarStylePrimary, navBarStyle, titleStyle, sceneStyle } = styles;
+    const { sliderSceneStyle, sliderNavBarStyle, tabBarStyle, navBarStylePrimary, navBarStyle, titleStyle, sceneStyle } = styles;
 
     return (
         <ConnectedRouter>
             <Scene key='root'>
-                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial>
+                <Scene key="slider" initial={true}>
+                    <Scene
+                        key="location"
+                        component={Location}
+                        sceneStyle={sliderSceneStyle}
+                        navigationBarStyle={sliderNavBarStyle}
+                        initial
+                    />
+                    <Scene
+                        key="gasType"
+                        component={GasType}
+                        sceneStyle={sliderSceneStyle}
+                        navigationBarStyle={sliderNavBarStyle}
+                    />
+                    <Scene
+                        key="tankCapacity"
+                        component={TankCapacity}
+                        sceneStyle={sliderSceneStyle}
+                        navigationBarStyle={sliderNavBarStyle}
+                    />
+                </Scene>
+                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={false}>
                     <Scene key="favorite" iconName='heart' icon={TabIcon}>
                         <Scene
                             sceneStyle={sceneStyle}
@@ -132,6 +156,13 @@ const RouterComponent = () => {
 };
 
 const styles = {
+    sliderSceneStyle: {
+        paddingTop: 50
+    },
+    sliderNavBarStyle: {
+        backgroundColor: 'transparent',
+        borderBottomWidth: 0
+    },
     tabBarStyle: {
         borderTopWidth: 0.5,
         borderColor: '#b7b7b7',

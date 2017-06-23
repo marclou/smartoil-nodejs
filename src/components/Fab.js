@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { Alert, Linking } from 'react-native';
 
 import { Blur } from './functionalComponents';
-import { COLOR_PRIMARY } from '../styles/common';
+import { COLOR_PRIMARY, COLOR_TEXT_SECONDARY } from '../styles/common';
 import { getUserPosition, changeUserAllowLocation } from '../actions';
 
 class Fab extends Component {
@@ -96,7 +96,7 @@ class Fab extends Component {
     }
 
     render() {
-        const { actionButtonIconStyle, actionButtonPopIconStyle } = styles;
+        const { actionButtonIconStyle, actionButtonItemIconStyle, textStyle, textContainerStyle } = styles;
 
         return (
             <ActionButton
@@ -104,26 +104,34 @@ class Fab extends Component {
                 icon={<Icon name='search' style={actionButtonIconStyle} />}
                 offsetY={70}
                 degrees={90}
+                outRangeScale={1.2}
                 backdrop={<Blur />}
             >
                 <ActionButton.Item
                     buttonColor='#EEE'
-                    title='Location'
+                    title='내 위치로 검색'
                     onPress={this.searchByLocation.bind(this)}
+                    textContainerStyle={textContainerStyle}
+                    textStyle={textStyle}
+                    spaceBetween={10}
+
                 >
                     <Icon
                         name='map-marker'
-                        style={actionButtonPopIconStyle}
+                        style={actionButtonItemIconStyle}
                     />
                 </ActionButton.Item>
                 <ActionButton.Item
                     buttonColor='#EEE'
-                    title='Areas'
+                    title='지역으로 검색'
                     onPress={() => Actions.searchArea()}
+                    textContainerStyle={textContainerStyle}
+                    textStyle={textStyle}
+                    spaceBetween={10}
                 >
                     <Icon
-                        name='list'
-                        style={actionButtonPopIconStyle}
+                        name='map-o'
+                        style={actionButtonItemIconStyle}
                     />
                 </ActionButton.Item>
             </ActionButton>
@@ -136,9 +144,17 @@ const styles = {
         fontSize: 16,
         color: 'white',
     },
-    actionButtonPopIconStyle: {
+    actionButtonItemIconStyle: {
         fontSize: 16,
-        color: 'black',
+        color: COLOR_TEXT_SECONDARY
+    },
+    textStyle: {
+        color: 'white',
+        fontSize: 16
+    },
+    textContainerStyle: {
+        backgroundColor: 'transparent',
+        borderWidth: 0
     }
 
 };

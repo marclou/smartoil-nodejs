@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { Spinner, ListSection, SelectionItem } from './functionalComponents';
 import { changeUserTankCapacity } from '../actions';
+import { PADDING_BOTTOM } from '../styles/common';
 
 class TankCapacityFavoriteList extends Component {
     constructor(props) {
@@ -11,6 +12,10 @@ class TankCapacityFavoriteList extends Component {
         this.state = {
             isComponentReady: false
         };
+        this.tankCapacity = [];
+        for (let i = 8; i < 25; i++) {
+            this.tankCapacity.push(i * 5);
+        }
         this.createDataSource();
     }
 
@@ -25,14 +30,10 @@ class TankCapacityFavoriteList extends Component {
     }
 
     createDataSource() {
-        const tankCapacity = [];
-        for (let i = 8; i < 25; i++) {
-            tankCapacity.push(i * 5);
-        }
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
-        this.dataSource = ds.cloneWithRows(tankCapacity);
+        this.dataSource = ds.cloneWithRows(this.tankCapacity);
     }
 
     render() {
@@ -60,7 +61,8 @@ class TankCapacityFavoriteList extends Component {
 
 const styles = {
     containerStyle: {
-        flex: 1
+        flex: 1,
+        paddingBottom: PADDING_BOTTOM
     }
 };
 
