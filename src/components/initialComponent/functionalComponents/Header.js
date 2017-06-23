@@ -27,7 +27,7 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'transparent',
-        marginBottom: 20
+        marginBottom: 30
     },
     titleStyle: {
         fontSize: 24,

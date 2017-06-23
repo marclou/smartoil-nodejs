@@ -26,7 +26,7 @@ const RouterComponent = () => {
     return (
         <ConnectedRouter>
             <Scene key='root'>
-                <Scene key="slider" initial={true}>
+                <Scene key="slider" initial={false}>
                     <Scene
                         key="location"
                         component={Location}
@@ -47,7 +47,7 @@ const RouterComponent = () => {
                         navigationBarStyle={sliderNavBarStyle}
                     />
                 </Scene>
-                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={false}>
+                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={true}>
                     <Scene key="favorite" iconName='heart' icon={TabIcon}>
                         <Scene
                             sceneStyle={sceneStyle}
