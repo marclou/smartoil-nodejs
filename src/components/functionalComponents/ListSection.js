@@ -1,11 +1,20 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 
+import {
+    COLOR_BORDER_SECONDARY,
+    COLOR_BACKGROUND_QUATERNARY
+} from '../../styles/common';
+
 const ListSection = ({ children, onPress }) => {
+    const { containerStyle, viewStyle } = styles;
+
     return (
-        <TouchableOpacity onPress={onPress} style={styles.containerStyle} >
-            <View style={styles.viewStyle}>
-                {children}
+        <TouchableOpacity onPress={onPress} >
+            <View style={containerStyle}>
+                <View style={viewStyle}>
+                    {children}
+                </View>
             </View>
         </TouchableOpacity>
     );
@@ -13,16 +22,16 @@ const ListSection = ({ children, onPress }) => {
 
 const styles = {
     containerStyle: {
-        backgroundColor: '#FFF'
+        flex: 1,
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY
     },
     viewStyle: {
-        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginHorizontal: 9,
         borderBottomWidth: 1,
-        borderColor: '#DDD',
-        backgroundColor: '#FFF',
+        borderColor: COLOR_BORDER_SECONDARY,
+
     }
 };
 

@@ -6,7 +6,12 @@ import SegmentedControlTab from 'react-native-segmented-control-tab';
 import { gasStationFetch, selectFilter, deselectGasStation } from '../actions';
 import GasStationItem from './GasStationItem';
 import { Spinner, SegmentSelector } from './functionalComponents';
-import { COLOR_TEXT_SECONDARY, COLOR_PRIMARY, COLOR_NAV_BACKGROUND } from '../styles/common';
+import {
+    COLOR_PRIMARY,
+    COLOR_BACKGROUND_TERCIARY,
+    COLOR_BACKGROUND_QUATERNARY,
+    COLOR_FONT_QUATERNARY
+} from '../styles/common';
 
 
 class GasStationList extends Component {
@@ -146,23 +151,24 @@ class GasStationList extends Component {
 
 const styles = {
     containerStyle: {
-        flex: 1
+        flex: 1,
+        backgroundColor: COLOR_BACKGROUND_TERCIARY
     },
     tabsContainerStyle: {
-        backgroundColor: COLOR_NAV_BACKGROUND,
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
         borderBottomWidth: 0,
         padding: 8
     },
     tabStyle: {
-        backgroundColor: COLOR_NAV_BACKGROUND,
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
         borderWidth: 0
     },
     tabTextStyle: {
-        color: COLOR_TEXT_SECONDARY,
+        color: COLOR_FONT_QUATERNARY,
         fontSize: 16
     },
     activeTabStyle: {
-        backgroundColor: COLOR_NAV_BACKGROUND,
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
         borderWidth: 0,
     },
     activeTabTextStyle: {

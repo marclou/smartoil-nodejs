@@ -6,7 +6,12 @@ import { connect } from 'react-redux';
 import { Alert, Linking } from 'react-native';
 
 import { Blur } from './functionalComponents';
-import { COLOR_PRIMARY, COLOR_TEXT_SECONDARY } from '../styles/common';
+import {
+    COLOR_PRIMARY,
+    COLOR_FONT_SECONDARY,
+    COLOR_FONT_QUINARY,
+    COLOR_TEXT_SECONDARY
+} from '../styles/common';
 import { getUserPosition, changeUserAllowLocation } from '../actions';
 
 class Fab extends Component {
@@ -142,14 +147,14 @@ class Fab extends Component {
 const styles = {
     actionButtonIconStyle: {
         fontSize: 16,
-        color: 'white',
+        color: COLOR_FONT_QUINARY
     },
     actionButtonItemIconStyle: {
         fontSize: 16,
-        color: COLOR_TEXT_SECONDARY
+        color: COLOR_FONT_SECONDARY
     },
     textStyle: {
-        color: 'white',
+        color: COLOR_FONT_QUINARY,
         fontSize: 16
     },
     textContainerStyle: {

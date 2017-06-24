@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import { Spinner, SettingsRow, LocationSettingsRow } from './functionalComponents';
+import { COLOR_BACKGROUND_TERCIARY } from '../styles/common';
 
 class SettingsList extends Component {
     constructor(props) {
@@ -24,9 +25,10 @@ class SettingsList extends Component {
             return <Spinner />;
         }
         const { userFavoriteGas, userTankCapacity, userFavoriteArea } = this.props.userSettings;
+        const { containerStyle } = styles;
 
         return (
-            <View style={{ flex: 1 }}>
+            <View style={containerStyle}>
                 <ScrollView>
                     <SettingsRow
                         title="기름종류"
@@ -57,6 +59,13 @@ class SettingsList extends Component {
         );
     }
 }
+
+const styles = {
+    containerStyle: {
+        flex: 1,
+        backgroundColor: COLOR_BACKGROUND_TERCIARY
+    }
+};
 
 const mapStateToProps = state => {
     return { userSettings: state.userState };

@@ -1,7 +1,11 @@
 import React from 'react';
 import { View } from 'react-native';
 
-import { COLOR_PRIMARY, COLOR_NAV_BACKGROUND } from '../../styles/common';
+import {
+    COLOR_PRIMARY,
+    COLOR_BACKGROUND_QUATERNARY,
+    COLOR_BORDER_SECONDARY
+} from '../../styles/common';
 
 const SegmentSelector = ({ number, indexSelected }) => {
     const { containerStyle, selectorStyle, selectorActiveStyle } = styles;
@@ -24,15 +28,14 @@ const SegmentSelector = ({ number, indexSelected }) => {
 
 const styles = {
     containerStyle: {
-
         flexDirection: 'row'
     },
     selectorStyle: {
         flex: 1,
         height: 6,
-        backgroundColor: COLOR_NAV_BACKGROUND,
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
         borderBottomWidth: 1,
-        borderColor: '#DDD'
+        borderColor: COLOR_BORDER_SECONDARY
     },
     selectorActiveStyle: {
         flex: 1,

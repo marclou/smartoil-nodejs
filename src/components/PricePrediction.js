@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { pricePredictionFetch } from '../actions';
 import { Tag, Spinner, PredictionPrice, PredictionIcon } from './functionalComponents';
-import { COLOR_TEXT_SECONDARY } from '../styles/common';
+import { COLOR_FONT_SECONDARY, COLOR_BORDER_SECONDARY } from '../styles/common';
 
 class PricePrediction extends Component {
     shouldComponentUpdate(nextProps) {
@@ -32,7 +32,7 @@ class PricePrediction extends Component {
         // TO BE REMOVED WHEN PRICE PREDICTION API IS READY
         Object.assign(pricePredictionData, { predictPrice: 1250 }, { shortText: 'Buy !' }, { longText: 'Prices will increase tomorrow, you should refill your tank now.' });
         const { section, row, advice } = styles;
-        const { userFavoriteGas, userFavoriteArea } = this.props.userState;
+        const { userFavoriteGas, userFavoriteArea, userTankCapacity } = this.props.userState;
 
         return (
             <View>
@@ -44,6 +44,7 @@ class PricePrediction extends Component {
                     <View style={row}>
                         <Tag text={userFavoriteGas} />
                         <Tag text={userFavoriteArea} />
+                        <Tag text={`${userTankCapacity} L`} />
                     </View>
                     <View style={row}>
                         <Text style={advice}>
@@ -79,7 +80,7 @@ const styles = {
     section: {
         flexDirection: 'column',
         borderBottomWidth: 1,
-        borderColor: '#e2e2e2',
+        borderColor: COLOR_BORDER_SECONDARY,
         padding: 20
     },
     row: {
@@ -88,7 +89,7 @@ const styles = {
         justifyContent: 'flex-start',
     },
     advice: {
-        color: COLOR_TEXT_SECONDARY,
+        color: COLOR_FONT_SECONDARY,
         fontSize: 18
     }
 };

@@ -5,7 +5,11 @@ import { connect } from 'react-redux';
 import { loadFavorites } from '../actions';
 import FavoriteItem from './FavoriteItem';
 import { Spinner } from './functionalComponents';
-import { PADDING_BOTTOM, COLOR_TEXT_TERTIARY } from '../styles/common';
+import {
+    PADDING_BOTTOM,
+    COLOR_BACKGROUND_TERCIARY,
+    COLOR_FONT_TERCIARY
+} from '../styles/common';
 
 class FavoriteGasStations extends Component {
     constructor(props) {
@@ -69,6 +73,7 @@ class FavoriteGasStations extends Component {
 const styles = {
     containerStyle: {
         flex: 1,
+        backgroundColor: COLOR_BACKGROUND_TERCIARY,
         paddingBottom: PADDING_BOTTOM
     },
     emptyContainerStyle: {
@@ -85,7 +90,7 @@ const styles = {
     },
     emptyTextStyle: {
         fontSize: 24,
-        color: COLOR_TEXT_TERTIARY,
+        color: COLOR_FONT_TERCIARY,
         paddingVertical: 10
     }
 };

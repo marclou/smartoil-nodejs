@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Platform } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
 
 import Fab from './Fab';
@@ -10,6 +10,7 @@ import {
     getUserTankCapacity,
     getUserFavoriteArea
 } from '../actions';
+import { COLOR_BACKGROUND_QUATERNARY } from '../styles/common';
 
 class Welcome extends Component {
     componentDidMount() {
@@ -42,6 +43,7 @@ class Welcome extends Component {
 const styles = {
     containerStyle: {
         flex: 1,
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY
     },
     sectionStyle: {
         flex: 1,

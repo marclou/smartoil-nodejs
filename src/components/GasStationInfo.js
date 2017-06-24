@@ -10,8 +10,9 @@ import { Spinner, Tag, Button, NavIcon } from './functionalComponents';
 import { displayLogo } from '../img/brands';
 import {
     COLOR_PRIMARY,
-    COLOR_TEXT_PRIMARY,
-    COLOR_TEXT_SECONDARY
+    COLOR_FONT_PRIMARY,
+    COLOR_FONT_SECONDARY,
+    COLOR_BORDER_SECONDARY
 } from '../styles/common';
 
 class GasStationInfo extends Component {
@@ -66,7 +67,7 @@ class GasStationInfo extends Component {
                     <Text style={textMediumStyle}>{store_name}</Text>
                 </View>
                 <View style={row}>
-                    <Icon name="map-marker" style={{ color: COLOR_TEXT_SECONDARY }} />
+                    <Icon name="map-marker" style={{ color: COLOR_FONT_SECONDARY }} />
                     <Text style={textMinorStyle}> {(Math.round(distance * 100) / 100).toFixed(2)} km | </Text>
                     <Text style={textMinorStyle}> 1 원</Text>
                 </View>
@@ -101,7 +102,7 @@ const styles = {
     divider: {
         margin: 15,
         borderWidth: 0.5,
-        borderColor: '#e2e2e2'
+        borderColor: COLOR_BORDER_SECONDARY
     },
     row: {
         paddingVertical: 3,
@@ -116,17 +117,17 @@ const styles = {
     },
     textMajorStyle: {
         fontSize: 24,
-        color: COLOR_TEXT_PRIMARY,
+        color: COLOR_FONT_PRIMARY,
         paddingRight: 15
     },
     textMediumStyle: {
         fontSize: 16,
-        color: COLOR_TEXT_PRIMARY,
+        color: COLOR_FONT_PRIMARY,
         fontWeight: '500'
     },
     textMinorStyle: {
         fontSize: 12,
-        color: COLOR_TEXT_SECONDARY
+        color: COLOR_FONT_SECONDARY
     },
     navIconStyle: {
         flexDirection: 'row',

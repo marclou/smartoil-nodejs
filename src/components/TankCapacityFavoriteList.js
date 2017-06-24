@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Spinner, ListSection, SelectionItem } from './functionalComponents';
 import { changeUserTankCapacity } from '../actions';
-import { PADDING_BOTTOM } from '../styles/common';
+import { COLOR_BACKGROUND_TERCIARY, PADDING_BOTTOM } from '../styles/common';
 
 class TankCapacityFavoriteList extends Component {
     constructor(props) {
@@ -62,6 +62,7 @@ class TankCapacityFavoriteList extends Component {
 const styles = {
     containerStyle: {
         flex: 1,
+        backgroundColor: COLOR_BACKGROUND_TERCIARY,
         paddingBottom: PADDING_BOTTOM
     }
 };

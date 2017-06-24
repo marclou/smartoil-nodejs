@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import { Text, Image, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { COLOR_TEXT_PRIMARY, COLOR_TEXT_SECONDARY } from '../styles/common';
+import {
+    COLOR_FONT_PRIMARY,
+    COLOR_FONT_SECONDARY
+} from '../styles/common';
 import { displayLogo } from '../img/brands';
 
 class GasStationRow extends Component {
@@ -71,7 +74,7 @@ const styles = {
     },
     iconStyle: {
         alignSelf: 'center',
-        color: COLOR_TEXT_SECONDARY
+        color: COLOR_FONT_SECONDARY
     },
     logoStyle: {
         height: 40,
@@ -83,12 +86,12 @@ const styles = {
     },
     majorTextStyle: {
         fontSize: 16,
-        color: COLOR_TEXT_PRIMARY,
+        color: COLOR_FONT_PRIMARY,
         fontWeight: '700'
     },
     textStyle: {
         fontSize: 14,
-        color: COLOR_TEXT_SECONDARY
+        color: COLOR_FONT_SECONDARY
     }
 };
 

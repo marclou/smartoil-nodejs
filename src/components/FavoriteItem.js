@@ -4,7 +4,9 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { COLOR_TEXT_SECONDARY } from '../styles/common';
+import {
+    COLOR_FONT_SECONDARY
+} from '../styles/common';
 import { deleteFavorite } from '../actions/FavoriteStationAction';
 import { ListSectionLongPress } from './functionalComponents';
 import { displayLogo } from '../img/brands';
@@ -71,12 +73,12 @@ const styles = {
     },
     textStyle: {
         fontSize: 14,
-        color: COLOR_TEXT_SECONDARY,
+        color: COLOR_FONT_SECONDARY,
         paddingLeft: 20
 
     },
     iconStyle: {
-        color: COLOR_TEXT_SECONDARY
+        color: COLOR_FONT_SECONDARY
     },
 
 };

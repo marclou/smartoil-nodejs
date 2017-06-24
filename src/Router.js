@@ -10,13 +10,25 @@ import { TabIcon, NavIcon, BackButton } from './components/functionalComponents'
 import Welcome from './components/Welcome';
 import SettingsList from './components/SettingsList';
 import Result from './components/Result';
-import AreaList from './components/AreaContainer';
+import AreaList from './components/AreaList';
 import FavoriteGasStations from './components/FavoriteGasStations';
 import GasStationInfo from './components/GasStationInfo';
 import GasFavoriteList from './components/GasFavoriteList';
 import TankCapacityFavoriteList from './components/TankCapacityFavoriteList';
 import AreaFavoriteList from './components/AreaFavoriteList';
-import { COLOR_PRIMARY, COLOR_TEXT_SECONDARY, COLOR_BACKGROUND, COLOR_NAV_BACKGROUND } from './styles/common';
+import {
+    COLOR_PRIMARY,
+    COLOR_FONT_QUINARY,
+    COLOR_BACKGROUND_PRIMARY,
+    COLOR_BACKGROUND_SECONDARY,
+    COLOR_BACKGROUND_TERCIARY,
+    COLOR_BACKGROUND_QUATERNARY,
+    COLOR_BORDER_PRIMARY,
+    COLOR_BORDER_SECONDARY,
+    COLOR_TEXT_SECONDARY,
+    COLOR_BACKGROUND,
+    COLOR_NAV_BACKGROUND
+} from './styles/common';
 
 const ConnectedRouter = connect()(Router);
 
@@ -26,7 +38,7 @@ const RouterComponent = () => {
     return (
         <ConnectedRouter>
             <Scene key='root'>
-                <Scene key="slider" initial={false}>
+                <Scene key="slider" initial={true}>
                     <Scene
                         key="location"
                         component={Location}
@@ -39,15 +51,17 @@ const RouterComponent = () => {
                         component={GasType}
                         sceneStyle={sliderSceneStyle}
                         navigationBarStyle={sliderNavBarStyle}
+                        renderBackButton={() => <BackButton color={COLOR_TEXT_SECONDARY} />}
                     />
                     <Scene
                         key="tankCapacity"
                         component={TankCapacity}
                         sceneStyle={sliderSceneStyle}
                         navigationBarStyle={sliderNavBarStyle}
+                        renderBackButton={() => <BackButton color={COLOR_TEXT_SECONDARY} />}
                     />
                 </Scene>
-                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={true}>
+                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={false}>
                     <Scene key="favorite" iconName='heart' icon={TabIcon}>
                         <Scene
                             sceneStyle={sceneStyle}
@@ -66,7 +80,7 @@ const RouterComponent = () => {
                             title="홈페이지"
                             titleStyle={titleStyle}
                             initial
-                            renderRightButton={() => <NavIcon iconName="share" color={COLOR_BACKGROUND} />}
+                            renderRightButton={() => <NavIcon iconName="share" color={COLOR_FONT_QUINARY} />}
                             rightButtonStyle={{ flexDirection: 'row' }}
                             onRight={() => console.log('shared')}
                             navigationBarStyle={navBarStylePrimary}
@@ -94,7 +108,7 @@ const RouterComponent = () => {
                             component={AreaList}
                             renderBackButton={() => <BackButton color={COLOR_TEXT_SECONDARY} />}
                             title="Areas"
-                            navigationBarStyle={navBarStyle}
+                            navigationBarStyle={[navBarStyle, { borderBottomWidth: 0 }]}
                         />
                     </Scene>
                     <Scene key="setting" iconName='cog' icon={TabIcon} >
@@ -111,7 +125,7 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="gasTypeSetting"
                             component={GasFavoriteList}
-                            renderBackButton={() => <BackButton color={COLOR_NAV_BACKGROUND} />}
+                            renderBackButton={() => <BackButton color={COLOR_FONT_QUINARY} />}
                             title="기름 종류"
                             titleStyle={titleStyle}
                             navigationBarStyle={navBarStylePrimary}
@@ -120,7 +134,7 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="tankCapacitySetting"
                             component={TankCapacityFavoriteList}
-                            renderBackButton={() => <BackButton color={COLOR_NAV_BACKGROUND} />}
+                            renderBackButton={() => <BackButton color={COLOR_FONT_QUINARY} />}
                             title="리터량"
                             titleStyle={titleStyle}
                             navigationBarStyle={navBarStylePrimary}
@@ -129,7 +143,7 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="favoriteArea"
                             component={AreaFavoriteList}
-                            renderBackButton={() => <BackButton color={COLOR_NAV_BACKGROUND} />}
+                            renderBackButton={() => <BackButton color={COLOR_FONT_QUINARY} />}
                             title="지역"
                             titleStyle={titleStyle}
                             navigationBarStyle={navBarStylePrimary}
@@ -164,25 +178,22 @@ const styles = {
         borderBottomWidth: 0
     },
     tabBarStyle: {
-        borderTopWidth: 0.5,
-        borderColor: '#b7b7b7',
-        backgroundColor: COLOR_NAV_BACKGROUND,
+        borderTopWidth: 1,
+        borderTopColor: COLOR_BORDER_SECONDARY,
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
     },
     navBarStyle: {
-        borderBottomWidth: 0.5,
-        borderColor: '#b7b7b7',
+        borderBottomWidth: 1,
+        borderBottomColor: COLOR_BORDER_PRIMARY,
         backgroundColor: COLOR_NAV_BACKGROUND,
     },
     navBarStylePrimary: {
-        borderBottomWidth: 0.5,
-        borderColor: '#b7b7b7',
         backgroundColor: COLOR_PRIMARY,
     },
     titleStyle: {
-        color: COLOR_NAV_BACKGROUND
+        color: COLOR_FONT_QUINARY
     },
     sceneStyle: {
-        backgroundColor: COLOR_BACKGROUND,
         ...Platform.select({
             ios: {
                 paddingTop: 64,

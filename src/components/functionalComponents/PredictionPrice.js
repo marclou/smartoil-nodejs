@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { COLOR_TEXT_PRIMARY, COLOR_TEXT_SECONDARY } from '../../styles/common';
+import { COLOR_FONT_PRIMARY, COLOR_FONT_SECONDARY } from '../../styles/common';
 
 const PredictionPrice = ({ text }) => {
     const { containerStyle, priceStyle, priceInfoStyle } = styles;
@@ -26,12 +26,12 @@ const styles = {
         alignSelf: 'flex-end',
         fontSize: 60,
         fontWeight: '300',
-        color: COLOR_TEXT_PRIMARY,
+        color: COLOR_FONT_PRIMARY,
         paddingRight: 10,
     },
     priceInfoStyle: {
         fontSize: 12,
-        color: COLOR_TEXT_SECONDARY,
+        color: COLOR_FONT_SECONDARY,
         alignSelf: 'flex-end',
         paddingBottom: 10
     }

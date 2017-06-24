@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { Spinner, ListSection, SelectionItem } from './functionalComponents';
 import { changeUserFavoriteGas } from '../actions';
+import { COLOR_BACKGROUND_TERCIARY, PADDING_BOTTOM } from '../styles/common';
 
 class GasFavoriteList extends Component {
     constructor(props) {
@@ -62,7 +63,9 @@ class GasFavoriteList extends Component {
 
 const styles = {
     containerStyle: {
-        flex: 1
+        flex: 1,
+        backgroundColor: COLOR_BACKGROUND_TERCIARY,
+        paddingBottom: PADDING_BOTTOM
     }
 };
 
