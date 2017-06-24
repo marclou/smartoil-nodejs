@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Platform, Text } from 'react-native';
 
-import { COLOR_BACKGROUND } from '../../styles/common';
+import { COLOR_BACKGROUND_PRIMARY } from '../../styles/common';
 import SaveIcon from '../SaveIcon';
 import { NavIcon } from '../functionalComponents';
 
@@ -23,7 +23,7 @@ const styles = {
     containerStyle: {
         borderBottomWidth: 0.5,
         borderColor: '#b7b7b7',
-        backgroundColor: COLOR_BACKGROUND,
+        backgroundColor: COLOR_BACKGROUND_PRIMARY,
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center',

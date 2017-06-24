@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
 
 import { isSaved, addFavorite, deleteFavorite } from '../actions';
-import { COLOR_PRIMARY, COLOR_PRIMARY_OPPOSITE } from '../styles/common';
+import { COLOR_PRIMARY, COLOR_BACKGROUND_PRIMARY } from '../styles/common';
 
 class SaveIcon extends Component {
     constructor(props) {
@@ -56,7 +56,7 @@ const styles = {
     },
     iconStyle: {
         fontSize: 20,
-        color: COLOR_PRIMARY_OPPOSITE
+        color: COLOR_BACKGROUND_PRIMARY
     }
 };
 

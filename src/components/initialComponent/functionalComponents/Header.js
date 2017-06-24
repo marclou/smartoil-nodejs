@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Dimensions } from 'react-native';
 
-import { COLOR_TEXT_PRIMARY, COLOR_TEXT_SECONDARY } from '../../../styles/common';
+import { COLOR_FONT_PRIMARY, COLOR_FONT_SECONDARY } from '../../../styles/common';
 
 const Header = ({ title, description }) => {
     const { containerStyle, titleStyle, descriptionStyle } = styles;
@@ -32,14 +32,14 @@ const styles = {
     titleStyle: {
         fontSize: 24,
         textAlign: 'center',
-        color: COLOR_TEXT_PRIMARY
+        color: COLOR_FONT_PRIMARY
     },
     descriptionStyle: {
         marginHorizontal: 30,
         marginVertical: 10,
         fontSize: 16,
         textAlign: 'center',
-        color: COLOR_TEXT_SECONDARY
+        color: COLOR_FONT_SECONDARY
     }
 };
 

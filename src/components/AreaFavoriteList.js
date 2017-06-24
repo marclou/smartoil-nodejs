@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import areas from '../AreaList.json';
 import { Spinner, Area } from './functionalComponents';
 import { changeUserFavoriteArea } from '../actions';
-import { COLOR_BACKGROUND_TERCIARY } from '../styles/common';
+import { COLOR_BACKGROUND_QUATERNARY } from '../styles/common';
 
 class AreaFavoriteList extends Component {
     constructor(props) {
@@ -63,7 +63,7 @@ class AreaFavoriteList extends Component {
 const styles = {
     containerStyle: {
         flex: 1,
-        backgroundColor: COLOR_BACKGROUND_TERCIARY,
+        backgroundColor: 'transparent',
         padding: 10,
     },
     listStyle: {

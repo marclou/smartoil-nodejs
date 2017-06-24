@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
 import { Spinner, SegmentSelector, Area } from './functionalComponents';
-import { COLOR_TEXT_SECONDARY, COLOR_NAV_BACKGROUND, COLOR_PRIMARY } from '../styles/common';
+import { COLOR_FONT_SECONDARY, COLOR_BACKGROUND_QUATERNARY, COLOR_PRIMARY } from '../styles/common';
 
 class AreaList extends Component {
     constructor(props) {
@@ -90,20 +90,20 @@ const styles = {
         flex: 1
     },
     tabsContainerStyle: {
-        backgroundColor: COLOR_NAV_BACKGROUND,
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
         borderBottomWidth: 0,
         padding: 8
     },
     tabStyle: {
-        backgroundColor: COLOR_NAV_BACKGROUND,
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
         borderWidth: 0
     },
     tabTextStyle: {
-        color: COLOR_TEXT_SECONDARY,
+        color: COLOR_FONT_SECONDARY,
         fontSize: 16
     },
     activeTabStyle: {
-        backgroundColor: COLOR_NAV_BACKGROUND,
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
         borderWidth: 0,
     },
     activeTabTextStyle: {

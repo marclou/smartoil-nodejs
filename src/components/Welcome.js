@@ -10,7 +10,7 @@ import {
     getUserTankCapacity,
     getUserFavoriteArea
 } from '../actions';
-import { COLOR_BACKGROUND_QUATERNARY } from '../styles/common';
+import { COLOR_PRIMARY, COLOR_BACKGROUND_QUATERNARY } from '../styles/common';
 
 class Welcome extends Component {
     componentDidMount() {

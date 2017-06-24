@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { COLOR_PRIMARY, COLOR_PRIMARY_OPPOSITE } from '../../styles/common';
+import { COLOR_PRIMARY, COLOR_BACKGROUND_PRIMARY } from '../../styles/common';
 
 const TabIcon = ({ iconName, selected }) => {
     const { containerStyle, colorStyle, colorSelectedStyle } = styles;
@@ -26,7 +26,7 @@ const styles = {
         justifyContent: 'center'
     },
     colorStyle: {
-        color: COLOR_PRIMARY_OPPOSITE
+        color: COLOR_BACKGROUND_PRIMARY
     },
     colorSelectedStyle: {
         color: COLOR_PRIMARY

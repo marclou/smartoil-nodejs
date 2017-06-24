@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, View, Text, Dimensions } from 'react-native';
 
-import { COLOR_PRIMARY } from '../../../styles/common';
+import { COLOR_PRIMARY, COLOR_FONT_QUINARY } from '../../../styles/common';
 
 const Footer = ({ onPress, text }) => {
     const { containerStyle, textStyle } = styles;
@@ -28,7 +28,7 @@ const styles = {
         backgroundColor: COLOR_PRIMARY
     },
     textStyle: {
-        color: 'white',
+        color: COLOR_FONT_QUINARY,
         fontSize: 20
     }
 };

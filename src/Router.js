@@ -18,16 +18,12 @@ import TankCapacityFavoriteList from './components/TankCapacityFavoriteList';
 import AreaFavoriteList from './components/AreaFavoriteList';
 import {
     COLOR_PRIMARY,
+    COLOR_FONT_SECONDARY,
     COLOR_FONT_QUINARY,
-    COLOR_BACKGROUND_PRIMARY,
-    COLOR_BACKGROUND_SECONDARY,
     COLOR_BACKGROUND_TERCIARY,
     COLOR_BACKGROUND_QUATERNARY,
     COLOR_BORDER_PRIMARY,
-    COLOR_BORDER_SECONDARY,
-    COLOR_TEXT_SECONDARY,
-    COLOR_BACKGROUND,
-    COLOR_NAV_BACKGROUND
+    COLOR_BORDER_SECONDARY
 } from './styles/common';
 
 const ConnectedRouter = connect()(Router);
@@ -51,14 +47,14 @@ const RouterComponent = () => {
                         component={GasType}
                         sceneStyle={sliderSceneStyle}
                         navigationBarStyle={sliderNavBarStyle}
-                        renderBackButton={() => <BackButton color={COLOR_TEXT_SECONDARY} />}
+                        renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
                     />
                     <Scene
                         key="tankCapacity"
                         component={TankCapacity}
                         sceneStyle={sliderSceneStyle}
                         navigationBarStyle={sliderNavBarStyle}
-                        renderBackButton={() => <BackButton color={COLOR_TEXT_SECONDARY} />}
+                        renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
                     />
                 </Scene>
                 <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={false}>
@@ -89,7 +85,7 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="result"
                             component={Result}
-                            renderBackButton={() => <BackButton color={COLOR_TEXT_SECONDARY} />}
+                            renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
                             title="결과"
                             navigationBarStyle={[navBarStyle, { borderBottomWidth: 0 }]}
                             hideTabBar
@@ -98,7 +94,7 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="gasStationInfo"
                             component={GasStationInfo}
-                            renderBackButton={() => <BackButton color={COLOR_TEXT_SECONDARY} />}
+                            renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
                             navigationBarStyle={navBarStyle}
                             hideTabBar
                         />
@@ -106,7 +102,7 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="searchArea"
                             component={AreaList}
-                            renderBackButton={() => <BackButton color={COLOR_TEXT_SECONDARY} />}
+                            renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
                             title="Areas"
                             navigationBarStyle={[navBarStyle, { borderBottomWidth: 0 }]}
                         />
@@ -140,7 +136,7 @@ const RouterComponent = () => {
                             navigationBarStyle={navBarStylePrimary}
                         />
                         <Scene
-                            sceneStyle={sceneStyle}
+                            sceneStyle={[sceneStyle, { backgroundColor: COLOR_BACKGROUND_TERCIARY }]}
                             key="favoriteArea"
                             component={AreaFavoriteList}
                             renderBackButton={() => <BackButton color={COLOR_FONT_QUINARY} />}
@@ -185,7 +181,7 @@ const styles = {
     navBarStyle: {
         borderBottomWidth: 1,
         borderBottomColor: COLOR_BORDER_PRIMARY,
-        backgroundColor: COLOR_NAV_BACKGROUND,
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
     },
     navBarStylePrimary: {
         backgroundColor: COLOR_PRIMARY,

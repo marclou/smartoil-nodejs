@@ -9,8 +9,7 @@ import { Blur } from './functionalComponents';
 import {
     COLOR_PRIMARY,
     COLOR_FONT_SECONDARY,
-    COLOR_FONT_QUINARY,
-    COLOR_TEXT_SECONDARY
+    COLOR_FONT_QUINARY
 } from '../styles/common';
 import { getUserPosition, changeUserAllowLocation } from '../actions';
 

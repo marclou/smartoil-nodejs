@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Dimensions } from 'react-native';
 
-import { COLOR_PRIMARY } from '../../styles/common';
+import { COLOR_PRIMARY, COLOR_FONT_QUINARY } from '../../styles/common';
 
 const Button = ({ title, onPress }) => {
     const { containerStyle, textStyle } = styles;
@@ -33,7 +33,7 @@ const styles = {
     },
     textStyle: {
         textAlign: 'center',
-        color: '#FFF',
+        color: COLOR_FONT_QUINARY,
         fontSize: 24,
         fontWeight: '500'
     }
