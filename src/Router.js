@@ -57,8 +57,8 @@ const RouterComponent = () => {
                         renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
                     />
                 </Scene>
-                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={false}>
-                    <Scene key="favorite" iconName='heart' icon={TabIcon}>
+                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={true}>
+                    <Scene key="favorite" iconName='heart' icon={TabIcon} titleStyle={{ fontSize: 20 }}>
                         <Scene
                             sceneStyle={sceneStyle}
                             key="areaList"
@@ -68,7 +68,7 @@ const RouterComponent = () => {
                             navigationBarStyle={navBarStylePrimary}
                         />
                     </Scene>
-                    <Scene key="home" iconName='home' icon={TabIcon} initial>
+                    <Scene key="home" iconName='home' icon={TabIcon} initial titleStyle={{ fontSize: 20 }}>
                         <Scene
                             sceneStyle={sceneStyle}
                             key="main"
@@ -107,7 +107,7 @@ const RouterComponent = () => {
                             navigationBarStyle={[navBarStyle, { borderBottomWidth: 0 }]}
                         />
                     </Scene>
-                    <Scene key="setting" iconName='cog' icon={TabIcon} >
+                    <Scene key="setting" iconName='cog' icon={TabIcon} titleStyle={{ fontSize: 20 }}>
                         <Scene
                             sceneStyle={sceneStyle}
                             key="settings"

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
 
 import Fab from './Fab';
 import PricePrediction from './PricePrediction';
@@ -27,13 +28,11 @@ class Welcome extends Component {
     }
 
     render() {
-        const { containerStyle, sectionStyle } = styles;
+        const { containerStyle } = styles;
 
         return (
-            <View style={containerStyle} >
-                <View style={sectionStyle}>
-                    <PricePrediction />
-                </View>
+            <View style={containerStyle}>
+                <PricePrediction />
                 <Fab />
             </View>
         );
@@ -43,10 +42,7 @@ class Welcome extends Component {
 const styles = {
     containerStyle: {
         flex: 1,
-        backgroundColor: COLOR_BACKGROUND_QUATERNARY
-    },
-    sectionStyle: {
-        flex: 1,
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
         flexDirection: 'column',
         justifyContent: 'flex-start'
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Actions } from 'react-native-router-flux';
 
 const BackButton = ({ color }) => {
@@ -9,7 +9,7 @@ const BackButton = ({ color }) => {
     return (
         <TouchableOpacity style={containerStyle} onPress={Actions.pop}>
             <View style={viewStyle}>
-                <Icon name='arrow-left' color={color} style={iconStyle} />
+                <Icon name='arrow-back' color={color} style={iconStyle} />
             </View>
         </TouchableOpacity>
     );

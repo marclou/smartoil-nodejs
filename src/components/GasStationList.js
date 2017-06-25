@@ -109,13 +109,13 @@ class GasStationList extends Component {
 
     renderListOrSpinner() {
         const { gasStationsLibraries, selectedFilter } = this.props.gasStations;
-        const { tabsContainerStyle, tabStyle, tabTextStyle, activeTabStyle, activeTabTextStyle } = styles;
+        const { containerStyle, tabsContainerStyle, tabStyle, tabTextStyle, activeTabStyle, activeTabTextStyle } = styles;
 
         if (gasStationsLibraries.loading) {
             return <Spinner size='large' />;
         }
         return (
-            <View style={styles.containerStyle}>
+            <View style={containerStyle}>
                 <View>
                     <SegmentedControlTab
                         values={['가장 싼', '가까운']}
