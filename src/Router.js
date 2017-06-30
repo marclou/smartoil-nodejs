@@ -99,7 +99,7 @@ const RouterComponent = () => {
                             hideTabBar
                         />
                         <Scene
-                            sceneStyle={sceneStyle}
+                            sceneStyle={[sceneStyle, { backgroundColor: COLOR_BACKGROUND_TERCIARY }]}
                             key="searchArea"
                             component={AreaList}
                             renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}

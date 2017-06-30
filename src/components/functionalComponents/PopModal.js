@@ -1,23 +1,23 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Dimensions } from 'react-native';
 
-import GasStationSelectedRow from '../GasStationSelectedRow';
-import { Header } from './Header';
-
-const PopModal = (props) => {
+const PopModal = ({ children }) => {
     const { containerStyle } = styles;
 
     return (
         <View style={containerStyle}>
-            <Header title='Gas Station' gasStation={props.gasStation} />
-            <GasStationSelectedRow gasStation={props.gasStation} />
+            {children}
         </View>
     );
 };
 
+const { height, width } = Dimensions.get('window');
+
 const styles = {
     containerStyle: {
-        flex: 1,
+        position: 'relative',
+        height: height / 2,
+        bottom: 0
     }
 
 };

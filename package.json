@@ -15,6 +15,7 @@
     "react-native-action-button": "^2.7.1",
     "react-native-blur": "^3.0.0",
     "react-native-linear-gradient": "^2.0.0",
+    "react-native-maps": "^0.15.2",
     "react-native-radio-buttons": "^0.14.0",
     "react-native-router-flux": "^3.40.1",
     "react-native-segmented-control-tab": "^3.0.2",

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Image, View, InteractionManager } from 'react-native';
+import { Text, Image, View, InteractionManager, Share } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -22,6 +22,7 @@ class GasStationInfo extends Component {
         this.state = {
             isComponentReady: false
         };
+        this.renderRightButton = this.renderRightButton.bind(this);
     }
 
     componentDidMount() {
@@ -34,15 +35,25 @@ class GasStationInfo extends Component {
         });
     }
 
-    linkToNavigation() {
-
+    shareContent() {
+        Share.share({
+                message: 'Go to this gas station asap ! ',
+                title: 'Look at this cheap price !',
+                url: 'http://nsjtech.com'
+            },
+            {
+                dialogTitle: 'This is share dialog title',
+                tintColor: 'green'
+            })
+            .then(result => console.log(result))
+            .catch(err => console.log(err));
     }
 
     renderRightButton(props) {
         return (
             <View style={styles.navIconStyle}>
                 <SaveIcon gasStation={props.gasStation} />
-                <NavIcon iconName="share" color={COLOR_PRIMARY} />
+                <NavIcon iconName="share" color={COLOR_PRIMARY} onPress={this.shareContent} />
             </View>
         );
     }
@@ -84,7 +95,7 @@ class GasStationInfo extends Component {
                 <View style={{ marginTop: 25 }}>
                     <Button
                         title="항해하다"
-                        onPress={() => this.linkToNavigation()}
+                        onPress={() => this.shareContent()}
                     />
                 </View>
             </View>

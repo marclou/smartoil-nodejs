@@ -29,7 +29,6 @@ class LocationPreference extends Component {
                     value={userAllowLocation}
                     onValueChange={this.valueChanged.bind(this, userAllowLocation)}
                     onTintColor={COLOR_PRIMARY}
-                    thumbTintColor='white'
                 />
             </View>
         );

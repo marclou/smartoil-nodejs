@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
 import { Spinner, SegmentSelector, Area } from './functionalComponents';
+import { selectArea, selectIndex } from '../actions/AreaListAction';
 import { COLOR_FONT_SECONDARY, COLOR_BACKGROUND_QUATERNARY, COLOR_PRIMARY } from '../styles/common';
 
 class AreaList extends Component {
@@ -12,17 +13,17 @@ class AreaList extends Component {
         this.state = {
             isComponentReady: false
         };
-        const obj = this.props.areaList.filter((obj) => {
-            return obj.name === 'Wonju-si';
-        })[0];
-
-        this.createDataSource(this.props.areaList);
+        this.createDataSource(this.props.areaList.data);
     }
 
     componentDidMount() {
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.createDataSource(nextProps.areaList.data);
     }
 
     createDataSource(list) {
@@ -47,8 +48,8 @@ class AreaList extends Component {
         } = styles;
         const {
             selectedSegment,
-            areaList,
-            userSelection
+            selectedAreas,
+            areaList
         } = this.props;
 
         return (
@@ -57,7 +58,7 @@ class AreaList extends Component {
                     <SegmentedControlTab
                         values={['시/도', '시/군/구', '읍/면/동']}
                         selectedIndex={selectedSegment}
-                        onTabPress={() => console.log('lol')}
+                        onTabPress={(index) => this.props.selectIndex(index, 'Wonju-si')}
                         borderRadius={0}
                         tabsContainerStyle={tabsContainerStyle}
                         tabStyle={tabStyle}
@@ -68,7 +69,7 @@ class AreaList extends Component {
                     <SegmentSelector number={3} indexSelected={selectedSegment} />
                 </View>
                 <ListView
-                    pageSize={areaList.length}
+                    pageSize={areaList.data.length}
                     contentContainerStyle={listStyle}
                     dataSource={this.dataSource}
                     renderRow={
@@ -76,7 +77,7 @@ class AreaList extends Component {
                             <Area
                                 name={rowData.name}
                                 selected={false}
-                                onPress={() => console.log('selected')}
+                                onPress={() => this.props.selectArea(rowData.name, areaList.type)}
                             />
                     }
                 />
@@ -120,10 +121,10 @@ const styles = {
 
 const mapStateToProps = state => {
     return {
-        userSelection: state.areaListReducer.selectedAreas,
+        selectedAreas: state.areaListReducer.selectedAreas,
         areaList: state.areaListReducer.areasList,
         selectedSegment: state.areaListReducer.selectedSegment
     };
 };
 
-export default connect(mapStateToProps)(AreaList);
+export default connect(mapStateToProps, { selectArea, selectIndex })(AreaList);

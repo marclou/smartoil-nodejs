@@ -25,3 +25,8 @@ export const PREDICTION_FETCH_SUCCESS = 'prediction_fetch_success';
 
 /** Type for SquareButtonCollection Component **/
 export const SQUARE_BUTTON_FETCHING_SUCCESS = 'square_button_fetching_success';
+
+/** Type for AreaList Component **/
+export const SELECT_AREA = 'select_area';
+export const DESELECT_AREA = 'deselect_area';
+export const SELECT_INDEX = 'select_filter';

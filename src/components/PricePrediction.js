@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Share } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 
 import { pricePredictionFetch } from '../actions';
-import { Tag, Spinner, PredictionPrice, PredictionIcon } from './functionalComponents';
-import { COLOR_FONT_SECONDARY, COLOR_BORDER_SECONDARY } from '../styles/common';
+import { Tag, Spinner, PredictionPrice, PredictionIcon, NavIcon } from './functionalComponents';
+import { COLOR_FONT_SECONDARY, COLOR_BORDER_SECONDARY, COLOR_FONT_QUINARY } from '../styles/common';
 
 class PricePrediction extends Component {
+    componentDidMount() {
+        Actions.refresh({
+            renderRightButton: () => <NavIcon iconName="share" color={COLOR_FONT_QUINARY} onPress={this.shareContent} />
+        });
+    }
+
     shouldComponentUpdate(nextProps) {
         if (nextProps.userState.userLocation !== this.props.userState.userLocation) {
             return true;
@@ -20,6 +27,20 @@ class PricePrediction extends Component {
         if (nextProps.pricePrediction.pricePredictionData.length === 0) {
             this.props.pricePredictionFetch(latitude, longitude);
         }
+    }
+
+    shareContent() {
+        Share.share({
+                message: 'Go to this gas station asap ! ',
+                title: 'Look at this cheap price !',
+                url: 'http://nsjtech.com'
+            },
+            {
+                dialogTitle: 'This is share dialog title',
+                tintColor: 'green'
+            })
+            .then(result => console.log(result))
+            .catch(err => console.log(err));
     }
 
     renderPricePredictionOrSpinner() {
@@ -53,7 +74,7 @@ class PricePrediction extends Component {
                     </View>
                 </View>
                 <View style={section}>
-                    <Text> Hey </Text>
+                    <Text> Hello World </Text>
                 </View>
             </View>
         );
