@@ -20,9 +20,8 @@ const styles = {
         height: height,
         width: width,
         backgroundColor: 'black',
-        opacity: 0.7,
-        elevation: 1,
-        zIndex: 100002
+        opacity: 0.5,
+        zIndex: 10
     }
 };
 

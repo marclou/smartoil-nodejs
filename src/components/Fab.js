@@ -104,7 +104,7 @@ class Fab extends Component {
 
         return (
             <ActionButton
-                buttonColor={COLOR_PRIMARY}
+                buttonColor={COLOR_FONT_QUINARY}
                 icon={<Icon name='search' style={actionButtonIconStyle} />}
                 offsetY={70}
                 degrees={90}
@@ -146,7 +146,7 @@ class Fab extends Component {
 const styles = {
     actionButtonIconStyle: {
         fontSize: 16,
-        color: COLOR_FONT_QUINARY
+        color: COLOR_PRIMARY
     },
     actionButtonItemIconStyle: {
         fontSize: 16,

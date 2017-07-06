@@ -31,3 +31,4 @@ export const COLOR_BORDER_SECONDARY = '#d3dce6';
     ----- PADDING -----
  */
 export const PADDING_BOTTOM = 50;
+

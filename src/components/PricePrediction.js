@@ -5,7 +5,12 @@ import { Actions } from 'react-native-router-flux';
 
 import { pricePredictionFetch } from '../actions';
 import { Tag, Spinner, PredictionPrice, PredictionIcon, NavIcon } from './functionalComponents';
-import { COLOR_FONT_SECONDARY, COLOR_BORDER_SECONDARY, COLOR_FONT_QUINARY } from '../styles/common';
+import {
+    COLOR_FONT_SECONDARY,
+    COLOR_BORDER_SECONDARY,
+    COLOR_FONT_QUINARY,
+    PADDING_BOTTOM
+} from '../styles/common';
 
 class PricePrediction extends Component {
     componentDidMount() {
@@ -47,44 +52,40 @@ class PricePrediction extends Component {
         const { loading, pricePredictionData } = this.props.pricePrediction;
 
         if (loading) {
-            return <Spinner size='large' />;
+            return <Spinner size='large' color='white' />;
         }
 
         // TO BE REMOVED WHEN PRICE PREDICTION API IS READY
         Object.assign(pricePredictionData, { predictPrice: 1250 }, { shortText: 'Buy !' }, { longText: 'Prices will increase tomorrow, you should refill your tank now.' });
-        const { section, row, advice } = styles;
-        const { userFavoriteGas, userFavoriteArea, userTankCapacity } = this.props.userState;
+        const { containerStyle, row, advice, subAdvice } = styles;
+        const { userFavoriteGas, userFavoriteArea } = this.props.userState;
 
         return (
-            <View>
-                <View style={section}>
-                    <View style={row}>
-                        <PredictionIcon value="UP" />
-                        <PredictionPrice text="1,567,09" />
-                    </View>
-                    <View style={row}>
-                        <Tag text={userFavoriteGas} />
-                        <Tag text={userFavoriteArea} />
-                        <Tag text={`${userTankCapacity} L`} />
-                    </View>
-                    <View style={row}>
-                        <Text style={advice}>
-                            이제 구매해야.
-                        </Text>
-                    </View>
+            <View style={containerStyle}>
+                <View style={row}>
+                    <Text style={advice}>
+                        이제 구매해야 이제.
+                    </Text>
                 </View>
-                <View style={section}>
-                    <Text> Hello World </Text>
+                <View style={row}>
+                    <Text style={subAdvice}>
+                        이제 구매해야.
+                    </Text>
+                </View>
+                <View style={row}>
+                    <PredictionPrice text="1,567,09" />
+                </View>
+                <View style={row}>
+                    <Tag text={userFavoriteGas} />
+                    <Tag text={userFavoriteArea} />
                 </View>
             </View>
         );
     }
 
     render() {
-        const { containerStyle } = styles;
-
         return (
-            <View style={containerStyle} >
+            <View style={{ flex: 1, paddingBottom: PADDING_BOTTOM }}>
                 {this.renderPricePredictionOrSpinner()}
             </View>
         );
@@ -93,10 +94,12 @@ class PricePrediction extends Component {
 
 const styles = {
     containerStyle: {
-        height: 300,
+        flex: 1,
         flexDirection: 'column',
-        justifyContent: 'flex-start',
-        padding: 20
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        padding: 20,
+        marginBottom: 50
     },
     section: {
         flexDirection: 'column',
@@ -107,11 +110,20 @@ const styles = {
     row: {
         padding: 5,
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'transparent'
     },
     advice: {
-        color: COLOR_FONT_SECONDARY,
-        fontSize: 18
+        color: COLOR_FONT_QUINARY,
+        fontSize: 20,
+        fontWeight: '600'
+    },
+    subAdvice: {
+        color: COLOR_FONT_QUINARY,
+        fontSize: 18,
+        fontWeight: '200'
+
     }
 };
 

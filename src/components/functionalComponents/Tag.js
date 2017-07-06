@@ -17,14 +17,14 @@ const Tag = ({ text }) => {
 
 const styles = {
     containerStyle: {
-        marginRight: 8,
+        margin: 5,
         alignSelf: 'center',
         backgroundColor: COLOR_BACKGROUND_SECONDARY,
         padding: 2,
         borderRadius: 3,
     },
     textStyle: {
-        padding: 2,
+        padding: 3,
         fontSize: 12,
         textAlign: 'center',
         color: COLOR_FONT_SECONDARY

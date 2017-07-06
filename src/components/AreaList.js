@@ -13,7 +13,7 @@ class AreaList extends Component {
         this.state = {
             isComponentReady: false
         };
-        this.createDataSource(this.props.areaList.data);
+        this.createDataSource(this.props.areaList);
     }
 
     componentDidMount() {
@@ -23,7 +23,7 @@ class AreaList extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.createDataSource(nextProps.areaList.data);
+        this.createDataSource(nextProps.areaList);
     }
 
     createDataSource(list) {
@@ -32,6 +32,21 @@ class AreaList extends Component {
         });
         this.dataSource = ds.cloneWithRows(list);
     }
+
+    isSelected(areaName) {
+        const { selectedAreas } = this.props;
+        const areas = Object.values(selectedAreas);
+        let isSelected = false;
+
+        areas.find(area => {
+            if (area === areaName) {
+                isSelected = true;
+            }
+            return isSelected;
+        });
+        return isSelected;
+    }
+
 
     render() {
         if (!this.state.isComponentReady) {
@@ -58,7 +73,7 @@ class AreaList extends Component {
                     <SegmentedControlTab
                         values={['시/도', '시/군/구', '읍/면/동']}
                         selectedIndex={selectedSegment}
-                        onTabPress={(index) => this.props.selectIndex(index, 'Wonju-si')}
+                        onTabPress={(index) => this.props.selectIndex(index, selectedAreas)}
                         borderRadius={0}
                         tabsContainerStyle={tabsContainerStyle}
                         tabStyle={tabStyle}
@@ -69,15 +84,15 @@ class AreaList extends Component {
                     <SegmentSelector number={3} indexSelected={selectedSegment} />
                 </View>
                 <ListView
-                    pageSize={areaList.data.length}
+                    pageSize={areaList.length}
                     contentContainerStyle={listStyle}
                     dataSource={this.dataSource}
                     renderRow={
                         (rowData) =>
                             <Area
                                 name={rowData.name}
-                                selected={false}
-                                onPress={() => this.props.selectArea(rowData.name, areaList.type)}
+                                selected={this.isSelected(rowData.name)}
+                                onPress={() => this.props.selectArea(selectedSegment, rowData.name, selectedAreas)}
                             />
                     }
                 />

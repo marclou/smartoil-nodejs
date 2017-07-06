@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Location from './components/initialComponent/Location';
 import GasType from './components/initialComponent/GasType';
 import TankCapacity from './components/initialComponent/TankCapacity';
-import { TabIcon, NavIcon, BackButton } from './components/functionalComponents';
+import { TabIcon, NavIcon, BackButton, Blur } from './components/functionalComponents';
 import Welcome from './components/Welcome';
 import SettingsList from './components/SettingsList';
 import Result from './components/Result';
@@ -34,7 +34,7 @@ const RouterComponent = () => {
     return (
         <ConnectedRouter>
             <Scene key='root'>
-                <Scene key="slider" initial={true}>
+                <Scene key="slider" initial>
                     <Scene
                         key="location"
                         component={Location}
@@ -68,7 +68,7 @@ const RouterComponent = () => {
                             navigationBarStyle={navBarStylePrimary}
                         />
                     </Scene>
-                    <Scene key="home" iconName='home' icon={TabIcon} initial titleStyle={{ fontSize: 20 }}>
+                    <Scene key="home" iconName='home' icon={TabIcon} initial titleStyle={{ fontSize: 20 }} >
                         <Scene
                             sceneStyle={sceneStyle}
                             key="main"
@@ -79,7 +79,7 @@ const RouterComponent = () => {
                             renderRightButton={() => <NavIcon iconName="share" color={COLOR_FONT_QUINARY} />}
                             rightButtonStyle={{ flexDirection: 'row' }}
                             onRight={() => console.log('shared')}
-                            navigationBarStyle={navBarStylePrimary}
+                            navigationBarStyle={[navBarStylePrimary, { borderBottomWidth: 0 }]}
                         />
                         <Scene
                             sceneStyle={sceneStyle}
@@ -176,7 +176,7 @@ const styles = {
     tabBarStyle: {
         borderTopWidth: 1,
         borderTopColor: COLOR_BORDER_SECONDARY,
-        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY
     },
     navBarStyle: {
         borderBottomWidth: 1,
@@ -184,7 +184,7 @@ const styles = {
         backgroundColor: COLOR_BACKGROUND_QUATERNARY,
     },
     navBarStylePrimary: {
-        backgroundColor: COLOR_PRIMARY,
+        backgroundColor: COLOR_PRIMARY
     },
     titleStyle: {
         color: COLOR_FONT_QUINARY

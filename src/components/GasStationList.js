@@ -39,7 +39,6 @@ class GasStationList extends Component {
         const { gasStationsData } = gasStations.gasStationsLibraries;
         const { userFavoriteGas } = userState;
 
-
         const gasStationList = this.matchUserGasTypePreference(gasStationsData, userFavoriteGas);
 
         if (gasStations.selectedFilter === 0) {
@@ -47,6 +46,7 @@ class GasStationList extends Component {
         } else {
             gasStationList.sort(this.sortByDistance);
         }
+
         this.dataSource = ds.cloneWithRows(gasStationList);
     }
 

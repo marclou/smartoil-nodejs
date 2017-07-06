@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { connect } from 'react-redux';
+import LinearGradient from 'react-native-linear-gradient';
 
 import Fab from './Fab';
 import PricePrediction from './PricePrediction';
@@ -10,14 +11,9 @@ import {
     getUserTankCapacity,
     getUserFavoriteArea
 } from '../actions';
-import { COLOR_PRIMARY, COLOR_BACKGROUND_QUATERNARY } from '../styles/common';
-import { Button } from './functionalComponents';
+import { COLOR_PRIMARY } from '../styles/common';
 
 class Welcome extends Component {
-    state = {
-        modalVisible: false,
-    };
-
     componentDidMount() {
         this.props.getUserPosition();
         this.props.getUserFavoriteGas();
@@ -31,22 +27,15 @@ class Welcome extends Component {
         return errorLocation !== null && !loadingLocation && userAllowLocation;
     }
 
-    setModalVisible(visible) {
-
-        this.setState({modalVisible: visible});
-    }
-
     render() {
-        const { containerStyle } = styles;
+        const { containerStyle, linearGradientStyle } = styles;
 
         return (
             <View style={containerStyle}>
-                <PricePrediction />
-                <Button
-                    title='test'
-                    onPress={() => console.log('pressed')}
-                />
-                <Fab />
+                <LinearGradient colors={[COLOR_PRIMARY, '#53a0fe', '#40bbef']} style={linearGradientStyle}>
+                    <PricePrediction />
+                    <Fab />
+                </LinearGradient>
             </View>
         );
     }
@@ -55,9 +44,12 @@ class Welcome extends Component {
 const styles = {
     containerStyle: {
         flex: 1,
-        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
+        backgroundColor: COLOR_PRIMARY,
         flexDirection: 'column',
         justifyContent: 'flex-start'
+    },
+    linearGradientStyle: {
+        flex: 1
     }
 };
 

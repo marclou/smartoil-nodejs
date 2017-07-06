@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Image, View, InteractionManager, Share } from 'react-native';
+import { Text, Image, View, InteractionManager, Share, ActionSheetIOS, Platform, Linking } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -23,6 +23,7 @@ class GasStationInfo extends Component {
             isComponentReady: false
         };
         this.renderRightButton = this.renderRightButton.bind(this);
+        this.linkToNavigation = this.linkToNavigation.bind(this);
     }
 
     componentDidMount() {
@@ -33,6 +34,36 @@ class GasStationInfo extends Component {
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
         });
+    }
+
+    linkToNavigation() {
+        const { latitude, longitude } = this.props.gasStation.location;
+        const options = [
+            'Cancel',
+            'T-Map',
+            'Kakao Map',
+            'Naver'
+        ];
+        const URL = `http://maps.apple.com/?ll=${longitude},${latitude}`;
+
+        if (Platform.OS === 'ios') {
+            this.showIOSActionSheet(options);
+        } else {
+            this.showAndroidActionSheet(options);
+        }
+    }
+
+    showIOSActionSheet(options) {
+        ActionSheetIOS.showActionSheetWithOptions({
+                options: options,
+                cancelButtonIndex: 0
+            },
+            (buttonIndex) => {
+                console.log(buttonIndex);
+            }
+        );
+    }
+    showAndroidActionSheet() {
     }
 
     shareContent() {
@@ -95,7 +126,7 @@ class GasStationInfo extends Component {
                 <View style={{ marginTop: 25 }}>
                     <Button
                         title="항해하다"
-                        onPress={() => this.shareContent()}
+                        onPress={this.linkToNavigation}
                     />
                 </View>
             </View>

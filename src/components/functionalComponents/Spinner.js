@@ -3,12 +3,12 @@ import { View, ActivityIndicator } from 'react-native';
 
 import { COLOR_PRIMARY } from '../../styles/common';
 
-const Spinner = ({ size }) => {
+const Spinner = ({ size, color }) => {
     return (
         <View style={styles.spinnerStyle}>
             <ActivityIndicator
                 size={size || 'large'}
-                color={COLOR_PRIMARY}
+                color={color || COLOR_PRIMARY}
             />
         </View>
     );

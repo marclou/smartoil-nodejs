@@ -28,5 +28,6 @@ export const SQUARE_BUTTON_FETCHING_SUCCESS = 'square_button_fetching_success';
 
 /** Type for AreaList Component **/
 export const SELECT_AREA = 'select_area';
-export const DESELECT_AREA = 'deselect_area';
 export const SELECT_INDEX = 'select_filter';
+export const CLEAR_CACHE = 'clear_cache';
+export const ERROR_NO_LOG = 'error_no_log';
