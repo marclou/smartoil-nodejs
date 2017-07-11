@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
 
 import SaveIcon from './SaveIcon';
+import AndroidActionSheet from './AndroidActionSheet';
 import { Spinner, Tag, Button, NavIcon } from './functionalComponents';
 import { displayLogo } from '../img/brands';
 import {
@@ -20,10 +21,13 @@ class GasStationInfo extends Component {
         super(props);
 
         this.state = {
-            isComponentReady: false
+            isComponentReady: false,
+            isModalVisible: false
         };
         this.renderRightButton = this.renderRightButton.bind(this);
         this.linkToNavigation = this.linkToNavigation.bind(this);
+        this.onModalBackgroundPress = this.onModalBackgroundPress.bind(this);
+        this.showAndroidActionSheet = this.showAndroidActionSheet.bind(this);
     }
 
     componentDidMount() {
@@ -33,6 +37,12 @@ class GasStationInfo extends Component {
         });
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
+        });
+    }
+
+    onModalBackgroundPress() {
+        this.setState({
+            isModalVisible: false
         });
     }
 
@@ -64,16 +74,17 @@ class GasStationInfo extends Component {
         );
     }
     showAndroidActionSheet() {
+        this.setState({ isModalVisible: true });
     }
 
     shareContent() {
         Share.share({
-                message: 'Go to this gas station asap ! ',
-                title: 'Look at this cheap price !',
+                message: '스마트오일 덕분에 이 주에 기름값을 XX원 절약할 수 있었어요!  얼마나 아낄 수 있는지 알아볼까요? ',
+                title: '스마트오일',
                 url: 'http://nsjtech.com'
             },
             {
-                dialogTitle: 'This is share dialog title',
+                dialogTitle: '공유하기',
                 tintColor: 'green'
             })
             .then(result => console.log(result))
@@ -129,6 +140,12 @@ class GasStationInfo extends Component {
                         onPress={this.linkToNavigation}
                     />
                 </View>
+                <AndroidActionSheet
+                    transparent
+                    animationType="slide"
+                    visible={this.state.isModalVisible}
+                    onBackgroundPress={this.onModalBackgroundPress}
+                />
             </View>
         );
     }

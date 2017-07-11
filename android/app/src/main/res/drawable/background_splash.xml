@@ -3,8 +3,8 @@
 
     <item>
         <bitmap
-            android:gravity="center"
-            android:src="@drawable/background"/>
+            android:gravity="fill"
+            android:src="@drawable/screen"/>
     </item>
 
 </selector>

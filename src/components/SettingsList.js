@@ -3,20 +3,29 @@ import { View, InteractionManager, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
-import { Spinner, SettingsRow, LocationSettingsRow } from './functionalComponents';
+import AndroidActionSheet from './AndroidActionSheet';
+import { Spinner, SettingsRow, LocationSettingsRow, Button } from './functionalComponents';
 import { COLOR_BACKGROUND_TERCIARY } from '../styles/common';
 
 class SettingsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isComponentReady: false
+            isComponentReady: false,
+            isModalVisible: false
         };
+        this.onModalBackgroundPress = this.onModalBackgroundPress.bind(this);
     }
 
     componentDidMount() {
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
+        });
+    }
+
+    onModalBackgroundPress() {
+        this.setState({
+            isModalVisible: false
         });
     }
 
@@ -53,6 +62,13 @@ class SettingsList extends Component {
                     />
                     <SettingsRow
                         title="정책"
+                    />
+                    <Button title='test' onPress={() => this.setState({ isModalVisible: true })} />
+                    <AndroidActionSheet
+                        transparent
+                        animationType="slide"
+                        visible={this.state.isModalVisible}
+                        onBackgroundPress={this.onModalBackgroundPress}
                     />
                 </ScrollView>
             </View>
