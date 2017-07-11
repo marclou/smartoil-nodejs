@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Image } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
@@ -57,7 +57,7 @@ const RouterComponent = () => {
                         renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
                     />
                 </Scene>
-                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={false}>
+                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={true}>
                     <Scene key="favorite" iconName='heart' icon={TabIcon} titleStyle={{ fontSize: 20 }}>
                         <Scene
                             sceneStyle={sceneStyle}
@@ -73,12 +73,14 @@ const RouterComponent = () => {
                             sceneStyle={sceneStyle}
                             key="main"
                             component={Welcome}
-                            title="홈페이지"
-                            titleStyle={titleStyle}
+                            navigationBarTitleImage={require('./img/icon/logo_type_white.png')}
+                            navigationBarTitleImageStyle={{ height: 22, width: 110, resizeMode: 'stretch' }}
+                            //title="홈페이지"
+                            //titleStyle={titleStyle}
                             initial
                             renderRightButton={() => <NavIcon iconName="share" color={COLOR_FONT_QUINARY} />}
                             rightButtonStyle={{ flexDirection: 'row' }}
-                            onRight={() => console.log('shared')}
+                            //onRight={() => console.log('shared')}
                             navigationBarStyle={[navBarStylePrimary, { borderBottomWidth: 0 }]}
                         />
                         <Scene
