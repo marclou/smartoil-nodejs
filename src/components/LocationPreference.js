@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Switch } from 'react-native';
+import { View, Switch, Platform } from 'react-native';
 import { connect } from 'react-redux';
 
 import { changeUserAllowLocation } from '../actions';
@@ -28,7 +28,8 @@ class LocationPreference extends Component {
                     disabled={loadingLocation}
                     value={userAllowLocation}
                     onValueChange={this.valueChanged.bind(this, userAllowLocation)}
-                    onTintColor={COLOR_PRIMARY}
+                    onTintColor={Platform.OS === 'ios' ? COLOR_PRIMARY : 'rgba(25, 118, 210, 0.5)'}
+                    thumbTintColor={Platform.OS === 'android' && userAllowLocation ? COLOR_PRIMARY : null}
                 />
             </View>
         );
