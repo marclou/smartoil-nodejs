@@ -136,7 +136,7 @@ class GasStationInfo extends Component {
                 </View>
                 <View style={{ marginTop: 25 }}>
                     <Button
-                        title="항해하다"
+                        title="주유소 찾아가기"
                         onPress={this.linkToNavigation}
                     />
                 </View>

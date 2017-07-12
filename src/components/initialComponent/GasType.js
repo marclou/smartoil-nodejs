@@ -12,8 +12,8 @@ class GasType extends Component {
         return (
             <View style={containerStyle}>
                 <Header
-                    title='Select oil type'
-                    description='Select the first time only for convenient service. Please select the type of car oil you are using.'
+                    title='기름 종류 선택'
+                    description='편리한 서비스 이용을 위해 처음 한번만 선택합니다. 사용하시는 자동차 기름 종류를 선택해주세요.'
                 />
                 <GasTypePicker />
                 <Footer onPress={() => Actions.tankCapacity()} text='다음' />

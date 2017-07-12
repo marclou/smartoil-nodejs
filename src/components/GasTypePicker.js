@@ -32,10 +32,10 @@ class GasTypePicker extends Component {
                     selectedValue={userFavoriteGas}
                     onValueChange={(itemValue) => this.props.changeUserFavoriteGas(itemValue)}
                 >
-                    <Picker.Item label="Gasoline" value="Gasoline" />
-                    <Picker.Item label="Premium Gasoline" value="Premium Gasoline" />
-                    <Picker.Item label="Diesel" value="Diesel" />
-                    <Picker.Item label="Heating Gas" value="Heating Gas" />
+                    <Picker.Item label="휘발유" value="Gasoline" />
+                    <Picker.Item label="경유" value="Diesel" />
+                    <Picker.Item label="고급휘발유" value="Premium Gasoline" />
+                    <Picker.Item label="실내등유" value="Heating Gas" />
                 </Picker>
             </View>
         );

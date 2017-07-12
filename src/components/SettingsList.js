@@ -63,7 +63,7 @@ class SettingsList extends Component {
                     <SettingsRow
                         title="정책"
                     />
-                    <Button title='test' onPress={() => this.setState({ isModalVisible: true })} />
+                    {/*<Button title='test' onPress={() => this.setState({ isModalVisible: true })} />*/}
                     <AndroidActionSheet
                         transparent
                         animationType="slide"

@@ -57,7 +57,7 @@ const RouterComponent = () => {
                         renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
                     />
                 </Scene>
-                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={true}>
+                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={false}>
                     <Scene key="favorite" iconName='heart' icon={TabIcon} titleStyle={{ fontSize: 20 }}>
                         <Scene
                             sceneStyle={sceneStyle}

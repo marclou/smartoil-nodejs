@@ -12,8 +12,8 @@ class Location extends Component {
         return (
             <View style={containerStyle}>
                 <Header
-                    title='Select your location'
-                    description='It is only needed for the first time to use the convenience service. Please select a residential area.'
+                    title='내 지역 선택'
+                    description='편리한 서비스 이용을 위해 처음 한번만 필요합니다. 주거하시는 지역을 선택해주세요.'
                 />
                 <AreaFavoriteList />
                 <Footer onPress={() => Actions.gasType()} text='다음' />
