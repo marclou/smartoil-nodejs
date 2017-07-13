@@ -32,3 +32,11 @@ export const COLOR_BORDER_SECONDARY = '#d3dce6';
  */
 export const PADDING_BOTTOM = 50;
 
+
+/*
+ ----- FONTS -----
+ */
+export const FONT_CHARACTER_REGULAR = 'NanumGothic';
+export const FONT_CHARACTER_BOLD = 'NanumGothic-Bold';
+export const FONT_NUMBER_REGULAR = 'Roboto-Light';
+export const FONT_NUMBER_BOLD = 'Roboto-Medium';

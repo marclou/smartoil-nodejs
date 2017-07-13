@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import areas from '../AreaList.json';
 import { Spinner, Area } from './functionalComponents';
 import { changeUserFavoriteArea } from '../actions';
-import { COLOR_BACKGROUND_QUATERNARY } from '../styles/common';
 
 class AreaFavoriteList extends Component {
     constructor(props) {

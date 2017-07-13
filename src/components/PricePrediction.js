@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 
 import { pricePredictionFetch } from '../actions';
-import { Tag, Spinner, PredictionPrice, PredictionIcon, NavIcon } from './functionalComponents';
+import { Tag, Spinner, PredictionPrice, NavIcon } from './functionalComponents';
 import {
-    COLOR_FONT_SECONDARY,
     COLOR_BORDER_SECONDARY,
     COLOR_FONT_QUINARY,
-    PADDING_BOTTOM
+    PADDING_BOTTOM,
+    FONT_CHARACTER_REGULAR,
+    FONT_CHARACTER_BOLD
 } from '../styles/common';
 
 class PricePrediction extends Component {
@@ -73,7 +74,7 @@ class PricePrediction extends Component {
                     </Text>
                 </View>
                 <View style={row}>
-                    <PredictionPrice text="1,567,09" />
+                    <PredictionPrice text="1,567.09" />
                 </View>
                 <View style={row}>
                     <Tag text={userFavoriteGas} />
@@ -117,12 +118,14 @@ const styles = {
     advice: {
         color: COLOR_FONT_QUINARY,
         fontSize: 20,
-        fontWeight: '600'
+        fontFamily: FONT_CHARACTER_BOLD,
+        letterSpacing: 1.5
     },
     subAdvice: {
         color: COLOR_FONT_QUINARY,
         fontSize: 18,
-        fontWeight: '200'
+        fontFamily: FONT_CHARACTER_REGULAR,
+        letterSpacing: 2
 
     }
 };

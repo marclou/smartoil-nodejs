@@ -5,7 +5,13 @@ import SegmentedControlTab from 'react-native-segmented-control-tab';
 
 import { Spinner, SegmentSelector, Area } from './functionalComponents';
 import { selectArea, selectIndex } from '../actions/AreaListAction';
-import { COLOR_FONT_SECONDARY, COLOR_BACKGROUND_QUATERNARY, COLOR_PRIMARY } from '../styles/common';
+import {
+    COLOR_FONT_SECONDARY,
+    COLOR_BACKGROUND_QUATERNARY,
+    COLOR_PRIMARY,
+    FONT_CHARACTER_BOLD,
+    FONT_CHARACTER_REGULAR
+} from '../styles/common';
 
 class AreaList extends Component {
     constructor(props) {
@@ -116,6 +122,7 @@ const styles = {
     },
     tabTextStyle: {
         color: COLOR_FONT_SECONDARY,
+        fontFamily: FONT_CHARACTER_REGULAR,
         fontSize: 16
     },
     activeTabStyle: {
@@ -124,6 +131,7 @@ const styles = {
     },
     activeTabTextStyle: {
         color: COLOR_PRIMARY,
+        fontFamily: FONT_CHARACTER_BOLD,
         fontSize: 16
     },
     listStyle: {

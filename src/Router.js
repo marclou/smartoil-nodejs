@@ -1,12 +1,12 @@
 import React from 'react';
-import { Platform, Image } from 'react-native';
+import { Platform } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
 import Location from './components/initialComponent/Location';
 import GasType from './components/initialComponent/GasType';
 import TankCapacity from './components/initialComponent/TankCapacity';
-import { TabIcon, NavIcon, BackButton, Blur } from './components/functionalComponents';
+import { TabIcon, NavIcon, BackButton } from './components/functionalComponents';
 import Welcome from './components/Welcome';
 import SettingsList from './components/SettingsList';
 import Result from './components/Result';
@@ -23,7 +23,8 @@ import {
     COLOR_BACKGROUND_TERCIARY,
     COLOR_BACKGROUND_QUATERNARY,
     COLOR_BORDER_PRIMARY,
-    COLOR_BORDER_SECONDARY
+    COLOR_BORDER_SECONDARY,
+    FONT_CHARACTER_BOLD
 } from './styles/common';
 
 const ConnectedRouter = connect()(Router);
@@ -57,7 +58,7 @@ const RouterComponent = () => {
                         renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
                     />
                 </Scene>
-                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={true}>
+                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={false}>
                     <Scene key="favorite" iconName='heart' icon={TabIcon} titleStyle={{ fontSize: 20 }}>
                         <Scene
                             sceneStyle={sceneStyle}
@@ -86,6 +87,7 @@ const RouterComponent = () => {
                             component={Result}
                             renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
                             title="결과"
+                            titleStyle={{ fontFamily: FONT_CHARACTER_BOLD }}
                             navigationBarStyle={[navBarStyle, { borderBottomWidth: 0 }]}
                             hideTabBar
                         />
@@ -95,6 +97,7 @@ const RouterComponent = () => {
                             component={GasStationInfo}
                             renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
                             navigationBarStyle={navBarStyle}
+                            titleStyle={{ fontFamily: FONT_CHARACTER_BOLD }}
                             hideTabBar
                         />
                         <Scene
@@ -102,7 +105,8 @@ const RouterComponent = () => {
                             key="searchArea"
                             component={AreaList}
                             renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
-                            title="Areas"
+                            title="지역으로 검색"
+                            titleStyle={{ fontFamily: FONT_CHARACTER_BOLD }}
                             navigationBarStyle={[navBarStyle, { borderBottomWidth: 0 }]}
                         />
                     </Scene>
@@ -186,7 +190,8 @@ const styles = {
         backgroundColor: COLOR_PRIMARY
     },
     titleStyle: {
-        color: COLOR_FONT_QUINARY
+        color: COLOR_FONT_QUINARY,
+        fontFamily: FONT_CHARACTER_BOLD
     },
     sceneStyle: {
         ...Platform.select({

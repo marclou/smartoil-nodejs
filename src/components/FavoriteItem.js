@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
-    COLOR_FONT_SECONDARY
+    COLOR_FONT_SECONDARY,
+    FONT_CHARACTER_REGULAR
 } from '../styles/common';
 import { deleteFavorite } from '../actions/FavoriteStationAction';
 import { ListSectionLongPress } from './functionalComponents';
@@ -60,7 +61,8 @@ const styles = {
         justifyContent: 'space-between',
         alignItems: 'center',
         flexDirection: 'row',
-        padding: 8,
+        paddingHorizontal: 20,
+        paddingVertical: 8,
         height: 70
     },
     section: {
@@ -74,6 +76,7 @@ const styles = {
     textStyle: {
         fontSize: 14,
         color: COLOR_FONT_SECONDARY,
+        fontFamily: FONT_CHARACTER_REGULAR,
         paddingLeft: 20
 
     },

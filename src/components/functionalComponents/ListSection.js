@@ -28,7 +28,7 @@ const styles = {
     viewStyle: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginHorizontal: 9,
+        marginHorizontal: 10,
         borderBottomWidth: 1,
         borderColor: COLOR_BORDER_SECONDARY,
 

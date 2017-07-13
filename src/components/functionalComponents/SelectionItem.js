@@ -2,7 +2,11 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { COLOR_PRIMARY, COLOR_FONT_SECONDARY } from '../../styles/common';
+import {
+    COLOR_PRIMARY,
+    COLOR_FONT_SECONDARY,
+    FONT_CHARACTER_REGULAR
+} from '../../styles/common';
 
 const SelectionItem = ({ value, selected }) => {
     const { containerStyle, textStyle } = styles;
@@ -41,7 +45,8 @@ const styles = {
     },
     textStyle: {
         fontSize: 16,
-        color: COLOR_FONT_SECONDARY
+        color: COLOR_FONT_SECONDARY,
+        fontFamily: FONT_CHARACTER_REGULAR
     },
     iconStyle: {
         fontSize: 20,

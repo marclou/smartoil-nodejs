@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, InteractionManager, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
+import axios from 'axios';
 
 import AndroidActionSheet from './AndroidActionSheet';
 import { Spinner, SettingsRow, LocationSettingsRow, Button } from './functionalComponents';
@@ -29,6 +30,16 @@ class SettingsList extends Component {
         });
     }
 
+    query() {
+        axios.get('https://gosmartoil.com/opinetGasStationInfoVoes').then(
+            response => {
+                console.log(response);
+            },
+            error => {
+                console.log(error);
+            });
+    }
+
     render() {
         if (!this.state.isComponentReady) {
             return <Spinner />;
@@ -47,7 +58,7 @@ class SettingsList extends Component {
                     <SettingsRow
                         title="리터량"
                         onPress={() => Actions.tankCapacitySetting()}
-                        value={`${userTankCapacity} L`}
+                        value={`${userTankCapacity}L`}
                     />
                     <SettingsRow
                         title="내 지역"
@@ -63,6 +74,7 @@ class SettingsList extends Component {
                     <SettingsRow
                         title="정책"
                     />
+                    <Button title='request' onPress={() => this.query()} />
                     {/*<Button title='test' onPress={() => this.setState({ isModalVisible: true })} />*/}
                     <AndroidActionSheet
                         transparent

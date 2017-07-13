@@ -5,7 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {
     COLOR_BACKGROUND_QUATERNARY,
     COLOR_BORDER_SECONDARY,
-    COLOR_FONT_SECONDARY
+    COLOR_FONT_SECONDARY,
+    FONT_CHARACTER_REGULAR
 } from '../../styles/common';
 
 const SettingsRow = ({ title, onPress, value }) => {
@@ -27,7 +28,8 @@ const styles = {
         height: 50,
         borderBottomWidth: 1,
         borderColor: COLOR_BORDER_SECONDARY,
-        padding: 8,
+        paddingHorizontal: 20,
+        paddingVertical: 8,
         backgroundColor: COLOR_BACKGROUND_QUATERNARY,
         justifyContent: 'space-between',
         flexDirection: 'row',
@@ -35,11 +37,13 @@ const styles = {
     textStyle: {
         flex: 1,
         alignSelf: 'center',
-        color: COLOR_FONT_SECONDARY
+        color: COLOR_FONT_SECONDARY,
+        fontFamily: FONT_CHARACTER_REGULAR
     },
     valueStyle: {
         flex: 1,
         color: COLOR_FONT_SECONDARY,
+        fontFamily: FONT_CHARACTER_REGULAR,
         textAlign: 'right',
         paddingRight: 25,
         alignSelf: 'center'

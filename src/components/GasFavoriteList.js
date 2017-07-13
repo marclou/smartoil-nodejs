@@ -1,24 +1,18 @@
 import React, { Component } from 'react';
-import { InteractionManager, ListView, View } from 'react-native';
+import { ListView, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { Spinner, ListSection, SelectionItem } from './functionalComponents';
+import { ListSection, SelectionItem } from './functionalComponents';
 import { changeUserFavoriteGas } from '../actions';
-import { COLOR_BACKGROUND_TERCIARY, PADDING_BOTTOM } from '../styles/common';
+import {
+    COLOR_BACKGROUND_TERCIARY,
+    PADDING_BOTTOM
+} from '../styles/common';
 
 class GasFavoriteList extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isComponentReady: false
-        };
         this.createDataSource();
-    }
-
-    componentDidMount() {
-        InteractionManager.runAfterInteractions(() => {
-            this.setState({ isComponentReady: true });
-        });
     }
 
     componentWillReceiveProps() {
@@ -39,9 +33,6 @@ class GasFavoriteList extends Component {
     }
 
     render() {
-        if (!this.state.isComponentReady) {
-            return <Spinner />;
-        }
         const { containerStyle } = styles;
         const { userFavoriteGas } = this.props;
 

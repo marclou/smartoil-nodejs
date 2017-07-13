@@ -9,7 +9,8 @@ import { Blur } from './functionalComponents';
 import {
     COLOR_PRIMARY,
     COLOR_FONT_SECONDARY,
-    COLOR_FONT_QUINARY
+    COLOR_FONT_QUINARY,
+    FONT_CHARACTER_REGULAR
 } from '../styles/common';
 import { getUserPosition, changeUserAllowLocation } from '../actions';
 
@@ -100,25 +101,25 @@ class Fab extends Component {
     }
 
     render() {
-        const { actionButtonIconStyle, actionButtonItemIconStyle, textStyle, textContainerStyle } = styles;
+        const { actionButtonIconStyle, actionButtonItemIconStyle, textStyle, textContainerStyle, shadowStyle } = styles;
 
         return (
             <ActionButton
                 buttonColor={COLOR_FONT_QUINARY}
                 icon={<Icon name='search' style={actionButtonIconStyle} />}
                 offsetY={70}
-                degrees={90}
-                outRangeScale={1.2}
+                degrees={0}
                 backdrop={<Blur />}
+                useNativeFeedback={false}
             >
                 <ActionButton.Item
-                    buttonColor='#EEE'
                     title='내 위치로 검색'
                     onPress={this.searchByLocation.bind(this)}
                     textContainerStyle={textContainerStyle}
                     textStyle={textStyle}
                     spaceBetween={10}
-
+                    useNativeFeedback={false}
+                    hideLabelShadow={true}
                 >
                     <Icon
                         name='map-marker'
@@ -126,12 +127,14 @@ class Fab extends Component {
                     />
                 </ActionButton.Item>
                 <ActionButton.Item
-                    buttonColor='#EEE'
                     title='지역으로 검색'
                     onPress={() => Actions.searchArea()}
                     textContainerStyle={textContainerStyle}
                     textStyle={textStyle}
                     spaceBetween={10}
+                    useNativeFeedback={false}
+                    hideLabelShadow={true}
+
                 >
                     <Icon
                         name='map-o'
@@ -153,12 +156,23 @@ const styles = {
         color: COLOR_FONT_SECONDARY
     },
     textStyle: {
+        flex: 1,
         color: COLOR_FONT_QUINARY,
-        fontSize: 16
+        fontSize: 16,
+        fontFamily: FONT_CHARACTER_REGULAR,
+        letterSpacing: 0
     },
     textContainerStyle: {
         backgroundColor: 'transparent',
-        borderWidth: 0
+        borderWidth: 0,
+        height: undefined,
+        shadowOpacity: 0,
+        shadowOffset: { height: 0, width: 0 }
+    },
+    shadowStyle: {
+        shadowOffset: { height: 5, width: 5 },
+        shadowOpacity: 0.5,
+
     }
 
 };

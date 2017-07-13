@@ -4,7 +4,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import {
     COLOR_FONT_PRIMARY,
-    COLOR_FONT_SECONDARY
+    COLOR_FONT_SECONDARY,
+    FONT_CHARACTER_REGULAR,
+    FONT_NUMBER_BOLD
 } from '../styles/common';
 import { displayLogo } from '../img/brands';
 
@@ -20,7 +22,7 @@ class GasStationRow extends Component {
                         style={logoStyle}
                         source={displayLogo('small', brand)}
                     />
-                    <View style={[subSection, { paddingLeft: 20 }]}>
+                    <View style={[subSection, { marginLeft: 20 }]}>
                         <Text style={textStyle}>
                             {store_name}
                         </Text>
@@ -65,12 +67,12 @@ const styles = {
     },
     section: {
         flexDirection: 'row',
-        padding: 5,
-        maxWidth: 220
+        padding: 5
     },
     subSection: {
         justifyContent: 'space-around',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        maxWidth: 190
     },
     iconStyle: {
         alignSelf: 'center',
@@ -87,11 +89,13 @@ const styles = {
     majorTextStyle: {
         fontSize: 16,
         color: COLOR_FONT_PRIMARY,
-        fontWeight: '700'
+        fontFamily: FONT_NUMBER_BOLD,
     },
     textStyle: {
         fontSize: 14,
-        color: COLOR_FONT_SECONDARY
+        color: COLOR_FONT_SECONDARY,
+        fontFamily: FONT_CHARACTER_REGULAR,
+
     }
 };
 

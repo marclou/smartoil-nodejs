@@ -1,7 +1,11 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import { COLOR_FONT_SECONDARY, COLOR_BACKGROUND_SECONDARY } from '../../styles/common';
+import {
+    COLOR_FONT_SECONDARY,
+    COLOR_BACKGROUND_SECONDARY,
+    FONT_CHARACTER_REGULAR
+} from '../../styles/common';
 
 const Tag = ({ text }) => {
     const { containerStyle, textStyle } = styles;
@@ -17,17 +21,21 @@ const Tag = ({ text }) => {
 
 const styles = {
     containerStyle: {
-        margin: 5,
+        margin: 4,
         alignSelf: 'center',
         backgroundColor: COLOR_BACKGROUND_SECONDARY,
-        padding: 2,
+        padding: 1,
         borderRadius: 3,
+        borderWidth: 1,
+        borderColor: 'white'
     },
     textStyle: {
         padding: 3,
         fontSize: 12,
         textAlign: 'center',
-        color: COLOR_FONT_SECONDARY
+        color: COLOR_FONT_SECONDARY,
+        fontFamily: FONT_CHARACTER_REGULAR,
+        letterSpacing: 0.6
     }
 };
 

@@ -8,21 +8,21 @@ import { changeUserFavoriteGas } from '../actions';
 class GasTypePicker extends Component {
     constructor(props) {
         super(props);
-        this.state = {
+        /*this.state = {
             isComponentReady: false
-        };
+        };*/
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
         });
-    }
+    }*/
 
     render() {
-        if (!this.state.isComponentReady) {
+        /*if (!this.state.isComponentReady) {
             return <Spinner />;
-        }
+        }*/
         const { containerStyle } = styles;
         const { userFavoriteGas } = this.props;
 

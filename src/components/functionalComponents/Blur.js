@@ -20,7 +20,7 @@ const styles = {
         height: height,
         width: width,
         backgroundColor: 'black',
-        opacity: 0.5,
+        opacity: 0.7,
         zIndex: 10
     }
 };

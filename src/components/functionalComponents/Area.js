@@ -5,14 +5,19 @@ import {
     COLOR_PRIMARY,
     COLOR_BORDER_PRIMARY,
     COLOR_BACKGROUND_QUATERNARY,
-    COLOR_FONT_QUATERNARY
+    COLOR_FONT_QUATERNARY,
+    FONT_CHARACTER_BOLD,
+    FONT_CHARACTER_REGULAR
 } from '../../styles/common';
 
 const Area = ({ name, onPress, selected }) => {
     const { containerStyle, textStyle, containerSelectedStyle, textSelectedStyle } = styles;
 
     return (
-        <TouchableOpacity onPress={!selected ? onPress : null} >
+        <TouchableOpacity
+          //onPress={!selected ? onPress : null}
+          onPress={onPress}
+        >
             <View style={[containerStyle, selected && containerSelectedStyle]} >
                 <Text style={[textStyle, selected && textSelectedStyle]}>
                     {name}
@@ -43,10 +48,11 @@ const styles = {
         alignSelf: 'center',
         fontSize: 14,
         color: COLOR_FONT_QUATERNARY,
+        fontFamily: FONT_CHARACTER_REGULAR
     },
     textSelectedStyle: {
         color: COLOR_PRIMARY,
-        fontWeight: '600'
+        fontFamily: FONT_CHARACTER_BOLD
     }
 };
 

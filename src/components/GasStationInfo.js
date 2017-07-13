@@ -13,7 +13,10 @@ import {
     COLOR_PRIMARY,
     COLOR_FONT_PRIMARY,
     COLOR_FONT_SECONDARY,
-    COLOR_BORDER_SECONDARY
+    COLOR_BORDER_SECONDARY,
+    FONT_CHARACTER_REGULAR,
+    FONT_CHARACTER_BOLD,
+    FONT_NUMBER_BOLD
 } from '../styles/common';
 
 class GasStationInfo extends Component {
@@ -177,16 +180,18 @@ const styles = {
     textMajorStyle: {
         fontSize: 24,
         color: COLOR_FONT_PRIMARY,
+        fontFamily: FONT_NUMBER_BOLD,
         paddingRight: 15
     },
     textMediumStyle: {
         fontSize: 16,
         color: COLOR_FONT_PRIMARY,
-        fontWeight: '500'
+        fontFamily: FONT_CHARACTER_BOLD
     },
     textMinorStyle: {
         fontSize: 12,
-        color: COLOR_FONT_SECONDARY
+        color: COLOR_FONT_SECONDARY,
+        fontFamily: FONT_CHARACTER_REGULAR
     },
     navIconStyle: {
         flexDirection: 'row',

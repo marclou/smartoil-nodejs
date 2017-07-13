@@ -10,9 +10,10 @@ import {
     COLOR_PRIMARY,
     COLOR_BACKGROUND_TERCIARY,
     COLOR_BACKGROUND_QUATERNARY,
-    COLOR_FONT_QUATERNARY
+    COLOR_FONT_QUATERNARY,
+    FONT_CHARACTER_REGULAR,
+    FONT_CHARACTER_BOLD
 } from '../styles/common';
-
 
 class GasStationList extends Component {
     componentWillMount() {
@@ -165,6 +166,7 @@ const styles = {
     },
     tabTextStyle: {
         color: COLOR_FONT_QUATERNARY,
+        fontFamily: FONT_CHARACTER_REGULAR,
         fontSize: 16
     },
     activeTabStyle: {
@@ -173,6 +175,7 @@ const styles = {
     },
     activeTabTextStyle: {
         color: COLOR_PRIMARY,
+        fontFamily: FONT_CHARACTER_BOLD,
         fontSize: 16
     }
 };

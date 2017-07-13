@@ -8,7 +8,8 @@ import { Spinner } from './functionalComponents';
 import {
     PADDING_BOTTOM,
     COLOR_BACKGROUND_TERCIARY,
-    COLOR_FONT_TERCIARY
+    COLOR_FONT_TERCIARY,
+    FONT_CHARACTER_REGULAR
 } from '../styles/common';
 
 class FavoriteGasStations extends Component {
@@ -90,6 +91,7 @@ const styles = {
     },
     emptyTextStyle: {
         fontSize: 24,
+        fontFamily: FONT_CHARACTER_REGULAR,
         color: COLOR_FONT_TERCIARY,
         paddingVertical: 10
     }
