@@ -22,3 +22,4 @@ export * from './SegmentSelector';
 export * from './Area';
 export * from './BackButton';
 export * from './SelectionItem';
+export * from './TextContainer';

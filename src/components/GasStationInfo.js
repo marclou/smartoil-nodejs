@@ -62,7 +62,7 @@ class GasStationInfo extends Component {
         if (Platform.OS === 'ios') {
             this.showIOSActionSheet(options);
         } else {
-            this.showAndroidActionSheet(options);
+            this.showAndroidActionSheet(latitude, longitude);
         }
     }
 
@@ -76,8 +76,9 @@ class GasStationInfo extends Component {
             }
         );
     }
-    showAndroidActionSheet() {
-        this.setState({ isModalVisible: true });
+    showAndroidActionSheet(latitude, longitude) {
+        Linking.openURL(`geo:${latitude},${longitude}`);
+        //this.setState({ isModalVisible: true });
     }
 
     shareContent() {

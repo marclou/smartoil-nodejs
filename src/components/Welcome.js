@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -32,6 +32,9 @@ class Welcome extends Component {
 
         return (
             <View style={containerStyle}>
+                <StatusBar
+                    backgroundColor={COLOR_PRIMARY}
+                />
                 <LinearGradient colors={[COLOR_PRIMARY, '#53a0fe', '#40bbef']} style={linearGradientStyle}>
                     <PricePrediction />
                     <Fab />

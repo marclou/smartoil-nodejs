@@ -41,7 +41,7 @@ class FavoriteItem extends Component {
                             style={logoStyle}
                             source={displayLogo('small', brand)}
                         />
-                        <Text style={textStyle}>
+                        <Text style={textStyle} numberOfLines={1}>
                             {name}
                         </Text>
                     </View>

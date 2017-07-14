@@ -70,11 +70,9 @@ class SettingsList extends Component {
                     />
                     <SettingsRow
                         title="정책"
+                        onPress={() => Actions.privacy()}
                     />
-                    <SettingsRow
-                        title="정책"
-                    />
-                    <Button title='request' onPress={() => this.query()} />
+                    {/*<Button title='request' onPress={() => this.query()} />*/}
                     {/*<Button title='test' onPress={() => this.setState({ isModalVisible: true })} />*/}
                     <AndroidActionSheet
                         transparent

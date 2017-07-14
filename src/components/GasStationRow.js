@@ -23,7 +23,7 @@ class GasStationRow extends Component {
                         source={displayLogo('small', brand)}
                     />
                     <View style={[subSection, { marginLeft: 20 }]}>
-                        <Text style={textStyle}>
+                        <Text style={textStyle} numberOfLines={1}>
                             {store_name}
                         </Text>
                         <View style={textContainer} >

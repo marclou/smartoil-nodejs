@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Location from './components/initialComponent/Location';
 import GasType from './components/initialComponent/GasType';
 import TankCapacity from './components/initialComponent/TankCapacity';
-import { TabIcon, NavIcon, BackButton } from './components/functionalComponents';
+import { TabIcon, NavIcon, BackButton, TextContainer } from './components/functionalComponents';
 import Welcome from './components/Welcome';
 import SettingsList from './components/SettingsList';
 import Result from './components/Result';
@@ -149,10 +149,12 @@ const RouterComponent = () => {
                         />
                         <Scene
                             sceneStyle={sceneStyle}
-                            key="addArea"
-                            component={AreaList}
-                            title="Area List"
-                            navigationBarStyle={navBarStyle}
+                            key="privacy"
+                            component={TextContainer}
+                            renderBackButton={() => <BackButton color={COLOR_FONT_QUINARY} />}
+                            title="정책"
+                            titleStyle={titleStyle}
+                            navigationBarStyle={navBarStylePrimary}
                         />
                         <Scene
                             sceneStyle={sceneStyle}
