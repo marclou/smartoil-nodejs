@@ -77,7 +77,7 @@ class PricePrediction extends Component {
                     <PredictionPrice text="1,567.09" />
                 </View>
                 <View style={row}>
-                    <Tag text={userFavoriteGas} />
+                    <Tag text={userFavoriteGas.value} />
                     <Tag text={userFavoriteArea} />
                 </View>
             </View>

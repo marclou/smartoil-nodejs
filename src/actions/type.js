@@ -10,6 +10,7 @@ export const RECEIVE_USER_FAVORITE_AREA = 'receive_user_favorite_area';
 /** Type for the GasStationList Component **/
 export const DATA_FETCHING = 'data_fetching';
 export const DATA_FETCH_SUCCESS = 'data_fetch_success';
+export const DATA_FETCH_ERROR = 'data_fetch_error';
 export const SELECT_ID = 'select_id';
 export const DESELECT_ID = 'deselect_id';
 export const SELECT_FILTER = 'select_filter';
@@ -22,9 +23,6 @@ export const DELETE_FAVORITE = 'delete_favorite';
 /** Type for PricePrediction Component **/
 export const PREDICTION_FETCHING = 'prediction_fetching';
 export const PREDICTION_FETCH_SUCCESS = 'prediction_fetch_success';
-
-/** Type for SquareButtonCollection Component **/
-export const SQUARE_BUTTON_FETCHING_SUCCESS = 'square_button_fetching_success';
 
 /** Type for AreaList Component **/
 export const SELECT_AREA = 'select_area';

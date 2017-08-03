@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Text, Image, View, InteractionManager, Share, ActionSheetIOS, Platform, Linking } from 'react-native';
+import { Text, Image, View, InteractionManager, Share, ActionSheetIOS, Linking, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
 
 import SaveIcon from './SaveIcon';
-import AndroidActionSheet from './AndroidActionSheet';
 import { Spinner, Tag, Button, NavIcon } from './functionalComponents';
 import { displayLogo } from '../img/brands';
 import {
@@ -24,12 +23,10 @@ class GasStationInfo extends Component {
         super(props);
 
         this.state = {
-            isComponentReady: false,
-            isModalVisible: false
+            isComponentReady: false
         };
         this.renderRightButton = this.renderRightButton.bind(this);
         this.linkToNavigation = this.linkToNavigation.bind(this);
-        this.onModalBackgroundPress = this.onModalBackgroundPress.bind(this);
         this.showAndroidActionSheet = this.showAndroidActionSheet.bind(this);
     }
 
@@ -43,12 +40,6 @@ class GasStationInfo extends Component {
         });
     }
 
-    onModalBackgroundPress() {
-        this.setState({
-            isModalVisible: false
-        });
-    }
-
     linkToNavigation() {
         const { latitude, longitude } = this.props.gasStation.location;
         const options = [
@@ -57,28 +48,28 @@ class GasStationInfo extends Component {
             'Kakao Map',
             'Naver'
         ];
-        const URL = `http://maps.apple.com/?ll=${longitude},${latitude}`;
+        const URL = `http://maps.apple.com/?ll=${latitude},${longitude}`;
+        console.log(URL);
 
         if (Platform.OS === 'ios') {
-            this.showIOSActionSheet(options);
+            this.showIOSActionSheet(options, URL);
         } else {
             this.showAndroidActionSheet(latitude, longitude);
         }
     }
 
-    showIOSActionSheet(options) {
+    showIOSActionSheet(options, url) {
         ActionSheetIOS.showActionSheetWithOptions({
                 options: options,
                 cancelButtonIndex: 0
             },
             (buttonIndex) => {
-                console.log(buttonIndex);
+                Linking.openURL(url);
             }
         );
     }
     showAndroidActionSheet(latitude, longitude) {
         Linking.openURL(`geo:${latitude},${longitude}`);
-        //this.setState({ isModalVisible: true });
     }
 
     shareContent() {
@@ -106,10 +97,13 @@ class GasStationInfo extends Component {
 
     render() {
         const { containerStyle, divider, row, logoStyle, textMajorStyle, textMediumStyle, textMinorStyle } = styles;
-        const { price, distance, store_name, brand } = this.props.gasStation;
+        const { priceInfo, distance, name, brand } = this.props.gasStation;
         const { userGasType } = this.props;
 
         if (!this.state.isComponentReady) {
+            return <Spinner />;
+        }
+        if (this.props.gasStation === undefined) {
             return <Spinner />;
         }
         return (
@@ -121,7 +115,7 @@ class GasStationInfo extends Component {
                     />
                 </LinearGradient>
                 <View style={row}>
-                    <Text style={textMediumStyle}>{store_name}</Text>
+                    <Text style={textMediumStyle}>{name}</Text>
                 </View>
                 <View style={row}>
                     <Icon name="map-marker" style={{ color: COLOR_FONT_SECONDARY }} />
@@ -130,8 +124,8 @@ class GasStationInfo extends Component {
                 </View>
                 <View style={divider} />
                 <View style={row}>
-                    <Text style={textMajorStyle}> {price}원</Text>
-                    <Tag text={userGasType} />
+                    <Text style={textMajorStyle}> {priceInfo.price}원</Text>
+                    <Tag text={userGasType.value} />
                 </View>
                 <View style={row}>
                     <Text style={[textMinorStyle, { color: COLOR_PRIMARY }]}>
@@ -144,12 +138,6 @@ class GasStationInfo extends Component {
                         onPress={this.linkToNavigation}
                     />
                 </View>
-                <AndroidActionSheet
-                    transparent
-                    animationType="slide"
-                    visible={this.state.isModalVisible}
-                    onBackgroundPress={this.onModalBackgroundPress}
-                />
             </View>
         );
     }

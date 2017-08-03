@@ -1,28 +1,32 @@
 export const displayLogo = (size, code) => {
     if (size === 'small') {
         switch (code) {
-            case '서울 중구':
+            case 'NHO':
                 return require('./icon/allttull.png');
-            case 'GS칼텍스':
+            case 'GSC':
                 return require('./icon/gs.png');
-            case '현대오일뱅크':
+            case 'HDO':
                 return require('./icon/hyundai.png');
-            case 'SK에너지':
+            case 'SKE':
                 return require('./icon/sk.png');
+            case 'SOL':
+                return require('./icon/soil.png');
             default:
                 return require('./icon/allttull.png');
         }
     }
     if (size === 'large') {
         switch (code) {
-            case '서울 중구':
+            case 'NHO':
                 return require('./iconLarge/allttullLarge.png');
-            case 'GS칼텍스':
+            case 'GSC':
                 return require('./iconLarge/gsLarge.png');
-            case '현대오일뱅크':
+            case 'HDO':
                 return require('./iconLarge/hyundaiLarge.png');
-            case 'SK에너지':
+            case 'SKE':
                 return require('./iconLarge/skLarge.png');
+            case 'SOL':
+                return require('./iconLarge/soilLarge.png');
             default:
                 return require('./iconLarge/allttullLarge.png');
         }

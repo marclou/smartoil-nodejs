@@ -1,10 +1,13 @@
 import {
     DATA_FETCHING,
-    DATA_FETCH_SUCCESS
+    DATA_FETCH_SUCCESS,
+    DATA_FETCH_ERROR
 } from '../actions/type';
 
 const INITIAL_STATE = {
     loading: true,
+    error: false,
+    errorCode: null,
     gasStationsData: []
 };
 
@@ -13,13 +16,24 @@ export default (state = INITIAL_STATE, action) => {
         case DATA_FETCHING:
             return {
                 ...state,
-                loading: true
+                loading: true,
+                error: false,
+                errorCode: null,
             };
         case DATA_FETCH_SUCCESS:
             return {
                 ...state,
                 loading: false,
+                error: false,
+                errorCode: null,
                 gasStationsData: action.payload
+            };
+        case DATA_FETCH_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: true,
+                errorCode: action.payload
             };
         default:
             return state;

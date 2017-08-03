@@ -10,7 +10,7 @@ class SaveIcon extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selected: isSaved(props.gasStation.uni_id)
+            selected: isSaved(props.gasStation.uniId)
         };
     }
 
@@ -20,10 +20,10 @@ class SaveIcon extends Component {
         if (!this.state.selected) {
             this.props.addFavorite(gasStation);
         } else {
-            this.props.deleteFavorite(gasStation.uni_id);
+            this.props.deleteFavorite(gasStation.uniId);
         }
         this.setState({
-            selected: isSaved(gasStation.uni_id)
+            selected: isSaved(gasStation.uniId)
         });
     }
 

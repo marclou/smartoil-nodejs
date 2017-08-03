@@ -52,13 +52,13 @@ export const loadFavorites = () => {
     };
 };
 
-export const addFavorite = ({ uni_id, location, store_name, address, brand }) => {
+export const addFavorite = ({ uniId, location, name, address, brand }) => {
     const favoriteStationsList = realm.objects('GasStationsList');
     const toBeSaved = {
-        uid: uni_id,
+        uid: uniId,
         latitude: location.latitude,
         longitude: location.longitude,
-        name: store_name,
+        name: name,
         address: address,
         brand: brand
     };

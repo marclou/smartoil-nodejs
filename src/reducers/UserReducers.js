@@ -7,6 +7,7 @@ import {
     RECEIVE_USER_TANK_CAPACITY,
     RECEIVE_USER_FAVORITE_AREA
 } from '../actions/type';
+import { GASOLINE } from '../Type';
 
 const INITIAL_STATE = {
     errorLocation: null,
@@ -16,7 +17,7 @@ const INITIAL_STATE = {
         latitude: null,
         longitude: null
     },
-    userFavoriteGas: 'Gasoline',
+    userFavoriteGas: GASOLINE,
     userTankCapacity: 50,
     userFavoriteArea: 'Seoul'
 };

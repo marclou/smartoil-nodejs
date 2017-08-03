@@ -1,41 +1,54 @@
 import React, { Component } from 'react';
-import { InteractionManager, Picker, View } from 'react-native';
+import { Picker, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { Spinner } from './functionalComponents';
 import { changeUserFavoriteGas } from '../actions';
+import {
+    GASOLINE,
+    PREMIUM_GASOLINE,
+    DIESEL,
+    LPG
+} from '../Type';
 
 class GasTypePicker extends Component {
-    constructor(props) {
-        super(props);
-        /*this.state = {
-            isComponentReady: false
-        };*/
+    saveFavoriteGas(gasType) {
+        const { userFavoriteGas } = this.props;
+
+        if (userFavoriteGas.code !== gasType) {
+            switch (gasType) {
+                case GASOLINE.code:
+                    this.props.changeUserFavoriteGas(GASOLINE);
+                    break;
+                case DIESEL.code:
+                    this.props.changeUserFavoriteGas(DIESEL);
+                    break;
+                case PREMIUM_GASOLINE.code:
+                    this.props.changeUserFavoriteGas(PREMIUM_GASOLINE);
+                    break;
+                case LPG.code:
+                    this.props.changeUserFavoriteGas(LPG);
+                    break;
+                default:
+                    this.props.changeUserFavoriteGas(GASOLINE);
+                    break;
+            }
+        }
     }
 
-    /*componentDidMount() {
-        InteractionManager.runAfterInteractions(() => {
-            this.setState({ isComponentReady: true });
-        });
-    }*/
-
     render() {
-        /*if (!this.state.isComponentReady) {
-            return <Spinner />;
-        }*/
         const { containerStyle } = styles;
         const { userFavoriteGas } = this.props;
 
         return (
             <View style={containerStyle}>
                 <Picker
-                    selectedValue={userFavoriteGas}
-                    onValueChange={(itemValue) => this.props.changeUserFavoriteGas(itemValue)}
+                    selectedValue={userFavoriteGas.code}
+                    onValueChange={itemValue => this.saveFavoriteGas(itemValue)}
                 >
-                    <Picker.Item label="휘발유" value="Gasoline" />
-                    <Picker.Item label="경유" value="Diesel" />
-                    <Picker.Item label="고급휘발유" value="Premium Gasoline" />
-                    <Picker.Item label="실내등유" value="Heating Gas" />
+                    <Picker.Item label={GASOLINE.value} value={GASOLINE.code} />
+                    <Picker.Item label={DIESEL.value} value={DIESEL.code} />
+                    <Picker.Item label={PREMIUM_GASOLINE.value} value={PREMIUM_GASOLINE.code} />
+                    <Picker.Item label={LPG.value} value={LPG.code} />
                 </Picker>
             </View>
         );

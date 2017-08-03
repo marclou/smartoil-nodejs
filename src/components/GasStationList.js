@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView, View } from 'react-native';
+import { ListView, View, Text } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
-import { gasStationFetch, selectFilter, deselectGasStation } from '../actions';
+import { gasStationFetch, selectFilter } from '../actions';
 import GasStationItem from './GasStationItem';
-import { Spinner, SegmentSelector } from './functionalComponents';
+import {
+    Spinner,
+    SegmentSelector,
+    ErrorStatic
+} from './functionalComponents';
 import {
     COLOR_PRIMARY,
     COLOR_BACKGROUND_TERCIARY,
@@ -16,46 +20,42 @@ import {
 } from '../styles/common';
 
 class GasStationList extends Component {
-    componentWillMount() {
-        if (this.props.gasStations.gasStationsLibraries.loading !== true) {
-            this.createDataSource(this.props);
-        }
+    constructor(props) {
+        super(props);
+        this.createDataSource(props);
     }
 
     componentDidMount() {
-        const { latitude, longitude } = this.props.userState.userLocation;
+        const { userLocation, userFavoriteGas } = this.props.userState;
 
-        this.props.gasStationFetch(latitude, longitude);
+        this.props.gasStationFetch(userLocation.latitude, userLocation.longitude, userFavoriteGas.code);
     }
 
     componentWillReceiveProps(nextProps) {
         this.createDataSource(nextProps);
     }
 
-    createDataSource({ gasStations, userState }) {
+    createDataSource({ gasStations }) {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
 
         const { gasStationsData } = gasStations.gasStationsLibraries;
-        const { userFavoriteGas } = userState;
-
-        const gasStationList = this.matchUserGasTypePreference(gasStationsData, userFavoriteGas);
 
         if (gasStations.selectedFilter === 0) {
-            gasStationList.sort(this.sortByPrice);
+            gasStationsData.sort(this.sortByPrice);
         } else {
-            gasStationList.sort(this.sortByDistance);
+            gasStationsData.sort(this.sortByDistance);
         }
 
-        this.dataSource = ds.cloneWithRows(gasStationList);
+        this.dataSource = ds.cloneWithRows(gasStationsData);
     }
 
     sortByPrice(a, b) {
         let comparison = 0;
-        if (a.price > b.price) {
+        if (a.priceInfo.price > b.priceInfo.price) {
             comparison = 1;
-        } else if (a.price < b.price) {
+        } else if (a.priceInfo.price < b.priceInfo.price) {
             comparison = -1;
         }
         return comparison;
@@ -71,49 +71,26 @@ class GasStationList extends Component {
         return comparison;
     }
 
-    matchUserGasTypePreference(array, userPreference) {
-        let result = [];
-
-        switch (userPreference) {
-            case 'Gasoline':
-                result = array.map((object) => {
-                    const price = { price: object.oil };
-                    return Object.assign(object, price);
-                });
-                break;
-            case 'Premium Gasoline':
-                result = array.map((object) => {
-                    const price = { price: object.premium_oil };
-                    return Object.assign(object, price);
-                });
-                break;
-            case 'Diesel':
-                result = array.map((object) => {
-                    const price = { price: object.diesel };
-                    return Object.assign(object, price);
-                });
-                break;
-            case 'Heating gas':
-                result = array.map((object) => {
-                    const price = { price: object.heating_oil };
-                    return Object.assign(object, price);
-                });
-                break;
-        }
-        return result;
-    }
-
     changeFilter(id) {
-        this.props.deselectGasStation();
         this.props.selectFilter(id);
     }
 
     renderListOrSpinner() {
         const { gasStationsLibraries, selectedFilter } = this.props.gasStations;
+        const { userLocation, userFavoriteGas } = this.props.userState;
         const { containerStyle, tabsContainerStyle, tabStyle, tabTextStyle, activeTabStyle, activeTabTextStyle } = styles;
 
         if (gasStationsLibraries.loading) {
             return <Spinner size='large' />;
+        }
+        if (gasStationsLibraries.error) {
+            return (
+                <ErrorStatic
+                    title='Ooops, something went wrong'
+                    message='But no worry, you can still refresh the result with the button below'
+                    onPress={this.props.gasStationFetch.bind(this, userLocation.latitude, userLocation.longitude, userFavoriteGas.code)}
+                />
+            );
         }
         return (
             <View style={containerStyle}>
@@ -187,4 +164,4 @@ const mapStateToProps = state => {
     };
 };
 
-export default connect(mapStateToProps, { gasStationFetch, selectFilter, deselectGasStation })(GasStationList);
+export default connect(mapStateToProps, { gasStationFetch, selectFilter })(GasStationList);

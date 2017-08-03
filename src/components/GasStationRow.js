@@ -12,7 +12,7 @@ import { displayLogo } from '../img/brands';
 
 class GasStationRow extends Component {
     render() {
-        const { price, distance, store_name, brand } = this.props.gasStation;
+        const { priceInfo, distance, name, brand } = this.props.gasStation;
         const { containerStyle, logoStyle, textContainer, textStyle, majorTextStyle, section, subSection, iconStyle } = styles;
 
         return (
@@ -24,11 +24,11 @@ class GasStationRow extends Component {
                     />
                     <View style={[subSection, { marginLeft: 20 }]}>
                         <Text style={textStyle} numberOfLines={1}>
-                            {store_name}
+                            {name}
                         </Text>
                         <View style={textContainer} >
                             <Text style={majorTextStyle}>
-                                {price} 원
+                                {priceInfo.price} 원
                             </Text>
                         </View>
                     </View>

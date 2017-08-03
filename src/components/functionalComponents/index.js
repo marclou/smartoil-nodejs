@@ -23,3 +23,4 @@ export * from './Area';
 export * from './BackButton';
 export * from './SelectionItem';
 export * from './TextContainer';
+export * from './ErrorStatic';

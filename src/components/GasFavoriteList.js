@@ -8,6 +8,12 @@ import {
     COLOR_BACKGROUND_TERCIARY,
     PADDING_BOTTOM
 } from '../styles/common';
+import {
+    GASOLINE,
+    DIESEL,
+    PREMIUM_GASOLINE,
+    LPG
+} from '../Type';
 
 class GasFavoriteList extends Component {
     constructor(props) {
@@ -21,15 +27,39 @@ class GasFavoriteList extends Component {
 
     createDataSource() {
         const gasType = [
-            'Gasoline',
-            'Premium Gasoline',
-            'Diesel',
-            'Heating gas'
+            GASOLINE.value,
+            DIESEL.value,
+            PREMIUM_GASOLINE.value,
+            LPG.value
         ];
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
         this.dataSource = ds.cloneWithRows(gasType);
+    }
+
+    saveFavoriteGas(gasType) {
+        const { userFavoriteGas } = this.props;
+
+        if (userFavoriteGas.value !== gasType) {
+            switch (gasType) {
+                case GASOLINE.value:
+                    this.props.changeUserFavoriteGas(GASOLINE);
+                    break;
+                case DIESEL.value:
+                    this.props.changeUserFavoriteGas(DIESEL);
+                    break;
+                case PREMIUM_GASOLINE.value:
+                    this.props.changeUserFavoriteGas(PREMIUM_GASOLINE);
+                    break;
+                case LPG.value:
+                    this.props.changeUserFavoriteGas(LPG);
+                    break;
+                default:
+                    this.props.changeUserFavoriteGas(GASOLINE);
+                    break;
+            }
+        }
     }
 
     render() {
@@ -42,8 +72,8 @@ class GasFavoriteList extends Component {
                     dataSource={this.dataSource}
                     renderRow={
                         (rowData) =>
-                            <ListSection onPress={this.props.changeUserFavoriteGas.bind(this, rowData)}>
-                                <SelectionItem value={rowData} selected={rowData === userFavoriteGas} />
+                            <ListSection onPress={this.saveFavoriteGas.bind(this, rowData)}>
+                                <SelectionItem value={rowData} selected={rowData === userFavoriteGas.value} />
                             </ListSection>
                     }
                 />

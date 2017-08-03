@@ -2,42 +2,22 @@ import React, { Component } from 'react';
 import { View, InteractionManager, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import axios from 'axios';
 
-import AndroidActionSheet from './AndroidActionSheet';
-import { Spinner, SettingsRow, LocationSettingsRow, Button } from './functionalComponents';
+import { Spinner, SettingsRow, LocationSettingsRow } from './functionalComponents';
 import { COLOR_BACKGROUND_TERCIARY } from '../styles/common';
 
 class SettingsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isComponentReady: false,
-            isModalVisible: false
+            isComponentReady: false
         };
-        this.onModalBackgroundPress = this.onModalBackgroundPress.bind(this);
     }
 
     componentDidMount() {
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
         });
-    }
-
-    onModalBackgroundPress() {
-        this.setState({
-            isModalVisible: false
-        });
-    }
-
-    query() {
-        axios.get('https://gosmartoil.com/opinetGasStationInfoVoes').then(
-            response => {
-                console.log(response);
-            },
-            error => {
-                console.log(error);
-            });
     }
 
     render() {
@@ -53,7 +33,7 @@ class SettingsList extends Component {
                     <SettingsRow
                         title="기름종류"
                         onPress={() => Actions.gasTypeSetting()}
-                        value={userFavoriteGas}
+                        value={userFavoriteGas.value}
                     />
                     <SettingsRow
                         title="리터량"
@@ -71,14 +51,6 @@ class SettingsList extends Component {
                     <SettingsRow
                         title="정책"
                         onPress={() => Actions.privacy()}
-                    />
-                    {/*<Button title='request' onPress={() => this.query()} />*/}
-                    {/*<Button title='test' onPress={() => this.setState({ isModalVisible: true })} />*/}
-                    <AndroidActionSheet
-                        transparent
-                        animationType="slide"
-                        visible={this.state.isModalVisible}
-                        onBackgroundPress={this.onModalBackgroundPress}
                     />
                 </ScrollView>
             </View>

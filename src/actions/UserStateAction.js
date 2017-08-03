@@ -101,7 +101,7 @@ export const getUserFavoriteGas = () => {
     return (dispatch) => {
         AsyncStorage.getItem('gasTypePreference').then((userFavoriteGas) => {
             if (userFavoriteGas !== null) {
-                return dispatch(userFavoriteGasAction(userFavoriteGas));
+                return dispatch(userFavoriteGasAction(JSON.parse(userFavoriteGas)));
             }
         }).catch(error => {
             console.log(error);
@@ -111,7 +111,7 @@ export const getUserFavoriteGas = () => {
 
 export const changeUserFavoriteGas = selectedGasType => {
     return (dispatch) => {
-        AsyncStorage.setItem('gasTypePreference', selectedGasType).then(() => {
+        AsyncStorage.setItem('gasTypePreference', JSON.stringify(selectedGasType)).then(() => {
             return dispatch(userFavoriteGasAction(selectedGasType));
         }).catch(error => {
             console.log(error);

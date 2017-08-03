@@ -3,8 +3,7 @@ import axios from 'axios';
 import {
     DATA_FETCHING,
     DATA_FETCH_SUCCESS,
-    SELECT_ID,
-    DESELECT_ID,
+    DATA_FETCH_ERROR,
     SELECT_FILTER
 } from './type';
 import {
@@ -20,31 +19,25 @@ const gasStationFetchAction = (gasStationList) => {
     };
 };
 
-export const gasStationFetch = (latitude, longitude) => {
+const gasStationFetchError = message => {
+    return {
+        type: DATA_FETCH_ERROR,
+        payload: message
+    };
+};
+
+export const gasStationFetch = (latitude, longitude, gasType) => {
     return (dispatch) => {
         dispatch({ type: DATA_FETCHING });
 
-        return axios.get(`${SERVER_URL}?latitude=${latitude}&longitude=${longitude}&limit=${QUERY_LIMIT}&km=${DISTANCE_LIMIT}`).then(
+        return axios.get(`${SERVER_URL}gas_station/near?lat=${latitude}&lng=${longitude}&type=${gasType}&lim=${QUERY_LIMIT}&dist=${DISTANCE_LIMIT}`).then(
             response => {
                 return dispatch(gasStationFetchAction(response.data));
             },
             error => {
-                console.log(error);
+                return dispatch(gasStationFetchError(error.request.status));
             });
     };
-};
-
-export const selectGasStation = (id) => {
-    return {
-        type: SELECT_ID,
-        payload: id
-    };
-};
-
-export const deselectGasStation = () => {
-      return {
-          type: DESELECT_ID
-      };
 };
 
 export const selectFilter = (id) => {

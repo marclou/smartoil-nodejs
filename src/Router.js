@@ -35,7 +35,7 @@ const RouterComponent = () => {
     return (
         <ConnectedRouter>
             <Scene key='root'>
-                <Scene key="slider" initial>
+                <Scene key="slider" initial={false}>
                     <Scene
                         key="location"
                         component={Location}
@@ -58,15 +58,25 @@ const RouterComponent = () => {
                         renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
                     />
                 </Scene>
-                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={false}>
+                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={true}>
                     <Scene key="favorite" iconName='heart' icon={TabIcon} titleStyle={{ fontSize: 20 }}>
                         <Scene
+                            initial
                             sceneStyle={sceneStyle}
                             key="areaList"
                             component={FavoriteGasStations}
                             title="단골주유소"
                             titleStyle={titleStyle}
                             navigationBarStyle={navBarStylePrimary}
+                        />
+                        <Scene
+                            sceneStyle={sceneStyle}
+                            key="favoriteGasStationInfo"
+                            component={GasStationInfo}
+                            renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
+                            navigationBarStyle={navBarStyle}
+                            titleStyle={{ fontFamily: FONT_CHARACTER_BOLD }}
+                            hideTabBar
                         />
                     </Scene>
                     <Scene key="home" iconName='home' initial icon={TabIcon} titleStyle={{ fontSize: 20 }} >
