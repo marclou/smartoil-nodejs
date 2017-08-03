@@ -9,20 +9,11 @@ import { COLOR_BACKGROUND_TERCIARY, PADDING_BOTTOM } from '../styles/common';
 class TankCapacityFavoriteList extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isComponentReady: false
-        };
         this.tankCapacity = [];
         for (let i = 8; i < 25; i++) {
             this.tankCapacity.push(i * 5);
         }
         this.createDataSource();
-    }
-
-    componentDidMount() {
-        InteractionManager.runAfterInteractions(() => {
-            this.setState({ isComponentReady: true });
-        });
     }
 
     componentWillReceiveProps() {
@@ -37,9 +28,6 @@ class TankCapacityFavoriteList extends Component {
     }
 
     render() {
-        if (!this.state.isComponentReady) {
-            return <Spinner />;
-        }
         const { containerStyle } = styles;
         const { userTankCapacity } = this.props;
 
