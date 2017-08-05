@@ -30,7 +30,7 @@ export const gasStationFetch = (latitude, longitude, gasType) => {
     return (dispatch) => {
         dispatch({ type: DATA_FETCHING });
 
-        return axios.get(`${SERVER_URL}gas_station/near?lat=${latitude}&lng=${longitude}&type=${gasType}&lim=${QUERY_LIMIT}&dist=${DISTANCE_LIMIT}`).then(
+        return axios.get(`${SERVER_URL}/gas_station/near?lat=${latitude}&lng=${longitude}&type=${gasType}&lim=${QUERY_LIMIT}&dist=${DISTANCE_LIMIT}`).then(
             response => {
                 return dispatch(gasStationFetchAction(response.data));
             },

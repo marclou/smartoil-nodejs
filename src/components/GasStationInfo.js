@@ -127,11 +127,16 @@ class GasStationInfo extends Component {
                     <Text style={textMajorStyle}> {priceInfo.price}원</Text>
                     <Tag text={userGasType.value} />
                 </View>
+                {priceInfo.priceDiff !== 0 &&
                 <View style={row}>
                     <Text style={[textMinorStyle, { color: COLOR_PRIMARY }]}>
-                        지금 사면 약 15,000원(1.6L기준) 절약됩니다.
+                        지금 사면 약 &nbsp;
+                        {<Text style={{ fontFamily: FONT_CHARACTER_BOLD }}>
+                            {priceInfo.priceDiff.toLocaleString('en')}
+                        </Text>}
+                        원(1.6L기준) 절약됩니다.
                     </Text>
-                </View>
+                </View>}
                 <View style={{ marginTop: 25 }}>
                     <Button
                         title="주유소 찾아가기"

@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise';
+import { composeWithDevTools } from 'remote-redux-devtools';
 import createLogger from 'redux-logger';
 import _ from 'lodash';
 
@@ -28,7 +29,7 @@ export const configureStore = () => {
     }
     const store = createStore(
         reducers,
-        applyMiddleware(...middlewares)
+        composeWithDevTools(applyMiddleware(...middlewares))
     );
 
     if (module.hot) {

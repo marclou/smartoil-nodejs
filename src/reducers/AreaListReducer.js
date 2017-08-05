@@ -3,7 +3,10 @@ import areasList from '../FullAreasList.json';
 import {
     SELECT_AREA,
     SELECT_INDEX,
-    CLEAR_CACHE
+    CLEAR_CACHE,
+    DATA_FETCHING,
+    DATA_FETCH_SUCCESS,
+    DATA_FETCH_ERROR
 } from '../actions/type';
 
 const INITIAL_STATE = {
@@ -13,12 +16,14 @@ const INITIAL_STATE = {
         department: null,
         region: null
     },
-    areasList: areasList
+    areasList: [],
+    loading: true,
+    error: false
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        case SELECT_AREA:
+        /*case SELECT_AREA:
             switch (action.payload.index) {
                 case 0:
                     return {
@@ -52,12 +57,59 @@ export default (state = INITIAL_STATE, action) => {
                     };
                 default: break;
             }
+            break;*/
+        case DATA_FETCHING:
+            return {
+                ...state,
+                loading: true
+            };
+        case DATA_FETCH_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: false,
+                areasList: action.payload
+            };
+        case DATA_FETCH_ERROR:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            };
+        case SELECT_AREA:
+            switch (action.payload.areaDepth) {
+                case 'L':
+                    return {
+                        ...state,
+                        selectedAreas: {
+                            ...state.selectedAreas,
+                            area: action.payload
+                        }
+                    };
+                case 'M':
+                    return {
+                        ...state,
+                        selectedAreas: {
+                            ...state.selectedAreas,
+                            department: action.payload
+                        }
+                    };
+                case 'S':
+                    return {
+                        ...state,
+                        selectedAreas: {
+                            ...state.selectedAreas,
+                            region: action.payload
+                        }
+                    };
+                default:
+                    break;
+            }
             break;
         case SELECT_INDEX:
             return {
                 ...state,
-                selectedSegment: action.payload.selectedSegment,
-                areasList: action.payload.areasList
+                selectedSegment: action.payload
             };
         case CLEAR_CACHE:
             return {
@@ -68,7 +120,9 @@ export default (state = INITIAL_STATE, action) => {
                     department: null,
                     region: null
                 },
-                areasList: areasList
+                areasList: [],
+                loading: true,
+                error: false
             };
         default: return { ...state };
     }

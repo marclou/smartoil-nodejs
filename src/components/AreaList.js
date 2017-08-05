@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { InteractionManager, View, ListView } from 'react-native';
+import { View, ListView } from 'react-native';
 import { connect } from 'react-redux';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
 import { Spinner, SegmentSelector, Area } from './functionalComponents';
-import { selectArea, selectIndex } from '../actions/AreaListAction';
+import { changeDataSource, selectArea, selectIndex } from '../actions/AreaListAction';
 import {
     COLOR_FONT_SECONDARY,
     COLOR_BACKGROUND_QUATERNARY,
@@ -16,20 +16,35 @@ import {
 class AreaList extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isComponentReady: false
-        };
-        this.createDataSource(this.props.areaList);
+        console.log('* CONSTRUCTOR *');
+        this.createDataSource(props.areaList);
     }
 
     componentDidMount() {
-        InteractionManager.runAfterInteractions(() => {
-            this.setState({ isComponentReady: true });
-        });
+        console.log('* COMPONENT DID MOUNT *');
+        this.props.changeDataSource(this.props.selectedSegment, this.props.selectedAreas);
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log('----- Will Receive Props -----');
         this.createDataSource(nextProps.areaList);
+    }
+
+    shouldComponentUpdate(nextProps) {
+        if (this.props.loading) {
+            return (this.props.areaList !== nextProps.areaList);
+        }
+        return (this.props.selectedSegment !== nextProps.selectedSegment) || (this.props.selectedAreas !== nextProps.selectedAreas);
+    }
+
+    componentWillUpdate(nextProps) {
+        console.log('----- Will Update -----');
+        this.props.changeDataSource(nextProps.selectedSegment, nextProps.selectedAreas);
+    }
+
+    componentDidUpdate() {
+        console.log('----- Did Update -----');
+        //this.props.changeDataSource(this.props.selectedSegment, this.props.selectedAreas);
     }
 
     createDataSource(list) {
@@ -50,12 +65,14 @@ class AreaList extends Component {
             }
             return isSelected;
         });
+
         return isSelected;
     }
 
 
     render() {
-        if (!this.state.isComponentReady) {
+        console.log('Render...');
+        if (this.props.loading) {
             return <Spinner />;
         }
         const {
@@ -79,7 +96,7 @@ class AreaList extends Component {
                     <SegmentedControlTab
                         values={['시/도', '시/군/구', '읍/면/동']}
                         selectedIndex={selectedSegment}
-                        onTabPress={(index) => this.props.selectIndex(index, selectedAreas)}
+                        onTabPress={(index) => this.props.selectIndex(index)}
                         borderRadius={0}
                         tabsContainerStyle={tabsContainerStyle}
                         tabStyle={tabStyle}
@@ -96,9 +113,9 @@ class AreaList extends Component {
                     renderRow={
                         (rowData) =>
                             <Area
-                                name={rowData.name}
-                                selected={this.isSelected(rowData.name)}
-                                onPress={() => this.props.selectArea(selectedSegment, rowData.name, selectedAreas)}
+                                name={rowData.districtName}
+                                selected={this.isSelected(rowData)}
+                                onPress={() => this.props.selectArea(rowData)}
                             />
                     }
                 />
@@ -146,8 +163,9 @@ const mapStateToProps = state => {
     return {
         selectedAreas: state.areaListReducer.selectedAreas,
         areaList: state.areaListReducer.areasList,
-        selectedSegment: state.areaListReducer.selectedSegment
+        selectedSegment: state.areaListReducer.selectedSegment,
+        loading: state.areaListReducer.loading
     };
 };
 
-export default connect(mapStateToProps, { selectArea, selectIndex })(AreaList);
+export default connect(mapStateToProps, { changeDataSource, selectArea, selectIndex })(AreaList);

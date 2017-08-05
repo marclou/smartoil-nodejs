@@ -39,16 +39,28 @@ class GasStationList extends Component {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
+        const { gasStationsData, loading } = gasStations.gasStationsLibraries;
 
-        const { gasStationsData } = gasStations.gasStationsLibraries;
-
+        if (!loading) {
+            this.comparePrice(gasStationsData);
+        }
         if (gasStations.selectedFilter === 0) {
             gasStationsData.sort(this.sortByPrice);
         } else {
             gasStationsData.sort(this.sortByDistance);
         }
-
         this.dataSource = ds.cloneWithRows(gasStationsData);
+    }
+
+    comparePrice(gasStationsList) {
+        gasStationsList.sort(this.sortByPrice);
+        const highestPrice = gasStationsList.slice(-1)[0].priceInfo.price;
+        const { userTankCapacity } = this.props.userState;
+
+        return gasStationsList.map((gasStation) => {
+            const priceDiff = { priceDiff: (highestPrice - gasStation.priceInfo.price) * userTankCapacity };
+            return Object.assign(gasStation.priceInfo, priceDiff);
+        });
     }
 
     sortByPrice(a, b) {
