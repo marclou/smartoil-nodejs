@@ -14,7 +14,9 @@ import { displayLogo } from '../img/brands';
 
 class FavoriteItem extends Component {
     onPress() {
-        Actions.result();
+        Actions.favoriteGasStationInfo({
+            stationUid: this.props.gasStation.uid
+        });
     }
     onLongPress() {
         const { uid } = this.props.gasStation;

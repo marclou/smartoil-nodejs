@@ -7,11 +7,17 @@ import SelectedFilterReducer from './SelectedFilter';
 import PricePredictionReducer from './PricePredictionReducer';
 import AreaListReducer from './AreaListReducer';
 import FavoriteStationReducer from './FavoriteStationReducer';
+import SelectedFavoriteStationReducer from './SelectedFavoriteStationReducer';
 
 const gasStationList = combineReducers({
     gasStationsLibraries: GasStationListReducer,
     selectedID: SelectedIDReducer,
     selectedFilter: SelectedFilterReducer
+});
+
+const favoriteGasStationList = combineReducers({
+    favoriteStations: FavoriteStationReducer,
+    selectedStation: SelectedFavoriteStationReducer
 });
 
 export default combineReducers({
@@ -20,5 +26,5 @@ export default combineReducers({
     gasStationList,
     pricePrediction: PricePredictionReducer,
     areaListReducer: AreaListReducer,
-    favoriteStations: FavoriteStationReducer
+    favoriteGasStationList
 });

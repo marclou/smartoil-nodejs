@@ -98,7 +98,7 @@ const styles = {
 };
 
 const mapStateToProps = state => {
-    return { favoriteStations: state.favoriteStations.favoritesList };
+    return { favoriteStations: state.favoriteGasStationList.favoriteStations.favoritesList };
 };
 
 export default connect(mapStateToProps, { loadFavorites })(FavoriteGasStations);

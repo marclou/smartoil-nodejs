@@ -1,9 +1,15 @@
+import axios from 'axios';
+
 import realm from '../Realm';
 import {
     LOAD_FAVORITES,
     ADD_FAVORITE,
-    DELETE_FAVORITE
+    DELETE_FAVORITE,
+    FAVORITE_STATION_FETCH,
+    FAVORITE_STATION_FETCH_SUCCESS,
+    FAVORITE_STATION_FETCH_ERROR
 } from './type';
+import { SERVER_URL } from '../Api';
 
 /*
  * We have have to create a realm Object "favoriteStationslist" once the app is launched.
@@ -84,5 +90,37 @@ export const deleteFavorite = (uid) => {
     return {
         type: DELETE_FAVORITE,
         payload: uid
+    };
+};
+
+export const fetchFavoriteStation = (latitude, longitude, gasType, uid) => {
+    return (dispatch) => {
+        dispatch({ type: FAVORITE_STATION_FETCH });
+        const URL =
+            (latitude !== null && longitude !== null) ?
+            `${SERVER_URL}/gas_station/specific?lat=${latitude}&lng=${longitude}&type=${gasType}&id=${uid}` :
+            `${SERVER_URL}/gas_station/specific?type=${gasType}&id=${uid}`;
+
+        return axios.get(URL).then(
+            response => {
+                return dispatch(fetchFavoriteStationSuccess(response.data));
+            },
+            error => {
+                return dispatch(fetchFavoriteStationError(error.request.status));
+            });
+    };
+};
+
+const fetchFavoriteStationSuccess = data => {
+    return {
+        type: FAVORITE_STATION_FETCH_SUCCESS,
+        payload: data
+    };
+};
+
+const fetchFavoriteStationError = error => {
+    return {
+        type: FAVORITE_STATION_FETCH_ERROR,
+        payload: error
     };
 };

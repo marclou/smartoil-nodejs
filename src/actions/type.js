@@ -19,6 +19,9 @@ export const SELECT_FILTER = 'select_filter';
 export const LOAD_FAVORITES = 'load_favorites';
 export const ADD_FAVORITE = 'add_favorite';
 export const DELETE_FAVORITE = 'delete_favorite';
+export const FAVORITE_STATION_FETCH = 'favorite_station_fetch';
+export const FAVORITE_STATION_FETCH_SUCCESS = 'favorite_station_fetch_success';
+export const FAVORITE_STATION_FETCH_ERROR = 'favorite_station_fetch_error';
 
 /** Type for PricePrediction Component **/
 export const PREDICTION_FETCHING = 'prediction_fetching';

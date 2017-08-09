@@ -14,7 +14,6 @@ class GasStationItem extends Component {
         const { gasStation } = this.props;
 
         Actions.gasStationInfo({
-            title: gasStation.name,
             gasStation: gasStation
         });
     }

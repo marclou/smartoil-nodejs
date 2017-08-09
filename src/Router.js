@@ -6,12 +6,18 @@ import { connect } from 'react-redux';
 import Location from './components/initialComponent/Location';
 import GasType from './components/initialComponent/GasType';
 import TankCapacity from './components/initialComponent/TankCapacity';
-import { TabIcon, NavIcon, BackButton, TextContainer } from './components/functionalComponents';
+import {
+    TabIcon,
+    NavIcon,
+    BackButton,
+    TextContainer
+} from './components/functionalComponents';
 import Welcome from './components/Welcome';
 import SettingsList from './components/SettingsList';
 import Result from './components/Result';
 import AreaList from './components/AreaList';
 import FavoriteGasStations from './components/FavoriteGasStations';
+import GasStationContainer from './components/GasStationContainer';
 import GasStationInfo from './components/GasStationInfo';
 import GasFavoriteList from './components/GasFavoriteList';
 import TankCapacityFavoriteList from './components/TankCapacityFavoriteList';
@@ -35,7 +41,7 @@ const RouterComponent = () => {
     return (
         <ConnectedRouter>
             <Scene key='root'>
-                <Scene key="slider" initial={false}>
+                <Scene key="slider" initial={true}>
                     <Scene
                         key="location"
                         component={Location}
@@ -58,7 +64,7 @@ const RouterComponent = () => {
                         renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
                     />
                 </Scene>
-                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={true}>
+                <Scene key='tabs' tabs={true} tabBarStyle={tabBarStyle} initial={false}>
                     <Scene key="favorite" iconName='heart' icon={TabIcon} titleStyle={{ fontSize: 20 }}>
                         <Scene
                             initial
@@ -72,7 +78,7 @@ const RouterComponent = () => {
                         <Scene
                             sceneStyle={sceneStyle}
                             key="favoriteGasStationInfo"
-                            component={GasStationInfo}
+                            component={GasStationContainer}
                             renderBackButton={() => <BackButton color={COLOR_FONT_SECONDARY} />}
                             navigationBarStyle={navBarStyle}
                             titleStyle={{ fontFamily: FONT_CHARACTER_BOLD }}

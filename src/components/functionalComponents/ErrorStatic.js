@@ -1,20 +1,25 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 
 import {
     COLOR_FONT_SECONDARY,
     COLOR_FONT_TERCIARY,
     COLOR_BACKGROUND_TERCIARY,
     FONT_CHARACTER_BOLD,
-    FONT_CHARACTER_REGULAR
+    FONT_CHARACTER_REGULAR,
+    PADDING_BOTTOM
 } from '../../styles/common';
 import { Button } from './Button';
 
 const ErrorStatic = ({ title, message, onPress }) => {
-    const { containerStyle, titleStyle, messageStyle } = styles;
+    const { containerStyle, imageStyle, titleStyle, messageStyle } = styles;
 
     return (
         <View style={containerStyle}>
+            <Image
+                source={require('../../img/error.png')}
+                style={imageStyle}
+            />
             <Text style={titleStyle}>
                 {title}
             </Text>
@@ -36,7 +41,13 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: COLOR_BACKGROUND_TERCIARY,
-        paddingHorizontal: 40
+        paddingHorizontal: 40,
+        paddingBottom: PADDING_BOTTOM
+    },
+    imageStyle: {
+        marginBottom: 20,
+        width: 150,
+        height: 150
     },
     titleStyle: {
         fontSize: 16,

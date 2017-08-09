@@ -32,6 +32,7 @@ class GasStationInfo extends Component {
 
     componentDidMount() {
         Actions.refresh({
+            title: this.props.gasStation.name,
             renderRightButton: this.renderRightButton,
             rightButtonStyle: { padding: 0 }
         });
@@ -49,7 +50,6 @@ class GasStationInfo extends Component {
             'Naver'
         ];
         const URL = `http://maps.apple.com/?ll=${latitude},${longitude}`;
-        console.log(URL);
 
         if (Platform.OS === 'ios') {
             this.showIOSActionSheet(options, URL);
@@ -86,10 +86,10 @@ class GasStationInfo extends Component {
             .catch(err => console.log(err));
     }
 
-    renderRightButton(props) {
+    renderRightButton() {
         return (
             <View style={styles.navIconStyle}>
-                <SaveIcon gasStation={props.gasStation} />
+                <SaveIcon gasStation={this.props.gasStation} />
                 <NavIcon iconName="share" color={COLOR_PRIMARY} onPress={this.shareContent} />
             </View>
         );
@@ -103,9 +103,6 @@ class GasStationInfo extends Component {
         if (!this.state.isComponentReady) {
             return <Spinner />;
         }
-        if (this.props.gasStation === undefined) {
-            return <Spinner />;
-        }
         return (
             <View style={containerStyle}>
                 <LinearGradient colors={['rgba(0,0,0,0.1)', 'rgba(0,0,0,0)']}>
@@ -117,17 +114,18 @@ class GasStationInfo extends Component {
                 <View style={row}>
                     <Text style={textMediumStyle}>{name}</Text>
                 </View>
-                <View style={row}>
+                {(distance !== null) &&
+                    <View style={row}>
                     <Icon name="map-marker" style={{ color: COLOR_FONT_SECONDARY }} />
                     <Text style={textMinorStyle}> {(Math.round(distance * 100) / 100).toFixed(2)} km | </Text>
-                    <Text style={textMinorStyle}> 1 원</Text>
-                </View>
+                    <Text style={textMinorStyle}> 1 분</Text>
+                    </View>}
                 <View style={divider} />
                 <View style={row}>
                     <Text style={textMajorStyle}> {priceInfo.price}원</Text>
                     <Tag text={userGasType.value} />
                 </View>
-                {priceInfo.priceDiff !== 0 &&
+                {(priceInfo.priceDiff !== 0 && typeof priceInfo.priceDiff !== 'undefined') &&
                 <View style={row}>
                     <Text style={[textMinorStyle, { color: COLOR_PRIMARY }]}>
                         지금 사면 약 &nbsp;

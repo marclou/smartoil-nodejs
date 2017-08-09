@@ -39,9 +39,9 @@ class GasStationList extends Component {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
-        const { gasStationsData, loading } = gasStations.gasStationsLibraries;
+        const { gasStationsData, loading, error } = gasStations.gasStationsLibraries;
 
-        if (!loading) {
+        if (!loading && !error) {
             this.comparePrice(gasStationsData);
         }
         if (gasStations.selectedFilter === 0) {

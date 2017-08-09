@@ -16,7 +16,10 @@ class Location extends Component {
                     description='편리한 서비스 이용을 위해 처음 한번만 필요합니다. 주거하시는 지역을 선택해주세요.'
                 />
                 <AreaFavoriteList />
-                <Footer onPress={() => Actions.gasType()} text='다음' />
+                <Footer
+                    onPress={() => Actions.gasType()}
+                    text='다음'
+                />
             </View>
         );
     }
