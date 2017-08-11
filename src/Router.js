@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform } from 'react-native';
-import { Scene, Router } from 'react-native-router-flux';
+import { StackNavigator } from 'react-navigation';
 import { connect } from 'react-redux';
 
 import Location from './components/initialComponent/Location';
@@ -12,7 +12,7 @@ import {
     BackButton,
     TextContainer
 } from './components/functionalComponents';
-import Welcome from './components/Welcome';
+import Welcome from './components/HomeScreen';
 import SettingsList from './components/SettingsList';
 import Result from './components/Result';
 import AreaList from './components/AreaList';

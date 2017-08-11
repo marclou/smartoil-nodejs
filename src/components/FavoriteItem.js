@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text, Image, Alert } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -14,9 +13,10 @@ import { displayLogo } from '../img/brands';
 
 class FavoriteItem extends Component {
     onPress() {
-        Actions.favoriteGasStationInfo({
-            stationUid: this.props.gasStation.uid
-        });
+        const { navigate } = this.props.navigation;
+        const { uid } = this.props.gasStation;
+
+        navigate('StationDetail', { stationUid: uid });
     }
     onLongPress() {
         const { uid } = this.props.gasStation;

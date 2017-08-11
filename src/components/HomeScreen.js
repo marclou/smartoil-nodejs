@@ -1,19 +1,32 @@
 import React, { Component } from 'react';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, Image } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Fab from './Fab';
 import PricePrediction from './PricePrediction';
+import { NavIcon } from './functionalComponents';
 import {
     getUserPosition,
     getUserFavoriteGas,
     getUserTankCapacity,
     getUserFavoriteArea
 } from '../actions';
-import { COLOR_PRIMARY } from '../styles/common';
+import { COLOR_PRIMARY, COLOR_FONT_QUINARY } from '../styles/common';
+import Styles from '../styles/NavigationStyle';
 
-class Welcome extends Component {
+class HomeScreen extends Component {
+    static navigationOptions = {
+        tabBarLabel: '홈',
+        tabBarIcon: ({ tintColor }) => (
+            <Icon name='home' style={[Styles.tabBarIcon, { color: tintColor }]} />
+        ),
+        headerStyle: Styles.headerBackgroundPrimary,
+        headerTitle: <Image source={require('../img/icon/logo_type_white.png')} style={Styles.headerImageTitle} />,
+        headerRight: <NavIcon iconName="share" color={COLOR_FONT_QUINARY} />
+    };
+
     componentDidMount() {
         this.props.getUserPosition();
         this.props.getUserFavoriteGas();
@@ -29,6 +42,7 @@ class Welcome extends Component {
 
     render() {
         const { containerStyle, linearGradientStyle } = styles;
+        const { navigate } = this.props.navigation;
 
         return (
             <View style={containerStyle}>
@@ -37,7 +51,7 @@ class Welcome extends Component {
                 />
                 <LinearGradient colors={[COLOR_PRIMARY, '#53a0fe', '#40bbef']} style={linearGradientStyle}>
                     <PricePrediction />
-                    <Fab />
+                    <Fab navigate={navigate} />
                 </LinearGradient>
             </View>
         );
@@ -67,4 +81,4 @@ export default connect(mapStateToProps,
         getUserTankCapacity,
         getUserFavoriteArea
     }
-    )(Welcome);
+    )(HomeScreen);

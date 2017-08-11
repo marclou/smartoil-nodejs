@@ -5,8 +5,18 @@ import { connect } from 'react-redux';
 import areas from '../AreaList.json';
 import { Spinner, Area } from './functionalComponents';
 import { changeUserFavoriteArea } from '../actions';
+import { COLOR_FONT_QUINARY } from '../styles/common';
+import Styles from '../styles/NavigationStyle';
 
 class AreaFavoriteList extends Component {
+    static navigationOptions = {
+        tabBarVisible: false,
+        headerTitle: '지역',
+        headerStyle: Styles.headerBackgroundPrimary,
+        headerTitleStyle: Styles.headerTitlePrimary,
+        headerTintColor: COLOR_FONT_QUINARY,
+    };
+
     constructor(props) {
         super(props);
         this.state = {

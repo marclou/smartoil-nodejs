@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { LayoutAnimation } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 
 import GasStationRow from './GasStationRow';
 import { ListSection } from './functionalComponents';
@@ -12,10 +11,9 @@ class GasStationItem extends Component {
 
     onItemPress() {
         const { gasStation } = this.props;
+        const { navigate } = this.props.navigation;
 
-        Actions.gasStationInfo({
-            gasStation: gasStation
-        });
+        navigate('StationInfo', { gasStation: gasStation });
     }
 
     render() {

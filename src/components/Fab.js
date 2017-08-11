@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { Alert, Linking } from 'react-native';
 
@@ -25,8 +24,10 @@ class Fab extends Component {
     }
 
     reloadLocation() {
+        const { navigate } = this.props;
+
         this.props.getUserPosition()
-            .then(() => Actions.result())
+            .then(() => navigate('Result'))
             .catch((positionError) => {
                 switch (positionError.code) {
                     case 0:
@@ -76,6 +77,7 @@ class Fab extends Component {
 
     searchByLocation() {
         const { userAllowLocation, userLocation, errorLocation } = this.props.userState;
+        const { navigate } = this.props.navigation;
 
         if (!userAllowLocation) {
             return this.displayAlert(
@@ -96,12 +98,13 @@ class Fab extends Component {
             this.reloadLocation();
         }
         if (userAllowLocation && userLocation.latitude !== null && userLocation.longitude !== null) {
-            return Actions.result();
+            return navigate('Result');
         }
     }
 
     render() {
         const { actionButtonIconStyle, actionButtonItemIconStyle, textStyle, textContainerStyle, shadowStyle } = styles;
+        const { navigate } = this.props;
 
         return (
             <ActionButton
@@ -128,7 +131,7 @@ class Fab extends Component {
                 </ActionButton.Item>
                 <ActionButton.Item
                     title='지역으로 검색'
-                    onPress={() => Actions.searchArea()}
+                    onPress={() => navigate('AreaList')}
                     textContainerStyle={textContainerStyle}
                     textStyle={textStyle}
                     spaceBetween={10}

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { Actions } from 'react-native-router-flux';
 
 import AreaFavoriteList from '../AreaFavoriteList';
 import { Header, Footer } from './functionalComponents';
@@ -8,6 +7,7 @@ import { Header, Footer } from './functionalComponents';
 class Location extends Component {
     render() {
         const { containerStyle } = styles;
+        const { navigate } = this.props.navigation;
 
         return (
             <View style={containerStyle}>
@@ -17,7 +17,7 @@ class Location extends Component {
                 />
                 <AreaFavoriteList />
                 <Footer
-                    onPress={() => Actions.gasType()}
+                    onPress={() => navigate('GasType')}
                     text='다음'
                 />
             </View>

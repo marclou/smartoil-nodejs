@@ -1,13 +1,12 @@
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { Actions } from 'react-native-router-flux';
 
 const BackButton = ({ color }) => {
     const { containerStyle, viewStyle, iconStyle } = styles;
 
     return (
-        <TouchableOpacity style={containerStyle} onPress={Actions.pop}>
+        <TouchableOpacity style={containerStyle} onPress={console.log('find a way to pop the page :-)')}>
             <View style={viewStyle}>
                 <Icon name='arrow-back' color={color} style={iconStyle} />
             </View>

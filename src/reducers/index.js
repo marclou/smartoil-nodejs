@@ -21,7 +21,7 @@ const favoriteGasStationList = combineReducers({
 });
 
 export default combineReducers({
-    navigationState: NavigationReducer,
+    nav: NavigationReducer,
     userState: UserReducer,
     gasStationList,
     pricePrediction: PricePredictionReducer,

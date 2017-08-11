@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { InteractionManager, ListView, Text, View, Image } from 'react-native';
 import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { loadFavorites } from '../actions';
 import FavoriteItem from './FavoriteItem';
@@ -11,8 +12,19 @@ import {
     COLOR_FONT_TERCIARY,
     FONT_CHARACTER_REGULAR
 } from '../styles/common';
+import Styles from '../styles/NavigationStyle';
 
 class FavoriteGasStations extends Component {
+    static navigationOptions = {
+        tabBarLabel: '단골',
+        tabBarIcon: ({ tintColor }) => (
+            <Icon name='heart' style={[Styles.tabBarIcon, { color: tintColor }]} />
+        ),
+        headerTitle: '단골주유소',
+        headerStyle: Styles.headerBackgroundPrimary,
+        headerTitleStyle: [Styles.headerTitlePrimary, { alignSelf: 'center' }],
+    };
+
     constructor(props) {
         super(props);
         this.state = {

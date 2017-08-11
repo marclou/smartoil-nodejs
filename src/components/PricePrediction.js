@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Share } from 'react-native';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
 
 import { pricePredictionFetch } from '../actions';
 import { Tag, Spinner, PredictionPrice, NavIcon } from './functionalComponents';
@@ -15,9 +14,9 @@ import {
 
 class PricePrediction extends Component {
     componentDidMount() {
-        Actions.refresh({
+        /*Actions.refresh({
             renderRightButton: () => <NavIcon iconName="share" color={COLOR_FONT_QUINARY} onPress={this.shareContent} />
-        });
+        });*/
     }
 
     shouldComponentUpdate(nextProps) {

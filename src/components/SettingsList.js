@@ -1,12 +1,23 @@
 import React, { Component } from 'react';
 import { View, InteractionManager, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Spinner, SettingsRow, LocationSettingsRow } from './functionalComponents';
 import { COLOR_BACKGROUND_TERCIARY } from '../styles/common';
+import Styles from '../styles/NavigationStyle';
 
 class SettingsList extends Component {
+    static navigationOptions = {
+        tabBarLabel: '설정',
+        tabBarIcon: ({ tintColor }) => (
+            <Icon name='cog' style={[Styles.tabBarIcon, { color: tintColor }]} />
+        ),
+        headerTitle: '설정',
+        headerStyle: Styles.headerBackgroundPrimary,
+        headerTitleStyle: [Styles.headerTitlePrimary, { alignSelf: 'center' }],
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -25,6 +36,7 @@ class SettingsList extends Component {
             return <Spinner />;
         }
         const { userFavoriteGas, userTankCapacity, userFavoriteArea } = this.props.userSettings;
+        const { navigate } = this.props.navigation;
         const { containerStyle } = styles;
 
         return (
@@ -32,17 +44,17 @@ class SettingsList extends Component {
                 <ScrollView>
                     <SettingsRow
                         title="기름종류"
-                        onPress={() => Actions.gasTypeSetting()}
+                        onPress={() => navigate('GasSetting')}
                         value={userFavoriteGas.value}
                     />
                     <SettingsRow
                         title="리터량"
-                        onPress={() => Actions.tankCapacitySetting()}
+                        onPress={() => navigate('TankSetting')}
                         value={`${userTankCapacity}L`}
                     />
                     <SettingsRow
                         title="내 지역"
-                        onPress={() => Actions.favoriteArea()}
+                        onPress={() => navigate('LocationSetting')}
                         value={userFavoriteArea}
                     />
                     <LocationSettingsRow
@@ -50,7 +62,7 @@ class SettingsList extends Component {
                     />
                     <SettingsRow
                         title="정책"
-                        onPress={() => Actions.privacy()}
+                        onPress={() => navigate('Privacy')}
                     />
                 </ScrollView>
             </View>

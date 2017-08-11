@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Text, Image, View, InteractionManager, Share, ActionSheetIOS, Linking, Platform } from 'react-native';
 import { connect } from 'react-redux';
-import { Actions } from 'react-native-router-flux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -31,11 +30,11 @@ class GasStationInfo extends Component {
     }
 
     componentDidMount() {
-        Actions.refresh({
+        /*Actions.refresh({
             title: this.props.gasStation.name,
             renderRightButton: this.renderRightButton,
             rightButtonStyle: { padding: 0 }
-        });
+        });*/
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
         });

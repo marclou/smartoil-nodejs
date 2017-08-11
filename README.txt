@@ -5,7 +5,7 @@
 Npm install --save react-redux   (To create Providers)
 Npm install --save redux   ( To write async method. >  dispatch actions )
 Npm install --save native-base   (UI components
-Npm i react-native-router-flux --save   (To add the <Scene> tag - Navigation )
+Npm i react-navigation --save   (For Navigation..)
 Npm i --save lodash   (To manipulate easily Javascript array, objects etc..)
 Npm install react-native-vector-icons   (set of icons)
 Npm install --save axios (http client)

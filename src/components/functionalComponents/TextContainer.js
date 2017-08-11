@@ -8,9 +8,8 @@ import {
     PADDING_BOTTOM
 } from '../../styles/common';
 
-const TextContainer = ({ content }) => {
+const TextContainer = () => {
     const { containerStyle, scrollStyle, section, textStyle } = styles;
-    console.log(content);
 
     return (
         <View style={containerStyle}>

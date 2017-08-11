@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
-import { InteractionManager, ListView, View } from 'react-native';
+import { ListView, View } from 'react-native';
 import { connect } from 'react-redux';
 
-import { Spinner, ListSection, SelectionItem } from './functionalComponents';
+import { ListSection, SelectionItem } from './functionalComponents';
 import { changeUserTankCapacity } from '../actions';
-import { COLOR_BACKGROUND_TERCIARY, PADDING_BOTTOM } from '../styles/common';
+import { COLOR_BACKGROUND_TERCIARY, COLOR_FONT_QUINARY } from '../styles/common';
+import Styles from '../styles/NavigationStyle';
 
 class TankCapacityFavoriteList extends Component {
+    static navigationOptions = {
+        tabBarVisible: false,
+        headerTitle: '리터량',
+        headerStyle: Styles.headerBackgroundPrimary,
+        headerTitleStyle: Styles.headerTitlePrimary,
+        headerTintColor: COLOR_FONT_QUINARY
+    };
+
     constructor(props) {
         super(props);
         this.tankCapacity = [];
@@ -51,7 +60,6 @@ const styles = {
     containerStyle: {
         flex: 1,
         backgroundColor: COLOR_BACKGROUND_TERCIARY,
-        paddingBottom: PADDING_BOTTOM
     }
 };
 
