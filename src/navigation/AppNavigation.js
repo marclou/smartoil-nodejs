@@ -17,7 +17,8 @@ import { TextContainer } from '../components/functionalComponents';
 import {
     COLOR_PRIMARY,
     COLOR_BACKGROUND_PRIMARY,
-    COLOR_BACKGROUND_TERCIARY
+    COLOR_BACKGROUND_TERCIARY,
+    COLOR_BACKGROUND_QUATERNARY
 } from '../styles/common';
 import styles from '../styles/NavigationStyle';
 
@@ -29,7 +30,7 @@ const InitialStack = StackNavigator({
     initialRouteName: 'Location',
     headerMode: 'none',
     cardStyle: {
-        paddingTop: 70,
+        paddingTop: 80,
         backgroundColor: COLOR_BACKGROUND_TERCIARY
     },
 });
@@ -39,16 +40,22 @@ const FavoriteStack = StackNavigator({
     StationDetail: { screen: GasStationContainer }
 }, {
     initialRouteName: 'FavoriteList',
+    cardStyle: {
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY
+    },
 });
 
 const HomeStack = StackNavigator({
     Prediction: { screen: HomeScreen },
     AreaList: { screen: AreaList },
     Result: { screen: Result },
-    StationInfo: { screen: GasStationInfo }
+    StationInfo: { screen: GasStationContainer }
 
 }, {
-    initialRouteName: 'Prediction'
+    initialRouteName: 'Prediction',
+    cardStyle: {
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY
+    },
 });
 
 const SettingsStack = StackNavigator({
@@ -59,9 +66,6 @@ const SettingsStack = StackNavigator({
     Privacy: { screen: TextContainer }
 }, {
     initialRouteName: 'SettingsList',
-    gesturesEnabled: false,
-    swipeEnabled: false,
-    animationEnabled: false
 });
 
 const TabNav = TabNavigator({
@@ -86,7 +90,7 @@ const AppNav = StackNavigator({
     Initial: { screen: InitialStack },
     Main: { screen: TabNav },
 }, {
-    initialRouteName: 'Initial',
+    initialRouteName: 'Main',
     headerMode: 'none',
 });
 

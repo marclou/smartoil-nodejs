@@ -18,6 +18,10 @@ import {
 } from '../styles/common';
 
 class GasStationInfo extends Component {
+    static navigationOptions = {
+        tabBarVisible: false,
+    };
+
     constructor(props) {
         super(props);
 
@@ -30,11 +34,6 @@ class GasStationInfo extends Component {
     }
 
     componentDidMount() {
-        /*Actions.refresh({
-            title: this.props.gasStation.name,
-            renderRightButton: this.renderRightButton,
-            rightButtonStyle: { padding: 0 }
-        });*/
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
         });
@@ -97,7 +96,7 @@ class GasStationInfo extends Component {
     render() {
         const { containerStyle, divider, row, logoStyle, textMajorStyle, textMediumStyle, textMinorStyle } = styles;
         const { priceInfo, distance, name, brand } = this.props.gasStation;
-        const { userGasType } = this.props;
+        const { priceDiff, userGasType } = this.props;
 
         if (!this.state.isComponentReady) {
             return <Spinner />;
@@ -124,12 +123,12 @@ class GasStationInfo extends Component {
                     <Text style={textMajorStyle}> {priceInfo.price}원</Text>
                     <Tag text={userGasType.value} />
                 </View>
-                {(priceInfo.priceDiff !== 0 && typeof priceInfo.priceDiff !== 'undefined') &&
+                {(priceDiff !== 0 && typeof priceDiff !== 'undefined') &&
                 <View style={row}>
                     <Text style={[textMinorStyle, { color: COLOR_PRIMARY }]}>
                         지금 사면 약 &nbsp;
                         {<Text style={{ fontFamily: FONT_CHARACTER_BOLD }}>
-                            {priceInfo.priceDiff.toLocaleString('en')}
+                            {priceDiff.toLocaleString('en')}
                         </Text>}
                         원(1.6L기준) 절약됩니다.
                     </Text>

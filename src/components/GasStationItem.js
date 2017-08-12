@@ -10,10 +10,10 @@ class GasStationItem extends Component {
     }
 
     onItemPress() {
-        const { gasStation } = this.props;
-        const { navigate } = this.props.navigation;
+        const { uniId, priceInfo } = this.props.gasStation;
+        const { navigate } = this.props;
 
-        navigate('StationInfo', { gasStation: gasStation });
+        navigate('StationInfo', { stationUid: uniId, priceDiff: priceInfo.priceDiff });
     }
 
     render() {

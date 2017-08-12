@@ -55,6 +55,7 @@ class FavoriteGasStations extends Component {
         const { containerStyle, emptyContainerStyle, emptyImgStyle, emptyTextStyle } = styles;
         const { isComponentReady } = this.state;
         const { favoriteStations } = this.props;
+        const { navigate } = this.props.navigation;
 
         if (!isComponentReady) {
             return <Spinner />;
@@ -77,7 +78,7 @@ class FavoriteGasStations extends Component {
                 enableEmptySections
                 style={containerStyle}
                 dataSource={this.dataSource}
-                renderRow={(gasStation) => <FavoriteItem gasStation={gasStation} />}
+                renderRow={(gasStation) => <FavoriteItem gasStation={gasStation} navigate={navigate} />}
             />
         );
     }

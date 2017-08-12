@@ -5,6 +5,10 @@ import { Spinner } from './functionalComponents';
 import GasStationList from './GasStationList';
 
 class Result extends Component {
+    static navigationOptions = {
+        tabBarVisible: false,
+    };
+
     constructor(props) {
         super(props);
         this.state = {
@@ -20,13 +24,14 @@ class Result extends Component {
 
     render() {
         const { containerStyle } = styles;
+        const { navigate } = this.props.navigation;
 
         if (!this.state.isComponentReady) {
             return <Spinner />;
         }
         return (
             <View style={containerStyle} >
-                <GasStationList />
+                <GasStationList navigate={navigate} />
             </View>
         );
     }

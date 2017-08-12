@@ -90,6 +90,7 @@ class GasStationList extends Component {
     renderListOrSpinner() {
         const { gasStationsLibraries, selectedFilter } = this.props.gasStations;
         const { userLocation, userFavoriteGas } = this.props.userState;
+        const { navigate } = this.props;
         const { containerStyle, tabsContainerStyle, tabStyle, tabTextStyle, activeTabStyle, activeTabTextStyle } = styles;
 
         if (gasStationsLibraries.loading) {
@@ -123,7 +124,7 @@ class GasStationList extends Component {
                 <ListView
                     enableEmptySections
                     dataSource={this.dataSource}
-                    renderRow={(gasStation) => <GasStationItem gasStation={gasStation} />}
+                    renderRow={(gasStation) => <GasStationItem gasStation={gasStation} navigate={navigate} />}
                 />
             </View>
 

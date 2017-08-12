@@ -4,11 +4,19 @@ import { connect } from 'react-redux';
 import { fetchFavoriteStation } from '../actions/FavoriteStationAction';
 import GasStationInfo from './GasStationInfo';
 import { Spinner, ErrorStatic } from './functionalComponents';
+import { COLOR_PRIMARY } from '../styles/common';
+import Styles from '../styles/NavigationStyle';
 
 class GasStationContainer extends Component {
+    static navigationOptions = {
+        tabBarVisible: false,
+        headerTintColor: COLOR_PRIMARY,
+        headerBackTitle: null,
+    };
+
     componentDidMount() {
         const { userLocation, userFavoriteGas } = this.props.userState;
-        const { stationUid } = this.props;
+        const { stationUid } = this.props.navigation.state.params;
 
         this.props.fetchFavoriteStation(userLocation.latitude, userLocation.longitude, userFavoriteGas.code, stationUid);
     }
@@ -16,7 +24,7 @@ class GasStationContainer extends Component {
     render() {
         const { favoriteStation } = this.props;
         const { userLocation, userFavoriteGas } = this.props.userState;
-        const { stationUid } = this.props;
+        const { stationUid, priceDiff } = this.props.navigation.state.params;
 
         if (favoriteStation.loading) {
             return <Spinner size='large' />;
@@ -34,6 +42,7 @@ class GasStationContainer extends Component {
             return (
                 <GasStationInfo
                     gasStation={favoriteStation.gasStation}
+                    priceDiff={priceDiff}
                 />
             );
         }

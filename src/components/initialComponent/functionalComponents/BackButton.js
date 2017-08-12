@@ -17,7 +17,7 @@ const BackButton = ({ onPress }) => {
 const styles = {
     containerStyle: {
         position: 'absolute',
-        top: -40,
+        top: -65,
         left: 0,
         alignItems: 'center',
         padding: 20

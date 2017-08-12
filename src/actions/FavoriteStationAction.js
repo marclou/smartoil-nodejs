@@ -103,7 +103,10 @@ export const fetchFavoriteStation = (latitude, longitude, gasType, uid) => {
 
         return axios.get(URL).then(
             response => {
-                return dispatch(fetchFavoriteStationSuccess(response.data));
+                if (response.data) {
+                    return dispatch(fetchFavoriteStationSuccess(response.data));
+                }
+                return dispatch(fetchFavoriteStationError(response.status));
             },
             error => {
                 return dispatch(fetchFavoriteStationError(error.request.status));

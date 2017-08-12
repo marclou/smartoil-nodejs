@@ -13,7 +13,7 @@ import { displayLogo } from '../img/brands';
 
 class FavoriteItem extends Component {
     onPress() {
-        const { navigate } = this.props.navigation;
+        const { navigate } = this.props;
         const { uid } = this.props.gasStation;
 
         navigate('StationDetail', { stationUid: uid });

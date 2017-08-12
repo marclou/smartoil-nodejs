@@ -77,7 +77,7 @@ class Fab extends Component {
 
     searchByLocation() {
         const { userAllowLocation, userLocation, errorLocation } = this.props.userState;
-        const { navigate } = this.props.navigation;
+        const { navigate } = this.props;
 
         if (!userAllowLocation) {
             return this.displayAlert(
@@ -110,7 +110,7 @@ class Fab extends Component {
             <ActionButton
                 buttonColor={COLOR_FONT_QUINARY}
                 icon={<Icon name='search' style={actionButtonIconStyle} />}
-                offsetY={70}
+                offsetY={30}
                 degrees={0}
                 backdrop={<Blur />}
                 useNativeFeedback={false}
