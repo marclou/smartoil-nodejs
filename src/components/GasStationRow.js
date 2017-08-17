@@ -12,7 +12,7 @@ import { displayLogo } from '../img/brands';
 
 class GasStationRow extends Component {
     render() {
-        const { priceInfo, distance, name, brand } = this.props.gasStation;
+        const { priceInfo, realTimeVariables, name, brand } = this.props.gasStation;
         const { containerStyle, logoStyle, textContainer, textStyle, majorTextStyle, section, subSection, iconStyle } = styles;
 
         return (
@@ -37,12 +37,12 @@ class GasStationRow extends Component {
                     <View style={[subSection, { alignItems: 'flex-end', paddingRight: 20 }]}>
                         <View style={textContainer} >
                             <Text style={textStyle}>
-                                {(Math.round(distance * 100) / 100).toFixed(2)} km
+                                {(Math.round(realTimeVariables.totalDistance) / 1000).toFixed(2)} km
                             </Text>
                         </View>
                         <View style={textContainer} >
                             <Text style={textStyle}>
-                                1 분
+                                {Math.round(realTimeVariables.totalTime / 60).toFixed(0)} 분
                             </Text>
                         </View>
                     </View>

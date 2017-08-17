@@ -10,10 +10,10 @@ class GasStationItem extends Component {
     }
 
     onItemPress() {
-        const { uniId, priceInfo } = this.props.gasStation;
+        const { uniId, priceInfo, realTimeVariables } = this.props.gasStation;
         const { navigate } = this.props;
 
-        navigate('StationInfo', { stationUid: uniId, priceDiff: priceInfo.priceDiff });
+        navigate('StationInfo', { stationUid: uniId, priceDiff: priceInfo.priceDiff, realTimeVariables: realTimeVariables });
     }
 
     render() {

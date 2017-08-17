@@ -17,11 +17,10 @@ const styles = {
         position: 'absolute',
         top: 0,
         left: 0,
-        height: height,
-        width: width,
+        height: height * 3,
+        width: width * 3,
         backgroundColor: 'black',
         opacity: 0.7,
-        zIndex: 10
     }
 };
 

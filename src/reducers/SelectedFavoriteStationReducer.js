@@ -7,6 +7,7 @@ import {
 const INITIAL_STATE = {
     loading: true,
     gasStation: null,
+    title: 'lol',
     error: false,
     errorCode: null
 };
@@ -23,6 +24,7 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 loading: false,
                 gasStation: action.payload,
+                title: action.payload.name,
                 error: false,
                 errorCode: null
             };

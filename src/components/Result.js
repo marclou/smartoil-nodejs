@@ -3,10 +3,16 @@ import { InteractionManager, View } from 'react-native';
 
 import { Spinner } from './functionalComponents';
 import GasStationList from './GasStationList';
+import { COLOR_FONT_SECONDARY } from '../styles/common';
+import Styles from '../styles/NavigationStyle';
 
 class Result extends Component {
     static navigationOptions = {
         tabBarVisible: false,
+        headerTitle: '내 위치로 검색',
+        headerTintColor: COLOR_FONT_SECONDARY,
+        headerTitleStyle: Styles.headerTitleDark,
+        headerStyle: [Styles.headerBackgroundDark, { shadowOpacity: 0 }]
     };
 
     constructor(props) {

@@ -18,17 +18,12 @@ import {
 } from '../styles/common';
 
 class GasStationInfo extends Component {
-    static navigationOptions = {
-        tabBarVisible: false,
-    };
-
     constructor(props) {
         super(props);
 
         this.state = {
             isComponentReady: false
         };
-        this.renderRightButton = this.renderRightButton.bind(this);
         this.linkToNavigation = this.linkToNavigation.bind(this);
         this.showAndroidActionSheet = this.showAndroidActionSheet.bind(this);
     }
@@ -70,33 +65,10 @@ class GasStationInfo extends Component {
         Linking.openURL(`geo:${latitude},${longitude}`);
     }
 
-    shareContent() {
-        Share.share({
-                message: '스마트오일 덕분에 이 주에 기름값을 XX원 절약할 수 있었어요!  얼마나 아낄 수 있는지 알아볼까요? ',
-                title: '스마트오일',
-                url: 'http://nsjtech.com'
-            },
-            {
-                dialogTitle: '공유하기',
-                tintColor: 'green'
-            })
-            .then(result => console.log(result))
-            .catch(err => console.log(err));
-    }
-
-    renderRightButton() {
-        return (
-            <View style={styles.navIconStyle}>
-                <SaveIcon gasStation={this.props.gasStation} />
-                <NavIcon iconName="share" color={COLOR_PRIMARY} onPress={this.shareContent} />
-            </View>
-        );
-    }
-
     render() {
         const { containerStyle, divider, row, logoStyle, textMajorStyle, textMediumStyle, textMinorStyle } = styles;
-        const { priceInfo, distance, name, brand } = this.props.gasStation;
-        const { priceDiff, userGasType } = this.props;
+        const { priceInfo, name, brand } = this.props.gasStation;
+        const { priceDiff, realTimeVariables, userGasType } = this.props;
 
         if (!this.state.isComponentReady) {
             return <Spinner />;
@@ -112,11 +84,15 @@ class GasStationInfo extends Component {
                 <View style={row}>
                     <Text style={textMediumStyle}>{name}</Text>
                 </View>
-                {(distance !== null) &&
+                {(realTimeVariables !== undefined) &&
                     <View style={row}>
-                    <Icon name="map-marker" style={{ color: COLOR_FONT_SECONDARY }} />
-                    <Text style={textMinorStyle}> {(Math.round(distance * 100) / 100).toFixed(2)} km | </Text>
-                    <Text style={textMinorStyle}> 1 분</Text>
+                        <Icon name="map-marker" style={{ color: COLOR_FONT_SECONDARY }} />
+                        <Text style={textMinorStyle}>
+                            &nbsp; {(Math.round(realTimeVariables.totalDistance) / 1000).toFixed(2)} km |
+                        </Text>
+                        <Text style={textMinorStyle}>
+                            &nbsp; {Math.round(realTimeVariables.totalTime / 60).toFixed(0)} 분
+                        </Text>
                     </View>}
                 <View style={divider} />
                 <View style={row}>

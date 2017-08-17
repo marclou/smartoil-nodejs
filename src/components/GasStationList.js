@@ -55,6 +55,7 @@ class GasStationList extends Component {
     comparePrice(gasStationsList) {
         gasStationsList.sort(this.sortByPrice);
         const highestPrice = gasStationsList.slice(-1)[0].priceInfo.price;
+
         const { userTankCapacity } = this.props.userState;
 
         return gasStationsList.map((gasStation) => {
@@ -75,9 +76,9 @@ class GasStationList extends Component {
 
     sortByDistance(a, b) {
         let comparison = 0;
-        if (a.distance > b.distance) {
+        if (a.realTimeVariables.totalDistance > b.realTimeVariables.totalDistance) {
             comparison = 1;
-        } else if (a.distance < b.distance) {
+        } else if (a.realTimeVariables.totalDistance < b.realTimeVariables.totalDistance) {
             comparison = -1;
         }
         return comparison;

@@ -8,7 +8,6 @@ import GasStationContainer from '../components/GasStationContainer';
 import HomeScreen from '../components/HomeScreen';
 import AreaList from '../components/AreaList';
 import Result from '../components/Result';
-import GasStationInfo from '../components/GasStationInfo';
 import SettingsList from '../components/SettingsList';
 import GasFavoriteList from '../components/GasFavoriteList';
 import TankCapacityFavoriteList from '../components/TankCapacityFavoriteList';
@@ -78,6 +77,7 @@ const TabNav = TabNavigator({
     tabBarComponent: TabBarBottom,
     swipeEnabled: true,
     animationEnabled: true,
+    lazy: false,
     tabBarOptions: {
         activeTintColor: COLOR_PRIMARY,
         inactiveTintColor: COLOR_BACKGROUND_PRIMARY,
