@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import Fab from './Fab';
 import PricePrediction from './PricePrediction';
 import { NavIcon } from './functionalComponents';
 import {

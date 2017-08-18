@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
-import { Alert, Linking, View } from 'react-native';
+import { Alert, Linking } from 'react-native';
 
 import { Blur } from './functionalComponents';
 import {
-    COLOR_PRIMARY,
     COLOR_FONT_SECONDARY,
     COLOR_FONT_QUINARY,
     FONT_CHARACTER_REGULAR
@@ -109,8 +108,8 @@ class Fab extends Component {
         return (
             <ActionButton
                 buttonColor={COLOR_FONT_QUINARY}
-                icon={<Icon name='search' style={actionButtonIconStyle}/>}
-                offsetY={80}
+                icon={<Icon name='search' style={actionButtonIconStyle} />}
+                offsetY={85}
                 degrees={0}
                 backdrop={<Blur />}
                 useNativeFeedback={false}
@@ -122,7 +121,7 @@ class Fab extends Component {
                     textStyle={textStyle}
                     spaceBetween={10}
                     useNativeFeedback={false}
-                    hideLabelShadow={true}
+                    hideLabel={true}
                 >
                     <Icon
                         name='map-marker'
@@ -152,7 +151,7 @@ class Fab extends Component {
 const styles = {
     actionButtonIconStyle: {
         fontSize: 16,
-        color: COLOR_PRIMARY
+        color: COLOR_FONT_SECONDARY
     },
     actionButtonItemIconStyle: {
         fontSize: 16,

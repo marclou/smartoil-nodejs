@@ -17,9 +17,10 @@ import {
     COLOR_PRIMARY,
     COLOR_BACKGROUND_PRIMARY,
     COLOR_BACKGROUND_TERCIARY,
-    COLOR_BACKGROUND_QUATERNARY
+    COLOR_BACKGROUND_QUATERNARY,
+    COLOR_FONT_QUINARY
 } from '../styles/common';
-import styles from '../styles/NavigationStyle';
+import Styles from '../styles/NavigationStyle';
 
 const InitialStack = StackNavigator({
     Location: { screen: Location },
@@ -62,9 +63,20 @@ const SettingsStack = StackNavigator({
     GasSetting: { screen: GasFavoriteList },
     TankSetting: { screen: TankCapacityFavoriteList },
     LocationSetting: { screen: AreaFavoriteList },
-    Privacy: { screen: TextContainer }
+    Privacy: {
+        screen: TextContainer,
+        navigationOptions: {
+            title: '정책',
+            tabBarVisible: false
+        }
+    }
 }, {
     initialRouteName: 'SettingsList',
+    navigationOptions: {
+        headerStyle: Styles.headerBackgroundPrimary,
+        headerTitleStyle: Styles.headerTitlePrimary,
+        headerTintColor: COLOR_FONT_QUINARY,
+    }
 });
 
 const TabNav = TabNavigator({
@@ -73,6 +85,7 @@ const TabNav = TabNavigator({
     Settings: { screen: SettingsStack },
 }, {
     initialRouteName: 'Home',
+    order: ['Favorite', 'Home', 'Settings'],
     tabBarPosition: 'bottom',
     tabBarComponent: TabBarBottom,
     swipeEnabled: true,
@@ -81,8 +94,8 @@ const TabNav = TabNavigator({
     tabBarOptions: {
         activeTintColor: COLOR_PRIMARY,
         inactiveTintColor: COLOR_BACKGROUND_PRIMARY,
-        style: styles.tabBar,
-        labelStyle: styles.tabBarLabel
+        style: Styles.tabBar,
+        labelStyle: Styles.tabBarLabel
     }
 });
 
@@ -90,7 +103,7 @@ const AppNav = StackNavigator({
     Initial: { screen: InitialStack },
     Main: { screen: TabNav },
 }, {
-    initialRouteName: 'Main',
+    initialRouteName: 'Initial',
     headerMode: 'none',
 });
 

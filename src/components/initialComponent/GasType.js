@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import { View, BackHandler } from 'react-native';
+import { View } from 'react-native';
 import { NavigationActions } from 'react-navigation';
 
 import GasTypePicker from '../GasTypePicker';
 import { Header, Footer, BackButton } from './functionalComponents';
 
 class GasType extends Component {
-    componentDidMount() {
-        BackHandler.addEventListener('hardwareBackPress', this.goBack);
-    }
-
     goBack = () => {
         this.props.navigation.dispatch(NavigationActions.back());
     };

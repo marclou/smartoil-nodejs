@@ -4,16 +4,12 @@ import { connect } from 'react-redux';
 
 import { ListSection, SelectionItem } from './functionalComponents';
 import { changeUserTankCapacity } from '../actions';
-import { COLOR_BACKGROUND_TERCIARY, COLOR_FONT_QUINARY } from '../styles/common';
-import Styles from '../styles/NavigationStyle';
+import { COLOR_BACKGROUND_TERCIARY } from '../styles/common';
 
 class TankCapacityFavoriteList extends Component {
     static navigationOptions = {
         tabBarVisible: false,
         headerTitle: '리터량',
-        headerStyle: Styles.headerBackgroundPrimary,
-        headerTitleStyle: Styles.headerTitlePrimary,
-        headerTintColor: COLOR_FONT_QUINARY
     };
 
     constructor(props) {

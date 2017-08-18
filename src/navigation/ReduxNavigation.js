@@ -8,8 +8,21 @@ import Fab from '../components/Fab';
 
 const handleHardwareBack = (props, navigation) => () => {
     // Back performs pop, unless we're to main screen [0,0]
-    if (navigation.state.index === 0 && navigation.state.routes[0].index === 0) {
-        BackHandler.exitApp();
+    switch (navigation.state.routes[0].routeName) {
+        case 'Initial':
+            if (navigation.state.index === 0
+                && navigation.state.routes[0].index === 0) {
+                BackHandler.exitApp();
+            }
+            break;
+        case 'Main':
+            if (navigation.state.index === 0
+                && navigation.state.routes[0].index === 1 && navigation.state.routes[0].routes[1].index === 0) {
+                BackHandler.exitApp();
+            }
+            break;
+        default:
+            return navigation.goBack(null);
     }
     return navigation.goBack(null);
 };
@@ -28,7 +41,9 @@ const ReduxNavigation = (props) => {
     return (
         <View style={{ flex: 1 }}>
             <AppNavigation navigation={navigation} />
-            {navigation.state.routes[0].index === 1 && <Fab navigation={navigation} />}
+            {navigation.state.routes[0].routes[navigation.state.routes[0].index].routeName === 'Home'
+            && navigation.state.routes[0].routes[navigation.state.routes[0].index].index === 0
+            && <Fab navigation={navigation} />}
         </View>
     );
 };

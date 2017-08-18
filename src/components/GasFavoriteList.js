@@ -6,8 +6,7 @@ import { ListSection, SelectionItem } from './functionalComponents';
 import { changeUserFavoriteGas } from '../actions';
 import {
     COLOR_BACKGROUND_TERCIARY,
-    PADDING_BOTTOM,
-    COLOR_FONT_QUINARY
+    PADDING_BOTTOM
 } from '../styles/common';
 import {
     GASOLINE,
@@ -15,15 +14,11 @@ import {
     PREMIUM_GASOLINE,
     LPG
 } from '../Type';
-import Styles from '../styles/NavigationStyle';
 
 class GasFavoriteList extends Component {
     static navigationOptions = {
         tabBarVisible: false,
         headerTitle: '기름 종류',
-        headerStyle: Styles.headerBackgroundPrimary,
-        headerTitleStyle: Styles.headerTitlePrimary,
-        headerTintColor: COLOR_FONT_QUINARY
     };
 
     constructor(props) {
