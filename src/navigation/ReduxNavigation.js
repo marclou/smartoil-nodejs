@@ -1,9 +1,10 @@
 import React from 'react';
 import * as ReactNavigation from 'react-navigation';
 import { connect } from 'react-redux';
-import { BackHandler } from 'react-native';
+import { BackHandler, View } from 'react-native';
 
 import AppNavigation from './AppNavigation';
+import Fab from '../components/Fab';
 
 const handleHardwareBack = (props, navigation) => () => {
     // Back performs pop, unless we're to main screen [0,0]
@@ -24,7 +25,12 @@ const ReduxNavigation = (props) => {
     // Android back button
     BackHandler.addEventListener('hardwareBackPress', handleHardwareBack(props, navigation));
 
-    return <AppNavigation navigation={navigation} />;
+    return (
+        <View style={{ flex: 1 }}>
+            <AppNavigation navigation={navigation} />
+            {navigation.state.routes[0].index === 1 && <Fab navigation={navigation} />}
+        </View>
+    );
 };
 
 const mapStateToProps = state => ({ nav: state.nav });

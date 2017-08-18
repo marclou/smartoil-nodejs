@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
-import { Alert, Linking } from 'react-native';
+import { Alert, Linking, View } from 'react-native';
 
 import { Blur } from './functionalComponents';
 import {
@@ -24,7 +24,7 @@ class Fab extends Component {
     }
 
     reloadLocation() {
-        const { navigate } = this.props;
+        const { navigate } = this.props.navigation;
 
         this.props.getUserPosition()
             .then(() => navigate('Result'))
@@ -77,7 +77,7 @@ class Fab extends Component {
 
     searchByLocation() {
         const { userAllowLocation, userLocation, errorLocation } = this.props.userState;
-        const { navigate } = this.props;
+        const { navigate } = this.props.navigation;
 
         if (!userAllowLocation) {
             return this.displayAlert(
@@ -103,14 +103,14 @@ class Fab extends Component {
     }
 
     render() {
-        const { actionButtonIconStyle, actionButtonItemIconStyle, textStyle, textContainerStyle, shadowStyle } = styles;
-        const { navigate } = this.props;
+        const { actionButtonIconStyle, actionButtonItemIconStyle, textStyle, textContainerStyle } = styles;
+        const { navigate } = this.props.navigation;
 
         return (
             <ActionButton
                 buttonColor={COLOR_FONT_QUINARY}
-                icon={<Icon name='search' style={actionButtonIconStyle} />}
-                offsetY={30}
+                icon={<Icon name='search' style={actionButtonIconStyle}/>}
+                offsetY={80}
                 degrees={0}
                 backdrop={<Blur />}
                 useNativeFeedback={false}

@@ -42,7 +42,6 @@ class HomeScreen extends Component {
 
     render() {
         const { containerStyle, linearGradientStyle } = styles;
-        const { navigate } = this.props.navigation;
 
         return (
             <View style={containerStyle}>
@@ -51,7 +50,6 @@ class HomeScreen extends Component {
                 />
                 <LinearGradient colors={[COLOR_PRIMARY, '#53a0fe', '#40bbef']} style={linearGradientStyle}>
                     <PricePrediction />
-                    <Fab navigate={navigate} />
                 </LinearGradient>
             </View>
         );
