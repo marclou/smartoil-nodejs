@@ -30,6 +30,7 @@ export default StyleSheet.create({
         width: 110,
         resizeMode: 'stretch',
         alignSelf: 'center',
+        paddingLeft: 50
     },
     headerBackgroundPrimary: {
         backgroundColor: COLOR_PRIMARY

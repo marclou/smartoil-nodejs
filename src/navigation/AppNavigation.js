@@ -103,7 +103,7 @@ const AppNav = StackNavigator({
     Initial: { screen: InitialStack },
     Main: { screen: TabNav },
 }, {
-    initialRouteName: 'Initial',
+    initialRouteName: 'Main',
     headerMode: 'none',
 });
 
