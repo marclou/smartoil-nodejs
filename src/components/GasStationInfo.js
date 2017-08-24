@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { Text, Image, View, InteractionManager, ActionSheetIOS, Linking, Platform } from 'react-native';
+import { Text, Image, View, InteractionManager, ActionSheetIOS, Linking, Platform, AlertIOS } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
 
-import SaveIcon from './SaveIcon';
 import { Spinner, Tag, Button, NavIcon } from './functionalComponents';
 import { displayLogo } from '../img/brands';
 import {
@@ -35,32 +34,68 @@ class GasStationInfo extends Component {
     }
 
     linkToNavigation() {
-        const { latitude, longitude } = this.props.gasStation.location;
-        const options = [
-            'Cancel',
-            'T-Map',
-            'Kakao Map',
-            'Naver'
-        ];
-        const URL = `http://maps.apple.com/?ll=${latitude},${longitude}`;
-
         if (Platform.OS === 'ios') {
-            this.showIOSActionSheet(options, URL);
+            const { gasStation } = this.props;
+
+            this.showIOSActionSheet(gasStation);
         } else {
+            const { latitude, longitude } = this.props.gasStation.location;
+
             this.showAndroidActionSheet(latitude, longitude);
         }
     }
 
-    showIOSActionSheet(options, url) {
+    showIOSActionSheet({ location, address }) {
+        const { latitude, longitude } = location;
+        const OPTIONS = [
+            'Cancel',
+            'Naver Map',
+            'Daum Map',
+            'Google Maps',
+            'Maps'
+        ];
+
         ActionSheetIOS.showActionSheetWithOptions({
-                options: options,
+                options: OPTIONS,
                 cancelButtonIndex: 0
             },
             (buttonIndex) => {
-                Linking.openURL(url);
+                let URL = null;
+
+                if (buttonIndex !== 0) {
+                    switch (buttonIndex) {
+                        case 1:
+                            URL = `navermaps://?menu=location&pinType=place&lat=${latitude}&lng=${longitude}`;
+                            break;
+                        case 2:
+                            URL = `daummaps://search?q=${address}&p=${latitude},${longitude}`;
+                            break;
+                        case 3:
+                            URL = `comgooglemaps://?q=${address}&center=${latitude},${longitude}`;
+                            break;
+                        case 4:
+                            URL = `http://maps.apple.com/?address=${address}`;
+                            break;
+                        default:
+                            break;
+
+                    }
+                    Linking.canOpenURL(URL).then(supported => {
+                        if (!supported) {
+                            AlertIOS.alert(
+                                'Error',
+                                `${OPTIONS[buttonIndex]} is not installed on your device`,
+                                [{ text: 'Ok' }]
+                            );
+                        } else {
+                            return Linking.openURL(URL);
+                        }
+                    }).catch(err => console.error('An error occurred', err));
+                }
             }
         );
     }
+
     showAndroidActionSheet(latitude, longitude) {
         Linking.openURL(`geo:${latitude},${longitude}`);
     }

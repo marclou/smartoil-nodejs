@@ -22,7 +22,7 @@ class Splash extends Component {
                 key: null
             });
 
-            this.props.changeUserIsFirstLaunch(value);
+            this.props.changeUserIsFirstLaunch(JSON.parse(value));
             this.props.navigation.dispatch(resetAction);
         });
     }
