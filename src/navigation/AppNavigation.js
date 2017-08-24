@@ -1,5 +1,6 @@
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 
+import Splash from '../components/Splash';
 import Location from '../components/initialComponent/Location';
 import GasType from '../components/initialComponent/GasType';
 import TankCapacity from '../components/initialComponent/TankCapacity';
@@ -102,8 +103,9 @@ const TabNav = TabNavigator({
 const AppNav = StackNavigator({
     Initial: { screen: InitialStack },
     Main: { screen: TabNav },
+    Splash: { screen: Splash }
 }, {
-    initialRouteName: 'Main',
+    initialRouteName: 'Splash',
     headerMode: 'none',
 });
 

@@ -1,30 +1,38 @@
 import React from 'react';
 import * as ReactNavigation from 'react-navigation';
 import { connect } from 'react-redux';
-import { BackHandler, View } from 'react-native';
+import { BackHandler, View, StatusBar } from 'react-native';
 
 import AppNavigation from './AppNavigation';
 import Fab from '../components/Fab';
 
 const handleHardwareBack = (props, navigation) => () => {
-    // Back performs pop, unless we're to main screen [0,0]
-    switch (navigation.state.routes[0].routeName) {
-        case 'Initial':
-            if (navigation.state.index === 0
-                && navigation.state.routes[0].index === 0) {
-                BackHandler.exitApp();
-            }
-            break;
-        case 'Main':
-            if (navigation.state.index === 0
-                && navigation.state.routes[0].index === 1 && navigation.state.routes[0].routes[1].index === 0) {
-                BackHandler.exitApp();
-            }
-            break;
+   const { nav } = props;
+
+   switch (AppNavigation.router.getPathAndParamsForState(nav).path) {
+       case 'Initial/Location':
+       case 'Main/Home/Prediction':
+           BackHandler.exitApp();
+           break;
+       default:
+           return navigation.goBack(null);
+   }
+};
+
+// manage IOS status bar color depending on the navigation path
+const setBarStyle = path => {
+    switch (path) {
+        case 'Initial/Location':
+        case 'Initial/GasType':
+        case 'Initial/TankCapacity':
+        case 'Main/Favorite/StationDetail':
+        case 'Main/Home/Result':
+        case 'Main/Home/StationInfo':
+        case 'Main/Home/AreaList':
+            return 'dark-content';
         default:
-            return navigation.goBack(null);
+            return 'light-content';
     }
-    return navigation.goBack(null);
 };
 
 // here is our redux-aware our smart component
@@ -34,15 +42,16 @@ const ReduxNavigation = (props) => {
         dispatch,
         state: nav
     });
-
     // Android back button
     BackHandler.addEventListener('hardwareBackPress', handleHardwareBack(props, navigation));
 
     return (
         <View style={{ flex: 1 }}>
+            <StatusBar
+                barStyle={setBarStyle(AppNavigation.router.getPathAndParamsForState(nav).path)}
+            />
             <AppNavigation navigation={navigation} />
-            {navigation.state.routes[0].routes[navigation.state.routes[0].index].routeName === 'Home'
-            && navigation.state.routes[0].routes[navigation.state.routes[0].index].index === 0
+            {AppNavigation.router.getPathAndParamsForState(nav).path === 'Main/Home/Prediction'
             && <Fab navigation={navigation} />}
         </View>
     );

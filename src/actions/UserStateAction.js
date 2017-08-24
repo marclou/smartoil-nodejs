@@ -7,7 +7,8 @@ import {
     CHANGE_USER_ALLOW_LOCATION,
     RECEIVE_USER_FAVORITE_GAS,
     RECEIVE_USER_TANK_CAPACITY,
-    RECEIVE_USER_FAVORITE_AREA
+    RECEIVE_USER_FAVORITE_AREA,
+    RECEIVE_USER_IS_FIRST_LAUNCH
 } from './type';
 
 // Action Creator for updating the location
@@ -59,6 +60,14 @@ const userFavoriteAreaAction = favoriteArea => {
     return {
         type: RECEIVE_USER_FAVORITE_AREA,
         payload: favoriteArea
+    };
+};
+
+// Action Creator for updating the user First Launch or not variable
+const userIsFirstLaunchAction = value => {
+    return {
+        type: RECEIVE_USER_IS_FIRST_LAUNCH ,
+        payload: value
     };
 };
 
@@ -157,6 +166,16 @@ export const changeUserFavoriteArea = favoriteArea => {
     return (dispatch) => {
         AsyncStorage.setItem('favoriteArea', favoriteArea).then(() => {
             return dispatch(userFavoriteAreaAction(favoriteArea));
+        }).catch(error => {
+            console.log(error);
+        });
+    };
+};
+
+export const changeUserIsFirstLaunch = value => {
+    return (dispatch) => {
+        AsyncStorage.setItem('isFirstLaunch', JSON.stringify(value)).then(() => {
+            return dispatch(userIsFirstLaunchAction(value));
         }).catch(error => {
             console.log(error);
         });

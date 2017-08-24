@@ -12,9 +12,22 @@ const RightIcon = ({ gasStation }) => {
     return (
         <View style={{ flexDirection: 'row', flex: 1 }}>
             <SaveIcon gasStation={gasStation} />
-            <NavIcon iconName="share" color={COLOR_PRIMARY} onPress={console.log('update this quickly Marc')} />
+            <NavIcon iconName="share" color={COLOR_PRIMARY} onPress={() => shareToSocial()} />
         </View>
     );
+};
+
+const shareToSocial = () => {
+    Share.share({
+            message: '스마트오일 덕분에 이 주에 기름값을 XX원 절약할 수 있었어요!  얼마나 아낄 수 있는지 알아볼까요?',
+            title: '스마트오일',
+            url: 'http://nsjtech.com'
+        },
+        {
+            dialogTitle: '공유하기',
+        })
+        .then(result => console.log(result))
+        .catch(err => console.log(err));
 };
 
 class GasStationContainer extends Component {

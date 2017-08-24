@@ -5,7 +5,8 @@ import {
     CHANGE_USER_ALLOW_LOCATION,
     RECEIVE_USER_FAVORITE_GAS,
     RECEIVE_USER_TANK_CAPACITY,
-    RECEIVE_USER_FAVORITE_AREA
+    RECEIVE_USER_FAVORITE_AREA,
+    RECEIVE_USER_IS_FIRST_LAUNCH
 } from '../actions/type';
 import { GASOLINE } from '../Type';
 
@@ -19,7 +20,8 @@ const INITIAL_STATE = {
     },
     userFavoriteGas: GASOLINE,
     userTankCapacity: 50,
-    userFavoriteArea: 'Seoul'
+    userFavoriteArea: 'Seoul',
+    isFirstLaunch: true
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -61,6 +63,11 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 userFavoriteArea: action.payload
+            };
+        case RECEIVE_USER_IS_FIRST_LAUNCH:
+            return {
+                ...state,
+                isFirstLaunch: action.payload
             };
         default:
             return state;

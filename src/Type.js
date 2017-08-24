@@ -12,6 +12,6 @@ export const PREMIUM_GASOLINE = {
     code: 'B034'
 };
 export const LPG = {
-    value: '자동차부탄',
+    value: 'LPG',
     code: 'K015'
 };

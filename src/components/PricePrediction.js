@@ -30,7 +30,7 @@ class PricePrediction extends Component {
         const { latitude, longitude } = nextProps.userState.userLocation;
 
         if (nextProps.pricePrediction.pricePredictionData.length === 0) {
-            this.props.pricePredictionFetch(latitude, longitude);
+            //this.props.pricePredictionFetch(latitude, longitude);
         }
     }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, Image, View, InteractionManager, Share, ActionSheetIOS, Linking, Platform } from 'react-native';
+import { Text, Image, View, InteractionManager, ActionSheetIOS, Linking, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';

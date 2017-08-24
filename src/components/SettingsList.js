@@ -3,9 +3,10 @@ import { View, InteractionManager, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { Spinner, SettingsRow, LocationSettingsRow } from './functionalComponents';
+import { Spinner, SettingsRow, LocationSettingsRow, Button } from './functionalComponents';
 import { COLOR_BACKGROUND_TERCIARY } from '../styles/common';
 import Styles from '../styles/NavigationStyle';
+import { changeUserIsFirstLaunch } from '../actions';
 
 class SettingsList extends Component {
     static navigationOptions = {
@@ -64,6 +65,9 @@ class SettingsList extends Component {
                         title="정책"
                         onPress={() => navigate('Privacy')}
                     />
+                    <View style={{ paddingVertical: 10 }}>
+                        <Button title='Reset App to first Launch' onPress={this.props.changeUserIsFirstLaunch.bind(this, true)} />
+                    </View>
                 </ScrollView>
             </View>
         );
@@ -81,4 +85,4 @@ const mapStateToProps = state => {
     return { userSettings: state.userState };
 };
 
-export default connect(mapStateToProps)(SettingsList);
+export default connect(mapStateToProps, { changeUserIsFirstLaunch })(SettingsList);

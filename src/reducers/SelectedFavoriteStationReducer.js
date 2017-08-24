@@ -7,7 +7,7 @@ import {
 const INITIAL_STATE = {
     loading: true,
     gasStation: null,
-    title: 'lol',
+    title: '',
     error: false,
     errorCode: null
 };

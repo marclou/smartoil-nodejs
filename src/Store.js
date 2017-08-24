@@ -16,13 +16,17 @@ import * as LocalStorage from './LocalStorage';
 const subscribeToLocalStorage = (store, frequency) => {
     // We use throttle from lodash library to minimize the call to the saveState() function.
     store.subscribe(_.throttle(() => {
-        // Only save the gas stations list (for now) to the local storage
-        LocalStorage.saveState({ gasStationsLibraries: store.getState().gasStationsLibraries });
+        LocalStorage.saveState({ state: store.getState() });
     }, frequency));
+};
+
+const retrieveInitialState = () => {
+    return LocalStorage.loadState();
 };
 
 export const configureStore = () => {
     const middlewares = [thunk, promise];
+    //const INITIAL_STATE = retrieveInitialState();
 
     if (process.env.NODE_ENV !== 'production') {
         middlewares.push(createLogger);
@@ -40,6 +44,6 @@ export const configureStore = () => {
         });
     }
 
-    subscribeToLocalStorage(store, 1000);
+    //subscribeToLocalStorage(store, 1000);
     return store;
 };

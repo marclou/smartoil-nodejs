@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
 
 import TankCapacityPicker from '../TankCapacityPicker';
 import { Header, Footer, BackButton } from './functionalComponents';
+import { changeUserIsFirstLaunch } from '../../actions';
 
 class TankCapacity extends Component {
     goBack = () => {
@@ -11,6 +13,8 @@ class TankCapacity extends Component {
     };
 
     resetAction = () => {
+        this.props.changeUserIsFirstLaunch(false);
+
         this.props.navigation.dispatch(NavigationActions.reset({
                 index: 0,
                 actions: [{ type: NavigationActions.NAVIGATE, routeName: 'Main' }],
@@ -44,4 +48,4 @@ const styles = {
     }
 };
 
-export default TankCapacity;
+export default connect(null, { changeUserIsFirstLaunch })(TankCapacity);

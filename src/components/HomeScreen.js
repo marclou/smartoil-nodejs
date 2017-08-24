@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -44,9 +44,6 @@ class HomeScreen extends Component {
 
         return (
             <View style={containerStyle}>
-                <StatusBar
-                    backgroundColor={COLOR_PRIMARY}
-                />
                 <LinearGradient colors={[COLOR_PRIMARY, '#53a0fe', '#40bbef']} style={linearGradientStyle}>
                     <PricePrediction />
                 </LinearGradient>

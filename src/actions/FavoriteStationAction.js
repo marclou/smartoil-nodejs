@@ -109,6 +109,7 @@ export const fetchFavoriteStation = (latitude, longitude, gasType, uid) => {
                 return dispatch(fetchFavoriteStationError(response.status));
             },
             error => {
+                console.log(error);
                 return dispatch(fetchFavoriteStationError(error.request.status));
             });
     };
