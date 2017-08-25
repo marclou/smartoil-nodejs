@@ -112,7 +112,7 @@ class Fab extends Component {
                 offsetY={85}
                 degrees={0}
                 backdrop={<Blur />}
-                useNativeFeedback={false}
+                outRangeScale={1.3}
             >
                 <ActionButton.Item
                     title='내 위치로 검색'
@@ -120,8 +120,7 @@ class Fab extends Component {
                     textContainerStyle={textContainerStyle}
                     textStyle={textStyle}
                     spaceBetween={10}
-                    useNativeFeedback={false}
-                    hideLabel={true}
+                    hideLabelShadow={true}
                 >
                     <Icon
                         name='map-marker'
@@ -134,7 +133,6 @@ class Fab extends Component {
                     textContainerStyle={textContainerStyle}
                     textStyle={textStyle}
                     spaceBetween={10}
-                    useNativeFeedback={false}
                     hideLabelShadow={true}
 
                 >

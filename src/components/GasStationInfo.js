@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { Spinner, Tag, Button, NavIcon } from './functionalComponents';
+import { Spinner, Tag, Button } from './functionalComponents';
 import { displayLogo } from '../img/brands';
 import {
     COLOR_PRIMARY,

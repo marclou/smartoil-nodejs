@@ -1,7 +1,7 @@
 import React from 'react';
 import * as ReactNavigation from 'react-navigation';
 import { connect } from 'react-redux';
-import { BackHandler, View, StatusBar } from 'react-native';
+import { BackHandler, View, StatusBar, Platform } from 'react-native';
 
 import AppNavigation from './AppNavigation';
 import Fab from '../components/Fab';
@@ -47,9 +47,8 @@ const ReduxNavigation = (props) => {
 
     return (
         <View style={{ flex: 1 }}>
-            <StatusBar
-                barStyle={setBarStyle(AppNavigation.router.getPathAndParamsForState(nav).path)}
-            />
+            {Platform.OS === 'ios'
+            && <StatusBar barStyle={setBarStyle(AppNavigation.router.getPathAndParamsForState(nav).path)} />}
             <AppNavigation navigation={navigation} />
             {AppNavigation.router.getPathAndParamsForState(nav).path === 'Main/Home/Prediction'
             && <Fab navigation={navigation} />}

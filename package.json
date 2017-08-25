@@ -12,7 +12,7 @@
     "node-pre-gyp": "^0.6.36",
     "react": "^16.0.0-alpha.12",
     "react-native": "^0.45.1",
-    "react-native-action-button": "^2.7.1",
+    "react-native-action-button": "^2.7.2",
     "react-native-blur": "^3.0.0",
     "react-native-linear-gradient": "^2.0.0",
     "react-native-maps": "^0.15.2",
