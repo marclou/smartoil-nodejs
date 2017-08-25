@@ -45,14 +45,15 @@ class GasStationInfo extends Component {
         }
     }
 
-    showIOSActionSheet({ location, address }) {
+    showIOSActionSheet({ location, name }) {
         const { latitude, longitude } = location;
         const OPTIONS = [
             'Cancel',
             'Naver Map',
             'Daum Map',
             'Google Maps',
-            'Maps'
+            'Maps',
+            'T-map'
         ];
 
         ActionSheetIOS.showActionSheetWithOptions({
@@ -65,16 +66,19 @@ class GasStationInfo extends Component {
                 if (buttonIndex !== 0) {
                     switch (buttonIndex) {
                         case 1:
-                            URL = `navermaps://?menu=location&pinType=place&lat=${latitude}&lng=${longitude}`;
+                            URL = `navermaps://?menu=location&pinType=place&lat=${latitude}&lng=${longitude}&title=${name}`;
                             break;
                         case 2:
-                            URL = `daummaps://search?q=${address}&p=${latitude},${longitude}`;
+                            URL = `daummaps://look?p=${latitude},${longitude}`;
                             break;
                         case 3:
-                            URL = `comgooglemaps://?q=${address}&center=${latitude},${longitude}`;
+                            URL = `comgooglemaps://?q=${latitude},${longitude}`;
                             break;
                         case 4:
-                            URL = `http://maps.apple.com/?address=${address}`;
+                            URL = `http://maps.apple.com/?q=${latitude},${longitude}`;
+                            break;
+                        case 5:
+                            URL = `tmap://?Lonlat=${latitude},${longitude}`;
                             break;
                         default:
                             break;

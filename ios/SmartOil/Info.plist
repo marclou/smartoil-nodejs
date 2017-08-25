@@ -75,6 +75,7 @@
 		<string>comgooglemaps</string>
 		<string>navermaps</string>
 		<string>daummaps</string>
+		<string>tmap</string>
 	</array>
 </dict>
 </plist>
