@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView, View } from 'react-native';
+import { ListView, View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 import { ListSection, SelectionItem } from './functionalComponents';
@@ -31,7 +31,7 @@ class GasFavoriteList extends Component {
     }
 
     createDataSource() {
-        const gasType = [
+        this.gasType = [
             GASOLINE.value,
             DIESEL.value,
             PREMIUM_GASOLINE.value,
@@ -40,7 +40,7 @@ class GasFavoriteList extends Component {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
-        this.dataSource = ds.cloneWithRows(gasType);
+        this.dataSource = ds.cloneWithRows(this.gasType);
     }
 
     saveFavoriteGas(gasType) {
@@ -90,8 +90,7 @@ class GasFavoriteList extends Component {
 const styles = {
     containerStyle: {
         flex: 1,
-        backgroundColor: COLOR_BACKGROUND_TERCIARY,
-        paddingBottom: PADDING_BOTTOM
+        backgroundColor: COLOR_BACKGROUND_TERCIARY
     }
 };
 

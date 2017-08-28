@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { InteractionManager, ListView, ScrollView } from 'react-native';
+import { InteractionManager, ListView, ScrollView, LayoutAnimation, UIManager, Platform } from 'react-native';
 import { connect } from 'react-redux';
 
 import areas from '../AreaList.json';
 import { Spinner, Area } from './functionalComponents';
 import { changeUserFavoriteArea } from '../actions';
+import { COLOR_BACKGROUND_TERCIARY } from '../styles/common';
 
 class AreaFavoriteList extends Component {
     static navigationOptions = {
@@ -17,6 +18,9 @@ class AreaFavoriteList extends Component {
         this.state = {
             isComponentReady: false
         };
+        if (Platform.OS === 'android') {
+            UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+        }
         this.createDataSource();
     }
 
@@ -28,6 +32,10 @@ class AreaFavoriteList extends Component {
 
     componentWillReceiveProps() {
         this.createDataSource();
+    }
+
+    componentWillUpdate() {
+        LayoutAnimation.spring();
     }
 
     createDataSource() {
@@ -67,7 +75,7 @@ class AreaFavoriteList extends Component {
 const styles = {
     containerStyle: {
         flex: 1,
-        backgroundColor: 'transparent',
+        backgroundColor: COLOR_BACKGROUND_TERCIARY,
         padding: 10,
     },
     listStyle: {

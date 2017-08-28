@@ -1,12 +1,10 @@
-import areasList from '../FullAreasList.json';
-
 import {
     SELECT_AREA,
     SELECT_INDEX,
     CLEAR_CACHE,
-    DATA_FETCHING,
-    DATA_FETCH_SUCCESS,
-    DATA_FETCH_ERROR
+    AREAS_FETCHING,
+    AREAS_FETCH_SUCCESS,
+    AREAS_FETCH_ERROR
 } from '../actions/type';
 
 const INITIAL_STATE = {
@@ -18,7 +16,8 @@ const INITIAL_STATE = {
     },
     areasList: [],
     loading: true,
-    error: false
+    error: false,
+    errorCode: null
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -58,23 +57,24 @@ export default (state = INITIAL_STATE, action) => {
                 default: break;
             }
             break;*/
-        case DATA_FETCHING:
+        case AREAS_FETCHING:
             return {
                 ...state,
                 loading: true
             };
-        case DATA_FETCH_SUCCESS:
+        case AREAS_FETCH_SUCCESS:
             return {
                 ...state,
                 loading: false,
                 error: false,
                 areasList: action.payload
             };
-        case DATA_FETCH_ERROR:
+        case AREAS_FETCH_ERROR:
             return {
                 ...state,
                 loading: false,
-                error: action.payload
+                error: action.payload.isError,
+                errorCode: action.payload.errorCode
             };
         case SELECT_AREA:
             switch (action.payload.areaDepth) {
@@ -122,7 +122,8 @@ export default (state = INITIAL_STATE, action) => {
                 },
                 areasList: [],
                 loading: true,
-                error: false
+                error: false,
+                errorCode: null
             };
         default: return { ...state };
     }

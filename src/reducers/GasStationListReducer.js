@@ -1,7 +1,8 @@
 import {
     DATA_FETCHING,
     DATA_FETCH_SUCCESS,
-    DATA_FETCH_ERROR
+    DATA_FETCH_ERROR,
+    CLEAR_CACHE
 } from '../actions/type';
 
 const INITIAL_STATE = {
@@ -34,6 +35,13 @@ export default (state = INITIAL_STATE, action) => {
                 loading: false,
                 error: true,
                 errorCode: action.payload
+            };
+        case CLEAR_CACHE:
+            return {
+                loading: true,
+                error: false,
+                errorCode: null,
+                gasStationsData: []
             };
         default:
             return state;

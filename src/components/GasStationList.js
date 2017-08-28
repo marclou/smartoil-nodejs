@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ListView, View, Text } from 'react-native';
+import { ListView, View } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
-import { gasStationFetch, selectFilter } from '../actions';
+import { gasStationFetch, areaGasStationFetch, selectFilter } from '../actions';
 import GasStationItem from './GasStationItem';
 import {
     Spinner,
@@ -27,15 +27,22 @@ class GasStationList extends Component {
 
     componentDidMount() {
         const { userLocation, userFavoriteGas } = this.props.userState;
+        const { isFromAreaList } = this.props;
 
-        this.props.gasStationFetch(userLocation.latitude, userLocation.longitude, userFavoriteGas.code);
+        if (isFromAreaList) {
+            const { area, department, region } = this.props.areaList;
+
+            this.props.areaGasStationFetch(area.districtName, department.districtName, region.disctrictName, userFavoriteGas.code);
+        } else {
+            this.props.gasStationFetch(userLocation.latitude, userLocation.longitude, userFavoriteGas.code);
+        }
     }
 
     componentWillReceiveProps(nextProps) {
         this.createDataSource(nextProps);
     }
 
-    createDataSource({ gasStations }) {
+    createDataSource({ gasStations, isFromAreaList }) {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
@@ -47,7 +54,10 @@ class GasStationList extends Component {
         if (gasStations.selectedFilter === 0) {
             gasStationsData.sort(this.sortByPrice);
         } else {
-            gasStationsData.sort(this.sortByDistance);
+            if (isFromAreaList) {
+                gasStationsData.sort(this.sortByStraightDistance);
+            }
+            gasStationsData.sort(this.sortByRealDistance);
         }
         this.dataSource = ds.cloneWithRows(gasStationsData);
     }
@@ -74,8 +84,20 @@ class GasStationList extends Component {
         return comparison;
     }
 
-    sortByDistance(a, b) {
+    sortByStraightDistance(a, b) {
         let comparison = 0;
+
+        if (a.distance > b.realTimeVariables.distance) {
+            comparison = 1;
+        } else if (a.distance < b.distance) {
+            comparison = -1;
+        }
+        return comparison;
+    }
+
+    sortByRealDistance(a, b) {
+        let comparison = 0;
+
         if (a.realTimeVariables.totalDistance > b.realTimeVariables.totalDistance) {
             comparison = 1;
         } else if (a.realTimeVariables.totalDistance < b.realTimeVariables.totalDistance) {
@@ -91,7 +113,8 @@ class GasStationList extends Component {
     renderListOrSpinner() {
         const { gasStationsLibraries, selectedFilter } = this.props.gasStations;
         const { userLocation, userFavoriteGas } = this.props.userState;
-        const { navigate } = this.props;
+        const { area, department, region } = this.props.areaList;
+        const { navigate, isFromAreaList } = this.props;
         const { containerStyle, tabsContainerStyle, tabStyle, tabTextStyle, activeTabStyle, activeTabTextStyle } = styles;
 
         if (gasStationsLibraries.loading) {
@@ -102,7 +125,9 @@ class GasStationList extends Component {
                 <ErrorStatic
                     title='Ooops, something went wrong'
                     message='But no worry, you can still refresh the result with the button below'
-                    onPress={this.props.gasStationFetch.bind(this, userLocation.latitude, userLocation.longitude, userFavoriteGas.code)}
+                    onPress={
+                        isFromAreaList ? this.props.areaGasStationFetch.bind(this, area.districtName, department.districtName, region.disctrictName, userFavoriteGas.code) :
+                        this.props.gasStationFetch.bind(this, userLocation.latitude, userLocation.longitude, userFavoriteGas.code)}
                 />
             );
         }
@@ -174,8 +199,9 @@ const styles = {
 const mapStateToProps = state => {
     return {
         gasStations: state.gasStationList,
-        userState: state.userState
+        userState: state.userState,
+        areaList: state.areaListReducer.selectedAreas
     };
 };
 
-export default connect(mapStateToProps, { gasStationFetch, selectFilter })(GasStationList);
+export default connect(mapStateToProps, { gasStationFetch, areaGasStationFetch, selectFilter })(GasStationList);

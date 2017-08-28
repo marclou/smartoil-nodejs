@@ -123,7 +123,7 @@ class GasStationInfo extends Component {
                 <View style={row}>
                     <Text style={textMediumStyle}>{name}</Text>
                 </View>
-                {(realTimeVariables !== undefined) &&
+                {(realTimeVariables !== null) &&
                     <View style={row}>
                         <Icon name="map-marker" style={{ color: COLOR_FONT_SECONDARY }} />
                         <Text style={textMinorStyle}>

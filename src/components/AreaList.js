@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, ListView } from 'react-native';
+import { View, ListView, LayoutAnimation, UIManager, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
-import { Spinner, SegmentSelector, Area } from './functionalComponents';
+import { Spinner, SegmentSelector, Area, ErrorStatic } from './functionalComponents';
 import { changeDataSource, selectArea, selectIndex } from '../actions/AreaListAction';
 import {
     COLOR_FONT_SECONDARY,
@@ -12,39 +12,45 @@ import {
     FONT_CHARACTER_BOLD,
     FONT_CHARACTER_REGULAR
 } from '../styles/common';
+import Styles from '../styles/NavigationStyle';
 
 class AreaList extends Component {
+    static navigationOptions = {
+        tabBarVisible: false,
+        headerTitle: '지역으로 검색',
+        headerTintColor: COLOR_FONT_SECONDARY,
+        headerTitleStyle: Styles.headerTitleDark,
+        headerStyle: [Styles.headerBackgroundDark, { shadowOpacity: 0 }],
+        gesturesEnabled: false
+    };
+
     constructor(props) {
         super(props);
-        console.log('* CONSTRUCTOR *');
+        if (Platform.OS === 'android') {
+            UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+        }
         this.createDataSource(props.areaList);
     }
 
     componentDidMount() {
-        console.log('* COMPONENT DID MOUNT *');
         this.props.changeDataSource(this.props.selectedSegment, this.props.selectedAreas);
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('----- Will Receive Props -----');
         this.createDataSource(nextProps.areaList);
     }
 
     shouldComponentUpdate(nextProps) {
-        if (this.props.loading) {
-            return (this.props.areaList !== nextProps.areaList);
-        }
-        return (this.props.selectedSegment !== nextProps.selectedSegment) || (this.props.selectedAreas !== nextProps.selectedAreas);
+        return (this.props.selectedSegment !== nextProps.selectedSegment)
+            || (this.props.areaList !== nextProps.areaList)
+            || (this.props.error !== nextProps.error);
     }
 
     componentWillUpdate(nextProps) {
-        console.log('----- Will Update -----');
-        this.props.changeDataSource(nextProps.selectedSegment, nextProps.selectedAreas);
-    }
-
-    componentDidUpdate() {
-        console.log('----- Did Update -----');
-        //this.props.changeDataSource(this.props.selectedSegment, this.props.selectedAreas);
+        if (nextProps.selectedSegment !== this.props.selectedSegment) {
+            this.props.changeDataSource(nextProps.selectedSegment, nextProps.selectedAreas);
+        }
+        LayoutAnimation.spring();
     }
 
     createDataSource(list) {
@@ -60,21 +66,18 @@ class AreaList extends Component {
         let isSelected = false;
 
         areas.find(area => {
-            if (area === areaName) {
-                isSelected = true;
+            if (area !== null) {
+                if (area.districtName === areaName.districtName) {
+                    isSelected = true;
+                }
             }
             return isSelected;
         });
-
         return isSelected;
     }
 
 
     render() {
-        console.log('Render...');
-        if (this.props.loading) {
-            return <Spinner />;
-        }
         const {
             containerStyle,
             tabsContainerStyle,
@@ -87,8 +90,23 @@ class AreaList extends Component {
         const {
             selectedSegment,
             selectedAreas,
-            areaList
+            areaList,
+            loading,
+            error
         } = this.props;
+
+        if (loading) {
+            return <Spinner />;
+        }
+        if (error) {
+            return (
+                <ErrorStatic
+                    title='Ooops, something went wrong'
+                    message='But no worry, you can still refresh the result with the button below'
+                    onPress={this.props.changeDataSource.bind(this, selectedSegment, selectedAreas)}
+                />
+            );
+        }
 
         return (
             <View style={containerStyle}>
@@ -96,7 +114,7 @@ class AreaList extends Component {
                     <SegmentedControlTab
                         values={['시/도', '시/군/구', '읍/면/동']}
                         selectedIndex={selectedSegment}
-                        onTabPress={(index) => this.props.selectIndex(index)}
+                        onTabPress={(index) => this.props.selectIndex(index, selectedAreas)}
                         borderRadius={0}
                         tabsContainerStyle={tabsContainerStyle}
                         tabStyle={tabStyle}
@@ -110,12 +128,13 @@ class AreaList extends Component {
                     pageSize={areaList.length}
                     contentContainerStyle={listStyle}
                     dataSource={this.dataSource}
+                    enableEmptySections
                     renderRow={
                         (rowData) =>
                             <Area
                                 name={rowData.districtName}
                                 selected={this.isSelected(rowData)}
-                                onPress={() => this.props.selectArea(rowData)}
+                                onPress={() => this.props.selectArea(rowData, selectedSegment)}
                             />
                     }
                 />
@@ -164,7 +183,8 @@ const mapStateToProps = state => {
         selectedAreas: state.areaListReducer.selectedAreas,
         areaList: state.areaListReducer.areasList,
         selectedSegment: state.areaListReducer.selectedSegment,
-        loading: state.areaListReducer.loading
+        loading: state.areaListReducer.loading,
+        error: state.areaListReducer.error
     };
 };
 

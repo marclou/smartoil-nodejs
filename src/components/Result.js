@@ -30,14 +30,19 @@ class Result extends Component {
 
     render() {
         const { containerStyle } = styles;
-        const { navigate } = this.props.navigation;
+        const { navigate, state } = this.props.navigation;
+        let isFromAreaList = false;
+
+        if (state.params.isFromAreaList) {
+            isFromAreaList = true;
+        }
 
         if (!this.state.isComponentReady) {
             return <Spinner />;
         }
         return (
             <View style={containerStyle} >
-                <GasStationList navigate={navigate} />
+                <GasStationList navigate={navigate} isFromAreaList={isFromAreaList} />
             </View>
         );
     }

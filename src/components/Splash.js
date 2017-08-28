@@ -7,6 +7,9 @@ import { changeUserIsFirstLaunch } from '../actions';
 import { Spinner } from '../components/functionalComponents';
 
 class Splash extends Component {
+    static navigationOptions = {
+
+    };
 
     componentDidMount() {
         this.checkLoggedInt();

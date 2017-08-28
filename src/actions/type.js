@@ -29,6 +29,9 @@ export const PREDICTION_FETCHING = 'prediction_fetching';
 export const PREDICTION_FETCH_SUCCESS = 'prediction_fetch_success';
 
 /** Type for AreaList Component **/
+export const AREAS_FETCHING = 'areas_fetching';
+export const AREAS_FETCH_SUCCESS = 'areas_fetch_success';
+export const AREAS_FETCH_ERROR = 'areas_fetch_error';
 export const SELECT_AREA = 'select_area';
 export const SELECT_INDEX = 'select_index';
 export const CLEAR_CACHE = 'clear_cache';

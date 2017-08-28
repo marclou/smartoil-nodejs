@@ -26,7 +26,7 @@ class Fab extends Component {
         const { navigate } = this.props.navigation;
 
         this.props.getUserPosition()
-            .then(() => navigate('Result'))
+            .then(() => navigate('Result', { isFromAreaList: false }))
             .catch((positionError) => {
                 switch (positionError.code) {
                     case 0:
@@ -97,7 +97,7 @@ class Fab extends Component {
             this.reloadLocation();
         }
         if (userAllowLocation && userLocation.latitude !== null && userLocation.longitude !== null) {
-            return navigate('Result');
+            return navigate('Result', { isFromAreaList: false });
         }
     }
 
@@ -113,6 +113,7 @@ class Fab extends Component {
                 degrees={0}
                 backdrop={<Blur />}
                 outRangeScale={1.3}
+                useNativeFeedback={false}
             >
                 <ActionButton.Item
                     title='내 위치로 검색'
@@ -121,6 +122,7 @@ class Fab extends Component {
                     textStyle={textStyle}
                     spaceBetween={10}
                     hideLabelShadow={true}
+                    useNativeFeedback={false}
                 >
                     <Icon
                         name='map-marker'
@@ -134,6 +136,7 @@ class Fab extends Component {
                     textStyle={textStyle}
                     spaceBetween={10}
                     hideLabelShadow={true}
+                    useNativeFeedback={false}
 
                 >
                     <Icon

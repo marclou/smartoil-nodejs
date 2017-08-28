@@ -55,7 +55,7 @@ const HomeStack = StackNavigator({
 }, {
     initialRouteName: 'Prediction',
     cardStyle: {
-        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
+        backgroundColor: COLOR_BACKGROUND_TERCIARY,
     },
 });
 
@@ -107,6 +107,9 @@ const AppNav = StackNavigator({
 }, {
     initialRouteName: 'Splash',
     headerMode: 'none',
+    cardStyle: {
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
+    },
 });
 
 export default AppNav;

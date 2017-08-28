@@ -8,7 +8,8 @@ import {
     RECEIVE_USER_FAVORITE_GAS,
     RECEIVE_USER_TANK_CAPACITY,
     RECEIVE_USER_FAVORITE_AREA,
-    RECEIVE_USER_IS_FIRST_LAUNCH
+    RECEIVE_USER_IS_FIRST_LAUNCH,
+    CLEAR_CACHE
 } from './type';
 
 // Action Creator for updating the location
@@ -179,5 +180,12 @@ export const changeUserIsFirstLaunch = value => {
         }).catch(error => {
             console.log(error);
         });
+    };
+};
+
+// Used to clear the cache of most of the data fetched by the API
+export const clearDataCache = () => {
+    return {
+        type: CLEAR_CACHE
     };
 };
