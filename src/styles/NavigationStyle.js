@@ -33,7 +33,7 @@ export default StyleSheet.create({
         paddingLeft: 50
     },
     headerBackgroundPrimary: {
-        backgroundColor: COLOR_PRIMARY
+        backgroundColor: COLOR_PRIMARY,
     },
     headerBackgroundDark: {
         backgroundColor: COLOR_BACKGROUND_QUATERNARY

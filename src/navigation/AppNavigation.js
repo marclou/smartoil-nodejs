@@ -55,7 +55,7 @@ const HomeStack = StackNavigator({
 }, {
     initialRouteName: 'Prediction',
     cardStyle: {
-        backgroundColor: COLOR_BACKGROUND_QUATERNARY
+        backgroundColor: COLOR_BACKGROUND_QUATERNARY,
     },
 });
 
@@ -68,7 +68,7 @@ const SettingsStack = StackNavigator({
         screen: TextContainer,
         navigationOptions: {
             title: '정책',
-            tabBarVisible: false
+            tabBarVisible: false,
         }
     }
 }, {
