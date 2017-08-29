@@ -114,6 +114,7 @@ class Fab extends Component {
                 backdrop={<Blur />}
                 outRangeScale={1.3}
                 useNativeFeedback={false}
+                hideShadow={true}
             >
                 <ActionButton.Item
                     title='내 위치로 검색'
@@ -121,7 +122,7 @@ class Fab extends Component {
                     textContainerStyle={textContainerStyle}
                     textStyle={textStyle}
                     spaceBetween={10}
-                    hideLabelShadow={true}
+                    hideShadow={true}
                     useNativeFeedback={false}
                 >
                     <Icon
@@ -135,7 +136,7 @@ class Fab extends Component {
                     textContainerStyle={textContainerStyle}
                     textStyle={textStyle}
                     spaceBetween={10}
-                    hideLabelShadow={true}
+                    hideShadow={true}
                     useNativeFeedback={false}
 
                 >

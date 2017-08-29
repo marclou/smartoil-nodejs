@@ -23,6 +23,7 @@ class HomeScreen extends Component {
         ),
         headerStyle: [Styles.headerBackgroundPrimary, { shadowOpacity: 0 }],
         headerTitle: <Image source={require('../img/icon/logo_type_white.png')} style={Styles.headerImageTitle} />,
+        headerLeft: (<View />),
         headerRight: <NavIcon iconName="share" color={COLOR_FONT_QUINARY} />
     };
 

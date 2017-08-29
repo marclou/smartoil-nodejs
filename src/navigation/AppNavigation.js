@@ -77,6 +77,9 @@ const SettingsStack = StackNavigator({
         headerStyle: Styles.headerBackgroundPrimary,
         headerTitleStyle: Styles.headerTitlePrimary,
         headerTintColor: COLOR_FONT_QUINARY,
+        cardStyle: {
+            backgroundColor: COLOR_BACKGROUND_QUATERNARY
+        }
     }
 });
 
