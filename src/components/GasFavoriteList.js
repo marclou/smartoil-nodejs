@@ -1,19 +1,13 @@
 import React, { Component } from 'react';
-import { ListView, View, Text } from 'react-native';
+import { ListView, View, InteractionManager } from 'react-native';
 import { connect } from 'react-redux';
 
-import { ListSection, SelectionItem } from './functionalComponents';
+import { ListSection, SelectionItem, Spinner } from './functionalComponents';
 import { changeUserFavoriteGas } from '../actions';
 import {
     COLOR_BACKGROUND_TERCIARY,
-    PADDING_BOTTOM
 } from '../styles/common';
-import {
-    GASOLINE,
-    DIESEL,
-    PREMIUM_GASOLINE,
-    LPG
-} from '../Type';
+import { GAS_TYPE } from '../Type';
 
 class GasFavoriteList extends Component {
     static navigationOptions = {
@@ -23,7 +17,17 @@ class GasFavoriteList extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            isComponentReady: false
+        };
+        this.gasType = GAS_TYPE;
         this.createDataSource();
+    }
+
+    componentDidMount() {
+        InteractionManager.runAfterInteractions(() => {
+            this.setState({ isComponentReady: true });
+        });
     }
 
     componentWillReceiveProps() {
@@ -31,12 +35,6 @@ class GasFavoriteList extends Component {
     }
 
     createDataSource() {
-        this.gasType = [
-            GASOLINE.value,
-            DIESEL.value,
-            PREMIUM_GASOLINE.value,
-            LPG.value
-        ];
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
@@ -46,40 +44,35 @@ class GasFavoriteList extends Component {
     saveFavoriteGas(gasType) {
         const { userFavoriteGas } = this.props;
 
-        if (userFavoriteGas.value !== gasType) {
-            switch (gasType) {
-                case GASOLINE.value:
-                    this.props.changeUserFavoriteGas(GASOLINE);
-                    break;
-                case DIESEL.value:
-                    this.props.changeUserFavoriteGas(DIESEL);
-                    break;
-                case PREMIUM_GASOLINE.value:
-                    this.props.changeUserFavoriteGas(PREMIUM_GASOLINE);
-                    break;
-                case LPG.value:
-                    this.props.changeUserFavoriteGas(LPG);
-                    break;
-                default:
-                    this.props.changeUserFavoriteGas(GASOLINE);
-                    break;
-            }
+        if (userFavoriteGas.code !== gasType.code) {
+            this.props.changeUserFavoriteGas(gasType);
         }
+    }
+
+    renderRow(rowData) {
+        const { userFavoriteGas } = this.props;
+
+        return (
+            <ListSection onPress={this.saveFavoriteGas.bind(this, rowData)}>
+                <SelectionItem value={rowData.value} selected={rowData.code === userFavoriteGas.code} />
+            </ListSection>
+        );
     }
 
     render() {
         const { containerStyle } = styles;
-        const { userFavoriteGas } = this.props;
+
+        if (!this.state.isComponentReady) {
+            return <Spinner />;
+        }
 
         return (
             <View style={containerStyle}>
                 <ListView
                     dataSource={this.dataSource}
+                    pageSize={this.gasType.length}
                     renderRow={
-                        (rowData) =>
-                            <ListSection onPress={this.saveFavoriteGas.bind(this, rowData)}>
-                                <SelectionItem value={rowData} selected={rowData === userFavoriteGas.value} />
-                            </ListSection>
+                        (rowData) => this.renderRow(rowData)
                     }
                 />
             </View>
