@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:gravity="fill"
+            android:drawable="@color/colorPrimary"/>
 
     <item>
         <bitmap
-            android:gravity="fill"
-            android:src="@drawable/screen"/>
+                android:gravity="center"
+                android:src="@drawable/screen"/>
     </item>
 
-</selector>
+</layer-list>

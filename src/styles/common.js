@@ -9,6 +9,9 @@ export const COLOR_PRIMARY = '#437ed3';
 // ERROR COLOR
 export const COLOR_ERROR = '#FF0000';
 
+// ANDROID STATUS BAR COLOR
+export const COLOR_STATUS_BAR = '#3260a3';
+
 // FONT COLORS
 export const COLOR_FONT_PRIMARY = '#1F2D3D';
 export const COLOR_FONT_SECONDARY = '#475669';

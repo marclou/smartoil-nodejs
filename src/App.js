@@ -5,7 +5,7 @@ import SplashScreen from 'react-native-smart-splash-screen';
 
 import { configureStore } from './Store';
 import ReduxNavigation from './navigation/ReduxNavigation';
-import { COLOR_PRIMARY } from './styles/common';
+import { COLOR_STATUS_BAR } from './styles/common';
 
 const store = configureStore();
 
@@ -22,7 +22,7 @@ class App extends Component {
         return (
             <View style={{ flex: 1 }}>
                 <StatusBar
-                    backgroundColor={COLOR_PRIMARY}
+                    backgroundColor={COLOR_STATUS_BAR}
                     barStyle='light-content'
                 />
                 <Provider store={store}>

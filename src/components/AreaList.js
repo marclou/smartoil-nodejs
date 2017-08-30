@@ -76,7 +76,6 @@ class AreaList extends Component {
         return isSelected;
     }
 
-
     render() {
         const {
             containerStyle,
