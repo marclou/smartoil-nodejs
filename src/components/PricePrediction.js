@@ -42,7 +42,6 @@ class PricePrediction extends Component {
             },
             {
                 dialogTitle: '공유하기',
-                tintColor: 'green'
             })
             .then(result => console.log(result))
             .catch(err => console.log(err));
