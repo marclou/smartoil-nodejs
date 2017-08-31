@@ -21,9 +21,9 @@ class HomeScreen extends Component {
         tabBarIcon: ({ tintColor }) => (
             <Icon name='home' style={[Styles.tabBarIcon, { color: tintColor }]} />
         ),
-        headerStyle: [Styles.headerBackgroundPrimary, { shadowOpacity: 0 }],
+        headerStyle: [Styles.headerBackgroundPrimary, { shadowOpacity: 0, elevation: 0 }],
         headerTitle: <Image source={require('../img/icon/logo_type_white.png')} style={Styles.headerImageTitle} />,
-        headerLeft: (<View />),
+        headerLeft: <View />,
         headerRight: <NavIcon iconName="share" color={COLOR_FONT_QUINARY} />
     };
 

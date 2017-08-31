@@ -12,7 +12,7 @@ class Result extends Component {
         headerTitle: '내 위치로 검색',
         headerTintColor: COLOR_FONT_SECONDARY,
         headerTitleStyle: Styles.headerTitleDark,
-        headerStyle: [Styles.headerBackgroundDark, { shadowOpacity: 0 }]
+        headerStyle: [Styles.headerBackgroundDark, { shadowOpacity: 0, elevation: 0 }]
     };
 
     constructor(props) {
