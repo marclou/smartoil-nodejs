@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { View, InteractionManager, ScrollView } from 'react-native';
+import { View, InteractionManager, ScrollView, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Spinner, SettingsRow, LocationSettingsRow, Button } from './functionalComponents';
 import { COLOR_BACKGROUND_TERCIARY } from '../styles/common';
 import Styles from '../styles/NavigationStyle';
-import { changeUserIsFirstLaunch } from '../actions';
 
 class SettingsList extends Component {
     static navigationOptions = {
@@ -29,6 +28,14 @@ class SettingsList extends Component {
     componentDidMount() {
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
+        });
+    }
+
+    eraseAllData() {
+        AsyncStorage.clear().then(() => {
+            console.log('async storage cleared');
+        }).catch((err) => {
+            console.log(err);
         });
     }
 
@@ -56,7 +63,7 @@ class SettingsList extends Component {
                     <SettingsRow
                         title="내 지역"
                         onPress={() => navigate('LocationSetting')}
-                        value={userFavoriteArea}
+                        value={userFavoriteArea.value}
                     />
                     <LocationSettingsRow
                         title="위치 정보 제공 동의"
@@ -66,7 +73,7 @@ class SettingsList extends Component {
                         onPress={() => navigate('Privacy')}
                     />
                     <View style={{ paddingVertical: 10 }}>
-                        <Button title='Reset App to first Launch' onPress={this.props.changeUserIsFirstLaunch.bind(this, true)} />
+                        <Button title='Reset App to first Launch' onPress={this.eraseAllData.bind(this)} />
                     </View>
                 </ScrollView>
             </View>
@@ -85,4 +92,4 @@ const mapStateToProps = state => {
     return { userSettings: state.userState };
 };
 
-export default connect(mapStateToProps, { changeUserIsFirstLaunch })(SettingsList);
+export default connect(mapStateToProps)(SettingsList);

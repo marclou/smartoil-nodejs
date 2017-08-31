@@ -32,7 +32,7 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: 'transparent',
-        marginBottom: 30
+        marginBottom: 10
     },
     titleStyle: {
         fontSize: 24,

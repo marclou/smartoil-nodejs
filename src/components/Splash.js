@@ -7,25 +7,28 @@ import { changeUserIsFirstLaunch } from '../actions';
 import { Spinner } from '../components/functionalComponents';
 
 class Splash extends Component {
-    static navigationOptions = {
-
-    };
-
     componentDidMount() {
         this.checkLoggedInt();
     }
 
     checkLoggedInt() {
         AsyncStorage.getItem('isFirstLaunch').then((value) => {
-            const routeName = JSON.parse(value) ? 'Initial' : 'Main';
+            let routeName = null;
 
+            if (value !== null) {
+                routeName = JSON.parse(value) ? 'Initial' : 'Main';
+            } else {
+                routeName = 'Initial';
+            }
             const resetAction = NavigationActions.reset({
                 index: 0,
                 actions: [{ type: NavigationActions.NAVIGATE, routeName: routeName }],
                 key: null
             });
 
-            this.props.changeUserIsFirstLaunch(JSON.parse(value));
+            if (routeName === 'Main') {
+                this.props.changeUserIsFirstLaunch(JSON.parse(value));
+            }
             this.props.navigation.dispatch(resetAction);
         });
     }

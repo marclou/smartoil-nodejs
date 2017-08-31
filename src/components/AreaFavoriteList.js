@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { InteractionManager, ListView, ScrollView, LayoutAnimation, UIManager, Platform } from 'react-native';
 import { connect } from 'react-redux';
 
-import areas from '../AreaList.json';
 import { Spinner, Area } from './functionalComponents';
 import { changeUserFavoriteArea } from '../actions';
 import { COLOR_BACKGROUND_TERCIARY } from '../styles/common';
+import { AREAS } from '../Type';
 
 class AreaFavoriteList extends Component {
     static navigationOptions = {
@@ -42,7 +42,7 @@ class AreaFavoriteList extends Component {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
-        this.dataSource = ds.cloneWithRows(areas);
+        this.dataSource = ds.cloneWithRows(AREAS);
     }
 
     render() {
@@ -55,15 +55,15 @@ class AreaFavoriteList extends Component {
         return (
             <ScrollView style={containerStyle}>
                 <ListView
-                    pageSize={areas.length}
+                    pageSize={AREAS.length}
                     contentContainerStyle={listStyle}
                     dataSource={this.dataSource}
                     renderRow={
                         (rowData) =>
                             <Area
-                                name={rowData.name}
-                                selected={rowData.name === userFavoriteArea}
-                                onPress={this.props.changeUserFavoriteArea.bind(this, rowData.name)}
+                                name={rowData.value}
+                                selected={rowData.code === userFavoriteArea.code}
+                                onPress={this.props.changeUserFavoriteArea.bind(this, rowData)}
                             />
                     }
                 />

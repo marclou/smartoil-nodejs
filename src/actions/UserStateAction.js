@@ -67,7 +67,7 @@ const userFavoriteAreaAction = favoriteArea => {
 // Action Creator for updating the user First Launch or not variable
 const userIsFirstLaunchAction = value => {
     return {
-        type: RECEIVE_USER_IS_FIRST_LAUNCH ,
+        type: RECEIVE_USER_IS_FIRST_LAUNCH,
         payload: value
     };
 };
@@ -155,7 +155,7 @@ export const getUserFavoriteArea = () => {
     return (dispatch) => {
         AsyncStorage.getItem('favoriteArea').then((favoriteArea) => {
             if (favoriteArea !== null) {
-                return dispatch(userFavoriteAreaAction(favoriteArea));
+                return dispatch(userFavoriteAreaAction(JSON.parse(favoriteArea)));
             }
         }).catch(error => {
             console.log(error);
@@ -165,7 +165,7 @@ export const getUserFavoriteArea = () => {
 
 export const changeUserFavoriteArea = favoriteArea => {
     return (dispatch) => {
-        AsyncStorage.setItem('favoriteArea', favoriteArea).then(() => {
+        AsyncStorage.setItem('favoriteArea', JSON.stringify(favoriteArea)).then(() => {
             return dispatch(userFavoriteAreaAction(favoriteArea));
         }).catch(error => {
             console.log(error);
@@ -173,10 +173,22 @@ export const changeUserFavoriteArea = favoriteArea => {
     };
 };
 
-export const changeUserIsFirstLaunch = value => {
+export const getUserIsFirstLaunch = () => {
     return (dispatch) => {
-        AsyncStorage.setItem('isFirstLaunch', JSON.stringify(value)).then(() => {
-            return dispatch(userIsFirstLaunchAction(value));
+        AsyncStorage.getItem('isFirstLaunch').then((isFirstLaunch) => {
+            if (isFirstLaunch !== null) {
+                return dispatch(userFavoriteAreaAction(JSON.parse(isFirstLaunch)));
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    };
+};
+
+export const changeUserIsFirstLaunch = isFirstLaunch => {
+    return (dispatch) => {
+        AsyncStorage.setItem('isFirstLaunch', JSON.stringify(isFirstLaunch)).then(() => {
+            return dispatch(userIsFirstLaunchAction(isFirstLaunch));
         }).catch(error => {
             console.log(error);
         });
