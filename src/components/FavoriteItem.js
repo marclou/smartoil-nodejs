@@ -16,7 +16,7 @@ class FavoriteItem extends Component {
         const { navigate } = this.props;
         const { uid } = this.props.gasStation;
 
-        navigate('StationDetail', { stationUid: uid });
+        navigate('StationDetail', { stationUid: uid, realTimeVariables: null });
     }
     onLongPress() {
         const { uid } = this.props.gasStation;

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Share } from 'react-native';
+import { View, Image, Share, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -26,7 +26,7 @@ const shareContent = () => {
         })
         .then(result => console.log(result))
         .catch(err => console.log(err));
-}
+};
 
 class HomeScreen extends Component {
     static navigationOptions = {
@@ -57,11 +57,11 @@ class HomeScreen extends Component {
         const { containerStyle, linearGradientStyle } = styles;
 
         return (
-            <View style={containerStyle}>
-                <LinearGradient colors={[COLOR_PRIMARY, '#53a0fe', '#40bbef']} style={linearGradientStyle}>
-                    <PricePrediction navigation={this.props.navigation} />
-                </LinearGradient>
-            </View>
+                <View style={containerStyle}>
+                    <LinearGradient colors={[COLOR_PRIMARY, '#53a0fe', '#40bbef']} style={linearGradientStyle} >
+                            <PricePrediction navigation={this.props.navigation} />
+                    </LinearGradient>
+                </View>
         );
     }
 }

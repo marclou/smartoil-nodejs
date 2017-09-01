@@ -27,14 +27,33 @@ const gasStationFetchError = message => {
     };
 };
 
-export const gasStationFetch = (latitude, longitude, gasType) => {
+const comparePrice = (gasStationsList, userTankCapacity) => {
+    //gasStationsList.sort(sortByPrice());
+    //const highestPrice = gasStationsList.slice(-1)[0].priceInfo.price;
+    function getPrice() {
+        return gasStationsList.map(d => d.priceInfo.price);
+    }
+    function getMaxPrice() {
+        return Math.max(...getPrice());
+    }
+    const highestPrice = getMaxPrice();
+
+
+    gasStationsList.map((gasStation) => {
+        const priceDiff = { priceDiff: (highestPrice - gasStation.priceInfo.price) * userTankCapacity };
+        return Object.assign(gasStation.priceInfo, priceDiff);
+    });
+    return gasStationsList;
+};
+
+export const gasStationFetch = (latitude, longitude, gasType, userTankCapacity) => {
     return (dispatch) => {
         dispatch(clearDataCache());
         dispatch({ type: DATA_FETCHING });
 
         return axios.get(`${SERVER_URL}/gas_station/near?lat=${latitude}&lng=${longitude}&type=${gasType}&lim=${QUERY_LIMIT}&dist=${DISTANCE_LIMIT}`).then(
             response => {
-                return dispatch(gasStationFetchAction(response.data));
+                return dispatch(gasStationFetchAction(comparePrice(response.data, userTankCapacity)));
             },
             error => {
                 return dispatch(gasStationFetchError(error.request.status));
@@ -42,14 +61,14 @@ export const gasStationFetch = (latitude, longitude, gasType) => {
     };
 };
 
-export const areaGasStationFetch = (largeName, middleName, smallName, gasType) => {
+export const areaGasStationFetch = (largeName, middleName, smallName, gasType, userTankCapacity) => {
     return (dispatch) => {
         dispatch(clearDataCache());
         dispatch({ type: DATA_FETCHING });
 
         return axios.get(`${SERVER_URL}/searchByArea?cityDo=${largeName}&guGun=${middleName}&dong=${smallName}&type=${gasType}&lim=${QUERY_LIMIT}&dist=${DISTANCE_LIMIT}`).then(
             response => {
-                return dispatch(gasStationFetchAction(response.data));
+                return dispatch(gasStationFetchAction(comparePrice(response.data, userTankCapacity)));
             },
             error => {
                 return dispatch(gasStationFetchError(error.request.status));

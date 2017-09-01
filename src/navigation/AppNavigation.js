@@ -92,7 +92,7 @@ const TabNav = TabNavigator({
     order: ['Favorite', 'Home', 'Settings'],
     tabBarPosition: 'bottom',
     tabBarComponent: TabBarBottom,
-    swipeEnabled: true,
+    swipeEnabled: false,
     animationEnabled: true,
     lazy: false,
     tabBarOptions: {

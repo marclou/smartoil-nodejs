@@ -164,7 +164,8 @@ const styles = {
     containerStyle: {
         flex: 1,
         justifyContent: 'flex-start',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        marginBottom: 10
     },
     divider: {
         margin: 15,

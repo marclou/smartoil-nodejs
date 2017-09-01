@@ -22,41 +22,6 @@ const INITIAL_STATE = {
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
-        /*case SELECT_AREA:
-            switch (action.payload.index) {
-                case 0:
-                    return {
-                        ...state,
-                        selectedSegment: action.payload.selectedSegment,
-                        selectedAreas: {
-                            ...state.selectedAreas,
-                            area: action.payload.name
-                        },
-                        areasList: action.payload.areasList
-                    };
-                case 1:
-                    return {
-                        ...state,
-                        selectedSegment: action.payload.selectedSegment,
-                        selectedAreas: {
-                            ...state.selectedAreas,
-                            department: action.payload.name
-                        },
-                        areasList: action.payload.areasList
-                    };
-                case 2:
-                    return {
-                        ...state,
-                        selectedSegment: action.payload.selectedSegment,
-                        selectedAreas: {
-                            ...state.selectedAreas,
-                            region: action.payload.name
-                        },
-                        areasList: action.payload.areasList
-                    };
-                default: break;
-            }
-            break;*/
         case AREAS_FETCHING:
             return {
                 ...state,
@@ -109,6 +74,7 @@ export default (state = INITIAL_STATE, action) => {
         case SELECT_INDEX:
             return {
                 ...state,
+                loading: true,
                 selectedSegment: action.payload
             };
         case CLEAR_CACHE:

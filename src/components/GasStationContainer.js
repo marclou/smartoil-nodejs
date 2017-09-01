@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Share } from 'react-native';
+import { View, Share, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 
 import { fetchFavoriteStation } from '../actions/FavoriteStationAction';
@@ -80,12 +80,15 @@ class GasStationContainer extends Component {
         }
         if (favoriteStation.gasStation !== null) {
             return (
-                <GasStationInfo
-                    navigation={navigation}
-                    gasStation={favoriteStation.gasStation}
-                    priceDiff={priceDiff}
-                    realTimeVariables={realTimeVariables}
-                />
+                <ScrollView>
+                    <GasStationInfo
+                        navigation={navigation}
+                        gasStation={favoriteStation.gasStation}
+                        priceDiff={priceDiff}
+                        realTimeVariables={realTimeVariables}
+                    />
+                </ScrollView>
+
             );
         }
     }

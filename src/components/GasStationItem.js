@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
-import { LayoutAnimation } from 'react-native';
+import { LayoutAnimation, Platform, UIManager } from 'react-native';
 
 import GasStationRow from './GasStationRow';
 import { ListSection } from './functionalComponents';
 
 class GasStationItem extends Component {
+    constructor(props) {
+        super(props);
+        if (Platform.OS === 'android') {
+            UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+        }
+    }
+
     componentWillUpdate() {
         LayoutAnimation.spring();
     }

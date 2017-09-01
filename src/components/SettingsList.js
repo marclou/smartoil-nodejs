@@ -72,9 +72,9 @@ class SettingsList extends Component {
                         title="정책"
                         onPress={() => navigate('Privacy')}
                     />
-                    <View style={{ paddingVertical: 10 }}>
+                    {/*<View style={{ paddingVertical: 10 }}>
                         <Button title='Reset App to first Launch' onPress={this.eraseAllData.bind(this)} />
-                    </View>
+                    </View>*/}
                 </ScrollView>
             </View>
         );

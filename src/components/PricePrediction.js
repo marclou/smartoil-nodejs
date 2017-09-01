@@ -14,8 +14,10 @@ class PricePrediction extends Component {
     constructor() {
         super();
         this.animate = this.animate.bind(this);
+        this.onLayout = this.onLayout.bind(this);
 
         this.state = {
+            isPortrait: true,
             animatedVal: new Animated.Value(0)
         };
     }
@@ -38,6 +40,20 @@ class PricePrediction extends Component {
             this.props.pricePredictionFetch(userFavoriteArea.code, userFavoriteGas.code);
         }
     }
+
+    onLayout(e) {
+        const { width, height } = e.nativeEvent.layout;
+        if (width > height) {
+            this.setState({
+                isPortrait: false
+            });
+        } else {
+            this.setState({
+                isPortrait: true
+            });
+        }
+    }
+
 
     animate() {
         this.state.animatedVal.setValue(0);
@@ -83,46 +99,51 @@ class PricePrediction extends Component {
             );
         }
         return (
-            <View style={containerStyle}>
-                <View style={row}>
-                    <View style={imageContainer}>
-                        {pricePredictionData.shortTermPrediction !== 0 ?
-                            <Animated.Image
-                                source={require('../img/prediction/full.png')}
-                                style={[image, { opacity, transform: [{ scale }] }]}
-                            /> :
-                            <Image
-                                source={require('../img/prediction/empty.png')}
-                                style={image}
-                            />
-                        }
+            <View
+                style={[containerStyle, this.state.isPortrait ? { flexDirection: 'column' } : { flexDirection: 'row' }]}
+                onLayout={this.onLayout}
+            >
+                    <View style={row}>
+                        <View style={imageContainer}>
+                            {pricePredictionData.shortTermPrediction !== 0 ?
+                                <Animated.Image
+                                    source={require('../img/prediction/full.png')}
+                                    style={[image, { opacity, transform: [{ scale }] }]}
+                                /> :
+                                <Image
+                                    source={require('../img/prediction/empty.png')}
+                                    style={image}
+                                />
+                            }
+                        </View>
                     </View>
-                </View>
-                <View style={row}>
-                    {(() => {
-                        switch (pricePredictionData.shortTermPrediction) {
-                            case 0:
-                                return <Text style={advice}>내일은 가격이 올라갑니다.</Text>;
-                            case 1:
-                                return <Text style={advice}>내일은 가격이 같습니다.</Text>;
-                            case 2:
-                                return <Text style={advice}>내일은 가격이 내려갑니다.</Text>;
-                            default:
-                                return <Text style={advice}>내일은 가격이 같습니다.</Text>;
-                        }
-                    })()}
-                </View>
-                <View style={row}>
-                    <Text style={subAdvice}>
-                        오늘 가격
-                    </Text>
-                </View>
-                <View style={row}>
-                    <PredictionPrice text={pricePredictionData.averagePrice.toLocaleString('en-US', { minimumFractionDigits: 2 })} />
-                </View>
-                <View style={row}>
-                    <Tag text={userFavoriteGas.value} />
-                    <Tag text={userFavoriteArea.value} />
+                <View style={[containerStyle, { flexDirection: 'column' }]}>
+                    <View style={row}>
+                        {(() => {
+                            switch (pricePredictionData.shortTermPrediction) {
+                                case 0:
+                                    return <Text style={advice}>내일은 가격이 올라갑니다.</Text>;
+                                case 1:
+                                    return <Text style={advice}>내일은 가격이 같습니다.</Text>;
+                                case 2:
+                                    return <Text style={advice}>내일은 가격이 내려갑니다.</Text>;
+                                default:
+                                    return <Text style={advice}>내일은 가격이 같습니다.</Text>;
+                            }
+                        })()}
+                    </View>
+                    <View style={row}>
+                        <Text style={subAdvice}>
+                            오늘 가격
+                        </Text>
+                    </View>
+                    <View style={row}>
+                        <PredictionPrice text={pricePredictionData.averagePrice.toLocaleString('en-US', { minimumFractionDigits: 2 })} />
+                    </View>
+                    <View style={row}>
+                        <Tag text={userFavoriteGas.value} />
+                        <Tag text={userFavoriteArea.value} />
+                    </View>
                 </View>
             </View>
         );
@@ -132,11 +153,9 @@ class PricePrediction extends Component {
 const styles = {
     containerStyle: {
         flex: 1,
-        flexDirection: 'column',
         justifyContent: 'space-around',
         alignItems: 'center',
         padding: 20,
-        marginBottom: 50
     },
     row: {
         padding: 5,
@@ -152,12 +171,14 @@ const styles = {
         resizeMode: 'contain',
     },
     advice: {
+        alignSelf: 'center',
         color: COLOR_FONT_QUINARY,
         fontSize: 20,
         fontFamily: FONT_CHARACTER_BOLD,
         letterSpacing: 1.5,
     },
     subAdvice: {
+        alignSelf: 'center',
         color: COLOR_FONT_QUINARY,
         fontSize: 18,
         fontFamily: FONT_CHARACTER_REGULAR,
@@ -165,6 +186,7 @@ const styles = {
 
     },
     imageContainer: {
+        alignSelf: 'center',
         height: 174,
         width: 174,
         justifyContent: 'center',

@@ -26,15 +26,15 @@ class GasStationList extends Component {
     }
 
     componentDidMount() {
-        const { userLocation, userFavoriteGas } = this.props.userState;
+        const { userLocation, userFavoriteGas, userTankCapacity } = this.props.userState;
         const { isFromAreaList } = this.props;
 
         if (isFromAreaList) {
             const { area, department, region } = this.props.areaList;
 
-            this.props.areaGasStationFetch(area.districtName, department.districtName, region.disctrictName, userFavoriteGas.code);
+            this.props.areaGasStationFetch(area.districtName, department.districtName, region.disctrictName, userFavoriteGas.code, userTankCapacity);
         } else {
-            this.props.gasStationFetch(userLocation.latitude, userLocation.longitude, userFavoriteGas.code);
+            this.props.gasStationFetch(userLocation.latitude, userLocation.longitude, userFavoriteGas.code, userTankCapacity);
         }
     }
 
@@ -46,32 +46,18 @@ class GasStationList extends Component {
         const ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2
         });
-        const { gasStationsData, loading, error } = gasStations.gasStationsLibraries;
+        const { gasStationsData } = gasStations.gasStationsLibraries;
 
-        if (!loading && !error) {
-            this.comparePrice(gasStationsData);
-        }
         if (gasStations.selectedFilter === 0) {
             gasStationsData.sort(this.sortByPrice);
         } else {
             if (isFromAreaList) {
                 gasStationsData.sort(this.sortByStraightDistance);
+            } else {
+                gasStationsData.sort(this.sortByRealDistance);
             }
-            gasStationsData.sort(this.sortByRealDistance);
         }
         this.dataSource = ds.cloneWithRows(gasStationsData);
-    }
-
-    comparePrice(gasStationsList) {
-        gasStationsList.sort(this.sortByPrice);
-        const highestPrice = gasStationsList.slice(-1)[0].priceInfo.price;
-
-        const { userTankCapacity } = this.props.userState;
-
-        return gasStationsList.map((gasStation) => {
-            const priceDiff = { priceDiff: (highestPrice - gasStation.priceInfo.price) * userTankCapacity };
-            return Object.assign(gasStation.priceInfo, priceDiff);
-        });
     }
 
     sortByPrice(a, b) {
@@ -87,7 +73,7 @@ class GasStationList extends Component {
     sortByStraightDistance(a, b) {
         let comparison = 0;
 
-        if (a.distance > b.realTimeVariables.distance) {
+        if (a.distance > b.distance) {
             comparison = 1;
         } else if (a.distance < b.distance) {
             comparison = -1;
@@ -112,7 +98,7 @@ class GasStationList extends Component {
 
     renderListOrSpinner() {
         const { gasStationsLibraries, selectedFilter } = this.props.gasStations;
-        const { userLocation, userFavoriteGas } = this.props.userState;
+        const { userLocation, userFavoriteGas, userTankCapacity } = this.props.userState;
         const { area, department, region } = this.props.areaList;
         const { navigate, isFromAreaList } = this.props;
         const { containerStyle, tabsContainerStyle, tabStyle, tabTextStyle, activeTabStyle, activeTabTextStyle } = styles;
@@ -126,8 +112,8 @@ class GasStationList extends Component {
                     title='Ooops, something went wrong'
                     message='But no worry, you can still refresh the result with the button below'
                     onPress={
-                        isFromAreaList ? this.props.areaGasStationFetch.bind(this, area.districtName, department.districtName, region.disctrictName, userFavoriteGas.code) :
-                        this.props.gasStationFetch.bind(this, userLocation.latitude, userLocation.longitude, userFavoriteGas.code)}
+                        isFromAreaList ? this.props.areaGasStationFetch.bind(this, area.districtName, department.districtName, region.disctrictName, userFavoriteGas.code, userTankCapacity) :
+                        this.props.gasStationFetch.bind(this, userLocation.latitude, userLocation.longitude, userFavoriteGas.code, userTankCapacity)}
                 />
             );
         }

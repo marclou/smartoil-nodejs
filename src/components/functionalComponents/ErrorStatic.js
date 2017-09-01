@@ -21,10 +21,10 @@ const ErrorStatic = ({ title, message, onPress }) => {
                 style={imageStyle}
             />
             <Text style={titleStyle}>
-                {title}
+                이런, 무언가 잘못 되었어요.
             </Text>
             <Text style={messageStyle}>
-                {message}
+                하지만 걱정마세요. 아래 버튼으로 결과를 새로 고칠 수 있어요.
             </Text>
             <Button
                 title='Retry'

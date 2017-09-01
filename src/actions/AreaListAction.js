@@ -100,18 +100,21 @@ export const selectIndex = (index, ...areaSelected) => {
         switch (index) {
             case 0:
                 dispatch({ type: SELECT_INDEX, payload: index });
-                return dispatch(changeDataSource(index, areaSelected));
+                break;
+                //return dispatch(changeDataSource(index, areaSelected));
             case 1:
                 if (areaSelected[0].area !== null) {
                     dispatch({ type: SELECT_INDEX, payload: index });
-                    return dispatch(changeDataSource(index, areaSelected[0]));
+                    break;
+                    //return dispatch(changeDataSource(index, areaSelected[0]));
                 }
                 displayAlert();
                 break;
             case 2:
                 if (areaSelected[0].area !== null && areaSelected[0].department !== null) {
                     dispatch({ type: SELECT_INDEX, payload: index });
-                    return dispatch(changeDataSource(index, areaSelected[0], areaSelected[0]));
+                    break;
+                    //return dispatch(changeDataSource(index, areaSelected[0], areaSelected[0]));
                 }
                 displayAlert();
                 break;

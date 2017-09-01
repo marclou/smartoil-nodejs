@@ -50,7 +50,7 @@ class AreaList extends Component {
         if (nextProps.selectedSegment !== this.props.selectedSegment) {
             this.props.changeDataSource(nextProps.selectedSegment, nextProps.selectedAreas);
         }
-        LayoutAnimation.spring();
+        LayoutAnimation.linear();
     }
 
     createDataSource(list) {
@@ -94,9 +94,6 @@ class AreaList extends Component {
             error
         } = this.props;
 
-        if (loading) {
-            return <Spinner />;
-        }
         if (error) {
             return (
                 <ErrorStatic
@@ -123,20 +120,24 @@ class AreaList extends Component {
                     />
                     <SegmentSelector number={3} indexSelected={selectedSegment} />
                 </View>
-                <ListView
-                    pageSize={areaList.length}
-                    contentContainerStyle={listStyle}
-                    dataSource={this.dataSource}
-                    enableEmptySections
-                    renderRow={
-                        (rowData) =>
-                            <Area
-                                name={rowData.districtName}
-                                selected={this.isSelected(rowData)}
-                                onPress={() => this.props.selectArea(rowData, selectedSegment)}
-                            />
-                    }
-                />
+                {!loading ?
+                    <ListView
+                        pageSize={areaList.length}
+                        contentContainerStyle={listStyle}
+                        dataSource={this.dataSource}
+                        enableEmptySections
+                        removeClippedSubviews={false}
+                        renderRow={
+                            (rowData) =>
+                                <Area
+                                    name={rowData.districtName}
+                                    selected={this.isSelected(rowData)}
+                                    onPress={() => this.props.selectArea(rowData, selectedSegment)}
+                                />
+                        }
+                    /> :
+                    <Spinner />
+                }
             </View>
         );
     }

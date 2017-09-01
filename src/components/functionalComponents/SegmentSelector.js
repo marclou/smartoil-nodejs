@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, LayoutAnimation } from 'react-native';
 
 import {
     COLOR_PRIMARY,
@@ -18,6 +18,7 @@ const SegmentSelector = ({ number, indexSelected }) => {
             segments.push(<View style={selectorStyle} key={i} />);
         }
     }
+    LayoutAnimation.linear();
 
     return (
         <View style={containerStyle}>

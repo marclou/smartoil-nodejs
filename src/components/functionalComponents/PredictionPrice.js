@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, LayoutAnimation } from 'react-native';
+import { View, Text } from 'react-native';
 import {
     COLOR_FONT_QUINARY,
     FONT_NUMBER_REGULAR
@@ -7,7 +7,6 @@ import {
 
 const PredictionPrice = ({ text }) => {
     const { containerStyle, priceStyle, priceInfoStyle } = styles;
-    LayoutAnimation.spring();
 
     return (
         <View style={containerStyle}>
