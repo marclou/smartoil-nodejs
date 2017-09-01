@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, Share } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -15,6 +15,19 @@ import {
 import { COLOR_PRIMARY, COLOR_FONT_QUINARY } from '../styles/common';
 import Styles from '../styles/NavigationStyle';
 
+const shareContent = () => {
+    Share.share({
+            message: '스마트오일 덕분에 이 주에 기름값을 XX원 절약할 수 있었어요!  얼마나 아낄 수 있는지 알아볼까요?',
+            title: '스마트오일',
+            url: 'http://nsjtech.com'
+        },
+        {
+            dialogTitle: '공유하기',
+        })
+        .then(result => console.log(result))
+        .catch(err => console.log(err));
+}
+
 class HomeScreen extends Component {
     static navigationOptions = {
         tabBarLabel: '홈',
@@ -24,7 +37,7 @@ class HomeScreen extends Component {
         headerStyle: [Styles.headerBackgroundPrimary, { shadowOpacity: 0, elevation: 0 }],
         headerTitle: <Image source={require('../img/icon/logo_type_white.png')} style={Styles.headerImageTitle} />,
         headerLeft: <View />,
-        headerRight: <NavIcon iconName="share" color={COLOR_FONT_QUINARY} />
+        headerRight: <NavIcon iconName="share" color={COLOR_FONT_QUINARY} onPress={() => shareContent()} />
     };
 
     componentDidMount() {
@@ -46,7 +59,7 @@ class HomeScreen extends Component {
         return (
             <View style={containerStyle}>
                 <LinearGradient colors={[COLOR_PRIMARY, '#53a0fe', '#40bbef']} style={linearGradientStyle}>
-                    <PricePrediction />
+                    <PricePrediction navigation={this.props.navigation} />
                 </LinearGradient>
             </View>
         );
@@ -56,7 +69,6 @@ class HomeScreen extends Component {
 const styles = {
     containerStyle: {
         flex: 1,
-        backgroundColor: COLOR_PRIMARY,
         flexDirection: 'column',
         justifyContent: 'flex-start'
     },

@@ -27,6 +27,7 @@ export const FAVORITE_STATION_FETCH_ERROR = 'favorite_station_fetch_error';
 /** Type for PricePrediction Component **/
 export const PREDICTION_FETCHING = 'prediction_fetching';
 export const PREDICTION_FETCH_SUCCESS = 'prediction_fetch_success';
+export const PREDICTION_FETCH_ERROR = 'prediction_fetch_error';
 
 /** Type for AreaList Component **/
 export const AREAS_FETCHING = 'areas_fetching';

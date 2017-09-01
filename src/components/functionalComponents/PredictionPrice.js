@@ -29,7 +29,6 @@ const styles = {
         fontSize: 48,
         fontFamily: FONT_NUMBER_REGULAR,
         color: COLOR_FONT_QUINARY,
-        paddingVertical: 5
     },
     priceInfoStyle: {
         fontSize: 12,

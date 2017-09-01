@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ActionButton from 'react-native-action-button';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { connect } from 'react-redux';
-import { Alert, Linking } from 'react-native';
+import { Alert, Linking, Platform } from 'react-native';
 
 import { Blur } from './functionalComponents';
 import {
@@ -114,7 +114,7 @@ class Fab extends Component {
                 backdrop={<Blur />}
                 outRangeScale={1.3}
                 useNativeFeedback={false}
-                hideShadow={true}
+                hideShadow={Platform.OS !== 'ios'}
             >
                 <ActionButton.Item
                     title='내 위치로 검색'

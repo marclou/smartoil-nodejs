@@ -21,17 +21,17 @@ class GasStationInfo extends Component {
         super(props);
 
         this.state = {
-            isComponentReady: false
+            isComponentReady: true
         };
         this.linkToNavigation = this.linkToNavigation.bind(this);
         this.showAndroidActionSheet = this.showAndroidActionSheet.bind(this);
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
         });
-    }
+    }*/
 
     linkToNavigation() {
         if (Platform.OS === 'ios') {

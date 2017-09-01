@@ -16,7 +16,7 @@ class AreaFavoriteList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isComponentReady: false
+            isComponentReady: true
         };
         if (Platform.OS === 'android') {
             UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -24,11 +24,11 @@ class AreaFavoriteList extends Component {
         this.createDataSource();
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
         });
-    }
+    }*/
 
     componentWillReceiveProps() {
         this.createDataSource();

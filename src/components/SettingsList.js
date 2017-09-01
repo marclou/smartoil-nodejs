@@ -21,15 +21,15 @@ class SettingsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isComponentReady: false
+            isComponentReady: true
         };
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
         });
-    }
+    }*/
 
     eraseAllData() {
         AsyncStorage.clear().then(() => {

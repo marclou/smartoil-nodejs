@@ -28,14 +28,14 @@ class FavoriteGasStations extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isComponentReady: false
+            isComponentReady: true
         };
     }
 
     componentDidMount() {
-        InteractionManager.runAfterInteractions(() => {
+        /*InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
-        });
+        });*/
         this.props.loadFavorites();
         this.createDataSource(this.props);
     }

@@ -1,40 +1,61 @@
 import React, { Component } from 'react';
-import { View, Text, Share } from 'react-native';
+import { View, Text, Share, Image, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
 
 import { pricePredictionFetch } from '../actions';
-import { Tag, Spinner, PredictionPrice, NavIcon } from './functionalComponents';
+import { Tag, Spinner, PredictionPrice, NavIcon, ErrorStatic } from './functionalComponents';
 import {
-    COLOR_BORDER_SECONDARY,
     COLOR_FONT_QUINARY,
-    PADDING_BOTTOM,
     FONT_CHARACTER_REGULAR,
-    FONT_CHARACTER_BOLD
+    FONT_CHARACTER_BOLD,
 } from '../styles/common';
 
 class PricePrediction extends Component {
+    constructor() {
+        super();
+        this.animate = this.animate.bind(this);
+
+        this.state = {
+            animatedVal: new Animated.Value(0)
+        };
+    }
+
     componentDidMount() {
-        /*Actions.refresh({
-            renderRightButton: () => <NavIcon iconName="share" color={COLOR_FONT_QUINARY} onPress={this.shareContent} />
-        });*/
+        const { userFavoriteArea, userFavoriteGas } = this.props.userState;
+
+        this.props.pricePredictionFetch(userFavoriteArea.code, userFavoriteGas.code);
     }
 
-    shouldComponentUpdate(nextProps) {
-        if (nextProps.userState.userLocation !== this.props.userState.userLocation) {
-            return true;
-        }
-        return (nextProps.pricePrediction.pricePredictionData.length !== 0);
+    componentWillUpdate() {
+        this.animate();
     }
 
-    componentWillUpdate(nextProps) {
-        const { latitude, longitude } = nextProps.userState.userLocation;
+    componentDidUpdate(prevProps) {
+        const { userFavoriteArea, userFavoriteGas } = this.props.userState;
 
-        if (nextProps.pricePrediction.pricePredictionData.length === 0) {
-            //this.props.pricePredictionFetch(latitude, longitude);
+        if (prevProps.userState.userFavoriteGas !== this.props.userState.userFavoriteGas
+            || prevProps.userState.userFavoriteArea !== this.props.userState.userFavoriteArea) {
+            this.props.pricePredictionFetch(userFavoriteArea.code, userFavoriteGas.code);
         }
     }
 
-    shareContent() {
+    animate() {
+        this.state.animatedVal.setValue(0);
+            Animated.timing(
+            this.state.animatedVal,
+            {
+                toValue: 1,
+                duration: 800,
+                easing: Easing.linear
+            }
+        ).start((animation) => {
+            if (animation.finished) {
+                this.animate();
+            }
+        });
+    }
+
+    /*shareContent() {
         Share.share({
                 message: '스마트오일 덕분에 이 주에 기름값을 XX원 절약할 수 있었어요!  얼마나 아낄 수 있는지 알아볼까요?',
                 title: '스마트오일',
@@ -45,47 +66,77 @@ class PricePrediction extends Component {
             })
             .then(result => console.log(result))
             .catch(err => console.log(err));
-    }
+    }*/
 
-    renderPricePredictionOrSpinner() {
-        const { loading, pricePredictionData } = this.props.pricePrediction;
+    render() {
+        const { loading, error, pricePredictionData } = this.props.pricePrediction;
+        const { userFavoriteArea, userFavoriteGas } = this.props.userState;
+        const { containerStyle, row, image, advice, subAdvice, imageContainer } = styles;
+        const opacity = this.state.animatedVal.interpolate({
+            inputRange: [0, 0.3, 1],
+            outputRange: [0.75, 1, 0.75]
+        });
+        const scale = this.state.animatedVal.interpolate({
+            inputRange: [0, 0.3, 1],
+            outputRange: [0.95, 1.1, 0.95]
+        });
 
         if (loading) {
-            return <Spinner size='large' color='white' />;
+            return (
+                <Spinner size='large' color='white' />
+            );
         }
-
-        // TO BE REMOVED WHEN PRICE PREDICTION API IS READY
-        Object.assign(pricePredictionData, { predictPrice: 1250 }, { shortText: 'Buy !' }, { longText: 'Prices will increase tomorrow, you should refill your tank now.' });
-        const { containerStyle, row, advice, subAdvice } = styles;
-        const { userFavoriteGas, userFavoriteArea } = this.props.userState;
-
+        if (error) {
+            return (
+                <ErrorStatic
+                    title='Ooops, something went wrong'
+                    message='But no worry, you can still refresh the result with the button below'
+                    onPress={this.props.pricePredictionFetch.bind(this, userFavoriteArea.code, userFavoriteGas.code)}
+                />
+            );
+        }
         return (
             <View style={containerStyle}>
                 <View style={row}>
-                    <Text style={advice}>
-                        이제 구매해야 이제.
-                    </Text>
+                    <View style={imageContainer}>
+                        {pricePredictionData.shortTermPrediction !== 0 ?
+                            <Animated.Image
+                                source={require('../img/prediction/full.png')}
+                                style={[image, { opacity, transform: [{ scale }] }]}
+                            /> :
+                            <Image
+                                source={require('../img/prediction/empty.png')}
+                                style={image}
+                            />
+                        }
+                    </View>
+                </View>
+                <View style={row}>
+                    {(() => {
+                        switch (pricePredictionData.shortTermPrediction) {
+                            case 0:
+                                return <Text style={advice}>내일은 가격이 올라갑니다.</Text>;
+                            case 1:
+                                return <Text style={advice}>내일은 가격이 같습니다.</Text>;
+                            case 2:
+                                return <Text style={advice}>내일은 가격이 내려갑니다.</Text>;
+                            default:
+                                return <Text style={advice}>내일은 가격이 같습니다.</Text>;
+                        }
+                    })()}
                 </View>
                 <View style={row}>
                     <Text style={subAdvice}>
-                        이제 구매해야.
+                        오늘 가격
                     </Text>
                 </View>
                 <View style={row}>
-                    <PredictionPrice text="1,567.09" />
+                    <PredictionPrice text={pricePredictionData.averagePrice.toLocaleString('en-US', { minimumFractionDigits: 2 })} />
                 </View>
                 <View style={row}>
                     <Tag text={userFavoriteGas.value} />
-                    <Tag text={userFavoriteArea} />
+                    <Tag text={userFavoriteArea.value} />
                 </View>
-            </View>
-        );
-    }
-
-    render() {
-        return (
-            <View style={{ flex: 1, paddingBottom: PADDING_BOTTOM }}>
-                {this.renderPricePredictionOrSpinner()}
             </View>
         );
     }
@@ -100,12 +151,6 @@ const styles = {
         padding: 20,
         marginBottom: 50
     },
-    section: {
-        flexDirection: 'column',
-        borderBottomWidth: 1,
-        borderColor: COLOR_BORDER_SECONDARY,
-        padding: 20
-    },
     row: {
         padding: 5,
         flexDirection: 'row',
@@ -113,11 +158,17 @@ const styles = {
         alignItems: 'center',
         backgroundColor: 'transparent'
     },
+    image: {
+        backgroundColor: 'transparent',
+        height: 85,
+        width: 85,
+        resizeMode: 'contain',
+    },
     advice: {
         color: COLOR_FONT_QUINARY,
         fontSize: 20,
         fontFamily: FONT_CHARACTER_BOLD,
-        letterSpacing: 1.5
+        letterSpacing: 1.5,
     },
     subAdvice: {
         color: COLOR_FONT_QUINARY,
@@ -125,6 +176,14 @@ const styles = {
         fontFamily: FONT_CHARACTER_REGULAR,
         letterSpacing: 2
 
+    },
+    imageContainer: {
+        height: 174,
+        width: 174,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 100,
+        backgroundColor: 'white'
     }
 };
 

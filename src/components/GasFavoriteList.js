@@ -18,17 +18,17 @@ class GasFavoriteList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isComponentReady: false
+            isComponentReady: true
         };
         this.gasType = GAS_TYPE;
         this.createDataSource();
     }
 
-    componentDidMount() {
+    /*componentDidMount() {
         InteractionManager.runAfterInteractions(() => {
             this.setState({ isComponentReady: true });
         });
-    }
+    }*/
 
     componentWillReceiveProps() {
         this.createDataSource();
