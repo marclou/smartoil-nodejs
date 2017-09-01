@@ -58,6 +58,7 @@ class AreaFavoriteList extends Component {
                     pageSize={AREAS.length}
                     contentContainerStyle={listStyle}
                     dataSource={this.dataSource}
+                    removeClippedSubviews={false}
                     renderRow={
                         (rowData) =>
                             <Area

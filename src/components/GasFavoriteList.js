@@ -71,6 +71,7 @@ class GasFavoriteList extends Component {
                 <ListView
                     dataSource={this.dataSource}
                     pageSize={this.gasType.length}
+                    removeClippedSubviews={false}
                     renderRow={
                         (rowData) => this.renderRow(rowData)
                     }

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Share, Image, Animated, Easing } from 'react-native';
+import { View, Text, Image, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
 
 import { pricePredictionFetch } from '../actions';
-import { Tag, Spinner, PredictionPrice, NavIcon, ErrorStatic } from './functionalComponents';
+import { Tag, Spinner, PredictionPrice, ErrorStatic } from './functionalComponents';
 import {
     COLOR_FONT_QUINARY,
     FONT_CHARACTER_REGULAR,
@@ -54,19 +54,6 @@ class PricePrediction extends Component {
             }
         });
     }
-
-    /*shareContent() {
-        Share.share({
-                message: '스마트오일 덕분에 이 주에 기름값을 XX원 절약할 수 있었어요!  얼마나 아낄 수 있는지 알아볼까요?',
-                title: '스마트오일',
-                url: 'http://nsjtech.com'
-            },
-            {
-                dialogTitle: '공유하기',
-            })
-            .then(result => console.log(result))
-            .catch(err => console.log(err));
-    }*/
 
     render() {
         const { loading, error, pricePredictionData } = this.props.pricePrediction;
