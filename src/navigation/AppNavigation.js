@@ -13,6 +13,7 @@ import SettingsList from '../components/SettingsList';
 import GasFavoriteList from '../components/GasFavoriteList';
 import TankCapacityFavoriteList from '../components/TankCapacityFavoriteList';
 import AreaFavoriteList from '../components/AreaFavoriteList';
+import RangeDistanceFavorite from '../components/RangeDistanceFavorite';
 import { TextContainer } from '../components/functionalComponents';
 import {
     COLOR_PRIMARY,
@@ -64,6 +65,7 @@ const SettingsStack = StackNavigator({
     GasSetting: { screen: GasFavoriteList },
     TankSetting: { screen: TankCapacityFavoriteList },
     LocationSetting: { screen: AreaFavoriteList },
+    DistanceSetting: { screen: RangeDistanceFavorite },
     Privacy: {
         screen: TextContainer,
         navigationOptions: {

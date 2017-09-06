@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, InteractionManager, ScrollView, AsyncStorage } from 'react-native';
+import { View, Slider, ScrollView, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { Spinner, SettingsRow, LocationSettingsRow, Button } from './functionalComponents';
-import { COLOR_BACKGROUND_TERCIARY } from '../styles/common';
+import { COLOR_BACKGROUND_TERCIARY, COLOR_PRIMARY } from '../styles/common';
 import Styles from '../styles/NavigationStyle';
+import RangeDistanceFavorite from './RangeDistanceFavorite';
 
 class SettingsList extends Component {
     static navigationOptions = {
@@ -43,7 +44,7 @@ class SettingsList extends Component {
         if (!this.state.isComponentReady) {
             return <Spinner />;
         }
-        const { userFavoriteGas, userTankCapacity, userFavoriteArea } = this.props.userSettings;
+        const { userFavoriteGas, userTankCapacity, userFavoriteArea, userDistanceRange } = this.props.userSettings;
         const { navigate } = this.props.navigation;
         const { containerStyle } = styles;
 
@@ -65,6 +66,11 @@ class SettingsList extends Component {
                         onPress={() => navigate('LocationSetting')}
                         value={userFavoriteArea.value}
                     />
+                    <SettingsRow
+                        title="검색 범위"
+                        onPress={() => navigate('DistanceSetting')}
+                        value={`${userDistanceRange}km`}
+                    />
                     <LocationSettingsRow
                         title="위치 정보 제공 동의"
                     />
@@ -72,9 +78,12 @@ class SettingsList extends Component {
                         title="정책"
                         onPress={() => navigate('Privacy')}
                     />
-                    {/*<View style={{ paddingVertical: 10 }}>
-                        <Button title='Reset App to first Launch' onPress={this.eraseAllData.bind(this)} />
-                    </View>*/}
+                    {
+                        process.env.NODE_ENV !== 'production' &&
+                        <View style={{ paddingVertical: 10 }}>
+                            <Button title='Reset App to first Launch' onPress={this.eraseAllData.bind(this)} />
+                        </View>
+                    }
                 </ScrollView>
             </View>
         );

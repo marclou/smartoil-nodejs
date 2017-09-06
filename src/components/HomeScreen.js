@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Image, Share, ScrollView } from 'react-native';
+import { View, Image, Share } from 'react-native';
 import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -10,6 +10,7 @@ import {
     getUserPosition,
     getUserFavoriteGas,
     getUserTankCapacity,
+    getUserRangeDistance,
     getUserFavoriteArea
 } from '../actions';
 import { COLOR_PRIMARY, COLOR_FONT_QUINARY } from '../styles/common';
@@ -45,6 +46,7 @@ class HomeScreen extends Component {
         this.props.getUserFavoriteGas();
         this.props.getUserTankCapacity();
         this.props.getUserFavoriteArea();
+        this.props.getUserRangeDistance();
     }
 
     shouldComponentUpdate() {
@@ -86,6 +88,7 @@ export default connect(mapStateToProps,
         getUserPosition,
         getUserFavoriteGas,
         getUserTankCapacity,
+        getUserRangeDistance,
         getUserFavoriteArea
     }
     )(HomeScreen);

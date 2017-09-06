@@ -46,12 +46,11 @@ const comparePrice = (gasStationsList, userTankCapacity) => {
     return gasStationsList;
 };
 
-export const gasStationFetch = (latitude, longitude, gasType, userTankCapacity) => {
+export const gasStationFetch = (latitude, longitude, gasType, userTankCapacity, distance) => {
     return (dispatch) => {
-        dispatch(clearDataCache());
         dispatch({ type: DATA_FETCHING });
 
-        return axios.get(`${SERVER_URL}/gas_station/near?lat=${latitude}&lng=${longitude}&type=${gasType}&lim=${QUERY_LIMIT}&dist=${DISTANCE_LIMIT}`).then(
+        return axios.get(`${SERVER_URL}/gas_station/near?lat=${latitude}&lng=${longitude}&type=${gasType}&lim=${QUERY_LIMIT}&dist=${distance}`).then(
             response => {
                 return dispatch(gasStationFetchAction(comparePrice(response.data, userTankCapacity)));
             },
@@ -61,12 +60,11 @@ export const gasStationFetch = (latitude, longitude, gasType, userTankCapacity) 
     };
 };
 
-export const areaGasStationFetch = (largeName, middleName, smallName, gasType, userTankCapacity) => {
+export const areaGasStationFetch = (largeName, middleName, smallName, gasType, userTankCapacity, distance) => {
     return (dispatch) => {
-        dispatch(clearDataCache());
         dispatch({ type: DATA_FETCHING });
 
-        return axios.get(`${SERVER_URL}/searchByArea?cityDo=${largeName}&guGun=${middleName}&dong=${smallName}&type=${gasType}&lim=${QUERY_LIMIT}&dist=${DISTANCE_LIMIT}`).then(
+        return axios.get(`${SERVER_URL}/searchByArea?cityDo=${largeName}&guGun=${middleName}&dong=${smallName}&type=${gasType}&lim=${QUERY_LIMIT}&dist=${distance}`).then(
             response => {
                 return dispatch(gasStationFetchAction(comparePrice(response.data, userTankCapacity)));
             },

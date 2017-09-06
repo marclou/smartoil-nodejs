@@ -7,6 +7,7 @@ import {
     CHANGE_USER_ALLOW_LOCATION,
     RECEIVE_USER_FAVORITE_GAS,
     RECEIVE_USER_TANK_CAPACITY,
+    RECEIVE_USER_DISTANCE_RANGE,
     RECEIVE_USER_FAVORITE_AREA,
     RECEIVE_USER_IS_FIRST_LAUNCH,
     CLEAR_CACHE
@@ -53,6 +54,14 @@ const userTankCapacityAction = tankCapacity => {
     return {
         type: RECEIVE_USER_TANK_CAPACITY,
         payload: tankCapacity
+    };
+};
+
+// Action Creator for updating the user Tank Capacity
+const userDistanceRangeAction = distance => {
+    return {
+        type: RECEIVE_USER_DISTANCE_RANGE,
+        payload: distance
     };
 };
 
@@ -145,6 +154,28 @@ export const changeUserTankCapacity = tankCapacity => {
     return (dispatch) => {
         AsyncStorage.setItem('tankCapacity', tankCapacity.toString()).then(() => {
             return dispatch(userTankCapacityAction(tankCapacity));
+        }).catch(error => {
+            console.log(error);
+        });
+    };
+};
+
+export const getUserRangeDistance = () => {
+    return (dispatch) => {
+        AsyncStorage.getItem('rangeDistance').then((rangeDistance) => {
+            if (rangeDistance !== null) {
+                return dispatch(userDistanceRangeAction(parseInt(rangeDistance, 10)));
+            }
+        }).catch(error => {
+            console.log(error);
+        });
+    };
+};
+
+export const changeUserRangeDistance = distance => {
+    return (dispatch) => {
+        AsyncStorage.setItem('rangeDistance', distance.toString()).then(() => {
+            return dispatch(userDistanceRangeAction(distance));
         }).catch(error => {
             console.log(error);
         });

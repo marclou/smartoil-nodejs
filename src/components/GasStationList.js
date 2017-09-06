@@ -26,15 +26,15 @@ class GasStationList extends Component {
     }
 
     componentDidMount() {
-        const { userLocation, userFavoriteGas, userTankCapacity } = this.props.userState;
+        const { userLocation, userFavoriteGas, userTankCapacity, userDistanceRange } = this.props.userState;
         const { isFromAreaList } = this.props;
 
         if (isFromAreaList) {
             const { area, department, region } = this.props.areaList;
 
-            this.props.areaGasStationFetch(area.districtName, department.districtName, region.disctrictName, userFavoriteGas.code, userTankCapacity);
+            this.props.areaGasStationFetch(area.districtName, department.districtName, region.disctrictName, userFavoriteGas.code, userTankCapacity, userDistanceRange);
         } else {
-            this.props.gasStationFetch(userLocation.latitude, userLocation.longitude, userFavoriteGas.code, userTankCapacity);
+            this.props.gasStationFetch(userLocation.latitude, userLocation.longitude, userFavoriteGas.code, userTankCapacity, userDistanceRange);
         }
     }
 
@@ -98,7 +98,7 @@ class GasStationList extends Component {
 
     renderListOrSpinner() {
         const { gasStationsLibraries, selectedFilter } = this.props.gasStations;
-        const { userLocation, userFavoriteGas, userTankCapacity } = this.props.userState;
+        const { userLocation, userFavoriteGas, userTankCapacity, userDistanceRange } = this.props.userState;
         const { area, department, region } = this.props.areaList;
         const { navigate, isFromAreaList } = this.props;
         const { containerStyle, tabsContainerStyle, tabStyle, tabTextStyle, activeTabStyle, activeTabTextStyle } = styles;
@@ -112,8 +112,8 @@ class GasStationList extends Component {
                     title='Ooops, something went wrong'
                     message='But no worry, you can still refresh the result with the button below'
                     onPress={
-                        isFromAreaList ? this.props.areaGasStationFetch.bind(this, area.districtName, department.districtName, region.disctrictName, userFavoriteGas.code, userTankCapacity) :
-                        this.props.gasStationFetch.bind(this, userLocation.latitude, userLocation.longitude, userFavoriteGas.code, userTankCapacity)}
+                        isFromAreaList ? this.props.areaGasStationFetch.bind(this, area.districtName, department.districtName, region.disctrictName, userFavoriteGas.code, userTankCapacity, userDistanceRange) :
+                        this.props.gasStationFetch.bind(this, userLocation.latitude, userLocation.longitude, userFavoriteGas.code, userTankCapacity, userDistanceRange)}
                 />
             );
         }

@@ -5,6 +5,7 @@ import {
     CHANGE_USER_ALLOW_LOCATION,
     RECEIVE_USER_FAVORITE_GAS,
     RECEIVE_USER_TANK_CAPACITY,
+    RECEIVE_USER_DISTANCE_RANGE,
     RECEIVE_USER_FAVORITE_AREA,
     RECEIVE_USER_IS_FIRST_LAUNCH
 } from '../actions/type';
@@ -20,6 +21,7 @@ const INITIAL_STATE = {
     },
     userFavoriteGas: GAS_TYPE[0],
     userTankCapacity: 50,
+    userDistanceRange: 5,
     userFavoriteArea: AREAS[0],
     isFirstLaunch: true
 };
@@ -58,6 +60,11 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 userTankCapacity: action.payload
+            };
+        case RECEIVE_USER_DISTANCE_RANGE:
+            return {
+                ...state,
+                userDistanceRange: action.payload
             };
         case RECEIVE_USER_FAVORITE_AREA:
             return {

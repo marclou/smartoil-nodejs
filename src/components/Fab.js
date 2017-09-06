@@ -31,43 +31,43 @@ class Fab extends Component {
                 switch (positionError.code) {
                     case 0:
                         return this.displayAlert(
-                            'Alert',
-                            'The request failed, but the reason is not known. Please try again.',
+                            '경고',
+                            '요청이 실패하였습니다만 이유를 알 수 없습니다. 다시 시도해 주세요.',
                             [
-                                { text: 'OK' }
+                                { text: '확인' }
                             ]
                         );
                     case 1:
                         return this.displayAlert(
-                            'Alert',
-                            'Please, turn on your GPS to access the data',
+                            '경고',
+                            '데이터에 접근하려면 GPS를 켜주세요.',
                             [
-                                { text: 'Ok', onPress: () => Linking.openURL('app-settings:1') },
-                                { text: 'Cancel', style: 'cancel' }
+                                { text: '확인', onPress: () => Linking.openURL('app-settings:1') },
+                                { text: '취소', style: 'cancel' }
                             ]
                         );
                     case 2:
                         return this.displayAlert(
-                            'Alert',
-                            'It seems that you network is not stable. Please retry soon',
+                            '경고',
+                            '네트워크가 안정적이지 않은 것 같습니다. 조금 있다가 다시 시도해 주세요.',
                             [
-                                { text: 'OK' }
+                                { text: '확인' }
                             ]
                         );
                     case 3:
                         return this.displayAlert(
-                            'Alert',
-                            'You request timed out. Please check if you allow SmartGas to access your location.',
+                            '경고',
+                            '반응 시간 초과. SmartOil이 귀하의 위치에 접근할수 있도록 허용하는지 확인해 주세요.',
                             [
-                                { text: 'OK' }
+                                { text: '확인' }
                             ]
                         );
                     default:
                         return this.displayAlert(
-                            'Alert',
-                            'An unknown problem happened.',
+                            '경고',
+                            '알려지지 않은 문제가 발생하였습니다.',
                             [
-                                { text: 'OK' }
+                                { text: '확인' }
                             ]
                         );
                 }
@@ -80,16 +80,16 @@ class Fab extends Component {
 
         if (!userAllowLocation) {
             return this.displayAlert(
-                'Alert',
-                'Please, allow us to access your location on the setting tab.',
+                '경고',
+                '설정 탭에서 사용자 위치를 액세스 할 수 있도록 해주세요.',
                 [
-                    { text: 'OK',
+                    { text: '확인',
                         onPress: () => {
                             this.props.changeUserAllowLocation(userAllowLocation);
                             this.reloadLocation();
                         }
                     },
-                    { text: 'Cancel', style: 'cancel' }
+                    { text: '취소', style: 'cancel' }
                 ]
             );
         }

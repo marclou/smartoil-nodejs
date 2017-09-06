@@ -3,7 +3,7 @@ import { View, ListView, LayoutAnimation, UIManager, Platform } from 'react-nati
 import { connect } from 'react-redux';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
-import { Spinner, SegmentSelector, Area, ErrorStatic } from './functionalComponents';
+import { Spinner, Area, SegmentSelector, ErrorStatic } from './functionalComponents';
 import { changeDataSource, selectArea, selectIndex } from '../actions/AreaListAction';
 import {
     COLOR_FONT_SECONDARY,

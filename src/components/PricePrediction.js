@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Animated, Easing } from 'react-native';
+import { View, Text, Image, Animated, Easing, TouchableWithoutFeedback, Platform, ToastAndroid } from 'react-native';
 import { connect } from 'react-redux';
 
 import { pricePredictionFetch } from '../actions';
@@ -15,6 +15,7 @@ class PricePrediction extends Component {
         super();
         this.animate = this.animate.bind(this);
         this.onLayout = this.onLayout.bind(this);
+        this.onIconPress = this.onIconPress.bind(this);
 
         this.state = {
             isPortrait: true,
@@ -32,15 +33,6 @@ class PricePrediction extends Component {
         this.animate();
     }
 
-    componentDidUpdate(prevProps) {
-        const { userFavoriteArea, userFavoriteGas } = this.props.userState;
-
-        if (prevProps.userState.userFavoriteGas !== this.props.userState.userFavoriteGas
-            || prevProps.userState.userFavoriteArea !== this.props.userState.userFavoriteArea) {
-            this.props.pricePredictionFetch(userFavoriteArea.code, userFavoriteGas.code);
-        }
-    }
-
     onLayout(e) {
         const { width, height } = e.nativeEvent.layout;
         if (width > height) {
@@ -54,6 +46,21 @@ class PricePrediction extends Component {
         }
     }
 
+    onIconPress() {
+        const { userFavoriteArea, userFavoriteGas } = this.props.userState;
+
+        this.props.pricePredictionFetch(userFavoriteArea.code, userFavoriteGas.code);
+
+        switch (Platform.OS) {
+            case 'android':
+                //ToastAndroid.show('가장 저렴한 주유소를 찾으려면 오른쪽 하단 버튼을 이용해주세요.', ToastAndroid.SHORT);
+                break;
+            case 'ios':
+                break;
+            default:
+                break;
+        }
+    }
 
     animate() {
         this.state.animatedVal.setValue(0);
@@ -100,10 +107,16 @@ class PricePrediction extends Component {
         }
         return (
             <View
-                style={[containerStyle, this.state.isPortrait ? { flexDirection: 'column' } : { flexDirection: 'row' }]}
+                style={[containerStyle,
+                    { padding: 20 },
+                    this.state.isPortrait ?
+                        { flexDirection: 'column' } :
+                        { flexDirection: 'row' }
+                    ]}
                 onLayout={this.onLayout}
             >
-                    <View style={row}>
+                <TouchableWithoutFeedback onPress={this.onIconPress}>
+                    <View style={[row, !this.state.isPortrait ? { flex: 1 } : { flex: 0 }]}>
                         <View style={imageContainer}>
                             {pricePredictionData.shortTermPrediction !== 0 ?
                                 <Animated.Image
@@ -117,7 +130,8 @@ class PricePrediction extends Component {
                             }
                         </View>
                     </View>
-                <View style={[containerStyle, { flexDirection: 'column' }]}>
+                </TouchableWithoutFeedback>
+                <View style={[containerStyle, { flexDirection: 'column' }, this.state.isPortrait ? { paddingVertical: 10 } : null]}>
                     <View style={row}>
                         {(() => {
                             switch (pricePredictionData.shortTermPrediction) {
@@ -132,15 +146,15 @@ class PricePrediction extends Component {
                             }
                         })()}
                     </View>
-                    <View style={row}>
+                    <View style={[row, this.state.isPortrait ? { paddingVertical: 10 } : null]}>
                         <Text style={subAdvice}>
                             오늘 가격
                         </Text>
                     </View>
-                    <View style={row}>
-                        <PredictionPrice text={pricePredictionData.averagePrice.toLocaleString('en-US', { minimumFractionDigits: 2 })} />
+                    <View style={[row, this.state.isPortrait ? { paddingVertical: 10 } : null]}>
+                        <PredictionPrice text={Number(pricePredictionData.averagePrice)} />
                     </View>
-                    <View style={row}>
+                    <View style={[row, this.state.isPortrait ? { paddingVertical: 10 } : null]}>
                         <Tag text={userFavoriteGas.value} />
                         <Tag text={userFavoriteArea.value} />
                     </View>
@@ -153,16 +167,14 @@ class PricePrediction extends Component {
 const styles = {
     containerStyle: {
         flex: 1,
-        justifyContent: 'space-around',
+        justifyContent: 'center',
         alignItems: 'center',
-        padding: 20,
     },
     row: {
-        padding: 5,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
     },
     image: {
         backgroundColor: 'transparent',

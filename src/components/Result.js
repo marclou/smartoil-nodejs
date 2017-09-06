@@ -15,19 +15,6 @@ class Result extends Component {
         headerStyle: [Styles.headerBackgroundDark, { shadowOpacity: 0, elevation: 0 }]
     };
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            isComponentReady: true
-        };
-    }
-/*
-    componentDidMount() {
-        InteractionManager.runAfterInteractions(() => {
-            this.setState({ isComponentReady: true });
-        });
-    }*/
-
     render() {
         const { containerStyle } = styles;
         const { navigate, state } = this.props.navigation;
@@ -35,10 +22,6 @@ class Result extends Component {
 
         if (state.params.isFromAreaList) {
             isFromAreaList = true;
-        }
-
-        if (!this.state.isComponentReady) {
-            return <Spinner />;
         }
         return (
             <View style={containerStyle} >

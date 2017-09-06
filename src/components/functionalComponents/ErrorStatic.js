@@ -27,7 +27,7 @@ const ErrorStatic = ({ title, message, onPress }) => {
                 하지만 걱정마세요. 아래 버튼으로 결과를 새로 고칠 수 있어요.
             </Text>
             <Button
-                title='Retry'
+                title='재시도'
                 onPress={onPress}
             />
         </View>
@@ -41,8 +41,7 @@ const styles = {
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: COLOR_BACKGROUND_TERCIARY,
-        paddingHorizontal: 40,
-        paddingBottom: PADDING_BOTTOM
+        padding: 40
     },
     imageStyle: {
         marginBottom: 20,
