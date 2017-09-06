@@ -14,14 +14,10 @@
     "react-native": "^0.45.1",
     "react-native-action-button": "^2.7.2",
     "react-native-animate-number": "^0.1.2",
-    "react-native-blur": "^3.0.0",
     "react-native-linear-gradient": "^2.0.0",
-    "react-native-maps": "^0.15.2",
     "react-native-radio-buttons": "^0.14.0",
-    "react-native-root-siblings": "^1.2.1",
     "react-native-segmented-control-tab": "^3.0.2",
     "react-native-smart-splash-screen": "^2.3.4",
-    "react-native-tab-view": "0.0.66",
     "react-native-vector-icons": "^4.2.0",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.5",
@@ -29,8 +25,7 @@
     "redux": "^3.7.0",
     "redux-logger": "^3.0.6",
     "redux-promise": "^0.5.3",
-    "redux-thunk": "^2.2.0",
-    "uuid": "^3.0.1"
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",

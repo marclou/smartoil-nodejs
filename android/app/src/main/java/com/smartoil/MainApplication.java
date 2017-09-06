@@ -5,9 +5,7 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import io.realm.react.RealmReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
-import com.airbnb.android.react.maps.MapsPackage;
 import com.BV.LinearGradient.LinearGradientPackage;
-import com.cmcewen.blurview.BlurViewPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -33,9 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RCTSplashScreenPackage(),
             new RealmReactPackage(),
             new VectorIconsPackage(),
-            new MapsPackage(),
-            new LinearGradientPackage(),
-            new BlurViewPackage()
+            new LinearGradientPackage()
       );
     }
   };
