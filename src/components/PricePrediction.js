@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Animated, Easing, TouchableWithoutFeedback, Platform, ToastAndroid } from 'react-native';
+import { View, Text, Image, Animated, Easing, TouchableWithoutFeedback, StyleSheet, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 
 import { pricePredictionFetch } from '../actions';
@@ -50,16 +50,6 @@ class PricePrediction extends Component {
         const { userFavoriteArea, userFavoriteGas } = this.props.userState;
 
         this.props.pricePredictionFetch(userFavoriteArea.code, userFavoriteGas.code);
-
-        switch (Platform.OS) {
-            case 'android':
-                //ToastAndroid.show('가장 저렴한 주유소를 찾으려면 오른쪽 하단 버튼을 이용해주세요.', ToastAndroid.SHORT);
-                break;
-            case 'ios':
-                break;
-            default:
-                break;
-        }
     }
 
     animate() {
@@ -108,7 +98,7 @@ class PricePrediction extends Component {
         return (
             <View
                 style={[containerStyle,
-                    { padding: 20 },
+                    { padding: 20, flex: 1 },
                     this.state.isPortrait ?
                         { flexDirection: 'column' } :
                         { flexDirection: 'row' }
@@ -116,7 +106,7 @@ class PricePrediction extends Component {
                 onLayout={this.onLayout}
             >
                 <TouchableWithoutFeedback onPress={this.onIconPress}>
-                    <View style={[row, !this.state.isPortrait ? { flex: 1 } : { flex: 0 }]}>
+                    <View style={[row, { flex: 1 }]}>
                         <View style={imageContainer}>
                             {pricePredictionData.shortTermPrediction !== 0 ?
                                 <Animated.Image
@@ -131,7 +121,7 @@ class PricePrediction extends Component {
                         </View>
                     </View>
                 </TouchableWithoutFeedback>
-                <View style={[containerStyle, { flexDirection: 'column' }, this.state.isPortrait ? { paddingVertical: 10 } : null]}>
+                <View style={[containerStyle, { flexDirection: 'column' }, this.state.isPortrait ? { paddingVertical: 10, flex: 2 } : { flex: 1 }]}>
                     <View style={row}>
                         {(() => {
                             switch (pricePredictionData.shortTermPrediction) {
@@ -163,10 +153,12 @@ class PricePrediction extends Component {
         );
     }
 }
+const width = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
+const imageSize = (height / width > 1.5) ? width / 2 : width / 3;
 
-const styles = {
+const styles = StyleSheet.create({
     containerStyle: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -178,8 +170,8 @@ const styles = {
     },
     image: {
         backgroundColor: 'transparent',
-        height: 85,
-        width: 85,
+        width: imageSize / 2.04,
+        height: imageSize / 2.04,
         resizeMode: 'contain',
     },
     advice: {
@@ -199,14 +191,14 @@ const styles = {
     },
     imageContainer: {
         alignSelf: 'center',
-        height: 174,
-        width: 174,
+        width: imageSize,
+        height: imageSize,
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 100,
         backgroundColor: 'white'
     }
-};
+});
 
 const mapStateToProps = state => {
     return {
