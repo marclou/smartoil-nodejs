@@ -5,7 +5,6 @@ import { NavigationActions } from 'react-navigation';
 import {
     SELECT_AREA,
     SELECT_INDEX,
-    CLEAR_CACHE,
     AREAS_FETCHING,
     AREAS_FETCH_SUCCESS,
     AREAS_FETCH_ERROR
@@ -125,10 +124,10 @@ export const selectIndex = (index, ...areaSelected) => {
 
 const displayAlert = () => {
     Alert.alert(
-        'Alert',
-        'You have to choose one area',
+        '경고',
+        '먼저 검색 범위를 선택하여야 합니다.',
         [
-            { text: 'OK' }
+            { text: '확인' }
         ],
         { cancelable: true }
     );
