@@ -24,7 +24,7 @@ class GasStationInfo extends Component {
                 return {
                     iconName: 'caret-up',
                     iconColor: COLOR_ERROR,
-                    adviceSentence: 'BUY NOW',
+                    adviceSentence: '오늘 구매',
                     adviceIcon: 'bolt',
                     adviceIconColor: COLOR_PRIMARY
                 };
@@ -33,9 +33,9 @@ class GasStationInfo extends Component {
                 return {
                     iconName: 'caret-down',
                     iconColor: COLOR_PRIMARY,
-                    adviceSentence: 'Wait',
+                    adviceSentence: '구매 대기',
                     adviceIcon: 'clock-o',
-                    adviceIconColor: COLOR_FONT_PRIMARY
+                    adviceIconColor: COLOR_PRIMARY
                 };
             default:
                 return {
@@ -50,8 +50,8 @@ class GasStationInfo extends Component {
 
     static alert() {
         Alert.alert(
-            'Coming soon...',
-            'We will be soon able to freeze the price for the desired amount of liters for a week !',
+            '잠시만요!',
+            '곧 원하시는 리터 당 가격을 일 주일 동안 보장해드리겠습니다.',
             [{ text: '확인' }],
             { cancelable: true }
         );
@@ -195,7 +195,7 @@ class GasStationInfo extends Component {
                 <View style={row}>
                     <Icon name={predictionState.adviceIcon} style={{ fontSize: 20, color: predictionState.adviceIconColor }} />
                     <Text style={textMajorStyle}> {predictionState.adviceSentence} </Text>
-                    <ClickableTag iconName='shield' onPress={GasStationInfo.alert} />
+                    { prediction !== 1 && <ClickableTag iconName='shield' onPress={GasStationInfo.alert} />}
                 </View>
 
 
@@ -245,8 +245,8 @@ const styles = {
         fontSize: 24,
         color: COLOR_FONT_PRIMARY,
         fontFamily: FONT_NUMBER_BOLD,
-        paddingRight: 12,
-        paddingLeft: 3
+        paddingRight: 10,
+        paddingLeft: 4
     },
     textMediumStyle: {
         fontSize: 16,
