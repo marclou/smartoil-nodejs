@@ -86,6 +86,7 @@ class GasStationContainer extends Component {
                         gasStation={favoriteStation.gasStation}
                         priceDiff={priceDiff}
                         realTimeVariables={realTimeVariables}
+                        prediction={-1}
                     />
                 </ScrollView>
 

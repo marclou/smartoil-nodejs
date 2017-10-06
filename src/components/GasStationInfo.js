@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Text, Image, View, InteractionManager, ActionSheetIOS, Linking, Platform, AlertIOS } from 'react-native';
+import { Alert, Text, Image, View, ActionSheetIOS, Linking, Platform, AlertIOS } from 'react-native';
 import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
 
-import { Spinner, Tag, Button } from './functionalComponents';
+import { Spinner, Tag, ClickableTag, Button } from './functionalComponents';
 import { displayLogo } from '../img/brands';
 import {
     COLOR_PRIMARY,
@@ -13,10 +13,50 @@ import {
     COLOR_BORDER_SECONDARY,
     FONT_CHARACTER_REGULAR,
     FONT_CHARACTER_BOLD,
-    FONT_NUMBER_BOLD
+    FONT_NUMBER_BOLD,
+    COLOR_ERROR
 } from '../styles/common';
 
 class GasStationInfo extends Component {
+    static mapPrediction(predictionValue) {
+        switch (predictionValue) {
+            case -1:
+                return {
+                    iconName: 'caret-up',
+                    iconColor: COLOR_ERROR,
+                    adviceSentence: 'BUY NOW',
+                    adviceIcon: 'bolt',
+                    adviceIconColor: COLOR_PRIMARY
+                };
+            case 0:
+            case 1:
+                return {
+                    iconName: 'caret-down',
+                    iconColor: COLOR_PRIMARY,
+                    adviceSentence: 'Wait',
+                    adviceIcon: 'clock-o',
+                    adviceIconColor: COLOR_FONT_PRIMARY
+                };
+            default:
+                return {
+                    iconName: 'question',
+                    iconColor: COLOR_FONT_SECONDARY,
+                    adviceSentence: 'No Information',
+                    adviceIcon: '',
+                    adviceIconColor: ''
+                };
+        }
+    }
+
+    static alert() {
+        Alert.alert(
+            'Coming soon...',
+            'We will be soon able to freeze the price for the desired amount of liters for a week !',
+            [{ text: '확인' }],
+            { cancelable: true }
+        );
+    }
+
     constructor(props) {
         super(props);
 
@@ -25,13 +65,8 @@ class GasStationInfo extends Component {
         };
         this.linkToNavigation = this.linkToNavigation.bind(this);
         this.showAndroidActionSheet = this.showAndroidActionSheet.bind(this);
+        GasStationInfo.alert = GasStationInfo.alert.bind(this);
     }
-
-    /*componentDidMount() {
-        InteractionManager.runAfterInteractions(() => {
-            this.setState({ isComponentReady: true });
-        });
-    }*/
 
     linkToNavigation() {
         if (Platform.OS === 'ios') {
@@ -107,7 +142,8 @@ class GasStationInfo extends Component {
     render() {
         const { containerStyle, divider, row, logoStyle, textMajorStyle, textMediumStyle, textMinorStyle } = styles;
         const { priceInfo, name, brand } = this.props.gasStation;
-        const { priceDiff, realTimeVariables, userGasType } = this.props;
+        const { priceDiff, realTimeVariables, userGasType, prediction } = this.props;
+        const predictionState = GasStationInfo.mapPrediction(prediction);
 
         if (!this.state.isComponentReady) {
             return <Spinner />;
@@ -134,10 +170,15 @@ class GasStationInfo extends Component {
                         </Text>
                     </View>}
                 <View style={divider} />
+
+
                 <View style={row}>
+                    <Icon name={predictionState.iconName} style={{ fontSize: 22, color: predictionState.iconColor }} />
                     <Text style={textMajorStyle}> {priceInfo.price}원</Text>
                     <Tag text={userGasType.value} />
                 </View>
+
+
                 {(priceDiff !== 0 && typeof priceDiff !== 'undefined') &&
                 <View style={row}>
                     <Text style={[textMinorStyle, { color: COLOR_PRIMARY }]}>
@@ -148,12 +189,28 @@ class GasStationInfo extends Component {
                         원(1.6L기준) 절약됩니다.
                     </Text>
                 </View>}
+                <View style={divider} />
+
+
+                <View style={row}>
+                    <Icon name={predictionState.adviceIcon} style={{ fontSize: 20, color: predictionState.adviceIconColor }} />
+                    <Text style={textMajorStyle}> {predictionState.adviceSentence} </Text>
+                    <ClickableTag iconName='shield' onPress={GasStationInfo.alert} />
+                </View>
+
+
+                <View style={row}>
+                    <Text style={textMinorStyle}>
+                        지금 사면 약 원(1.6L기준) 절약됩니다.
+                    </Text>
+                </View>
                 <View style={{ marginTop: 25 }}>
                     <Button
                         title="주유소 찾아가기"
                         onPress={this.linkToNavigation}
                     />
                 </View>
+
             </View>
         );
     }
@@ -176,6 +233,7 @@ const styles = {
         paddingVertical: 3,
         flexDirection: 'row',
         justifyContent: 'center',
+        alignItems: 'center'
     },
     logoStyle: {
         margin: 15,
@@ -187,7 +245,8 @@ const styles = {
         fontSize: 24,
         color: COLOR_FONT_PRIMARY,
         fontFamily: FONT_NUMBER_BOLD,
-        paddingRight: 15
+        paddingRight: 12,
+        paddingLeft: 3
     },
     textMediumStyle: {
         fontSize: 16,

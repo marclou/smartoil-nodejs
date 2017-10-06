@@ -22,8 +22,8 @@ class FavoriteItem extends Component {
         const { uid } = this.props.gasStation;
 
         Alert.alert(
-            'Delete',
-            'Are you sure you want to delete this from your favorites',
+            '삭제',
+            '이 주유소를 단골 목록에서 삭제하시겠습니까?',
             [
                 { text: 'Cancel', style: 'cancel' },
                 { text: 'OK', onPress: () => this.props.deleteFavorite(uid) },
