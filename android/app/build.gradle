@@ -97,8 +97,8 @@ android {
         applicationId "com.smartoil"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 5
-        versionName "2.0.0"
+        versionCode 6
+        versionName "2.1.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
