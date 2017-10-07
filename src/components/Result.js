@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { InteractionManager, View } from 'react-native';
+import { View } from 'react-native';
 
-import { Spinner } from './functionalComponents';
 import GasStationList from './GasStationList';
 import { COLOR_FONT_SECONDARY } from '../styles/common';
 import Styles from '../styles/NavigationStyle';

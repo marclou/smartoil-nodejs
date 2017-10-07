@@ -4,6 +4,7 @@ import {
     COLOR_BACKGROUND_QUATERNARY,
     COLOR_BORDER_SECONDARY,
     COLOR_FONT_QUINARY,
+    COLOR_FONT_SECONDARY,
     COLOR_FONT_PRIMARY,
     FONT_CHARACTER_REGULAR,
     FONT_CHARACTER_BOLD
@@ -32,9 +33,11 @@ export default StyleSheet.create({
         alignSelf: 'center',
     },
     headerBackgroundPrimary: {
+        borderBottomWidth: 0,
         backgroundColor: COLOR_PRIMARY
     },
     headerBackgroundDark: {
+        borderBottomWidth: 0,
         backgroundColor: COLOR_BACKGROUND_QUATERNARY
     },
     headerTitlePrimary: {
@@ -43,7 +46,7 @@ export default StyleSheet.create({
         fontSize: 20,
     },
     headerTitleDark: {
-        color: COLOR_FONT_PRIMARY,
+        color: COLOR_FONT_SECONDARY,
         fontFamily: FONT_CHARACTER_BOLD,
         fontSize: 20
     }

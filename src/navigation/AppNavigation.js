@@ -58,6 +58,11 @@ const HomeStack = StackNavigator({
     cardStyle: {
         backgroundColor: COLOR_BACKGROUND_TERCIARY,
     },
+    navigationOptions: {
+        headerStyle: {
+            borderWidth: 0
+        }
+    }
 });
 
 const SettingsStack = StackNavigator({

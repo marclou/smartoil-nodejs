@@ -10,7 +10,7 @@ import { AREAS } from '../Type';
 class AreaFavoriteList extends Component {
     static navigationOptions = {
         tabBarVisible: false,
-        headerTitle: '지역',
+        headerTitle: '지역'
     };
 
     constructor(props) {
@@ -23,12 +23,6 @@ class AreaFavoriteList extends Component {
         }
         this.createDataSource();
     }
-
-    /*componentDidMount() {
-        InteractionManager.runAfterInteractions(() => {
-            this.setState({ isComponentReady: true });
-        });
-    }*/
 
     componentWillReceiveProps() {
         this.createDataSource();

@@ -107,7 +107,7 @@ class PricePrediction extends Component {
             >
                 <TouchableWithoutFeedback onPress={this.onIconPress}>
                     <View style={[row, { flex: 1 }]}>
-                        <View style={imageContainer}>
+                        <View style={[imageContainer, this.state.isPortrait && { marginTop: 10 }]}>
                             {pricePredictionData.shortTermPrediction !== 0 ?
                                 <Animated.Image
                                     source={require('../img/prediction/full.png')}
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         width: imageSize / 2.04,
         height: imageSize / 2.04,
-        resizeMode: 'contain',
+        resizeMode: 'contain'
     },
     advice: {
         alignSelf: 'center',
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 100,
-        backgroundColor: 'white'
+        backgroundColor: 'white',
     }
 });
 

@@ -34,7 +34,7 @@ class GasStationContainer extends Component {
     static navigationOptions = ({ navigation }) => ({
         tabBarVisible: false,
         headerTintColor: COLOR_FONT_SECONDARY,
-        headerBackTitle: null,
+        headerTruncatedBackTitle: '뒤로 가기',
         headerTitle: navigation.state.params &&
             navigation.state.params.title ?
             navigation.state.params.title : '',
@@ -42,8 +42,39 @@ class GasStationContainer extends Component {
             navigation.state.params &&
             navigation.state.params.content ?
                 <RightIcon gasStation={navigation.state.params.content} /> :
-                <View />
+                <View />,
+        gestureResponseDistance: { horizontal: 60 }
     });
+
+    static mapPredictionType(gasType, predictions) {
+        if (predictions !== null) {
+            switch (gasType) {
+                case 'B027':
+                    if (predictions.gasoline1Day !== null) {
+                        return predictions.gasoline1Day;
+                    }
+                    return -1;
+                case 'D047':
+                    if (predictions.diesel1Day !== null) {
+                        return predictions.diesel1Day;
+                    }
+                    return -1;
+                case 'B034':
+                    if (predictions.premiumGasoline1Day) {
+                        return predictions.premiumGasoline1Day;
+                    }
+                    return -1;
+                case 'K015':
+                    if (predictions.lpg1Day) {
+                        return predictions.lpg1Day;
+                    }
+                    return -1;
+                default:
+                    return -1;
+            }
+        }
+        return -1;
+    }
 
     componentDidMount() {
         const { userLocation, userFavoriteGas } = this.props.userState;
@@ -62,8 +93,8 @@ class GasStationContainer extends Component {
     }
 
     render() {
-        const { favoriteStation, navigation } = this.props;
-        const { userLocation, userFavoriteGas } = this.props.userState;
+        const { favoriteStation, navigation, userState } = this.props;
+        const { userLocation, userFavoriteGas } = userState;
         const { stationUid, priceDiff, realTimeVariables } = this.props.navigation.state.params;
 
         if (favoriteStation.loading) {
@@ -79,6 +110,8 @@ class GasStationContainer extends Component {
             );
         }
         if (favoriteStation.gasStation !== null) {
+            const predictionType = GasStationContainer.mapPredictionType(userFavoriteGas.code, favoriteStation.gasStation.predictionInfo);
+
             return (
                 <ScrollView>
                     <GasStationInfo
@@ -86,7 +119,8 @@ class GasStationContainer extends Component {
                         gasStation={favoriteStation.gasStation}
                         priceDiff={priceDiff}
                         realTimeVariables={realTimeVariables}
-                        prediction={-1}
+                        prediction={predictionType}
+                        userState={userState}
                     />
                 </ScrollView>
 

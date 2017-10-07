@@ -25,8 +25,8 @@ class FavoriteItem extends Component {
             '삭제',
             '이 주유소를 단골 목록에서 삭제하시겠습니까?',
             [
-                { text: 'Cancel', style: 'cancel' },
-                { text: 'OK', onPress: () => this.props.deleteFavorite(uid) },
+                { text: '취소', style: 'cancel' },
+                { text: '확인', onPress: () => this.props.deleteFavorite(uid) },
             ],
             { cancelable: true }
         );

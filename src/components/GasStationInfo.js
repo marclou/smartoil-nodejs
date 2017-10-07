@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Alert, Text, Image, View, ActionSheetIOS, Linking, Platform, AlertIOS } from 'react-native';
-import { connect } from 'react-redux';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -20,30 +19,49 @@ import {
 class GasStationInfo extends Component {
     static mapPrediction(predictionValue) {
         switch (predictionValue) {
-            case -1:
+            case 0:
                 return {
+                    predictionAvailable: true,
                     iconName: 'caret-up',
                     iconColor: COLOR_ERROR,
-                    adviceSentence: '오늘 구매',
+                    adviceTitle: '오늘 구매',
+                    adviceSentence: {
+                        firstPart: '내일 가격상승 예상. 오늘 구매 시,',
+                        secondPart: '원까지 절약가능.'
+                    },
                     adviceIcon: 'bolt',
                     adviceIconColor: COLOR_PRIMARY
                 };
-            case 0:
             case 1:
                 return {
+                    predictionAvailable: true,
+                    adviceTitle: '가격 유지',
+                    adviceSentence: '내일 동일가격 유지.',
+                    adviceIcon: 'sort',
+                    adviceIconColor: COLOR_PRIMARY
+                };
+            case 2:
+                return {
+                    predictionAvailable: true,
                     iconName: 'caret-down',
                     iconColor: COLOR_PRIMARY,
-                    adviceSentence: '구매 대기',
+                    adviceTitle: '구매 대기',
+                    adviceSentence: {
+                        firstPart: '내일 가격하락 예상. 내일 구매 시,',
+                        secondPart: '원까지 절약가능.'
+                    },
                     adviceIcon: 'clock-o',
                     adviceIconColor: COLOR_PRIMARY
                 };
             default:
                 return {
+                    predictionAvailable: false,
                     iconName: 'question',
                     iconColor: COLOR_FONT_SECONDARY,
-                    adviceSentence: 'No Information',
-                    adviceIcon: '',
-                    adviceIconColor: ''
+                    adviceTitle: '예측 불가',
+                    adviceSentence: '본사에서는 항시 모든 주유소의 예상가를 제공하기 위해 노력합니다.',
+                    adviceIcon: 'frown-o',
+                    adviceIconColor: COLOR_FONT_SECONDARY
                 };
         }
     }
@@ -142,7 +160,7 @@ class GasStationInfo extends Component {
     render() {
         const { containerStyle, divider, row, logoStyle, textMajorStyle, textMediumStyle, textMinorStyle } = styles;
         const { priceInfo, name, brand } = this.props.gasStation;
-        const { priceDiff, realTimeVariables, userGasType, prediction } = this.props;
+        const { priceDiff, realTimeVariables, prediction, userState } = this.props;
         const predictionState = GasStationInfo.mapPrediction(prediction);
 
         if (!this.state.isComponentReady) {
@@ -173,15 +191,16 @@ class GasStationInfo extends Component {
 
 
                 <View style={row}>
-                    <Icon name={predictionState.iconName} style={{ fontSize: 22, color: predictionState.iconColor }} />
+                    {predictionState.predictionAvailable && prediction !== 1 &&
+                    <Icon name={predictionState.iconName} style={{ fontSize: 22, color: predictionState.iconColor }} />}
                     <Text style={textMajorStyle}> {priceInfo.price}원</Text>
-                    <Tag text={userGasType.value} />
+                    <Tag text={userState.userFavoriteGas.value} />
                 </View>
 
 
                 {(priceDiff !== 0 && typeof priceDiff !== 'undefined') &&
                 <View style={row}>
-                    <Text style={[textMinorStyle, { color: COLOR_PRIMARY }]}>
+                    <Text style={textMinorStyle}>
                         지금 사면 약 &nbsp;
                         {<Text style={{ fontFamily: FONT_CHARACTER_BOLD }}>
                             {priceDiff.toLocaleString('en')}
@@ -194,15 +213,32 @@ class GasStationInfo extends Component {
 
                 <View style={row}>
                     <Icon name={predictionState.adviceIcon} style={{ fontSize: 20, color: predictionState.adviceIconColor }} />
-                    <Text style={textMajorStyle}> {predictionState.adviceSentence} </Text>
-                    { prediction !== 1 && <ClickableTag iconName='shield' onPress={GasStationInfo.alert} />}
+                    <Text style={textMajorStyle}> {predictionState.adviceTitle} </Text>
+                    { predictionState.predictionAvailable && prediction === 0 && <ClickableTag iconName='snowflake-o' onPress={GasStationInfo.alert} />}
                 </View>
 
 
                 <View style={row}>
-                    <Text style={textMinorStyle}>
-                        지금 사면 약 원(1.6L기준) 절약됩니다.
-                    </Text>
+                    {
+                        predictionState.predictionAvailable ?
+                            (
+                                prediction !== 1 ?
+                                    <Text style={[textMinorStyle, { color: COLOR_PRIMARY }]}>
+                                        {predictionState.adviceSentence.firstPart} &nbsp;
+                                        <Text style={{ fontFamily: FONT_CHARACTER_BOLD }}>
+                                            {(((10 * priceInfo.price) / 100) * userState.userTankCapacity).toFixed(0)}
+                                        </Text>
+                                        {predictionState.adviceSentence.secondPart}
+                                    </Text> :
+                                    <Text style={[textMinorStyle, { color: COLOR_PRIMARY }]}>
+                                        {predictionState.adviceSentence}
+                                    </Text>
+                            )
+                            :
+                            <Text style={[textMinorStyle, { color: COLOR_PRIMARY }]}>
+                                {predictionState.adviceSentence}
+                            </Text>
+                    }
                 </View>
                 <View style={{ marginTop: 25 }}>
                     <Button
@@ -231,6 +267,7 @@ const styles = {
     },
     row: {
         paddingVertical: 3,
+        paddingHorizontal: 40,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'
@@ -246,7 +283,8 @@ const styles = {
         color: COLOR_FONT_PRIMARY,
         fontFamily: FONT_NUMBER_BOLD,
         paddingRight: 10,
-        paddingLeft: 4
+        paddingLeft: 4,
+        letterSpacing: 0.1
     },
     textMediumStyle: {
         fontSize: 16,
@@ -264,8 +302,4 @@ const styles = {
     }
 };
 
-const mapStateToProps = state => {
-    return { userGasType: state.userState.userFavoriteGas };
-};
-
-export default connect(mapStateToProps)(GasStationInfo);
+export default GasStationInfo;
