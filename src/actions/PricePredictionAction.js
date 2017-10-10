@@ -32,7 +32,7 @@ export const pricePredictionFetch = (areaCode, gasType) => {
                         return dispatch(pricePredictionFetchAction(response.data.gasoline));
                     case 'D047':
                         return dispatch(pricePredictionFetchAction(response.data.diesel));
-                    case 'BO34':
+                    case 'B034':
                         return dispatch(pricePredictionFetchAction(response.data.premiumGasoline));
                     case 'K015':
                         return dispatch(pricePredictionFetchAction(response.data.LPG));

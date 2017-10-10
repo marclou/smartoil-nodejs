@@ -108,7 +108,7 @@ class PricePrediction extends Component {
                 <TouchableWithoutFeedback onPress={this.onIconPress}>
                     <View style={[row, { flex: 1 }]}>
                         <View style={imageContainer}>
-                            {pricePredictionData.shortTermPrediction !== 0 ?
+                            {pricePredictionData.shortTermPrediction === 0 ?
                                 <Animated.Image
                                     source={require('../img/prediction/full.png')}
                                     style={[image, { opacity, transform: [{ scale }] }]}
