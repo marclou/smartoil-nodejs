@@ -29,7 +29,26 @@ class PricePrediction extends Component {
         this.props.pricePredictionFetch(userFavoriteArea.code, userFavoriteGas.code);
     }
 
-    componentWillUpdate() {
+    /*shouldComponentUpdate(nextProps) {
+        const { userFavoriteArea, userFavoriteGas } = this.props.userState;
+
+        /!*return (
+                userFavoriteArea !== nextProps.userState.userFavoriteArea ||
+                userFavoriteGas !== nextProps.userState.userFavoriteGas
+
+        );*!/
+    }*/
+
+
+    componentWillUpdate(nextProps) {
+        const { userFavoriteArea, userFavoriteGas } = this.props.userState;
+
+        if (userFavoriteArea !== nextProps.userState.userFavoriteArea || userFavoriteGas !== nextProps.userState.userFavoriteGas) {
+            console.log('will update with new props');
+            this.props.pricePredictionFetch(nextProps.userState.userFavoriteArea.code, nextProps.userState.userFavoriteGas.code);
+        }
+
+        //this.props.pricePredictionFetch(userFavoriteArea.code, userFavoriteGas.code);
         this.animate();
     }
 
@@ -48,6 +67,7 @@ class PricePrediction extends Component {
 
     onIconPress() {
         const { userFavoriteArea, userFavoriteGas } = this.props.userState;
+        console.log(userFavoriteArea, userFavoriteGas);
 
         this.props.pricePredictionFetch(userFavoriteArea.code, userFavoriteGas.code);
     }
