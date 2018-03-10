@@ -2,15 +2,8 @@
 #
 .DS_Store
 __tests__/
-android/
 ios/
-.babelrc
-.buckconfig
-.eslintrc
-.flowconfig
-.gitattributes
-.watchmanconfig
-README.TXT
+
 
 # Xcode
 #
@@ -35,6 +28,7 @@ project.xcworkspace
 # Android/IntelliJ
 #
 build/
+android/
 .idea
 .gradle
 local.properties
@@ -50,6 +44,14 @@ yarn-error.log
 buck-out/
 \.buckd/
 *.keystore
+
+.babelrc
+.buckconfig
+.eslintrc
+.flowconfig
+.gitattributes
+.watchmanconfig
+README.TXT
 
 # fastlane
 #
