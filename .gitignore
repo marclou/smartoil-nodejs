@@ -1,6 +1,15 @@
 # OSX
 #
 .DS_Store
+__tests__/
+android/
+ios/
+.babelrc
+.buckconfig
+.eslintrc
+.flowconfig
+.gitattributes
+.watchmanconfig
 
 # Xcode
 #
